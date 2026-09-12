@@ -41,3 +41,36 @@
   reviewers compare Air M5 vs Neo). Need details.
 - Sept 9 2026 Apple event: "iPhone Duo and more".
 - AppleCare One (US) multi-device plan exists.
+
+## Additional (2026-09-12, second pass)
+### Rosetta 2 timeline
+- macOS 26 Tahoe: last Intel-Mac release; Intel Macs get security updates ~3 years (to ~Sept 2029).
+- macOS 26.4 began warning users when launching Intel (x86_64) apps.
+- **macOS 27 install removes Rosetta 2 if previously installed; it CAN be reinstalled**
+  (`softwareupdate --install-rosetta --agree-to-license`). Golden Gate = last full Rosetta release.
+- **macOS 28 (fall 2027): Rosetta 2 removed for general apps**; only kept for a set of old unmaintained games.
+  => Guide must push: avoid x86 Homebrew (/usr/local), prefer arm64 everything; check `file`/Activity Monitor "Kind".
+- Xcode 27: Apple-silicon only, coding agents (agentic workflows), Device Hub, untitled projects/standalone
+  Swift files w/ previews, improved Instruments; ~30% faster (per press). Game Porting Toolkit 4.
+- New frameworks: **Core AI** (build/run/deploy AI models on Apple silicon; unified memory), MLX (open source),
+  Foundation Models framework (from macOS 26), Containerization.
+- macOS 27 denies cross-team app container access by default (security hardening).
+- macOS 27 installs as a Delta Update via System Settings (~19.5GB from Tahoe).
+
+### MacBook Neo (Mar 2026) — budget Mac
+- 13.0" 2408x1506 IPS, 500 nits, sRGB. A18 Pro chip (6-core CPU 2P+4E, 5-core GPU), **8GB RAM only**
+  (LPDDR5X, 60GB/s), 256GB $599 ($499 edu) / 512GB $699? Touch ID on higher config only.
+  2x USB-C (one USB3 10Gb/s + DP1.4, one USB2), 3.5mm jack, Wi-Fi 6E, BT 6, 1080p camera, 1 ext display 4K60,
+  36.5Wh battery (16h video), 20W charger, 1.23kg. Colours silver/blush/citrus/indigo.
+  => Verdict for CS students: OK for web/notes/light coding; 8GB is a hard ceiling for Docker/IDEs/VMs.
+     Recommend Air M5 16GB+ as the real floor for SWE.
+
+### Desktops (Aug 25 2026, ship Sept 22)
+- **Mac mini M6**: 12-core CPU, 12-core GPU w/ Neural Accelerators, 16GB std -> 32GB, 170GB/s, $899 ($799 edu).
+  Wi-Fi 7/BT 6, 2.5GbE std (10GbE option), TB5. "World's fastest single-thread".
+- **Mac mini M5 Pro**: up to 18-core CPU/20-core GPU, up to 64GB, 307GB/s, $1,699 ($1,599 edu).
+- **Mac Studio M5 Max**: 18-core CPU (6 super + 12 perf), up to 40-core GPU, up to 128GB, 614GB/s, $2,499 ($2,299 edu).
+- **Mac Studio M5 Ultra**: up to 36-core CPU, 80-core GPU, up to 512GB (late Oct), $5,499 ($5,099 edu).
+  TB5 clustering for distributed inference; up to 8 displays. Studio Display XDR exists (5K 120Hz).
+- Note M6 generation has begun (Mac mini first); MacBook Pro M6 (OLED rumored) likely late 2026/2027.
+- Apple Upgrade = US leasing program (Klarna).
