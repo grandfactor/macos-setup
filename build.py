@@ -341,3 +341,278 @@ def expand_includes(md: str) -> str:
         body = (ROOT / rel).read_text(encoding="utf-8").rstrip("\n")
         return f"```{lang}\n{body}\n```"
     return re.sub(r"^\{\{include:([^}|]+)(?:\|([a-z0-9]+))?\}\}\s*$", repl, md, flags=re.M)
+
+
+# --------------------------------------------------------------------------- #
+# Chapters
+# --------------------------------------------------------------------------- #
+
+@dataclass
+class Chapter:
+    src: Path
+    slug: str
+    number: str
+    title: str
+    description: str
+    part: str
+    md: str
+
+    @property
+    def href(self) -> str:
+        return f"{self.slug}.html"
+
+
+FRONT_RE = re.compile(r"^<!--\s*(.*?)\s*-->\s*", re.S)
+
+
+def parse_front(md: str) -> tuple[dict, str]:
+    """Front matter = leading HTML comment of key: value lines (invisible on GitHub)."""
+    meta = {}
+    m = FRONT_RE.match(md)
+    if m:
+        for line in m.group(1).splitlines():
+            if ":" in line:
+                k, v = line.split(":", 1)
+                meta[k.strip()] = v.strip()
+        md = md[m.end():]
+    return meta, md
+
+
+def load_chapters() -> list[Chapter]:
+    chapters = []
+    for p in sorted(GUIDE.glob("*.md")):
+        if p.name.startswith("_"):
+            continue
+        meta, body = parse_front(p.read_text(encoding="utf-8"))
+        tm = re.search(r"^#\s+(.+)$", body, re.M)
+        title = meta.get("title") or (tm.group(1).strip() if tm else p.stem)
+        chapters.append(Chapter(
+            src=p, slug=p.stem, number=meta.get("number", p.stem.split("-")[0]),
+            title=title, description=meta.get("description", ""), part=meta.get("part", ""), md=body,
+        ))
+    return chapters
+
+
+# --------------------------------------------------------------------------- #
+# HTML shell
+# --------------------------------------------------------------------------- #
+
+def nav_html(chapters: list[Chapter], current: Chapter | None) -> str:
+    parts: list[str] = []
+    last_part = None
+    for ch in chapters:
+        if ch.part != last_part:
+            if last_part is not None:
+                parts.append("</ul>")
+            parts.append(f'<p class="nav-part">{html.escape(ch.part)}</p><ul>')
+            last_part = ch.part
+        cls = ' class="active"' if current and ch.slug == current.slug else ""
+        num = f'<span class="nav-num">{html.escape(ch.number)}</span>' if ch.number else ""
+        parts.append(f'<li{cls}><a href="{ch.href}">{num}{html.escape(ch.title)}</a></li>')
+    if last_part is not None:
+        parts.append("</ul>")
+    return "\n".join(parts)
+
+
+def toc_html(headings: list[Heading]) -> str:
+    items = [h for h in headings if 2 <= h.level <= 3]
+    if not items:
+        return ""
+    out = ['<nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>']
+    for h in items:
+        out.append(f'<li class="lvl{h.level}"><a href="#{h.id}">{h.text}</a></li>')
+    out.append("</ul></nav>")
+    return "\n".join(out)
+
+
+GH_ICON = ('<svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 '
+           '3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-'
+           '.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-'
+           '1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 '
+           '1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38'
+           'A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>')
+
+
+def page(chapters: list[Chapter], ch: Chapter | None, body: str, *, title: str, description: str,
+         headings: list[Heading] | None = None, prev: Chapter | None = None, nxt: Chapter | None = None,
+         is_index: bool = False) -> str:
+    full_title = SITE_TITLE if is_index else f"{title} — {SITE_TITLE}"
+    toc = toc_html(headings or [])
+    pager = ""
+    if prev or nxt:
+        p = (f'<a class="pager-link prev" href="{prev.href}"><span>Previous</span><strong>{html.escape(prev.title)}</strong></a>'
+             if prev else "<span></span>")
+        q = (f'<a class="pager-link next" href="{nxt.href}"><span>Next</span><strong>{html.escape(nxt.title)}</strong></a>'
+             if nxt else "<span></span>")
+        pager = f'<nav class="pager" aria-label="Chapter navigation">{p}{q}</nav>'
+    if ch:
+        links = (f'<a href="{REPO_URL}/blob/main/guide/{ch.src.name}" target="_blank" rel="noopener">View this chapter as Markdown</a>'
+                 f' · <a href="{REPO_URL}/edit/main/guide/{ch.src.name}" target="_blank" rel="noopener">Edit on GitHub</a>')
+    else:
+        links = f'<a href="{REPO_URL}/blob/main/GUIDE.md" target="_blank" rel="noopener">Read the whole guide as one Markdown file</a>'
+    desc = html.escape(description or SITE_TAGLINE, quote=True)
+    return f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{html.escape(full_title)}</title>
+<meta name="description" content="{desc}">
+<meta property="og:title" content="{html.escape(full_title, quote=True)}">
+<meta property="og:description" content="{desc}">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){{try{{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}}catch(e){{}}}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>{html.escape(SITE_TITLE)}</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="{REPO_URL}" target="_blank" rel="noopener" aria-label="GitHub repository">{GH_ICON}</a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home{' active' if is_index else ''}" href="index.html">Start here: overview &amp; how to use this guide</a>
+      {nav_html(chapters, ch)}
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+{body}
+    </article>
+    {pager}
+    <footer class="page-footer">
+      <p>{links}</p>
+      <p>Last reviewed {LAST_UPDATED}. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar">{toc}</aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
+"""
+
+
+def index_body(chapters: list[Chapter], intro_html: str) -> str:
+    cards = []
+    last_part = None
+    for ch in chapters:
+        if ch.part != last_part:
+            if last_part is not None:
+                cards.append("</div>")
+            cards.append(f'<h2 class="part-title" id="{slugify(ch.part)}">{html.escape(ch.part)}</h2><div class="cards">')
+            last_part = ch.part
+        cards.append(
+            f'<a class="card" href="{ch.href}"><span class="card-num">{html.escape(ch.number)}</span>'
+            f'<span class="card-title">{html.escape(ch.title)}</span>'
+            f'<span class="card-desc">{html.escape(ch.description)}</span></a>'
+        )
+    if last_part is not None:
+        cards.append("</div>")
+    return intro_html + '\n<h2 id="chapters">All chapters</h2>\n' + "\n".join(cards)
+
+
+# --------------------------------------------------------------------------- #
+# GUIDE.md (single-file Markdown adaptation)
+# --------------------------------------------------------------------------- #
+
+def demote_headings(md: str, by: int = 1) -> str:
+    """Shift headings so chapter H1s become H2 in the combined file; skip fenced code."""
+    out, in_fence = [], False
+    for line in md.split("\n"):
+        if re.match(r"^\s*(```|~~~)", line):
+            in_fence = not in_fence
+        if not in_fence:
+            m = re.match(r"^(#{1,6})(\s+.*)$", line)
+            if m:
+                line = "#" * min(6, len(m.group(1)) + by) + m.group(2)
+        out.append(line)
+    return "\n".join(out)
+
+
+def build_guide_md(chapters: list[Chapter], intro_md: str) -> str:
+    out = [f"# {SITE_TITLE}", "", f"_{SITE_TAGLINE}_", "",
+           "> This is the single-document Markdown adaptation of the website. The same content is split "
+           "chapter-by-chapter in [`guide/`](guide/), and rendered as a site in [`docs/`](docs/). "
+           f"Last reviewed {LAST_UPDATED}.", "", "## Table of contents", ""]
+    last_part = None
+    for ch in chapters:
+        if ch.part != last_part:
+            out += [f"**{ch.part}**", ""]
+            last_part = ch.part
+        out.append(f"- [{ch.number}. {ch.title}](#{slugify(ch.number + ' ' + ch.title)}) — {ch.description}")
+    out += ["", "---", "", demote_headings(intro_md.strip()), ""]
+    for ch in chapters:
+        body = expand_includes(ch.md.strip())
+        # rename the chapter H1 to include its number, then demote everything one level
+        body = re.sub(r"^#\s+.+$", f"# {ch.number}. {ch.title}", body, count=1, flags=re.M)
+        out += ["---", "", demote_headings(body), "", "[↑ Back to top](#table-of-contents)", ""]
+    return "\n".join(out)
+
+
+# --------------------------------------------------------------------------- #
+# main
+# --------------------------------------------------------------------------- #
+
+def main() -> int:
+    chapters = load_chapters()
+    if not chapters:
+        print("no chapters in guide/", file=sys.stderr)
+        return 1
+    DOCS.mkdir(exist_ok=True)
+    (DOCS / ".nojekyll").write_text("")
+    intro_path = GUIDE / "_intro.md"
+    intro_md = intro_path.read_text(encoding="utf-8") if intro_path.exists() else f"# {SITE_TITLE}\n\n{SITE_TAGLINE}\n"
+    search_index = []
+
+    for idx, ch in enumerate(chapters):
+        r = Renderer()
+        body_html = r.render(ch.md)
+        prev = chapters[idx - 1] if idx > 0 else None
+        nxt = chapters[idx + 1] if idx + 1 < len(chapters) else None
+        (DOCS / ch.href).write_text(
+            page(chapters, ch, body_html, title=ch.title, description=ch.description,
+                 headings=r.headings, prev=prev, nxt=nxt), encoding="utf-8")
+        for sec in re.split(r'(?=<h[23] id=")', body_html):
+            m = re.match(r'<h([23]) id="([^"]+)">(.*?)<a class="anchor"', sec)
+            text = re.sub(r"\s+", " ", strip_tags(re.sub(r"<[^>]+>", " ", sec[m.end():] if m else sec))).strip()
+            if not text and not m:
+                continue
+            search_index.append({
+                "c": ch.title, "n": ch.number,
+                "t": strip_tags(m.group(3)) if m else "",
+                "u": f"{ch.href}#{m.group(2)}" if m else ch.href,
+                "b": text[:700],
+            })
+
+    r = Renderer()
+    intro_html = r.render(intro_md)
+    (DOCS / "index.html").write_text(
+        page(chapters, None, index_body(chapters, intro_html), title=SITE_TITLE, description=SITE_TAGLINE,
+             headings=r.headings, is_index=True), encoding="utf-8")
+    (DOCS / "search.json").write_text(json.dumps(search_index, ensure_ascii=False), encoding="utf-8")
+    (ROOT / "GUIDE.md").write_text(build_guide_md(chapters, intro_md), encoding="utf-8")
+
+    words = sum(len(c.md.split()) for c in chapters) + len(intro_md.split())
+    print(f"built {len(chapters)} chapters, {words:,} words, {len(search_index)} search sections -> docs/ and GUIDE.md")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
