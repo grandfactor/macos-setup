@@ -58,7 +58,7 @@ _For CS students, software engineers and everyone who lives on a Mac — 2026 ed
 <span class="badge">Apple silicon (M1 → M6)</span>
 <span class="badge">Homebrew 6</span>
 <span class="badge">Reviewed September 2026</span>
-<span class="badge">~30 chapters · fully scriptable</span>
+<span class="badge">23 chapters + 5 appendices · ~70,000 words · fully scriptable</span>
 </div>
 </div>
 
