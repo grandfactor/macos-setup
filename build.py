@@ -361,6 +361,13 @@ class Chapter:
     def href(self) -> str:
         return f"{self.slug}.html"
 
+    @property
+    def label(self) -> str:
+        """'12. Editors & IDEs' for chapters; appendix titles already carry their letter."""
+        if self.title.lower().startswith("appendix"):
+            return self.title
+        return f"{self.number}. {self.title}"
+
 
 FRONT_RE = re.compile(r"^<!--\s*(.*?)\s*-->\s*", re.S)
 
@@ -556,12 +563,12 @@ def build_guide_md(chapters: list[Chapter], intro_md: str) -> str:
         if ch.part != last_part:
             out += [f"**{ch.part}**", ""]
             last_part = ch.part
-        out.append(f"- [{ch.number}. {ch.title}](#{slugify(ch.number + ' ' + ch.title)}) — {ch.description}")
+        out.append(f"- [{ch.label}](#{slugify(ch.label)}) — {ch.description}")
     out += ["", "---", "", demote_headings(intro_md.strip()), ""]
     for ch in chapters:
         body = expand_includes(ch.md.strip())
         # rename the chapter H1 to include its number, then demote everything one level
-        body = re.sub(r"^#\s+.+$", f"# {ch.number}. {ch.title}", body, count=1, flags=re.M)
+        body = re.sub(r"^#\s+.+$", f"# {ch.label}", body, count=1, flags=re.M)
         out += ["---", "", demote_headings(body), "", "[↑ Back to top](#table-of-contents)", ""]
     return "\n".join(out)
 

@@ -41,8 +41,8 @@ _For CS students, software engineers and everyone who lives on a Mac — 2026 ed
 **Part VI — Reference**
 
 - [23. Checklists & cheat sheets](#23-checklists-cheat-sheets) — The whole guide compressed into printable checklists — the day-one setup order, the 30-minute security pass, the developer-environment checklist, weekly/monthly maintenance, a new-project checklist, a pre-travel checklist, and one-page cheat sheets for the terminal, Homebrew, mise/uv, Git, containers, and macOS CLI tools.
-- [A. Appendix A — Bootstrap script](#a-appendix-a-bootstrap-script) — The complete, idempotent bootstrap script that turns a fresh Apple-silicon Mac into the setup this guide describes — Command Line Tools, Homebrew, Brewfile, mise/uv, Git and SSH, shell, Touch ID sudo, dotfiles — plus the macOS defaults script, the monthly cleanup script, and the security audit script. Read before running.
-- [B. Appendix B — Brewfile](#b-appendix-b-brewfile) — The complete Brewfile behind this guide — 100+ CLI tools, runtimes, container/cloud tooling, fonts, and every GUI app recommended in chapters 9–19, with the optional ones commented out. Plus how Brewfile syntax works, how to keep yours in sync, and how to split it per machine.
+- [Appendix A — Bootstrap script](#appendix-a-bootstrap-script) — The complete, idempotent bootstrap script that turns a fresh Apple-silicon Mac into the setup this guide describes — Command Line Tools, Homebrew, Brewfile, mise/uv, Git and SSH, shell, Touch ID sudo, dotfiles — plus the macOS defaults script, the monthly cleanup script, and the security audit script. Read before running.
+- [Appendix B — Brewfile](#appendix-b-brewfile) — The complete Brewfile behind this guide — 100+ CLI tools, runtimes, container/cloud tooling, fonts, and every GUI app recommended in chapters 9–19, with the optional ones commented out. Plus how Brewfile syntax works, how to keep yours in sync, and how to split it per machine.
 
 ---
 
@@ -5068,7 +5068,7 @@ Exact numbers will drift — [Appendix E](appendix-e-sources.html) lists where t
 
 ---
 
-## A. Appendix A — Bootstrap script
+## Appendix A — Bootstrap script
 
 Everything in [Part II](03-system-settings.html) and [Part III](07-command-line-tools-and-xcode.html) that can be automated, in four scripts that live in the repo's `scripts/` directory. They're written for **zsh on macOS 26/27, Apple silicon**, and every step is idempotent — run them again after a partial failure or on a Mac you set up by hand and they'll only do what's missing.
 
@@ -5632,7 +5632,7 @@ Then bootstrap becomes: `zsh bootstrap.sh --no-apps --no-defaults --dotfiles git
 
 ---
 
-## B. Appendix B — Brewfile
+## Appendix B — Brewfile
 
 `brew bundle` reads a Ruby-flavoured manifest and installs everything in it — formulae, casks, Mac App Store apps (via `mas`), and VS Code extensions. It is the single most useful file in a dotfiles repo: the whole software side of a Mac in 300 lines, reproducible with one command. [Chapter 8](08-homebrew.html) explains Homebrew itself; this appendix is the manifest.
 
