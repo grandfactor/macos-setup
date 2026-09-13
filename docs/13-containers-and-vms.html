@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Containers &amp; virtual machines — The macOS Setup Guide</title>
+<meta name="description" content="Containers on macOS in 2026 — OrbStack, Docker Desktop, Colima, Podman and Apple&#x27;s own `container` compared; multi-arch images; Kubernetes locally; Linux and Windows VMs with UTM, Parallels, VMware Fusion and Apple&#x27;s Virtualization framework.">
+<meta property="og:title" content="Containers &amp; virtual machines — The macOS Setup Guide">
+<meta property="og:description" content="Containers on macOS in 2026 — OrbStack, Docker Desktop, Colima, Podman and Apple&#x27;s own `container` compared; multi-arch images; Kubernetes locally; Linux and Windows VMs with UTM, Parallels, VMware Fusion and Apple&#x27;s Virtualization framework.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li class="active"><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="containers-virtual-machines">Containers &amp; virtual machines</h1>
+<p>Every container on a Mac runs inside a Linux virtual machine — macOS has no Linux kernel. What differs between tools is <em>how many</em> VMs, how fast the file sharing is, how much memory sits idle, and what it costs. 2026 added a genuinely new option: Apple's own <code>container</code> tool, which runs one lightweight VM per container. This chapter picks a default, explains the trade-offs, and covers full VMs for Linux and Windows.</p>
+<h2 id="the-landscape-in-september-2026">The landscape in September 2026<a class="anchor" href="#the-landscape-in-september-2026" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>Tool</th><th>Model</th><th>Price</th><th>Idle cost</th><th>Compose</th><th>Kubernetes</th><th>Intel Macs</th><th>Notes</th></tr></thead><tbody><tr><td><strong>OrbStack</strong></td><td>One optimised shared VM; drop-in <code>docker</code> CLI; also runs Linux "machines"</td><td>Free personal; <strong>$8/user/mo</strong> commercial (triggered above ~$10k/yr income from work using it; 1 licence = 5 devices)</td><td>~400 MB, &lt;1% CPU</td><td>✅</td><td>✅ built-in</td><td>✅ (last old-Intel build v2.2.2)</td><td><strong>Default recommendation.</strong> Fastest bind mounts (virtiofs, ~3–4× Docker Desktop), instant start, memory actually released when idle, <code>*.orb.local</code> DNS for every container, menu bar UI. Closed source.</td></tr><tr><td><strong>Docker Desktop</strong></td><td>One shared VM; the official product</td><td>Free for &lt;250 employees &amp; &lt;$10M revenue; Pro $9 / Team $15 / Business $24 per user/mo</td><td>1–4 GB, 2–5% CPU</td><td>✅</td><td>✅ optional</td><td>✅</td><td>Cross-platform (Win/Linux too); the widest ecosystem (extensions, Scout, Build Cloud); heaviest. Use if your employer pays or mandates it.</td></tr><tr><td><strong>Apple <code>container</code></strong></td><td><strong>One micro-VM per container</strong> on the Containerization framework</td><td>Free, open source (Apache 2.0)</td><td>none when idle</td><td>❌ not yet (mid-2026)</td><td>❌</td><td>❌ Apple silicon only</td><td>1.0 stable June 2026, ~49k GitHub stars. Strong isolation, higher throughput once running, slower cold start (~0.9 s vs ~0.2 s). Needs macOS 26+. Great for single services and security-sensitive work; not yet a Compose replacement.</td></tr><tr><td><strong>Colima</strong></td><td>Lima-based VM + Docker or containerd runtime</td><td>Free, open source</td><td>~500 MB</td><td>✅ (with <code>docker-compose</code>)</td><td>✅ (k3s flag)</td><td>✅</td><td>CLI only, minimal, scriptable (<code>colima start --cpu 4 --memory 8</code>). The purist's Docker Desktop replacement.</td></tr><tr><td><strong>Podman + Podman Desktop</strong></td><td>Daemonless engine in a VM (<code>podman machine</code>)</td><td>Free, open source (Red Hat)</td><td>~500 MB</td><td>via <code>podman compose</code></td><td>✅ (kind/minikube)</td><td>✅</td><td>Rootless, OCI-standard, Kubernetes-flavoured (pods, <code>podman kube play</code>). Choose if your team/servers are RHEL/Fedora.</td></tr><tr><td><strong>Rancher Desktop</strong></td><td>Lima VM + containerd or moby, k3s</td><td>Free, open source (SUSE)</td><td>~1 GB</td><td>✅</td><td>✅ built-in k3s</td><td>✅</td><td>Best free cross-platform option with Kubernetes for mixed-OS teams.</td></tr></tbody></table></div>
+<p><strong>Recommendation</strong>: <strong>OrbStack</strong> for students and solo developers (free) and for anyone whose company will pay $8/mo. Keep the <code>docker</code> CLI you already know; everything in every tutorial works unchanged. Add <strong>Apple <code>container</code></strong> as a side tool to learn and for isolated single containers; watch it for Compose support. Use <strong>Docker Desktop</strong> when an employer supplies a licence or you need its enterprise features. Use <strong>Colima</strong> if you want zero GUI.</p>
+<h2 id="orbstack-setup">OrbStack setup<a class="anchor" href="#orbstack-setup" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew install --cask orbstack
+orb                      # first run creates the VM and installs docker/kubectl CLIs into /usr/local/bin &amp; ~/.orbstack
+docker run --rm -it alpine uname -m      # aarch64 — you're native
+docker context ls        # "orbstack" is default</code></pre></div>
+<p>Settings (menu bar → Settings): <strong>Resources</strong>: leave memory at <em>dynamic</em> (OrbStack grows and shrinks; cap at half your RAM if you like); <strong>Docker → Rosetta</strong>: on (so <code>linux/amd64</code> images run at near-native speed via Rosetta <em>for Linux</em>, which is unaffected by the macOS 28 Rosetta removal); <strong>Network</strong>: enable <em>Access container domains</em> so every container is reachable at <code>http://&lt;container&gt;.orb.local</code> with automatic HTTPS; <strong>Kubernetes</strong>: turn on when needed (a single-node cluster in seconds, <code>kubectl</code> context <code>orbstack</code>).</p>
+<p>Linux machines (<code>orb create ubuntu</code>, <code>orb create -a amd64 debian</code>) give you full distros with shared home directory, <code>ssh</code>, and a <code>mac</code> command to call back into macOS. This is the easiest Linux environment on a Mac for a systems course — lighter than a VM, more complete than a container.</p>
+<h2 id="docker-desktop-setup-if-you-use-it">Docker Desktop setup (if you use it)<a class="anchor" href="#docker-desktop-setup-if-you-use-it" aria-label="Permalink">#</a></h2>
+<p><code>brew install --cask docker-desktop</code>. Settings: <strong>Resources → Memory</strong>: 6–8 GB on a 16–24 GB Mac (containers get <em>this</em> memory, not the host's), <strong>CPUs</strong>: half your cores, <strong>Swap</strong>: 1 GB, <strong>Disk image size</strong>: 64 GB+; <strong>General</strong>: <em>Use Virtualization framework</em> (default), <em>VirtioFS</em> file sharing (default), <strong>Use Rosetta for x86_64/amd64 emulation on Apple Silicon</strong>: on; <strong>Kubernetes</strong>: off unless used; <strong>Software updates</strong>: on. Quit Docker Desktop when you're not developing — it holds its memory reservation.</p>
+<h2 id="apple-container-tahoe">Apple <code>container</code> (Tahoe+)<a class="anchor" href="#apple-container-tahoe" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew install container                # or the signed .pkg from github.com/apple/container/releases
+container system start                # installs a Linux kernel image on first run
+container run --rm -it alpine sh
+container build -t myapp .            # OCI images; Dockerfiles work
+container run -d --name web -p 8080:80 nginx
+container list                        # ps
+container logs web
+container system stop</code></pre></div>
+<p>Each container is its own lightweight VM booting a minimal Linux (sub-second), which gives kernel-level isolation between containers — a real advantage when you run untrusted or security-sensitive code. Images are standard OCI (pull from Docker Hub/GHCR; push too). Limits in mid-2026: no <code>compose</code>, no Kubernetes, CLI only, macOS 26+ for full networking (container-to-container IPs), Apple silicon only, and bind-mount performance is less benchmarked than OrbStack's. Apple ships releases every few weeks; check the README for what's landed.</p>
+<h2 id="multi-architecture-arm64-vs-amd64">Multi-architecture: arm64 vs amd64<a class="anchor" href="#multi-architecture-arm64-vs-amd64" aria-label="Permalink">#</a></h2>
+<p>Your Mac runs <strong>linux/arm64</strong> containers natively. Most official images (Postgres, Redis, nginx, Node, Python, Go, Debian, Ubuntu, Alpine) are multi-arch and <em>just work</em>. When an image is amd64-only (some vendor images, older internal ones), Docker/OrbStack run it under Rosetta or QEMU — slower and occasionally buggy (segfaults in JIT-heavy runtimes, <code>qemu: uncaught target signal</code>).</p>
+<ul>
+<li>Check: <code>docker image inspect img --format '{{.Architecture}}'</code> or <code>docker manifest inspect img</code>.</li>
+<li>Force: <code>docker run --platform linux/amd64 img</code> for a one-off; in Compose, <code>platform: linux/amd64</code> on the service.</li>
+<li><strong>Build for production servers (usually amd64) from your Mac</strong>: <code>docker buildx build --platform linux/amd64,linux/arm64 -t you/app:tag --push .</code> — buildx uses QEMU (installed automatically) or, better, a remote/native builder. For Go/Rust, cross-compile the binary natively and copy it into a scratch image instead of emulating the compiler.</li>
+<li><strong>Dev containers and CI parity</strong>: if your CI is amd64 and you develop arm64, pin base images by digest and run the test suite in both; native-extension packages (Python wheels, Node <code>.node</code> files) differ per arch — never copy a <code>node_modules</code> or <code>.venv</code> into an image, install inside it.</li>
+</ul>
+<h2 id="docker-compose-patterns-for-local-development">Docker Compose patterns for local development<a class="anchor" href="#docker-compose-patterns-for-local-development" aria-label="Permalink">#</a></h2>
+<p>A typical project's <code>compose.yaml</code> (the modern filename; <code>docker-compose.yml</code> still works):</p>
+<div class="codeblock"><span class="code-lang">yaml</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-yaml">services:
+  db:
+    image: postgres:17
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: app_dev
+    ports: ["5432:5432"]
+    volumes: ["pgdata:/var/lib/postgresql/data"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U app"]
+      interval: 5s
+  redis:
+    image: redis:7-alpine
+    ports: ["6379:6379"]
+  app:
+    build: .
+    command: pnpm dev
+    volumes:
+      - .:/app                       # bind mount source for hot reload
+      - /app/node_modules            # …but keep node_modules inside the container (arch!)
+    ports: ["3000:3000"]
+    environment:
+      DATABASE_URL: postgres://app:app@db:5432/app_dev
+    depends_on:
+      db: { condition: service_healthy }
+volumes:
+  pgdata:</code></pre></div>
+<p><code>docker compose up -d</code>, <code>docker compose logs -f app</code>, <code>docker compose exec app sh</code>, <code>docker compose down -v</code> (also deletes volumes). Use <code>docker compose watch</code> for file sync/rebuild rules. Many developers run <em>only the databases</em> in Compose and the app natively via mise — faster iteration, native debugger, no bind-mount overhead (Chapter 15).</p>
+<p><strong>Dev Containers</strong> (<code>.devcontainer/devcontainer.json</code>, VS Code / Cursor / JetBrains / GitHub Codespaces) package the whole toolchain in a container so a course or team gets an identical environment on any OS. OrbStack and Docker Desktop both work as the backend.</p>
+<h2 id="housekeeping">Housekeeping<a class="anchor" href="#housekeeping" aria-label="Permalink">#</a></h2>
+<p>Images and build cache grow silently. Monthly:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">docker system df                       # what's using space
+docker system prune -a --volumes       # everything unused (asks first; volumes too — be sure)
+docker builder prune                   # build cache only
+docker image prune -a                  # dangling + unused images</code></pre></div>
+<p>OrbStack shows its total in the menu bar; Docker Desktop's VM disk image lives at <code>~/Library/Containers/com.docker.docker/Data/vms/0/data/Docker.raw</code> and only shrinks on prune. Exclude these VM images from Time Machine (Chapter 17).</p>
+<h2 id="kubernetes-locally">Kubernetes locally<a class="anchor" href="#kubernetes-locally" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>OrbStack</strong>: toggle Kubernetes in settings — a real single-node cluster, <code>kubectl config use-context orbstack</code>.</li>
+<li><strong>kind</strong> (<code>brew install kind</code>): multi-node clusters in Docker; what most Kubernetes courses use.</li>
+<li><strong>minikube</strong> (<code>brew install minikube</code>) with the <code>docker</code> or <code>vfkit</code> driver; <strong>k3d</strong> for k3s-in-Docker; <strong>Rancher Desktop</strong> for a GUI.</li>
+<li>Tools: <code>kubectl</code> (<code>brew install kubectl</code>), <code>k9s</code> (TUI), <code>helm</code>, <code>kubectx</code>/<code>kubens</code>, <code>stern</code> (multi-pod logs), <code>kustomize</code>, <code>skaffold</code>/<code>tilt</code> for dev loops. <strong>Lens</strong> or <strong>Headlamp</strong> for a desktop GUI.</li>
+</ul>
+<h2 id="full-virtual-machines">Full virtual machines<a class="anchor" href="#full-virtual-machines" aria-label="Permalink">#</a></h2>
+<p>For a whole Linux desktop, a different kernel, Windows, or an x86 OS, you want a VM, not a container.</p>
+<div class="table-wrap"><table><thead><tr><th>Tool</th><th>Price</th><th>Guest OSes</th><th>Notes</th></tr></thead><tbody><tr><td><strong>UTM</strong></td><td>Free (App Store $10 for auto-updates)</td><td>Linux arm64 (fast, Apple Virtualization), Linux/Windows x86 (slow, QEMU emulation)</td><td>Open source. The default for students. "Apple Virtualization" backend for arm64 Linux is near-native; use it for Ubuntu/Fedora/Debian arm64 desktops.</td></tr><tr><td><strong>Parallels Desktop</strong></td><td>$99–$120/yr (student discount ~50%)</td><td>Windows 11 ARM (best), Linux arm64, macOS</td><td>Most polished; Coherence mode (Windows apps as Mac windows), GPU-accelerated Windows, installs Windows 11 with one click. x86 Windows apps run via Windows' own emulation layer.</td></tr><tr><td><strong>VMware Fusion</strong></td><td><strong>Free</strong> (personal and commercial since 2024)</td><td>Windows 11 ARM, Linux arm64</td><td>Broadcom made it free; less polished than Parallels but very capable. Good Windows-for-a-course option at $0.</td></tr><tr><td><strong>Apple Virtualization.framework</strong> (via <code>tart</code>, <code>lume</code>, <code>Virtual Buddy</code>, or your own Swift)</td><td>Free</td><td>macOS guests (!), Linux arm64</td><td><strong><code>tart</code></strong> (<code>brew install cirruslabs/cli/tart</code>) runs macOS VMs from OCI images — the way to test your dotfiles on a clean macOS or run a throwaway Tahoe. Virtual Buddy is the GUI. macOS guests can't sign into iCloud/App Store (2 VM limit).</td></tr><tr><td><strong>VirtualBox</strong></td><td>Free</td><td>arm64 builds exist but are immature</td><td>Avoid on Apple silicon.</td></tr></tbody></table></div>
+<p><strong>Windows on Apple silicon</strong>: Windows 11 <strong>ARM</strong> is the only Windows that runs; it's a full Windows with excellent x86/x64 app emulation (Prism), and Microsoft officially licenses it in Parallels/VMware. Get the ISO from Microsoft's site (Windows 11 Arm64 ISO) or let Parallels download it. Performance is very good for Office, Visual Studio, and most dev tools; games with anti-cheat and some drivers don't work. A Windows licence key is needed for activation (students often get one via Azure Dev Tools for Teaching).</p>
+<p><strong>x86 Linux</strong> (for an assembly course, a binary that only exists as x86, or matching a server exactly): UTM with QEMU emulation works but is ~5–10× slower than native. For anything sustained, use the department's servers, a cheap cloud VM, or OrbStack's <code>-a amd64</code> machines (Rosetta-accelerated user-space; the kernel is arm64, which is fine for user programs but not for kernel courses).</p>
+<p><strong>Asahi Linux</strong> (bare-metal Fedora on Apple silicon) supports M1 and M2 only — not M3/M4/M5/M6. For everyone else, Linux in a VM or OrbStack machine is the answer.</p>
+<h2 id="nix-and-reproducible-dev-shells">Nix and reproducible dev shells<a class="anchor" href="#nix-and-reproducible-dev-shells" aria-label="Permalink">#</a></h2>
+<p>Worth a mention for the reproducibility-minded: the <strong>Determinate Nix installer</strong> (<code>curl … | sh -s -- install</code>) installs Nix cleanly on macOS with a separate APFS volume; <code>nix develop</code> / <code>devenv</code> / <code>flox</code> give per-project shells with pinned compilers and libraries — an alternative to both containers and mise for native development. Steep curve; enormous payoff if a whole team adopts it. Don't start here as a first-year.</p>
+<h2 id="choosing-by-scenario">Choosing, by scenario<a class="anchor" href="#choosing-by-scenario" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Web/backend student, coursework uses Docker</strong>: OrbStack. Done.</li>
+<li><strong>Security or systems course, want strong isolation</strong>: Apple <code>container</code> for individual services; UTM for full Linux.</li>
+<li><strong>Kubernetes course</strong>: OrbStack Kubernetes or kind; <code>k9s</code>.</li>
+<li><strong>Need Windows for one course (Visual Studio, .NET Framework, Office macros)</strong>: VMware Fusion (free) or Parallels (student price) with Windows 11 ARM.</li>
+<li><strong>x86 assembly or a kernel course</strong>: UTM QEMU x86 VM (slow but correct) or the university's Linux servers over SSH.</li>
+<li><strong>Company policy says Docker Desktop</strong>: Docker Desktop with Rosetta on and the memory cap set.</li>
+<li><strong>Want to test dotfiles on a fresh macOS</strong>: <code>tart</code> macOS VM.</li>
+</ul>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="12-editors-and-ides.html"><span>Previous</span><strong>Editors, IDEs &amp; AI coding tools</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/13-containers-and-vms.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/13-containers-and-vms.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#the-landscape-in-september-2026">The landscape in September 2026</a></li>
+<li class="lvl2"><a href="#orbstack-setup">OrbStack setup</a></li>
+<li class="lvl2"><a href="#docker-desktop-setup-if-you-use-it">Docker Desktop setup (if you use it)</a></li>
+<li class="lvl2"><a href="#apple-container-tahoe">Apple <code>container</code> (Tahoe+)</a></li>
+<li class="lvl2"><a href="#multi-architecture-arm64-vs-amd64">Multi-architecture: arm64 vs amd64</a></li>
+<li class="lvl2"><a href="#docker-compose-patterns-for-local-development">Docker Compose patterns for local development</a></li>
+<li class="lvl2"><a href="#housekeeping">Housekeeping</a></li>
+<li class="lvl2"><a href="#kubernetes-locally">Kubernetes locally</a></li>
+<li class="lvl2"><a href="#full-virtual-machines">Full virtual machines</a></li>
+<li class="lvl2"><a href="#nix-and-reproducible-dev-shells">Nix and reproducible dev shells</a></li>
+<li class="lvl2"><a href="#choosing-by-scenario">Choosing, by scenario</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
