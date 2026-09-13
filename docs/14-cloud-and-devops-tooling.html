@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cloud, network &amp; DevOps tooling — The macOS Setup Guide</title>
+<meta name="description" content="Cloud CLIs and credentials done safely, Terraform/OpenTofu, Kubernetes tooling, API clients, HTTP debugging, Tailscale for reaching your machines, and GitHub Actions locally.">
+<meta property="og:title" content="Cloud, network &amp; DevOps tooling — The macOS Setup Guide">
+<meta property="og:description" content="Cloud CLIs and credentials done safely, Terraform/OpenTofu, Kubernetes tooling, API clients, HTTP debugging, Tailscale for reaching your machines, and GitHub Actions locally.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li class="active"><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="cloud-network-devops-tooling">Cloud, network &amp; DevOps tooling</h1>
+<p>The tools that connect your Mac to everything that isn't your Mac: cloud accounts, clusters, APIs, remote machines, CI. The theme is <strong>credentials never in plaintext, one tool per job, everything in the Brewfile.</strong></p>
+<h2 id="cloud-clis">Cloud CLIs<a class="anchor" href="#cloud-clis" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew install awscli azure-cli
+brew install --cask gcloud-cli            # Google Cloud SDK (cask, not formula)
+brew install doctl flyctl                 # DigitalOcean, Fly.io
+brew install vercel-cli netlify-cli       # or via npm through mise
+brew install cloudflare-wrangler          # Cloudflare Workers/Pages (or npm)
+brew install supabase/tap/supabase        # tap trust required (Homebrew 6)
+brew install stripe/stripe-cli/stripe
+brew install hcloud                       # Hetzner
+brew install oci-cli                      # Oracle Cloud (the free tier is real)</code></pre></div>
+<h3 id="credentials">Credentials<a class="anchor" href="#credentials" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>AWS</strong>: use <strong>IAM Identity Center (SSO)</strong> where your org has it (<code>aws configure sso</code>, then <code>aws sso login --profile work</code>) — short-lived tokens, nothing long-lived on disk. For personal accounts, create an IAM user with MFA and store the access key in <code>~/.aws/credentials</code> <strong>encrypted via a credential process</strong>: <code>aws-vault</code> (<code>brew install aws-vault</code>) keeps keys in the macOS Keychain and issues temporary STS credentials per shell (<code>aws-vault exec personal -- aws s3 ls</code>). Or <strong>granted</strong> (<code>brew install granted</code>) for fast profile switching with a browser-tab-per-account. Set <code>AWS_PROFILE</code> per project in <code>mise.toml</code>.</li>
+<li><strong>GCP</strong>: <code>gcloud auth login</code> and <code>gcloud auth application-default login</code> (the latter is what SDKs use). Use <em>configurations</em> for multiple projects (<code>gcloud config configurations create work</code>).</li>
+<li><strong>Azure</strong>: <code>az login</code> (browser); <code>az account set --subscription …</code>.</li>
+<li><strong>Never</strong> paste long-lived cloud keys into <code>.zshrc</code>. If you must keep one, <code>security add-generic-password</code> into the Keychain and read it lazily, or store it in 1Password and use <code>op run</code> (Chapter 16).</li>
+<li>Install <strong>git-secrets</strong>/<strong>gitleaks</strong> hooks (Chapter 10) — cloud keys in public repos are harvested within minutes.</li>
+</ul>
+<h3 id="local-emulation">Local emulation<a class="anchor" href="#local-emulation" aria-label="Permalink">#</a></h3>
+<p><strong>LocalStack</strong> (AWS emulator, <code>brew install localstack</code>), <strong>Firebase Emulator Suite</strong>, <strong>Azurite</strong> (Azure Storage), <strong>MinIO</strong> (S3-compatible object store, <code>brew install minio</code>), <strong>Supabase local</strong> (<code>supabase start</code> runs Postgres+Auth+Storage in Docker), <strong>Wrangler dev</strong> for Cloudflare. All run fine on Apple silicon under OrbStack.</p>
+<h2 id="infrastructure-as-code">Infrastructure as code<a class="anchor" href="#infrastructure-as-code" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Terraform</strong> (<code>brew install terraform</code> — note: HashiCorp's BSL licence since 2023) or <strong>OpenTofu</strong> (<code>brew install opentofu</code>, the open-source fork, drop-in). Pin versions per project with mise (<code>terraform = "1.13"</code> / <code>opentofu = "1.10"</code>). <strong>tflint</strong>, <strong>trivy</strong> (security scanning), <strong>terraform-docs</strong>, <strong>infracost</strong>.</li>
+<li><strong>Pulumi</strong> (<code>brew install pulumi</code>) if you'd rather write TypeScript/Python/Go.</li>
+<li><strong>Ansible</strong> (<code>uv tool install ansible</code> — it's Python; keep it out of the system interpreter), <strong>Packer</strong>, <strong>Vagrant</strong> (with the QEMU or Parallels provider on Apple silicon — VirtualBox doesn't work well).</li>
+<li><strong>SST</strong>, <strong>AWS CDK</strong> (<code>npm i -g aws-cdk</code> via mise), <strong>Serverless Framework</strong>, <strong>Cloudflare Wrangler</strong> for app-centric deploys.</li>
+</ul>
+<h2 id="kubernetes-and-containers-remotely">Kubernetes and containers, remotely<a class="anchor" href="#kubernetes-and-containers-remotely" aria-label="Permalink">#</a></h2>
+<p>Chapter 13 covers local clusters. For real ones: <code>kubectl</code> + <code>kubectx</code>/<code>kubens</code> (context switching), <strong>k9s</strong> (the TUI you'll live in), <strong>helm</strong>, <strong>kustomize</strong>, <strong>stern</strong> (tail many pods), <strong>kubecolor</strong>, <strong>kube-ps1</strong> or Starship's <code>kubernetes</code> module (shows context in the prompt — critical when you have a prod context configured), <strong>dive</strong> (inspect image layers), <strong>trivy</strong> (scan images), <strong>skopeo</strong>/<strong>crane</strong> (registry ops), <strong>argocd</strong>/<strong>flux</strong> CLIs. Keep <code>~/.kube/config</code> out of dotfiles and set <code>KUBECONFIG</code> per project if you juggle clusters. Make the prod context <em>hard</em> to use by accident: a different colour in Starship, or an alias that requires <code>--context</code>.</p>
+<h2 id="http-apis-and-debugging">HTTP, APIs and debugging<a class="anchor" href="#http-apis-and-debugging" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>CLI</strong>: <code>curl</code> (Apple's is fine; <code>brew install curl</code> for HTTP/3), <strong>xh</strong> or <strong>httpie</strong> for humane syntax, <strong>jq</strong>/<strong>yq</strong>/<strong>fx</strong> for output, <strong>grpcurl</strong> for gRPC, <strong>websocat</strong> for WebSockets, <strong>hey</strong>/<strong>oha</strong>/<strong>vegeta</strong> for load testing, <strong>mkcert</strong> (<code>brew install mkcert &amp;&amp; mkcert -install</code>) for locally-trusted HTTPS certificates.</li>
+<li><strong>GUI API clients</strong>: <strong>Bruno</strong> (free, open source, collections stored as plain files in your repo — the 2026 default), <strong>Postman</strong> (the incumbent; account required, heavy), <strong>Insomnia</strong>, <strong>Hoppscotch</strong> (web), <strong>RapidAPI/Paw</strong> (native Mac, one-time price), <strong>Yaak</strong>. For GraphQL: <strong>Altair</strong> or the built-in playground of your server.</li>
+<li><strong>Proxies and traffic inspection</strong>: <strong>Proxyman</strong> (native Mac, best UX, free tier), <strong>Charles</strong>, <strong>mitmproxy</strong> (<code>brew install mitmproxy</code>, scriptable, CLI/web UI), <strong>HTTP Toolkit</strong>. Each installs a root CA into your Keychain to decrypt TLS — remove it when you're done, and never trust one on a machine you don't control. <strong>Wireshark</strong> (<code>brew install --cask wireshark</code>) for packet-level work; install ChmodBPF when prompted so captures don't need <code>sudo</code>.</li>
+<li><strong>Tunnels to localhost</strong> (share a dev server, receive webhooks): <strong>ngrok</strong> (<code>brew install ngrok</code>), <strong>Cloudflare Tunnel</strong> (<code>cloudflared tunnel --url http://localhost:3000</code>, free, no account for quick tunnels), <strong>Tailscale Funnel</strong>, <strong>localtunnel</strong>, <strong>bore</strong>. Stripe/GitHub webhook testing: <code>stripe listen --forward-to localhost:3000/webhook</code>, <code>gh webhook forward</code>.</li>
+<li><strong>DNS</strong>: <code>dog</code> or <code>doggo</code> (modern <code>dig</code>), <code>dscacheutil -q host -a name example.com</code> (macOS's resolver), <code>sudo killall -HUP mDNSResponder</code> to flush. <code>/etc/hosts</code> for local overrides; <code>dnsmasq</code> via Homebrew for wildcard <code>*.test</code> domains.</li>
+<li><strong>Ports</strong>: <code>lsof -iTCP -sTCP:LISTEN -n -P</code> (what's listening), <code>lsof -i :3000</code> (who has it), <code>kill $(lsof -t -i :3000)</code>. macOS reserves nothing surprising, but <strong>AirPlay Receiver uses port 5000 and 7000</strong> — turn it off in <code>System Settings → General → AirDrop &amp; Handoff</code> if your Flask/AirFlow app can't bind 5000.</li>
+</ul>
+<h2 id="reaching-your-machines-tailscale">Reaching your machines: Tailscale<a class="anchor" href="#reaching-your-machines-tailscale" aria-label="Permalink">#</a></h2>
+<p><strong>Tailscale</strong> (<code>brew install --cask tailscale</code>, free for personal use up to 100 devices/3 users) builds a WireGuard mesh between your Mac, your phone, a home server, a Raspberry Pi and cloud VMs, each with a stable <code>100.x.y.z</code> IP and a MagicDNS name (<code>homelab.tailnet-name.ts.net</code>). No port forwarding, works across NATs and campus Wi‑Fi, and gives you: <code>ssh homelab</code> from anywhere; <strong>Tailscale SSH</strong> (auth by identity, no keys to manage); <strong>Serve/Funnel</strong> to expose a local dev server to your tailnet or the public internet with automatic HTTPS; <strong>exit nodes</strong> (route all traffic through your home connection on sketchy Wi‑Fi); <strong>Taildrop</strong> file sharing. Enable <em>Remote Login</em> on the Mac you want to reach (Chapter 3) and restrict <code>sshd</code> to the Tailscale interface via ACLs. Alternatives: <strong>ZeroTier</strong>, <strong>NetBird</strong>, plain <strong>WireGuard</strong> (<code>brew install wireguard-tools</code>), or <strong>Cloudflare Zero Trust</strong> tunnels.</p>
+<h2 id="remote-development">Remote development<a class="anchor" href="#remote-development" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>VS Code Remote-SSH</strong> / <strong>Cursor</strong> / <strong>Zed remote</strong> / <strong>JetBrains Gateway</strong>: edit on a Linux box (university server, a cloud GPU VM, your Mac mini at home) with local UI and remote compute. Combine with Tailscale for zero-config reachability and with <code>tmux</code> on the remote so long jobs outlive the connection.</li>
+<li><strong>GitHub Codespaces</strong>, <strong>Gitpod/Ona</strong>, <strong>DevPod</strong> (open source, any backend): full dev environments in the cloud from a <code>devcontainer.json</code>. Students get 180 core-hours/month of Codespaces free with the Student Developer Pack — a legitimate way to run x86 Linux or a beefier box than a base Air.</li>
+<li><strong>mosh</strong> for high-latency links; <strong>eternal terminal (et)</strong>; <strong>Blink</strong>/<strong>Termius</strong> on iPad to SSH into the Mac.</li>
+</ul>
+<h2 id="cicd-from-the-laptop">CI/CD from the laptop<a class="anchor" href="#cicd-from-the-laptop" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>act</strong> (<code>brew install act</code>) runs GitHub Actions workflows locally in Docker/OrbStack — <code>act -j test</code> before pushing saves a lot of "fix CI" commits. arm64 runners images differ slightly from GitHub's amd64 ones; use <code>--container-architecture linux/amd64</code> when parity matters.</li>
+<li><strong>gh run watch</strong>, <strong>gh pr checks --watch</strong> (Chapter 10) for the real thing.</li>
+<li><strong>pre-commit</strong> hooks (Chapter 10) and <strong>lefthook</strong> (<code>brew install lefthook</code>, faster, YAML) make the laptop the first CI stage.</li>
+<li><strong>Dagger</strong> (<code>brew install dagger/tap/dagger</code>) if you want pipelines as code that run identically locally and in CI.</li>
+<li><strong>Self-hosted runners on a Mac</strong>: GitHub Actions and GitLab both support macOS arm64 runners — useful for iOS builds; run them as a launchd service (Chapter 21) on a Mac mini.</li>
+</ul>
+<h2 id="databases-in-the-cloud-from-the-mac">Databases in the cloud, from the Mac<a class="anchor" href="#databases-in-the-cloud-from-the-mac" aria-label="Permalink">#</a></h2>
+<p>Connection tooling is Chapter 15; here, the credential rule: use short-lived IAM/database-proxy auth where offered (RDS IAM auth, Cloud SQL Auth Proxy <code>brew install cloud-sql-proxy</code>, Supabase/Neon branch tokens), keep connection strings in 1Password or the Keychain, and never in a committed <code>.env</code>.</p>
+<h2 id="observability-profiling-tools-worth-having">Observability &amp; profiling tools worth having<a class="anchor" href="#observability-profiling-tools-worth-having" aria-label="Permalink">#</a></h2>
+<p><code>brew install --cask stats</code> (menu bar CPU/GPU/mem/net — see the Apple silicon P/E core split), <code>btop</code>, <code>bandwhich</code> (per-process bandwidth), <code>nettop</code> (built in), Instruments (in Xcode: Time Profiler, Allocations, System Trace — works on any process, not just Apple apps), <code>sudo powermetrics --samplers cpu_power,gpu_power</code> (real-time watts per cluster), <code>sudo fs_usage -w -f filesys &lt;pid&gt;</code> and <code>sudo opensnoop</code> (file activity), <code>dtrace</code> is mostly blocked by SIP — use <code>eslogger</code>/Endpoint Security or Instruments instead.</p>
+<h2 id="recommended-cloud-dev-brewfile-fragment">Recommended "cloud dev" Brewfile fragment<a class="anchor" href="#recommended-cloud-dev-brewfile-fragment" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">ruby</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-ruby">tap "hashicorp/tap", trusted: true
+tap "supabase/tap", trusted: true
+brew "awscli"
+brew "aws-vault"
+brew "granted"
+brew "azure-cli"
+cask "gcloud-cli"
+brew "opentofu"          # or "hashicorp/tap/terraform"
+brew "tflint"
+brew "trivy"
+brew "kubectl"
+brew "kubectx"
+brew "k9s"
+brew "helm"
+brew "stern"
+brew "dive"
+brew "act"
+brew "lefthook"
+brew "mkcert"
+brew "xh"
+brew "grpcurl"
+brew "websocat"
+brew "oha"
+brew "doggo"
+brew "ngrok"
+brew "cloudflared"
+brew "supabase/tap/supabase"
+brew "localstack"
+cask "tailscale"
+cask "bruno"
+cask "proxyman"
+cask "wireshark"</code></pre></div>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="13-containers-and-vms.html"><span>Previous</span><strong>Containers &amp; virtual machines</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/14-cloud-and-devops-tooling.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/14-cloud-and-devops-tooling.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#cloud-clis">Cloud CLIs</a></li>
+<li class="lvl3"><a href="#credentials">Credentials</a></li>
+<li class="lvl3"><a href="#local-emulation">Local emulation</a></li>
+<li class="lvl2"><a href="#infrastructure-as-code">Infrastructure as code</a></li>
+<li class="lvl2"><a href="#kubernetes-and-containers-remotely">Kubernetes and containers, remotely</a></li>
+<li class="lvl2"><a href="#http-apis-and-debugging">HTTP, APIs and debugging</a></li>
+<li class="lvl2"><a href="#reaching-your-machines-tailscale">Reaching your machines: Tailscale</a></li>
+<li class="lvl2"><a href="#remote-development">Remote development</a></li>
+<li class="lvl2"><a href="#cicd-from-the-laptop">CI/CD from the laptop</a></li>
+<li class="lvl2"><a href="#databases-in-the-cloud-from-the-mac">Databases in the cloud, from the Mac</a></li>
+<li class="lvl2"><a href="#observability-profiling-tools-worth-having">Observability &amp; profiling tools worth having</a></li>
+<li class="lvl2"><a href="#recommended-cloud-dev-brewfile-fragment">Recommended "cloud dev" Brewfile fragment</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
