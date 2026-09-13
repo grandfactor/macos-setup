@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Performance &amp; maintenance — The macOS Setup Guide</title>
+<meta name="description" content="Keeping a Mac fast for years — reading Activity Monitor and memory pressure correctly, reclaiming storage (System Data, caches, Docker, Xcode, Homebrew), auditing login items and launch agents, battery health and the 80% charge limit, thermals, Spotlight reindexing, and a low-effort maintenance routine.">
+<meta property="og:title" content="Performance &amp; maintenance — The macOS Setup Guide">
+<meta property="og:description" content="Keeping a Mac fast for years — reading Activity Monitor and memory pressure correctly, reclaiming storage (System Data, caches, Docker, Xcode, Homebrew), auditing login items and launch agents, battery health and the 80% charge limit, thermals, Spotlight reindexing, and a low-effort maintenance routine.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+<li><a href="15-databases-and-local-dev.html"><span class="nav-num">15</span>Databases &amp; local development services</a></li>
+</ul>
+<p class="nav-part">Part IV — Security, backup &amp; maintenance</p><ul>
+<li><a href="16-security-and-privacy.html"><span class="nav-num">16</span>Security &amp; privacy</a></li>
+<li><a href="17-backup-and-recovery.html"><span class="nav-num">17</span>Backup &amp; recovery</a></li>
+<li class="active"><a href="18-performance-and-maintenance.html"><span class="nav-num">18</span>Performance &amp; maintenance</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="performance-maintenance">Performance &amp; maintenance</h1>
+<p>Apple-silicon Macs don't slow down the way Intel machines did — there's no spinning disk to fragment, no registry to rot, and macOS manages memory aggressively. What <em>does</em> go wrong is predictable: the disk fills up with build artifacts and container images, something you installed once runs at login forever, a runaway process eats a core in the background, and the battery gets cooked by living at 100% on a desk. This chapter covers how to <em>read</em> what the machine is doing, then how to fix the handful of things that actually matter.</p>
+<div class="admonition tip"><p class="admonition-title">Tip</p><p><strong>The 80/20 of Mac maintenance:</strong> (1) keep ≥15% of the disk free, (2) audit login items twice a year, (3) turn on the charge limit if the Mac lives plugged in, (4) reboot when the uptime passes a couple of weeks. Everything else in this chapter is diagnosis for when something feels wrong.</p></div>
+<h2 id="reading-activity-monitor-correctly">Reading Activity Monitor correctly<a class="anchor" href="#reading-activity-monitor-correctly" aria-label="Permalink">#</a></h2>
+<p>Open Activity Monitor (<code>⌘Space</code> → "Activity"), or pin it to the Dock during setup week. Five tabs, each with one thing that matters:</p>
+<div class="table-wrap"><table><thead><tr><th>Tab</th><th>Look at</th><th>Ignore</th></tr></thead><tbody><tr><td><strong>CPU</strong></td><td><code>% CPU</code> sorted descending; anything sustained &gt;100% that isn't a build or a video call. The <strong>Idle</strong> number at the bottom (&gt;80% at rest is normal).</td><td>Short spikes; <code>kernel_task</code> high <em>while the Mac is hot</em> is the OS throttling on purpose.</td></tr><tr><td><strong>Memory</strong></td><td>The <strong>Memory Pressure</strong> graph. Green = fine, yellow = fine but compressing, red = you're swapping hard.</td><td>"Memory Used" — macOS uses all RAM it can as cache; a "full" number is not a problem.</td></tr><tr><td><strong>Energy</strong></td><td><strong>Energy Impact</strong> and <strong>12 hr Power</strong>; the culprits when battery life suddenly drops. Also <strong>Preventing Sleep</strong>.</td><td>Absolute numbers — only relative ranking matters.</td></tr><tr><td><strong>Disk</strong></td><td><strong>Bytes Written</strong> over time for processes you don't expect (Spotlight <code>mds_stores</code> after a big copy is normal for an hour).</td><td>Reads.</td></tr><tr><td><strong>Network</strong></td><td>Sent/received bytes by process; find the cloud-sync app re-uploading 40 GB.</td><td>—</td></tr></tbody></table></div>
+<p>Useful, non-obvious features:</p>
+<ul>
+<li><strong>View → All Processes, Hierarchically</strong> shows which parent spawned that mystery <code>node</code> process.</li>
+<li><strong>View → Dock Icon → Show CPU History</strong> turns the Dock icon into a live graph.</li>
+<li>Select a process → <strong>ⓘ</strong> → <strong>Sample Process</strong> gives you a stack dump you can paste into a bug report (or feed to an AI assistant) to figure out what a hung app is doing.</li>
+<li><code>⌥⌘⎋</code> (Force Quit dialog) is the fast path when a GUI app is stuck; Activity Monitor's ✕ button does the same with more information.</li>
+</ul>
+<h3 id="memory-pressure-unified-memory-and-do-i-need-more-ram">Memory pressure, unified memory, and "do I need more RAM?"<a class="anchor" href="#memory-pressure-unified-memory-and-do-i-need-more-ram" aria-label="Permalink">#</a></h3>
+<p>On Apple silicon the CPU and GPU share one pool of memory. macOS will happily <em>use</em> all of it — file cache, compressed pages, GPU buffers — so the raw "used" number is meaningless. Three signals actually indicate a RAM shortage:</p>
+<ol>
+<li><strong>Memory Pressure is yellow or red for minutes at a time</strong>, not just during a build.</li>
+<li><strong>Swap Used</strong> grows into multiple gigabytes and stays there. A little swap is normal; 8–10 GB of swap on a 16 GB machine means the working set doesn't fit.</li>
+<li>Apps visibly stall for a second when you switch to them (pages being decompressed or read back from SSD).</li>
+</ol>
+<p>From the terminal:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># Pressure and swap in one line each
+memory_pressure | tail -1
+sysctl vm.swapusage
+
+# Top 10 processes by resident memory
+ps -axm -o rss,comm | head -11 | awk 'NR&gt;1{printf "%6.0f MB  %s\n",$1/1024,$2}'
+
+# Live view (q to quit)
+top -o mem -stats pid,command,mem,cpu</code></pre></div>
+<p>Rules of thumb for 2026 workloads (see <a href="01-hardware-and-buying.html">chapter 1</a> for the buying angle):</p>
+<ul>
+<li><strong>8 GB (MacBook Neo):</strong> fine for editors, browsers, and one language runtime. Docker/OrbStack with a database plus a JVM plus Chrome will swap constantly.</li>
+<li><strong>16 GB:</strong> the comfortable floor for a CS student or web developer. Watch pressure when running containers <em>and</em> an Android/iOS simulator.</li>
+<li><strong>24–36 GB:</strong> local LLMs up to ~20B parameters at 4-bit, Kubernetes-in-Docker, multiple VMs, big monorepos indexed by an IDE.</li>
+<li><strong>48 GB+:</strong> ML work, 70B-class models, video.</li>
+</ul>
+<p>You can't upgrade RAM later. If you're swapping every day, the fix is to reduce the working set (quit Docker when not using it, use one browser, close the IDE you're not using), not to "clean memory" with a utility — those apps just purge the cache macOS would have dropped anyway.</p>
+<h2 id="storage-where-the-space-went">Storage: where the space went<a class="anchor" href="#storage-where-the-space-went" aria-label="Permalink">#</a></h2>
+<p>APFS reports free space in a confusing way because snapshots, purgeable files, and clones make "used" fuzzy. Start with the two views macOS gives you, then go to the terminal.</p>
+<p><strong>System Settings → General → Storage</strong> gives category totals. The category that confuses everyone is <strong>System Data</strong> (formerly "Other"): it's caches, logs, Time Machine local snapshots, container disk images, Xcode simulators, and anything macOS can't classify. It legitimately reaches 30–100 GB on a developer machine.</p>
+<p>From the terminal, find the real culprits:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># Top-level usage of your home folder, largest first (takes a minute)
+du -xhd1 ~ 2&gt;/dev/null | sort -rh | head -20
+
+# Same for Library, where most "System Data" lives
+du -xhd1 ~/Library 2&gt;/dev/null | sort -rh | head -20
+
+# Interactive drill-down (install once: brew install dust  or  brew install ncdu)
+dust -d 2 ~
+ncdu ~</code></pre></div>
+<p>Or use a GUI: <strong>GrandPerspective</strong> (free, treemap), <strong>DaisyDisk</strong> ($10, prettier, can scan hidden system volumes), or <strong>OmniDiskSweeper</strong> (free, plain list). All three are in the <a href="appendix-b-brewfile.html">Brewfile</a>.</p>
+<h3 id="the-usual-suspects-on-a-developer-mac">The usual suspects on a developer Mac<a class="anchor" href="#the-usual-suspects-on-a-developer-mac" aria-label="Permalink">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th>Location</th><th>What</th><th>Safe cleanup</th></tr></thead><tbody><tr><td><code>~/Library/Developer/Xcode/DerivedData</code></td><td>Xcode build intermediates</td><td>Delete the whole folder anytime; Xcode rebuilds. Often 10–50 GB.</td></tr><tr><td><code>~/Library/Developer/Xcode/iOS DeviceSupport</code>, <code>.../Archives</code></td><td>Symbols for every iOS version you ever plugged in; app archives</td><td>Delete old versions; keep archives you've shipped.</td></tr><tr><td><code>~/Library/Developer/CoreSimulator</code></td><td>Simulator runtimes and device images</td><td><code>xcrun simctl delete unavailable</code>; Xcode → Settings → Components to remove old runtimes (5–8 GB each).</td></tr><tr><td><code>~/.orbstack</code> / <code>~/Library/Containers/com.docker.docker</code></td><td>Container images, volumes, build cache</td><td><code>docker system prune -a --volumes</code> (destroys stopped containers and unused volumes — read the prompt). OrbStack: Settings → Storage.</td></tr><tr><td><code>~/Library/Caches</code></td><td>App caches</td><td><code>brew cleanup --prune=all</code>; otherwise let apps manage it. Deleting the folder is safe but they regrow.</td></tr><tr><td><code>~/Library/Caches/Homebrew</code>, <code>$(brew --cache)</code></td><td>Downloaded bottles</td><td><code>brew cleanup -s</code></td></tr><tr><td><code>~/.cache</code>, <code>~/.npm/_cacache</code>, <code>~/.cache/uv</code>, <code>~/.cargo/registry</code>, <code>~/.m2</code>, <code>~/.gradle/caches</code>, <code>~/go/pkg/mod</code></td><td>Package manager caches</td><td><code>npm cache clean --force</code>, <code>uv cache clean</code>, <code>cargo cache -a</code> (via <code>cargo install cargo-cache</code>), <code>go clean -modcache</code>, delete Gradle caches.</td></tr><tr><td><code>node_modules</code> folders everywhere</td><td>Dependencies for projects you finished in 2024</td><td><code>npx npkill</code> walks your projects and lets you delete them interactively.</td></tr><tr><td><code>~/.local/share/mise</code>, <code>~/.pyenv</code>, <code>~/.nvm</code></td><td>Old runtime versions</td><td><code>mise prune</code> / <code>mise uninstall</code>.</td></tr><tr><td><code>~/Library/Application Support/Code/User/workspaceStorage</code></td><td>VS Code per-workspace caches</td><td>Safe to delete when VS Code is closed.</td></tr><tr><td><code>~/Library/Application Support/Slack/Cache</code>, Teams, Discord, Spotify</td><td>Electron media caches, often 2–5 GB each</td><td>Delete from inside the app (Spotify → Settings → Storage) or trash the Cache folder while quit.</td></tr><tr><td><code>~/Library/Mail</code></td><td>Offline copies of every attachment</td><td>Mail → Settings → Accounts → Download Attachments: Recent.</td></tr><tr><td><code>~/Library/Messages/Attachments</code></td><td>Every photo anyone ever texted you</td><td>System Settings → Storage → Messages → review large attachments.</td></tr><tr><td><code>~/Downloads</code></td><td>You know</td><td>Sort by size. A Hazel or Shortcuts rule to archive files older than 30 days helps.</td></tr><tr><td>Local Time Machine snapshots</td><td>Hourly snapshots when the backup drive is unplugged</td><td><code>tmutil listlocalsnapshots /</code> then <code>tmutil deletelocalsnapshots &lt;date&gt;</code>; macOS purges them itself when space gets low.</td></tr></tbody></table></div>
+<p>A one-shot cleanup you can run monthly (also in <a href="appendix-a-bootstrap-script.html">Appendix A</a> as <code>scripts/cleanup.sh</code>):</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">#!/bin/sh
+set -eu
+echo "→ Homebrew";      brew cleanup --prune=all -s; brew autoremove
+echo "→ Xcode";         rm -rf ~/Library/Developer/Xcode/DerivedData/*; xcrun simctl delete unavailable 2&gt;/dev/null || true
+echo "→ Docker";        command -v docker &gt;/dev/null &amp;&amp; docker system prune -f 2&gt;/dev/null || true
+echo "→ npm/uv/go";     npm cache clean --force 2&gt;/dev/null; uv cache clean 2&gt;/dev/null; go clean -modcache 2&gt;/dev/null || true
+echo "→ mise";          command -v mise &gt;/dev/null &amp;&amp; mise prune -y || true
+echo "→ Trash";         rm -rf ~/.Trash/* 2&gt;/dev/null || true
+echo "→ Snapshots";     tmutil listlocalsnapshots / | sed 's/.*\.//' | xargs -I{} tmutil deletelocalsnapshots {} &gt;/dev/null 2&gt;&amp;1 || true
+df -h / | tail -1</code></pre></div>
+<div class="admonition warning"><p class="admonition-title">Warning</p><p>Never <code>rm -rf</code> inside <code>/System</code>, <code>/Library</code> (root-level), or <code>/private/var/db</code>. On a sealed system volume you mostly can't, but the parts you <em>can</em> touch (<code>/Library/Caches</code>, <code>/private/var/folders</code>) are managed by the OS and deleting them by hand causes odd breakage until the next reboot. Use <code>sudo periodic daily weekly monthly</code> if you want the OS to run its own cleanups, though on modern macOS it's largely a no-op.</p></div>
+<h3 id="purgeable-space-and-why-df-disagrees-with-finder">Purgeable space and why <code>df</code> disagrees with Finder<a class="anchor" href="#purgeable-space-and-why-df-disagrees-with-finder" aria-label="Permalink">#</a></h3>
+<p>Finder shows <em>available</em> space including <strong>purgeable</strong> items — local snapshots, iCloud-evicted files, caches macOS knows it can drop. <code>df -h</code> shows what's actually free right now. When you're installing something big and get "not enough space" despite Finder saying otherwise, the OS hasn't purged yet. Force it by trying the copy anyway (macOS purges on demand), or delete snapshots as above.</p>
+<p>Check the state of your APFS container:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">diskutil apfs list | grep -E "Capacity (In Use|Not Allocated)|Name"</code></pre></div>
+<h3 id="keep-15-free">Keep 15% free<a class="anchor" href="#keep-15-free" aria-label="Permalink">#</a></h3>
+<p>APFS and SSD wear-leveling both want headroom. Below ~10% free, writes slow down, Time Machine local snapshots get purged constantly, and Xcode/Docker start failing in confusing ways. If you're routinely below that, the fix is an external SSD for media and project archives (see <a href="17-backup-and-recovery.html">chapter 17</a>) or an honest look at whether you need three container runtimes.</p>
+<h2 id="login-items-and-background-processes">Login items and background processes<a class="anchor" href="#login-items-and-background-processes" aria-label="Permalink">#</a></h2>
+<p>Every app you install wants to run at login. Six months in, a fresh Mac has 25 things starting before you type a password. This is the single biggest cause of "my Mac got slow."</p>
+<p><strong>System Settings → General → Login Items &amp; Extensions.</strong> Two lists:</p>
+<ul>
+<li><strong>Open at Login</strong> — full apps. Remove anything you don't need running the moment you sit down. Keep: password manager, clipboard manager, window manager, your launcher. Question: Slack, Discord, Spotify, cloud-sync clients you use weekly, every "helper" from a printer or webcam vendor.</li>
+<li><strong>Allow in the Background</strong> — launch agents and daemons registered by apps. Toggling one off disables the agent without deleting it. Turn off anything from an app you uninstalled (macOS shows the developer name; if it's unfamiliar, search for it).</li>
+</ul>
+<p>The terminal view is more complete. Agents live in five places:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># Per-user agents (apps you installed)
+ls -la ~/Library/LaunchAgents
+# System-wide agents/daemons installed by third-party apps (needs the app's installer or sudo)
+ls -la /Library/LaunchAgents /Library/LaunchDaemons
+# Apple's own — leave alone
+# /System/Library/LaunchAgents /System/Library/LaunchDaemons
+
+# What's currently loaded for your user, with PID and last exit status
+launchctl list | sort -k3
+
+# Everything with a non-zero exit code (crashing agents that relaunch forever)
+launchctl list | awk '$2 != 0 &amp;&amp; $2 != "-"'</code></pre></div>
+<p>To remove one properly:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">launchctl bootout gui/$(id -u) ~/Library/LaunchAgents/com.example.helper.plist
+rm ~/Library/LaunchAgents/com.example.helper.plist</code></pre></div>
+<p>Also check <strong>Login Items → Extensions</strong> for Finder Sync, Quick Look, Share, and Spotlight extensions from uninstalled apps; each one is a process that gets loaded on demand.</p>
+<div class="admonition note"><p class="admonition-title">Note</p><p>Homebrew services (<code>brew services list</code>) are launch agents too — <code>postgresql</code>, <code>redis</code>, <code>mysql</code> running at login are exactly the kind of thing you forget about. <code>brew services stop --all</code> before travel, or don't autostart databases at all and run <code>brew services run postgresql@18</code> when you need them (see <a href="15-databases-and-local-dev.html">chapter 15</a>).</p></div>
+<h2 id="uninstalling-properly">Uninstalling properly<a class="anchor" href="#uninstalling-properly" aria-label="Permalink">#</a></h2>
+<p>Dragging an app to the Trash leaves preferences, caches, launch agents, and sometimes a privileged helper behind. For most apps the leftovers are a few KB of plists and harmless. For anything that installed a kernel/system extension, a VPN, an agent, or a helper (Docker Desktop, antivirus, Adobe, Logitech/Razer software, old Zoom versions), use the vendor's uninstaller or a cleaner:</p>
+<ul>
+<li><code>brew uninstall --zap &lt;cask&gt;</code> — Homebrew's zap stanza deletes the app <em>and</em> its known support files. This is the strongest argument for installing GUI apps via casks.</li>
+<li><strong>AppCleaner</strong> (free) or <strong>Pearcleaner</strong> (free, open source) — drop an app in, see the associated files, delete them together.</li>
+<li>Check <strong>System Settings → General → Login Items &amp; Extensions → Extensions</strong> and <strong>Privacy &amp; Security</strong> for orphaned system extensions; <code>systemextensionsctl list</code> in the terminal.</li>
+</ul>
+<h2 id="battery-health">Battery health<a class="anchor" href="#battery-health" aria-label="Permalink">#</a></h2>
+<p>Lithium-ion batteries age by <strong>cycle count</strong> and by <strong>time spent at high charge and high temperature</strong>. A Mac that lives on a desk at 100% and 35 °C degrades faster than one that's cycled daily.</p>
+<p>Check the state: <strong>System Settings → Battery → Battery Health (ⓘ)</strong> shows Maximum Capacity and cycle count. <code>system_profiler SPPowerDataType | grep -E "Cycle Count|Condition|Maximum Capacity"</code> from the terminal. Apple rates batteries for 1,000 cycles to 80% capacity; "Service Recommended" appears below 80%.</p>
+<p>Settings that matter:</p>
+<ul>
+<li><strong>Optimized Battery Charging</strong> (on by default) learns your schedule and holds at 80% until shortly before you usually unplug. Leave it on.</li>
+<li><strong>Charge limit (80%)</strong> — new in macOS 26.4 for Apple-silicon laptops: <strong>System Settings → Battery → Charge Limit</strong>. If the Mac is docked most of the week, set this. It's the biggest single thing you can do for long-term health. Toggle it off for a travel day (the menu bar battery item has a "Charge to Full Now" shortcut).</li>
+<li><strong>Low Power Mode</strong> — Battery → Low Power Mode → "Only on Battery" caps performance modestly and can add 1–2 hours. Fine for note-taking days; turn off for builds.</li>
+<li><strong>Energy Mode</strong> (M-series Pro/Max only) — "High Power" pins the fans up for sustained loads; "Low Power" the opposite. Automatic is right almost always.</li>
+</ul>
+<p>Third-party options: <strong>AlDente</strong> ($) gives finer control (arbitrary limits, heat protection, sailing mode) and was the only way to do this before 26.4; <strong>coconutBattery</strong> (free) shows detailed history. Both are in the Brewfile as optional.</p>
+<p>Battery <em>life</em> problems (not health) are almost always software: check Activity Monitor → Energy sorted by 12 hr Power, and look for <strong>Preventing Sleep: Yes</strong> on something like a browser tab with a video call it thinks is still open. <code>pmset -g assertions</code> lists what's holding the Mac awake right now.</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># Who's keeping the Mac awake?
+pmset -g assertions | grep -iE "PreventUserIdleSystemSleep|PreventUserIdleDisplaySleep" -A2
+
+# Battery/charging log with wake reasons (find the 3 AM wakeups)
+pmset -g log | grep -E "Wake Requests|DarkWake|Sleep  " | tail -30</code></pre></div>
+<h2 id="thermals-and-fan-noise">Thermals and fan noise<a class="anchor" href="#thermals-and-fan-noise" aria-label="Permalink">#</a></h2>
+<p>Apple-silicon Macs throttle gracefully: when they get hot, <code>kernel_task</code> appears to use a lot of CPU — that's the scheduler stealing cycles to cool down, not a bug. MacBook Air has no fan and will throttle under sustained load (long compiles, ML training); that's the trade-off you accepted for silence.</p>
+<p>To reduce heat:</p>
+<ul>
+<li>Keep the intake vents (hinge area on MacBooks) unobstructed. A stand helps more than any software.</li>
+<li>Sustained 100% CPU from something that <em>shouldn't</em> be busy (Spotlight after a migration, a cloud sync client, a runaway Electron app) is the usual cause of a hot idle Mac — Activity Monitor → CPU.</li>
+<li><strong>Stats</strong> or <strong>iStat Menus</strong> ($) in the menu bar show temperature and fan speed. <code>sudo powermetrics --samplers smc -i 1000 -n 1</code> prints die temperatures and fan RPM from the terminal.</li>
+<li>Don't install fan-control software unless you know why. Macs Fan Control can force fans on early, which is fine, but the defaults are already tuned.</li>
+</ul>
+<h2 id="spotlight-and-indexing">Spotlight and indexing<a class="anchor" href="#spotlight-and-indexing" aria-label="Permalink">#</a></h2>
+<p>Spotlight (<code>mds</code>, <code>mds_stores</code>, <code>mdworker</code>) indexes every file change. It runs hot for an hour after a migration, big <code>git clone</code>, or Xcode install — that's normal. If Spotlight is <em>constantly</em> busy, or search results are wrong or missing, rebuild the index:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># Check indexing status
+mdutil -s /
+
+# Rebuild (takes 10–60 minutes; search is degraded meanwhile)
+sudo mdutil -E /
+
+# Stop indexing an external drive entirely
+sudo mdutil -i off /Volumes/Backup</code></pre></div>
+<p>Exclude build output from indexing to reduce churn: <strong>System Settings → Spotlight → Search Privacy</strong> (or Spotlight → Privacy on older versions) and add <code>~/code</code> (or specifically <code>node_modules</code>, <code>target</code>, <code>.build</code> — Spotlight doesn't do globs, so add the folders or accept indexing them). Many developers exclude their entire code directory and rely on the editor's search and <code>fd</code>/<code>rg</code> instead. Time Machine has a separate exclusion list (see <a href="17-backup-and-recovery.html">chapter 17</a>).</p>
+<div class="admonition tip"><p class="admonition-title">Tip</p><p>Alternative launchers (Raycast, Alfred) use Spotlight's metadata index for file search. If you turned indexing off to save CPU, file search in those breaks too.</p></div>
+<h2 id="updates">Updates<a class="anchor" href="#updates" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>macOS updates</strong>: System Settings → General → Software Update. Turn on <strong>Install Security Responses and system files</strong> (background security patches). For feature updates, waiting a week or two after release is reasonable on a machine you depend on; security updates (26.6 fixed 155 CVEs) should not wait. See the <a href="16-security-and-privacy.html">security chapter</a>.</li>
+<li><strong>App Store apps</strong>: automatic updates on.</li>
+<li><strong>Homebrew</strong>: <code>brew update &amp;&amp; brew upgrade &amp;&amp; brew cleanup</code> weekly, or <code>brew upgrade --greedy</code> to include casks with their own auto-updaters. Pin anything you can't afford to have change: <code>brew pin postgresql@18</code>.</li>
+<li><strong>Casks with auto-updaters</strong> (Chrome, VS Code, Slack, Zoom) update themselves; <code>brew upgrade</code> skips them unless <code>--greedy</code>.</li>
+<li><strong>Runtimes</strong>: <code>mise upgrade</code> for tool versions, <code>mise self-update</code> for mise itself (or via brew).</li>
+<li><strong>Global npm/pip/cargo installs</strong>: the fewer the better. <code>npm outdated -g</code>, <code>uv tool upgrade --all</code>, <code>cargo install-update -a</code> (via <code>cargo-update</code>).</li>
+</ul>
+<p>Reboot after macOS updates, obviously, but also reboot every couple of weeks regardless. <code>uptime</code> shows how long it's been; leaked memory in WindowServer and a dozen helper processes recovers nothing else.</p>
+<h2 id="a-maintenance-routine-that-fits-in-five-minutes">A maintenance routine that fits in five minutes<a class="anchor" href="#a-maintenance-routine-that-fits-in-five-minutes" aria-label="Permalink">#</a></h2>
+<p><strong>Weekly (Friday, before closing the lid):</strong></p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew update &amp;&amp; brew upgrade &amp;&amp; brew cleanup
+mise upgrade
+uptime   # &gt;14 days? reboot
+df -h /  # &lt;15% free? run cleanup.sh</code></pre></div>
+<p><strong>Monthly:</strong></p>
+<ul>
+<li>Run <code>scripts/cleanup.sh</code> (above).</li>
+<li>Glance at <strong>Login Items &amp; Extensions</strong>; remove anything new you don't recognize.</li>
+<li>Check Time Machine ran in the last 24 hours (menu bar icon or <code>tmutil latestbackup</code>).</li>
+<li><strong>Battery Health</strong>: note cycle count; if the Mac was docked all month and the limit is off, turn it on.</li>
+</ul>
+<p><strong>Every semester / quarter:</strong></p>
+<ul>
+<li><code>brew bundle cleanup</code> to see what's installed that's not in your Brewfile — decide whether to add it or remove it (see <a href="08-homebrew.html">chapter 8</a>).</li>
+<li><code>npx npkill</code> and <code>docker system prune -a</code> for abandoned projects.</li>
+<li>Review <strong>Privacy &amp; Security</strong> permissions (Full Disk Access, Screen Recording, Accessibility) and revoke stale ones.</li>
+<li>Check macOS version against Apple's currently-supported list; if you're on an N-2 release, plan the upgrade.</li>
+<li>Test a restore from backup — open a file from Time Machine you haven't touched in months.</li>
+</ul>
+<p><strong>Things you don't need to do:</strong></p>
+<ul>
+<li>"Repair permissions" — hasn't existed since El Capitan.</li>
+<li>Reset SMC/NVRAM — Apple silicon manages this itself; the old key combos don't exist. If someone tells you to, they're reading a 2015 article.</li>
+<li>Run a "cleaner" or "optimizer" app. CleanMyMac and its clones do the same things as the commands above with a subscription attached, and their background agents are themselves a login-item problem. The one useful thing they do — finding large old files — GrandPerspective does for free.</li>
+<li>Defragment. APFS on SSD; no.</li>
+<li>Reinstall macOS annually. If the machine feels slow, it's one of: disk space, login items, a runaway process, or a battery that needs the charge limit. Find which.</li>
+</ul>
+<h2 id="when-its-actually-slow-a-diagnostic-order">When it's actually slow: a diagnostic order<a class="anchor" href="#when-its-actually-slow-a-diagnostic-order" aria-label="Permalink">#</a></h2>
+<ol>
+<li><code>uptime</code> — over two weeks? Reboot first, then re-evaluate.</li>
+<li><code>df -h /</code> — under 10% free? Fix that.</li>
+<li>Activity Monitor → <strong>CPU</strong>, sort by % CPU. Anything sustained above 100% that isn't yours? Sample it, quit it, find why it's running (login items).</li>
+<li>Activity Monitor → <strong>Memory</strong>, look at pressure. Red? Quit Docker/IDE/browser you aren't using; consider whether you bought enough RAM.</li>
+<li>Activity Monitor → <strong>Disk</strong>, sort by Bytes Written. Spotlight or a sync client thrashing?</li>
+<li><code>pmset -g thermlog</code> (or <code>sudo powermetrics</code>) — throttled from heat? Clear the vents, close the tab with the WebGL demo.</li>
+<li>Boot into <strong>Safe Mode</strong> (hold power → Options → hold ⇧ while choosing the volume) — if it's fast there, a third-party login item or extension is the cause. Binary-search the Login Items list.</li>
+<li>Still slow? <a href="22-troubleshooting.html">Chapter 22</a> covers logs, Recovery, and when to reinstall.</li>
+</ol>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="17-backup-and-recovery.html"><span>Previous</span><strong>Backup &amp; recovery</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/18-performance-and-maintenance.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/18-performance-and-maintenance.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#reading-activity-monitor-correctly">Reading Activity Monitor correctly</a></li>
+<li class="lvl3"><a href="#memory-pressure-unified-memory-and-do-i-need-more-ram">Memory pressure, unified memory, and "do I need more RAM?"</a></li>
+<li class="lvl2"><a href="#storage-where-the-space-went">Storage: where the space went</a></li>
+<li class="lvl3"><a href="#the-usual-suspects-on-a-developer-mac">The usual suspects on a developer Mac</a></li>
+<li class="lvl3"><a href="#purgeable-space-and-why-df-disagrees-with-finder">Purgeable space and why <code>df</code> disagrees with Finder</a></li>
+<li class="lvl3"><a href="#keep-15-free">Keep 15% free</a></li>
+<li class="lvl2"><a href="#login-items-and-background-processes">Login items and background processes</a></li>
+<li class="lvl2"><a href="#uninstalling-properly">Uninstalling properly</a></li>
+<li class="lvl2"><a href="#battery-health">Battery health</a></li>
+<li class="lvl2"><a href="#thermals-and-fan-noise">Thermals and fan noise</a></li>
+<li class="lvl2"><a href="#spotlight-and-indexing">Spotlight and indexing</a></li>
+<li class="lvl2"><a href="#updates">Updates</a></li>
+<li class="lvl2"><a href="#a-maintenance-routine-that-fits-in-five-minutes">A maintenance routine that fits in five minutes</a></li>
+<li class="lvl2"><a href="#when-its-actually-slow-a-diagnostic-order">When it's actually slow: a diagnostic order</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
