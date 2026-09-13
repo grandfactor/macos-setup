@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dotfiles &amp; Git — The macOS Setup Guide</title>
+<meta name="description" content="Version-controlling your configuration with a bare repo, chezmoi or stow; a complete Git setup for macOS (identity, signing with SSH keys, delta, aliases, global ignore); GitHub CLI; direnv; and secrets hygiene.">
+<meta property="og:title" content="Dotfiles &amp; Git — The macOS Setup Guide">
+<meta property="og:description" content="Version-controlling your configuration with a bare repo, chezmoi or stow; a complete Git setup for macOS (identity, signing with SSH keys, delta, aliases, global ignore); GitHub CLI; direnv; and secrets hygiene.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li class="active"><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="dotfiles-git">Dotfiles &amp; Git</h1>
+<p>Everything you configured in the last three chapters lives in text files. Put them in a Git repository and a new Mac — or a reset one — goes from Setup Assistant to <em>your</em> environment in twenty minutes. This chapter also sets up Git itself the way a working engineer has it, because the defaults are from 2005.</p>
+<h2 id="what-counts-as-dotfiles">What counts as dotfiles<a class="anchor" href="#what-counts-as-dotfiles" aria-label="Permalink">#</a></h2>
+<p>Anything under <code>~</code> that starts with a <code>.</code>, plus the modern <code>~/.config/*</code> tree:</p>
+<div class="table-wrap"><table><thead><tr><th>Config</th><th>Path</th></tr></thead><tbody><tr><td>zsh</td><td><code>~/.zshenv</code>, <code>~/.zprofile</code>, <code>~/.zshrc</code></td></tr><tr><td>Git</td><td><code>~/.config/git/config</code>, <code>~/.config/git/ignore</code> (XDG paths — no more <code>~/.gitconfig</code>)</td></tr><tr><td>Ghostty</td><td><code>~/.config/ghostty/config</code></td></tr><tr><td>Starship</td><td><code>~/.config/starship.toml</code></td></tr><tr><td>mise</td><td><code>~/.config/mise/config.toml</code></td></tr><tr><td>tmux</td><td><code>~/.config/tmux/tmux.conf</code></td></tr><tr><td>Neovim</td><td><code>~/.config/nvim/</code></td></tr><tr><td>Karabiner</td><td><code>~/.config/karabiner/karabiner.json</code></td></tr><tr><td>AeroSpace</td><td><code>~/.aerospace.toml</code> (or <code>~/.config/aerospace/aerospace.toml</code>)</td></tr><tr><td>Homebrew</td><td><code>~/.config/homebrew/Brewfile</code></td></tr><tr><td>SSH</td><td><code>~/.ssh/config</code> (<strong>not</strong> the keys)</td></tr><tr><td>VS Code</td><td><code>~/Library/Application Support/Code/User/settings.json</code>, <code>keybindings.json</code> (or use Settings Sync)</td></tr><tr><td>Zed</td><td><code>~/.config/zed/settings.json</code>, <code>keymap.json</code></td></tr><tr><td>macOS defaults</td><td>your <code>macos-defaults.sh</code> script (Chapter 3 / Appendix A)</td></tr></tbody></table></div>
+<p><strong>Never commit</strong>: <code>~/.ssh/id_*</code>, <code>~/.gnupg/</code>, <code>~/.aws/credentials</code>, <code>~/.npmrc</code> with tokens, <code>~/.netrc</code>, <code>.env</code> files, anything from <code>~/Library/Keychains</code>. Chapter 16 covers where secrets go instead.</p>
+<h2 id="three-ways-to-manage-them">Three ways to manage them<a class="anchor" href="#three-ways-to-manage-them" aria-label="Permalink">#</a></h2>
+<h3 id="1-the-bare-repo-trick-zero-tools">1. The bare-repo trick (zero tools)<a class="anchor" href="#1-the-bare-repo-trick-zero-tools" aria-label="Permalink">#</a></h3>
+<p>Your home directory <em>is</em> the working tree; the <code>.git</code> directory lives elsewhere so <code>~</code> doesn't look like a repo.</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">git init --bare "$HOME/.dotfiles"
+alias dot='git --git-dir="$HOME/.dotfiles" --work-tree="$HOME"'   # put this in .zshrc
+dot config status.showUntrackedFiles no
+dot add ~/.zshrc ~/.config/ghostty/config ~/.config/starship.toml ~/.config/git/config
+dot commit -m "initial dotfiles"
+dot remote add origin git@github.com:you/dotfiles.git
+dot push -u origin main</code></pre></div>
+<p>On a new machine:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">git clone --bare git@github.com:you/dotfiles.git "$HOME/.dotfiles"
+alias dot='git --git-dir="$HOME/.dotfiles" --work-tree="$HOME"'
+dot checkout            # fails if files exist — move them aside, retry
+dot config status.showUntrackedFiles no</code></pre></div>
+<p>Pros: no dependencies, files live in place, <code>dot diff</code> works. Cons: no templating (same file on every machine), no secrets handling, easy to accidentally <code>dot add</code> something large.</p>
+<h3 id="2-chezmoi-recommended-for-more-than-one-machine">2. chezmoi (recommended for more than one machine)<a class="anchor" href="#2-chezmoi-recommended-for-more-than-one-machine" aria-label="Permalink">#</a></h3>
+<p><strong>chezmoi</strong> (<code>brew install chezmoi</code>) is a single Go binary that keeps the source of truth in <code>~/.local/share/chezmoi</code> and <em>applies</em> it to <code>~</code>. Its strengths: <strong>templates</strong> (one <code>.gitconfig</code> with <code>{{ if eq .chezmoi.hostname "work-mbp" }}</code> blocks), <strong>secrets</strong> pulled from 1Password/Bitwarden/Keychain at apply time (never stored in the repo), <code>run_once_</code> scripts (install Homebrew, run <code>brew bundle</code>, apply <code>defaults</code>), and first-class support for macOS/Linux differences.</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">chezmoi init                                  # creates the source repo
+chezmoi add ~/.zshrc ~/.config/ghostty/config # copies into the source dir (as dot_zshrc, dot_config/ghostty/config)
+chezmoi edit ~/.zshrc                         # edit the source version
+chezmoi diff                                  # what would change
+chezmoi apply                                 # write to ~
+chezmoi cd &amp;&amp; git add -A &amp;&amp; git commit -m "…" &amp;&amp; git push
+# new machine — one line, including running your install scripts:
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply you</code></pre></div>
+<p>A secrets template line: <code>token = {{ onepasswordRead "op://Private/GitHub/token" }}</code> — chezmoi calls the 1Password CLI at apply time. Machine-specific data lives in <code>~/.config/chezmoi/chezmoi.toml</code> (<code>[data] email = "…"</code>, <code>work = true</code>).</p>
+<h3 id="3-gnu-stow-yadm-nix-home-manager">3. GNU Stow / yadm / Nix Home Manager<a class="anchor" href="#3-gnu-stow-yadm-nix-home-manager" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>Stow</strong> (<code>brew install stow</code>): keep <code>~/dotfiles/zsh/.zshrc</code>, <code>~/dotfiles/ghostty/.config/ghostty/config</code>, run <code>stow zsh ghostty</code> to symlink them into <code>~</code>. Simple, transparent, no templating. Very popular.</li>
+<li><strong>yadm</strong>: the bare-repo trick with templating and encryption bolted on.</li>
+<li><strong>Home Manager (Nix)</strong>: declarative, reproducible, manages packages <em>and</em> config, steep learning curve; the right answer if you're already Nix-curious and wrong for a first-year student.</li>
+</ul>
+<p>Pick chezmoi if you have (or will have) a work Mac and a personal Mac; the bare repo or Stow if you have one machine and like simplicity.</p>
+<h2 id="repository-layout-and-bootstrap">Repository layout and bootstrap<a class="anchor" href="#repository-layout-and-bootstrap" aria-label="Permalink">#</a></h2>
+<p>Whatever the tool, include an <code>install.sh</code> (idempotent) at the repo root so the sequence on a fresh Mac is:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">xcode-select --install
+git clone git@github.com:you/dotfiles.git ~/.dotfiles   # or the chezmoi one-liner
+~/.dotfiles/install.sh</code></pre></div>
+<p>The script (Appendix A is a complete one) should: install Homebrew if missing → <code>brew bundle</code> → link/apply dotfiles → run <code>macos-defaults.sh</code> → <code>mise install</code> → set up Touch ID sudo → remind you of the manual steps (sign in to 1Password, add SSH key to GitHub, grant Accessibility to Raycast/Karabiner). Keep a <code>README.md</code> with those manual steps; you'll thank yourself in two years.</p>
+<p>Structure that scales:</p>
+<div class="codeblock"><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code>dotfiles/
+├── install.sh
+├── Brewfile
+├── macos-defaults.sh
+├── zsh/            .zshenv .zprofile .zshrc
+├── git/            config ignore
+├── ghostty/        config
+├── starship.toml
+├── mise/           config.toml
+├── nvim/           …
+├── karabiner/      karabiner.json
+├── aerospace/      aerospace.toml
+├── vscode/         settings.json keybindings.json extensions.txt
+└── README.md       manual steps, hardware notes</code></pre></div>
+<p>Include <code>.zshrc.local</code> in <code>.gitignore</code> and source it from <code>.zshrc</code> for machine-specific bits (work proxies, secrets, aliases you'd rather not publish).</p>
+<h2 id="git-configured-properly">Git, configured properly<a class="anchor" href="#git-configured-properly" aria-label="Permalink">#</a></h2>
+<p>Homebrew's <code>git</code> (<code>brew install git</code>) is newer than Apple's. Use the XDG location so <code>~</code> stays clean:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">mkdir -p ~/.config/git</code></pre></div>
+<p><code>~/.config/git/config</code>:</p>
+<div class="codeblock"><span class="code-lang">ini</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-ini">[user]
+    name = Alex Kowalski
+    email = alex@example.com
+    signingkey = ~/.ssh/id_ed25519.pub        # sign commits with your SSH key (no GPG needed)
+[gpg]
+    format = ssh
+[gpg "ssh"]
+    allowedSignersFile = ~/.config/git/allowed_signers
+    # 1Password users: program = /Applications/1Password.app/Contents/MacOS/op-ssh-sign
+[commit]
+    gpgsign = true
+    verbose = true                            # show the diff in the commit message editor
+[tag]
+    gpgsign = true
+[init]
+    defaultBranch = main
+[core]
+    editor = nvim                             # or: code --wait / zed --wait
+    pager = delta
+    autocrlf = input
+    excludesfile = ~/.config/git/ignore
+    fsmonitor = true                          # faster status in big repos (uses FSEvents)
+    untrackedCache = true
+[color]
+    ui = auto
+[column]
+    ui = auto
+[branch]
+    sort = -committerdate
+[tag]
+    sort = version:refname
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
+[pull]
+    rebase = true
+[push]
+    default = simple
+    autoSetupRemote = true                    # first `git push` just works
+    followTags = true
+[rebase]
+    autoSquash = true
+    autoStash = true
+    updateRefs = true
+[merge]
+    conflictstyle = zdiff3
+[diff]
+    algorithm = histogram
+    colorMoved = plain
+    mnemonicPrefix = true
+    renames = true
+[rerere]
+    enabled = true
+    autoupdate = true
+[help]
+    autocorrect = prompt
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+    side-by-side = false
+    line-numbers = true
+    hyperlinks = true
+[credential]
+    helper = osxkeychain                      # HTTPS tokens in the Keychain; `gh auth login` sets this up too
+[url "git@github.com:"]
+    insteadOf = https://github.com/           # always push over SSH even if you cloned via HTTPS
+[alias]
+    st = status -sb
+    co = checkout
+    sw = switch
+    br = branch
+    ci = commit
+    ca = commit --amend --no-edit
+    cm = commit -m
+    lg = log --oneline --graph --decorate --all -30
+    last = log -1 HEAD --stat
+    unstage = reset HEAD --
+    undo = reset --soft HEAD~1
+    wip = !git add -A &amp;&amp; git commit -m "wip"
+    fixup = commit --fixup
+    please = push --force-with-lease
+    aliases = config --get-regexp ^alias\\.
+    ignored = ls-files --others --ignored --exclude-standard
+    root = rev-parse --show-toplevel
+    cleanup = "!git branch --merged | grep -vE '(^\\*|main|master|develop)' | xargs -r git branch -d"
+[includeIf "gitdir:~/Developer/work/"]
+    path = ~/.config/git/config-work          # different email/signing key for work repos</code></pre></div>
+<p>Notes on the choices:</p>
+<ul>
+<li><strong>SSH commit signing</strong> (Git ≥ 2.34) reuses your SSH key — no GPG keyring to manage. Add the same public key to GitHub as a <em>Signing key</em> (<code>gh ssh-key add ~/.ssh/id_ed25519.pub --type signing</code>), and put <code>alex@example.com ssh-ed25519 AAAA…</code> in <code>~/.config/git/allowed_signers</code> so <code>git log --show-signature</code> verifies locally. With <strong>1Password</strong> as SSH agent, set <code>gpg.ssh.program</code> to <code>op-ssh-sign</code> and Touch ID approves each signature.</li>
+<li><code>fsmonitor</code> + <code>untrackedCache</code> make <code>git status</code> instant in monorepos on macOS.</li>
+<li><code>pull.rebase = true</code> and <code>rebase.autoStash</code> keep history linear for the solo-dev workflow; teams that merge can flip it.</li>
+<li><code>includeIf</code> lets your work identity kick in automatically for anything under <code>~/Developer/work/</code>.</li>
+<li><code>delta</code> (<code>brew install git-delta</code>) gives syntax-highlighted, line-numbered diffs; <code>difftastic</code> (<code>git difftool -t difftastic</code> after <code>[difftool "difftastic"] cmd = difft "$LOCAL" "$REMOTE"</code>) understands syntax trees.</li>
+</ul>
+<p>Global ignore, <code>~/.config/git/ignore</code>:</p>
+<div class="codeblock"><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code># macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+# editors
+.idea/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+*.swp
+*~
+.zed/
+# envs &amp; secrets (belt and braces — repos should ignore these too)
+.env
+.env.*
+!.env.example
+.envrc
+.direnv/
+# tooling
+.mise.local.toml
+.tool-versions.local
+node_modules/
+__pycache__/
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+target/
+dist/
+build/</code></pre></div>
+<h2 id="github-cli">GitHub CLI<a class="anchor" href="#github-cli" aria-label="Permalink">#</a></h2>
+<p><code>brew install gh</code>, then <code>gh auth login</code> (choose SSH, upload your key, authenticate in the browser). It configures the Keychain credential helper too. Daily use:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">gh repo create my-project --private --clone     # new repo + clone
+gh repo clone owner/repo
+gh pr create --fill                             # PR from the current branch
+gh pr checkout 123                              # review someone's PR locally
+gh pr view --web
+gh pr checks --watch
+gh issue list --assignee @me
+gh run watch                                    # tail a GitHub Actions run
+gh api repos/{owner}/{repo}/releases            # any REST call
+gh extension install dlvhdr/gh-dash             # a TUI dashboard of PRs/issues
+gh copilot suggest "undo last commit but keep changes"   # gh-copilot extension</code></pre></div>
+<p>GitLab has <code>glab</code>; Bitbucket has nothing good. <strong>Git GUI clients</strong> if you want one: <strong>Fork</strong> ($50, fast, best interactive rebase UI), <strong>Tower</strong> ($69/yr), <strong>GitKraken</strong>, <strong>Sublime Merge</strong>, <strong>GitHub Desktop</strong> (free, basic), or the Git panels in VS Code/Zed/JetBrains — plus <code>lazygit</code> in the terminal, which many people end up preferring to all of them.</p>
+<h2 id="direnv-per-directory-environment">direnv: per-directory environment<a class="anchor" href="#direnv-per-directory-environment" aria-label="Permalink">#</a></h2>
+<p><code>brew install direnv</code>, hook it in <code>.zshrc</code> (<code>eval "$(direnv hook zsh)"</code>). Drop a <code>.envrc</code> in a project:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># .envrc
+dotenv_if_exists .env          # load KEY=value pairs from .env (which is gitignored)
+export DATABASE_URL=postgres://localhost/myapp_dev
+PATH_add ./bin ./node_modules/.bin
+layout python                  # or `use mise` / `use flake` (nix) — activates a venv automatically</code></pre></div>
+<p><code>direnv allow</code> once; from then on, <code>cd</code> into the directory loads the environment and leaving it unloads it. <code>mise</code> (Chapter 11) can do the env part too (<code>[env]</code> in <code>.mise.toml</code>), so many people use only mise; direnv remains the standard for teams with mixed tooling and for Nix flakes.</p>
+<h2 id="secrets-hygiene-for-repos">Secrets hygiene for repos<a class="anchor" href="#secrets-hygiene-for-repos" aria-label="Permalink">#</a></h2>
+<ul>
+<li>Commit <code>.env.example</code> with placeholder keys; never <code>.env</code>. Add <code>.env*</code> to the global ignore (above) <em>and</em> each repo's <code>.gitignore</code>.</li>
+<li>Install <strong>gitleaks</strong> or <strong>trufflehog</strong> (<code>brew install gitleaks</code>) and run it as a pre-commit hook: <code>pre-commit</code> (<code>brew install pre-commit</code>) with a <code>.pre-commit-config.yaml</code> including <code>gitleaks</code>. GitHub's push protection also blocks known token formats on push for public repos and for orgs with Advanced Security.</li>
+<li>If you <em>do</em> commit a secret: rotate it immediately (assume it's compromised the moment it hits a remote), then rewrite history with <code>git filter-repo</code> and force-push. Rotating is the important part; the rewrite is hygiene.</li>
+<li>Store personal API keys in the <strong>macOS Keychain</strong> (<code>security add-generic-password -a "$USER" -s openai_api_key -w</code>) and read them in <code>.zshrc</code> lazily, or in <strong>1Password</strong> and inject with <code>op run --env-file=.env.tpl -- npm start</code>. Both beat a plaintext <code>export OPENAI_API_KEY=</code> in your dotfiles.</li>
+<li>SSH keys: one per machine, passphrase-protected, in the Keychain or a hardware token. Revoke a machine's key on GitHub when you sell it.</li>
+</ul>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="09-terminal-and-shell.html"><span>Previous</span><strong>Terminal &amp; shell</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/10-dotfiles-and-git.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/10-dotfiles-and-git.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#what-counts-as-dotfiles">What counts as dotfiles</a></li>
+<li class="lvl2"><a href="#three-ways-to-manage-them">Three ways to manage them</a></li>
+<li class="lvl3"><a href="#1-the-bare-repo-trick-zero-tools">1. The bare-repo trick (zero tools)</a></li>
+<li class="lvl3"><a href="#2-chezmoi-recommended-for-more-than-one-machine">2. chezmoi (recommended for more than one machine)</a></li>
+<li class="lvl3"><a href="#3-gnu-stow-yadm-nix-home-manager">3. GNU Stow / yadm / Nix Home Manager</a></li>
+<li class="lvl2"><a href="#repository-layout-and-bootstrap">Repository layout and bootstrap</a></li>
+<li class="lvl2"><a href="#git-configured-properly">Git, configured properly</a></li>
+<li class="lvl2"><a href="#github-cli">GitHub CLI</a></li>
+<li class="lvl2"><a href="#direnv-per-directory-environment">direnv: per-directory environment</a></li>
+<li class="lvl2"><a href="#secrets-hygiene-for-repos">Secrets hygiene for repos</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
