@@ -72,7 +72,7 @@
   </aside>
   <main id="content" class="content">
     <article class="prose">
-<h1 id="window-management-spaces-displays">Window management, Spaces &amp; displays</h1>
+<h1 id="window-management-spaces--displays">Window management, Spaces &amp; displays</h1>
 <p>macOS's window model confuses newcomers: there is no "maximise" in the Windows sense, apps can have many windows across many desktops, and full-screen is its own thing. Once you understand the three layers — <strong>Spaces</strong>, <strong>tiling</strong>, and <strong>switching</strong> — it's very fast. This chapter sets up the built-ins, then picks a third-party manager if you want more.</p>
 <h2 id="mental-model">Mental model<a class="anchor" href="#mental-model" aria-label="Permalink">#</a></h2>
 <ul>
@@ -105,10 +105,10 @@
 <p><code>Control Center → Stage Manager</code> (or Desktop &amp; Dock). It groups windows into "stages" shown as thumbnails on the left; clicking one swaps the whole set in. It's a different metaphor from Spaces — like having your open windows as a deck of cards. Some people love it for a single laptop screen; most developers find Spaces + tiling more predictable and leave it off. If you try it, turn off <em>Show recent apps</em> to reclaim the left strip and use <code>Click wallpaper to reveal desktop: Only in Stage Manager</code>.</p>
 <h2 id="third-party-window-managers">Third-party window managers<a class="anchor" href="#third-party-window-managers" aria-label="Permalink">#</a></h2>
 <p>Three tiers, from "just snapping" to "i3 on macOS". All need <strong>Accessibility</strong> permission (<code>Privacy &amp; Security → Accessibility</code>); the tilers also want <strong>Screen Recording</strong> to read window titles in some cases.</p>
-<h3 id="tier-1-snapping-and-hotkeys-most-people">Tier 1 — snapping and hotkeys (most people)<a class="anchor" href="#tier-1-snapping-and-hotkeys-most-people" aria-label="Permalink">#</a></h3>
+<h3 id="tier-1--snapping-and-hotkeys-most-people">Tier 1 — snapping and hotkeys (most people)<a class="anchor" href="#tier-1--snapping-and-hotkeys-most-people" aria-label="Permalink">#</a></h3>
 <div class="table-wrap"><table><thead><tr><th>Tool</th><th>Price</th><th>Why pick it</th></tr></thead><tbody><tr><td><strong>Rectangle</strong></td><td>Free, OSS</td><td>The classic. <kbd>⌃</kbd><kbd>⌥</kbd> + arrows/U/I/J/K/Enter/C for halves, quarters, thirds, maximise, centre, <em>next display</em> (<kbd>⌃</kbd><kbd>⌥</kbd><kbd>⌘</kbd><kbd>→</kbd>). Snap areas configurable. <strong>Rectangle Pro</strong> ($10) adds layouts, pinning, app-specific rules, stage-like "throw".</td></tr><tr><td><strong>Raycast window management</strong></td><td>Free (part of Raycast)</td><td>Same actions as Rectangle, assigned via Raycast hotkeys, plus <em>Reasonable Size</em>, <em>Almost Maximize</em>, custom sizes. If you already run Raycast, don't install a second tool.</td></tr><tr><td><strong>Loop</strong></td><td>Free, OSS</td><td>Hold a trigger key and move the mouse for a radial menu of positions. Pretty, fast, very configurable; the choice for people who don't want to memorise 15 chords.</td></tr><tr><td><strong>Swish</strong></td><td>$16</td><td>Trackpad-gesture window management (swipe on a title bar to tile). Great with Magic Trackpad.</td></tr><tr><td><strong>BetterSnapTool / Magnet / Moom</strong></td><td>$3–$10</td><td>Fine; older, still maintained. Moom's custom grid palette remains unique.</td></tr></tbody></table></div>
 <p><strong>Recommendation</strong>: Rectangle if you don't use Raycast; Raycast's built-in commands if you do. Bind: left/right halves, left/right two-thirds, maximise, centre, next display, and "reasonable size". That covers 95% of real use.</p>
-<h3 id="tier-2-automatic-tiling-without-disabling-security">Tier 2 — automatic tiling without disabling security<a class="anchor" href="#tier-2-automatic-tiling-without-disabling-security" aria-label="Permalink">#</a></h3>
+<h3 id="tier-2--automatic-tiling-without-disabling-security">Tier 2 — automatic tiling without disabling security<a class="anchor" href="#tier-2--automatic-tiling-without-disabling-security" aria-label="Permalink">#</a></h3>
 <p><strong>AeroSpace</strong> (free, OSS) is the most recommended tiler in 2026. It's an i3-like tree tiler: every new window is auto-placed in a split; you move focus with <kbd>⌥</kbd><kbd>H/J/K/L</kbd>, move windows with <kbd>⌥</kbd><kbd>⇧</kbd><kbd>H/J/K/L</kbd>, switch layout (tiles ↔ accordion) with <kbd>⌥</kbd><kbd>/</kbd>, and jump to <em>workspaces</em> with <kbd>⌥</kbd><kbd>1</kbd>…<kbd>9</kbd>. Crucially it <strong>does not use macOS Spaces</strong> (it emulates workspaces by hiding windows off-screen), so it needs <strong>no SIP changes</strong>, works on locked-down work machines, and switches workspaces with zero animation. Config is a single <code>~/.aerospace.toml</code> — dotfiles-friendly. Pair it with <strong>JankyBorders</strong> (active-window highlight) and <strong>Sketchybar</strong> if you want a Linux-rice look.</p>
 <p>Minimal <code>~/.aerospace.toml</code> to get started:</p>
 <div class="codeblock"><span class="code-lang">toml</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-toml">start-at-login = true
@@ -162,7 +162,7 @@ run = 'layout floating'
 if.app-id = 'com.apple.finder'
 run = 'layout floating'</code></pre></div>
 <p><strong>Amethyst</strong> (free, OSS) is the simpler xmonad-style option: fewer concepts, works with real Spaces, good if AeroSpace feels like too much.</p>
-<h3 id="tier-3-yabai-maximum-control-some-sip-cost">Tier 3 — yabai (maximum control, some SIP cost)<a class="anchor" href="#tier-3-yabai-maximum-control-some-sip-cost" aria-label="Permalink">#</a></h3>
+<h3 id="tier-3--yabai-maximum-control-some-sip-cost">Tier 3 — yabai (maximum control, some SIP cost)<a class="anchor" href="#tier-3--yabai-maximum-control-some-sip-cost" aria-label="Permalink">#</a></h3>
 <p><strong>yabai</strong> (free, OSS) + <strong>skhd</strong> (hotkey daemon) is the deepest tiler: BSP layouts, real Spaces integration, window opacity, borders, scripting via a Unix socket. Its full power (creating/destroying/moving Spaces, focusing across displays with animation off, window shadows/opacity) requires <strong>partially disabling System Integrity Protection</strong> and loading a scripting addition into Dock.app:</p>
 <ol>
 <li>Boot to Recovery (hold power → Options → Terminal): <code>csrutil enable --without fs --without debug --without nvram</code> (Apple silicon).</li>
@@ -204,9 +204,9 @@ run = 'layout floating'</code></pre></div>
 <li class="lvl2"><a href="#spaces-and-mission-control">Spaces and Mission Control</a></li>
 <li class="lvl2"><a href="#stage-manager">Stage Manager</a></li>
 <li class="lvl2"><a href="#third-party-window-managers">Third-party window managers</a></li>
-<li class="lvl3"><a href="#tier-1-snapping-and-hotkeys-most-people">Tier 1 — snapping and hotkeys (most people)</a></li>
-<li class="lvl3"><a href="#tier-2-automatic-tiling-without-disabling-security">Tier 2 — automatic tiling without disabling security</a></li>
-<li class="lvl3"><a href="#tier-3-yabai-maximum-control-some-sip-cost">Tier 3 — yabai (maximum control, some SIP cost)</a></li>
+<li class="lvl3"><a href="#tier-1--snapping-and-hotkeys-most-people">Tier 1 — snapping and hotkeys (most people)</a></li>
+<li class="lvl3"><a href="#tier-2--automatic-tiling-without-disabling-security">Tier 2 — automatic tiling without disabling security</a></li>
+<li class="lvl3"><a href="#tier-3--yabai-maximum-control-some-sip-cost">Tier 3 — yabai (maximum control, some SIP cost)</a></li>
 <li class="lvl3"><a href="#choosing">Choosing</a></li>
 <li class="lvl2"><a href="#multiple-displays">Multiple displays</a></li>
 <li class="lvl2"><a href="#focus-follows-mouse-and-other-linux-habits">Focus-follows-mouse and other Linux habits</a></li>

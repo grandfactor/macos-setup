@@ -85,8 +85,10 @@ def strip_tags(s: str) -> str:
 def slugify(text: str) -> str:
     text = strip_tags(text)
     text = text.replace("`", "").lower().strip()
+    # GitHub-compatible: drop punctuation, then map EACH whitespace char to a hyphen (no collapsing),
+    # so anchors in GUIDE.md resolve identically on github.com and on the site.
     text = re.sub(r"[^\w\s-]", "", text)
-    text = re.sub(r"[\s_]+", "-", text)
+    text = re.sub(r"\s", "-", text)
     return text.strip("-") or "section"
 
 
@@ -567,9 +569,21 @@ def build_guide_md(chapters: list[Chapter], intro_md: str) -> str:
             out += [f"**{ch.part}**", ""]
             last_part = ch.part
         out.append(f"- [{ch.label}](#{slugify(ch.label)}) — {ch.description}")
-    out += ["", "---", "", demote_headings(intro_md.strip()), ""]
+    # cross-chapter links: "12-editors-and-ides.html#foo" -> "#foo" / "#12-editors--ides" so GUIDE.md is self-contained
+    by_slug = {ch.slug: ch for ch in chapters}
+    def relink(md: str) -> str:
+        def repl(m):
+            slug, frag = m.group(1), m.group(2)
+            if slug == "index":
+                return "](#table-of-contents)"
+            ch = by_slug.get(slug)
+            if not ch:
+                return m.group(0)
+            return f"](#{frag})" if frag else f"](#{slugify(ch.label)})"
+        return re.sub(r"\]\(([0-9a-z][0-9a-z-]*)\.html(?:#([^)\s]+))?\)", repl, md)
+    out += ["", "---", "", demote_headings(relink(intro_md.strip())), ""]
     for ch in chapters:
-        body = expand_includes(ch.md.strip())
+        body = relink(expand_includes(ch.md.strip()))
         # rename the chapter H1 to include its number, then demote everything one level
         body = re.sub(r"^#\s+.+$", f"# {ch.label}", body, count=1, flags=re.M)
         out += ["---", "", demote_headings(body), "", "[↑ Back to top](#table-of-contents)", ""]

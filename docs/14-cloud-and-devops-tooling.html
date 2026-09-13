@@ -72,7 +72,7 @@
   </aside>
   <main id="content" class="content">
     <article class="prose">
-<h1 id="cloud-network-devops-tooling">Cloud, network &amp; DevOps tooling</h1>
+<h1 id="cloud-network--devops-tooling">Cloud, network &amp; DevOps tooling</h1>
 <p>The tools that connect your Mac to everything that isn't your Mac: cloud accounts, clusters, APIs, remote machines, CI. The theme is <strong>credentials never in plaintext, one tool per job, everything in the Brewfile.</strong></p>
 <h2 id="cloud-clis">Cloud CLIs<a class="anchor" href="#cloud-clis" aria-label="Permalink">#</a></h2>
 <div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew install awscli azure-cli
@@ -130,7 +130,7 @@ brew install oci-cli                      # Oracle Cloud (the free tier is real)
 </ul>
 <h2 id="databases-in-the-cloud-from-the-mac">Databases in the cloud, from the Mac<a class="anchor" href="#databases-in-the-cloud-from-the-mac" aria-label="Permalink">#</a></h2>
 <p>Connection tooling is Chapter 15; here, the credential rule: use short-lived IAM/database-proxy auth where offered (RDS IAM auth, Cloud SQL Auth Proxy <code>brew install cloud-sql-proxy</code>, Supabase/Neon branch tokens), keep connection strings in 1Password or the Keychain, and never in a committed <code>.env</code>.</p>
-<h2 id="observability-profiling-tools-worth-having">Observability &amp; profiling tools worth having<a class="anchor" href="#observability-profiling-tools-worth-having" aria-label="Permalink">#</a></h2>
+<h2 id="observability--profiling-tools-worth-having">Observability &amp; profiling tools worth having<a class="anchor" href="#observability--profiling-tools-worth-having" aria-label="Permalink">#</a></h2>
 <p><code>brew install --cask stats</code> (menu bar CPU/GPU/mem/net — see the Apple silicon P/E core split), <code>btop</code>, <code>bandwhich</code> (per-process bandwidth), <code>nettop</code> (built in), Instruments (in Xcode: Time Profiler, Allocations, System Trace — works on any process, not just Apple apps), <code>sudo powermetrics --samplers cpu_power,gpu_power</code> (real-time watts per cluster), <code>sudo fs_usage -w -f filesys &lt;pid&gt;</code> and <code>sudo opensnoop</code> (file activity), <code>dtrace</code> is mostly blocked by SIP — use <code>eslogger</code>/Endpoint Security or Instruments instead.</p>
 <h2 id="recommended-cloud-dev-brewfile-fragment">Recommended "cloud dev" Brewfile fragment<a class="anchor" href="#recommended-cloud-dev-brewfile-fragment" aria-label="Permalink">#</a></h2>
 <div class="codeblock"><span class="code-lang">ruby</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-ruby">tap "hashicorp/tap", trusted: true
@@ -183,7 +183,7 @@ cask "wireshark"</code></pre></div>
 <li class="lvl2"><a href="#remote-development">Remote development</a></li>
 <li class="lvl2"><a href="#cicd-from-the-laptop">CI/CD from the laptop</a></li>
 <li class="lvl2"><a href="#databases-in-the-cloud-from-the-mac">Databases in the cloud, from the Mac</a></li>
-<li class="lvl2"><a href="#observability-profiling-tools-worth-having">Observability &amp; profiling tools worth having</a></li>
+<li class="lvl2"><a href="#observability--profiling-tools-worth-having">Observability &amp; profiling tools worth having</a></li>
 <li class="lvl2"><a href="#recommended-cloud-dev-brewfile-fragment">Recommended "cloud dev" Brewfile fragment</a></li>
 </ul></nav></aside>
 </div>

@@ -182,7 +182,7 @@ dscacheutil -q host -a name example.com
 # Network interfaces/routes
 ifconfig en0 ; netstat -rn | head ; networksetup -listallhardwareports</code></pre></div>
 <p>Notes: <code>localhost</code> resolves to both <code>127.0.0.1</code> and <code>::1</code> — a server bound to IPv4 only will fail from tools that try IPv6 first; bind to <code>::</code> or <code>0.0.0.0</code> or use <code>127.0.0.1</code> explicitly. <strong><code>.local</code> hostnames are mDNS</strong> on macOS; resolving <code>myserver.local</code> over unicast DNS won't work (rename the domain or add <code>/etc/hosts</code> entries). <code>*.localhost</code> subdomains resolve to loopback automatically. <strong>VPN clients</strong> frequently break local DNS and Docker networks; disconnect to test. <strong>Little Snitch/LuLu</strong> silently blocking a new tool looks exactly like "the network is down" for that one process.</p>
-<h3 id="docker-orbstack-containers">Docker / OrbStack / containers<a class="anchor" href="#docker-orbstack-containers" aria-label="Permalink">#</a></h3>
+<h3 id="docker--orbstack--containers">Docker / OrbStack / containers<a class="anchor" href="#docker--orbstack--containers" aria-label="Permalink">#</a></h3>
 <ul>
 <li><strong><code>Cannot connect to the Docker daemon</code></strong> — the runtime isn't running (open OrbStack/Docker Desktop) or <code>docker context ls</code> points at the wrong one: <code>docker context use orbstack</code> (or <code>desktop-linux</code>).</li>
 <li><strong>Images run painfully slowly / "exec format error"</strong> — you pulled an <code>amd64</code> image on arm64. Look for an arm64 tag or run with <code>--platform linux/amd64</code> (Rosetta-translated; works until macOS 28). Build multi-arch with <code>docker buildx</code>.</li>
@@ -279,7 +279,7 @@ ifconfig en0 ; netstat -rn | head ; networksetup -listallhardwareports</code></p
 <li class="lvl3"><a href="#gatekeeper-code-signing-and-damaged-apps">Gatekeeper, code signing, and "damaged" apps</a></li>
 <li class="lvl3"><a href="#permissions-and-privacy-prompts">Permissions and privacy prompts</a></li>
 <li class="lvl3"><a href="#ports-networking-dns">Ports, networking, DNS</a></li>
-<li class="lvl3"><a href="#docker-orbstack-containers">Docker / OrbStack / containers</a></li>
+<li class="lvl3"><a href="#docker--orbstack--containers">Docker / OrbStack / containers</a></li>
 <li class="lvl3"><a href="#git-and-ssh">Git and SSH</a></li>
 <li class="lvl3"><a href="#python-node-and-friends">Python, Node, and friends</a></li>
 <li class="lvl2"><a href="#hardware-and-peripherals">Hardware and peripherals</a></li>

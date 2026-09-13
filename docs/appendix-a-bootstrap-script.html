@@ -72,7 +72,7 @@
   </aside>
   <main id="content" class="content">
     <article class="prose">
-<h1 id="appendix-a-bootstrap-script">Appendix A — Bootstrap script</h1>
+<h1 id="appendix-a--bootstrap-script">Appendix A — Bootstrap script</h1>
 <p>Everything in <a href="03-system-settings.html">Part II</a> and <a href="07-command-line-tools-and-xcode.html">Part III</a> that can be automated, in four scripts that live in the repo's <code>scripts/</code> directory. They're written for <strong>zsh on macOS 26/27, Apple silicon</strong>, and every step is idempotent — run them again after a partial failure or on a Mac you set up by hand and they'll only do what's missing.</p>
 <div class="admonition warning"><p class="admonition-title">Warning</p><p><strong>Read scripts before you run them.</strong> Piping <code>curl</code> into a shell from a stranger's repo is exactly the habit <a href="16-security-and-privacy.html">chapter 16</a> warns about. Clone the repo, open the files, delete the lines you disagree with (there will be some — these are opinions), then run. The scripts never touch <code>/System</code>, never disable Gatekeeper/SIP/FileVault, and ask before installing Rosetta or logging in to GitHub.</p></div>
 <h2 id="quick-start">Quick start<a class="anchor" href="#quick-start" aria-label="Permalink">#</a></h2>

@@ -72,7 +72,7 @@
   </aside>
   <main id="content" class="content">
     <article class="prose">
-<h1 id="languages-runtimes">Languages &amp; runtimes</h1>
+<h1 id="languages--runtimes">Languages &amp; runtimes</h1>
 <p>The rule that prevents 90% of "it works on my machine": <strong>never use the system interpreter, never install runtimes globally with Homebrew when the project pins a version, and manage every language with one tool.</strong> In 2026 that tool is <strong>mise</strong>, with <strong>uv</strong> handling Python's packaging on top. This chapter sets up each major language the way a CS curriculum or a modern job will need it.</p>
 <h2 id="mise-one-version-manager-to-rule-them-all">mise: one version manager to rule them all<a class="anchor" href="#mise-one-version-manager-to-rule-them-all" aria-label="Permalink">#</a></h2>
 <p><strong>mise</strong> (<code>brew install mise</code>, "mise-en-place") is a Rust binary that replaces nvm, fnm, pyenv, rbenv, goenv, jenv, sdkman and asdf. It reads <code>.tool-versions</code> (asdf-compatible) and <code>mise.toml</code>, installs the exact version each project needs, and switches when you <code>cd</code>. It also manages <strong>environment variables</strong> and <strong>tasks</strong> per project, which is why it can replace direnv and a Makefile too.</p>
@@ -148,7 +148,7 @@ uv venv                             # plain venv if you want one</code></pre></d
 <h3 id="conda-jupyter-data-science">Conda, Jupyter, data science<a class="anchor" href="#conda-jupyter-data-science" aria-label="Permalink">#</a></h3>
 <p>If your course requires <strong>Anaconda/Miniconda</strong> (common in data-science and stats departments), install <strong>Miniforge</strong> (<code>brew install --cask miniforge</code>, conda-forge defaults, arm64-native, no Anaconda licence issues) and run <code>conda config --set auto_activate_base false</code> so it doesn't hijack every shell. Prefer <code>mamba</code>/<code>micromamba</code> for speed. Mixing conda and uv in one project is asking for trouble — pick per project. For Jupyter: <code>uv add --dev jupyterlab</code> then <code>uv run jupyter lab</code>, or use VS Code's notebook UI (<code>ms-toolsai.jupyter</code>), or <strong>JupyterLab Desktop</strong>. <strong>Positron</strong> (Posit's VS Code-based data science IDE) is the R + Python IDE of choice; <strong>RStudio</strong> if you prefer.</p>
 <p>Apple silicon notes: NumPy/SciPy use Apple's <strong>Accelerate</strong> BLAS by default (fast); PyTorch supports the <strong>MPS</strong> backend (<code>torch.device("mps")</code>) for GPU training on the Mac; TensorFlow via <code>tensorflow-metal</code>; JAX via <code>jax-metal</code> (experimental). See <a href="#machine-learning-on-apple-silicon">ML</a> below.</p>
-<h2 id="javascript-typescript">JavaScript / TypeScript<a class="anchor" href="#javascript-typescript" aria-label="Permalink">#</a></h2>
+<h2 id="javascript--typescript">JavaScript / TypeScript<a class="anchor" href="#javascript--typescript" aria-label="Permalink">#</a></h2>
 <h3 id="nodejs">Node.js<a class="anchor" href="#nodejs" aria-label="Permalink">#</a></h3>
 <p>Install through mise, never through the Node installer or Homebrew's <code>node</code> (which can't switch versions):</p>
 <div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">mise use --global node@lts     # Node 24 LTS today; Node 26 becomes LTS in October 2026
@@ -233,7 +233,7 @@ gem install bundler rails</code></pre></div>
 <li class="lvl3"><a href="#uv-does-everything">uv does everything</a></li>
 <li class="lvl3"><a href="#python-314-and-315">Python 3.14 and 3.15</a></li>
 <li class="lvl3"><a href="#conda-jupyter-data-science">Conda, Jupyter, data science</a></li>
-<li class="lvl2"><a href="#javascript-typescript">JavaScript / TypeScript</a></li>
+<li class="lvl2"><a href="#javascript--typescript">JavaScript / TypeScript</a></li>
 <li class="lvl3"><a href="#nodejs">Node.js</a></li>
 <li class="lvl3"><a href="#package-managers">Package managers</a></li>
 <li class="lvl3"><a href="#tooling">Tooling</a></li>

@@ -72,7 +72,7 @@
   </aside>
   <main id="content" class="content">
     <article class="prose">
-<h1 id="backup-recovery">Backup &amp; recovery</h1>
+<h1 id="backup--recovery">Backup &amp; recovery</h1>
 <p>A developer's Mac holds three kinds of data: <strong>code</strong> (should already be on a Git remote), <strong>documents and media</strong> (irreplaceable), and <strong>configuration</strong> (your dotfiles repo). The goal is to make losing the laptop — to theft, a spilled coffee, a failed SSD, a bad <code>rm -rf</code>, or ransomware — cost you an afternoon instead of a semester. The industry rule is <strong>3-2-1</strong>: three copies, on two different media, one off-site. On a Mac that's cheap and mostly automatic.</p>
 <h2 id="the-plan">The plan<a class="anchor" href="#the-plan" aria-label="Permalink">#</a></h2>
 <div class="table-wrap"><table><thead><tr><th>Copy</th><th>Tool</th><th>Cost</th><th>Protects against</th></tr></thead><tbody><tr><td>1. The Mac itself</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2. <strong>Local, versioned</strong></td><td><strong>Time Machine</strong> to an encrypted external SSD (or a NAS)</td><td>$100–$180 once</td><td>Deleted/overwritten files, bad updates, dead SSD, "I need the version from Tuesday"</td></tr><tr><td>3. <strong>Off-site, continuous</strong></td><td><strong>Backblaze</strong> (or iCloud Drive for documents + Git for code)</td><td>$9/mo, or $0 with iCloud+Git</td><td>Theft, fire, both copies in the same bag</td></tr><tr><td>Bonus</td><td><strong>Git remotes</strong> for code, <strong>dotfiles repo</strong> for config, <strong>password manager</strong> for secrets</td><td>free</td><td>The stuff Time Machine restores slowest</td></tr></tbody></table></div>

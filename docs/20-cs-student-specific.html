@@ -81,7 +81,7 @@
 <p>Set a calendar reminder to re-verify GitHub Education and JetBrains each September.</p>
 <h2 id="the-course-by-course-toolchain">The course-by-course toolchain<a class="anchor" href="#the-course-by-course-toolchain" aria-label="Permalink">#</a></h2>
 <p>A CS degree touches a lot of languages. The approach from <a href="11-languages-and-runtimes.html">chapter 11</a> — <code>mise</code> for runtimes, <code>uv</code> for Python, Homebrew for compilers — handles all of them. Here's what each typical course expects and the Mac-specific gotchas.</p>
-<h3 id="intro-programming-python-java">Intro programming (Python / Java)<a class="anchor" href="#intro-programming-python-java" aria-label="Permalink">#</a></h3>
+<h3 id="intro-programming-python--java">Intro programming (Python / Java)<a class="anchor" href="#intro-programming-python--java" aria-label="Permalink">#</a></h3>
 <ul>
 <li><strong>Python</strong>: <code>uv python install 3.13</code> (or whatever the course pins — check; intro courses often lag a version). Use <code>uv init</code> per assignment folder, <code>uv add</code> for packages. Never <code>sudo pip</code>. Run scripts with <code>uv run script.py</code>. If the course insists on Anaconda, install <code>miniforge</code> via brew instead (same conda, no bloat, Apple-silicon native) and <code>conda init zsh</code>.</li>
 <li><strong>Java</strong>: <code>mise use -g java@21</code> (or 25 — current LTS is 25, most courses want 17 or 21). IntelliJ IDEA Ultimate is free (above) and is what most Java courses assume. <code>brew install --cask intellij-idea</code>. If the course uses BlueJ or Greenfoot, both have Apple-silicon builds.</li>
@@ -100,13 +100,13 @@
 <li><strong>Threads/OS courses</strong>: xv6 (<code>riscv64</code> toolchain + qemu, above), Pintos (needs x86 — Linux VM), and anything with <code>fork()</code>-heavy code works natively.</li>
 </ul>
 <p><strong>Recommended setup for a systems course:</strong> native Clang + sanitizers for daily work, plus an Ubuntu container (<code>orb create ubuntu:24.04 cs</code> or the course's Docker image) for the autograder-matching build and Valgrind/GDB. See <a href="13-containers-and-vms.html">chapter 13</a>. With OrbStack, <code>cd</code> into your project and run <code>orb -m cs make test</code> — the same files, Linux toolchain.</p>
-<h3 id="data-structures-algorithms">Data structures &amp; algorithms<a class="anchor" href="#data-structures-algorithms" aria-label="Permalink">#</a></h3>
+<h3 id="data-structures--algorithms">Data structures &amp; algorithms<a class="anchor" href="#data-structures--algorithms" aria-label="Permalink">#</a></h3>
 <p>Usually Java, C++, or Python; covered above. For competitive programming: <code>brew install gcc</code> for <code>bits/stdc++.h</code> (Clang lacks it; or create your own precompiled header), and use a fast judge client (<strong>cph</strong> extension in VS Code, or <strong>Competitive Companion</strong>).</p>
 <h3 id="web-development">Web development<a class="anchor" href="#web-development" aria-label="Permalink">#</a></h3>
 <p>Node via <code>mise use -g node@24</code> (26 is LTS from October 2026); <code>pnpm</code> or <code>npm</code>. Everything in <a href="11-languages-and-runtimes.html">chapter 11</a> applies. Browser DevTools in Chrome or Firefox. If the course uses PHP/Laravel: <code>brew install php composer</code> or Laravel Herd.</p>
 <h3 id="databases">Databases<a class="anchor" href="#databases" aria-label="Permalink">#</a></h3>
 <p><code>brew install postgresql@18</code> and <code>brew services run postgresql@18</code>, or a container. <code>sqlite3</code> is preinstalled. <strong>TablePlus</strong> (free tier) or <strong>DBeaver</strong> (free) for a GUI. MySQL courses: <code>brew install mysql</code> or a <code>mysql:9</code> container. Oracle: only via container (<code>gvenzl/oracle-free</code>, arm64 available). SQL Server: <code>mcr.microsoft.com/azure-sql-edge</code> or the 2025 arm64 preview in a container. See <a href="15-databases-and-local-dev.html">chapter 15</a>.</p>
-<h3 id="machine-learning-data-science">Machine learning &amp; data science<a class="anchor" href="#machine-learning-data-science" aria-label="Permalink">#</a></h3>
+<h3 id="machine-learning--data-science">Machine learning &amp; data science<a class="anchor" href="#machine-learning--data-science" aria-label="Permalink">#</a></h3>
 <p>The Mac is genuinely good here up to a point.</p>
 <ul>
 <li><strong>Python stack</strong>: <code>uv add numpy pandas scikit-learn matplotlib jupyter</code>. Everything is Apple-silicon native now.</li>
@@ -217,12 +217,12 @@ Host gpu1
   <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
 <li class="lvl2"><a href="#free-stuff-claim-it-in-week-one">Free stuff: claim it in week one</a></li>
 <li class="lvl2"><a href="#the-course-by-course-toolchain">The course-by-course toolchain</a></li>
-<li class="lvl3"><a href="#intro-programming-python-java">Intro programming (Python / Java)</a></li>
+<li class="lvl3"><a href="#intro-programming-python--java">Intro programming (Python / Java)</a></li>
 <li class="lvl3"><a href="#c-c-and-systems-programming">C, C++, and systems programming</a></li>
-<li class="lvl3"><a href="#data-structures-algorithms">Data structures &amp; algorithms</a></li>
+<li class="lvl3"><a href="#data-structures--algorithms">Data structures &amp; algorithms</a></li>
 <li class="lvl3"><a href="#web-development">Web development</a></li>
 <li class="lvl3"><a href="#databases">Databases</a></li>
-<li class="lvl3"><a href="#machine-learning-data-science">Machine learning &amp; data science</a></li>
+<li class="lvl3"><a href="#machine-learning--data-science">Machine learning &amp; data science</a></li>
 <li class="lvl3"><a href="#mobile-development">Mobile development</a></li>
 <li class="lvl3"><a href="#theory-math-and-writing-heavy-courses">Theory, math, and writing-heavy courses</a></li>
 <li class="lvl3"><a href="#other-languages-you-may-meet">Other languages you may meet</a></li>

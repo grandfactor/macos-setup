@@ -72,7 +72,7 @@
   </aside>
   <main id="content" class="content">
     <article class="prose">
-<h1 id="automation-scripting">Automation &amp; scripting</h1>
+<h1 id="automation--scripting">Automation &amp; scripting</h1>
 <p>macOS has more automation layers than any other desktop OS, accumulated over 30 years: AppleScript (1993), Automator (2005), launchd (2005), JavaScript for Automation (2014), Shortcuts (2021), and a rich set of command-line tools that expose the GUI — <code>open</code>, <code>pbcopy</code>, <code>osascript</code>, <code>defaults</code>, <code>mdfind</code>, <code>say</code>, <code>shortcuts</code>. Third-party tools (Hammerspoon, Keyboard Maestro, BetterTouchTool, Hazel) fill the gaps. This chapter picks the right layer for each kind of job and gives working examples you can paste.</p>
 <div class="admonition tip"><p class="admonition-title">Tip</p><p><strong>Which tool?</strong> Scheduled or on-boot job → <strong>launchd</strong>. Reacting to a new file in a folder → <strong>Folder Action / Hazel / launchd WatchPaths</strong>. Global hotkey that does something → <strong>Hammerspoon</strong> (free) or <strong>Keyboard Maestro</strong> ($). Chaining GUI apps together, or anything you want on iPhone too → <strong>Shortcuts</strong>. Poking a specific app's data (Mail, Music, Finder, Notes) → <strong>AppleScript/JXA</strong> via <code>osascript</code>. Anything that's just files and text → a <strong>shell/Python script</strong>, wrapped in one of the above.</p></div>
 <h2 id="the-macos-specific-cli-toolbox">The macOS-specific CLI toolbox<a class="anchor" href="#the-macos-specific-cli-toolbox" aria-label="Permalink">#</a></h2>

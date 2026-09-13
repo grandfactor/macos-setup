@@ -8,44 +8,44 @@ _For CS students, software engineers and everyone who lives on a Mac — 2026 ed
 
 **Part I — Before you start**
 
-- [01. Hardware & buying guide](#01-hardware-buying-guide) — Which Mac to buy in late 2026, how much RAM and storage you actually need, education pricing, refurbs, and the accessories that matter.
-- [02. First boot, Setup Assistant & migration](#02-first-boot-setup-assistant-migration) — Setup Assistant choices that are hard to undo, clean install vs Migration Assistant, the first 30 minutes, and getting to a known-good baseline.
+- [01. Hardware & buying guide](#01-hardware--buying-guide) — Which Mac to buy in late 2026, how much RAM and storage you actually need, education pricing, refurbs, and the accessories that matter.
+- [02. First boot, Setup Assistant & migration](#02-first-boot-setup-assistant--migration) — Setup Assistant choices that are hard to undo, clean install vs Migration Assistant, the first 30 minutes, and getting to a known-good baseline.
 **Part II — System & interface**
 
 - [03. System Settings, pane by pane](#03-system-settings-pane-by-pane) — A pane-by-pane tour of System Settings in macOS 26/27 with the developer-relevant toggles, the Liquid Glass controls, and the defaults-write equivalents for scripting.
-- [04. Finder, Dock & Spotlight](#04-finder-dock-spotlight) — Finder as a power tool, Quick Look, the Dock, and the new Spotlight (apps, files, actions, clipboard, Quick Keys) — plus when Raycast or Alfred still earn their place.
-- [05. Keyboard, shortcuts & input](#05-keyboard-shortcuts-input) — Modifier remaps, Caps Lock as Control/Escape, Karabiner-Elements, text navigation shortcuts every Mac user should know, input sources, and coming from Windows/Linux keyboards.
-- [06. Window management, Spaces & displays](#06-window-management-spaces-displays) — Spaces, Mission Control, native tiling, Stage Manager, and the third-party window managers (Rectangle, Raycast, AeroSpace, yabai) — which one fits how you work, and how to set up multiple displays.
+- [04. Finder, Dock & Spotlight](#04-finder-dock--spotlight) — Finder as a power tool, Quick Look, the Dock, and the new Spotlight (apps, files, actions, clipboard, Quick Keys) — plus when Raycast or Alfred still earn their place.
+- [05. Keyboard, shortcuts & input](#05-keyboard-shortcuts--input) — Modifier remaps, Caps Lock as Control/Escape, Karabiner-Elements, text navigation shortcuts every Mac user should know, input sources, and coming from Windows/Linux keyboards.
+- [06. Window management, Spaces & displays](#06-window-management-spaces--displays) — Spaces, Mission Control, native tiling, Stage Manager, and the third-party window managers (Rectangle, Raycast, AeroSpace, yabai) — which one fits how you work, and how to set up multiple displays.
 **Part III — Developer environment**
 
-- [07. Command Line Tools, Xcode & the toolchain](#07-command-line-tools-xcode-the-toolchain) — Command Line Tools vs full Xcode, xcode-select, SDKs and simulators, Rosetta 2 and the arm64-only future, and keeping Xcode from eating your disk.
+- [07. Command Line Tools, Xcode & the toolchain](#07-command-line-tools-xcode--the-toolchain) — Command Line Tools vs full Xcode, xcode-select, SDKs and simulators, Rosetta 2 and the arm64-only future, and keeping Xcode from eating your disk.
 - [08. Homebrew](#08-homebrew) — Homebrew 6 from scratch — installing correctly on Apple silicon, formulae vs casks, Brewfiles, tap trust, ask mode, services, maintenance, and the Intel deprecation.
-- [09. Terminal & shell](#09-terminal-shell) — Choosing a terminal (Ghostty, iTerm2, WezTerm, Kitty, Warp), zsh configured properly without a framework, Starship, fzf, zoxide, the modern Rust CLI toolkit, tmux, SSH keys, and Touch ID for sudo.
-- [10. Dotfiles & Git](#10-dotfiles-git) — Version-controlling your configuration with a bare repo, chezmoi or stow; a complete Git setup for macOS (identity, signing with SSH keys, delta, aliases, global ignore); GitHub CLI; direnv; and secrets hygiene.
-- [11. Languages & runtimes](#11-languages-runtimes) — One version manager (mise) for everything, uv for Python, Node/Bun/Deno, Java, Go, Rust, C/C++, Swift, Ruby, .NET, and the ML stack (PyTorch MPS, MLX, Ollama) — with the 2026 release calendar.
-- [12. Editors, IDEs & AI coding tools](#12-editors-ides-ai-coding-tools) — VS Code, Cursor, Zed, JetBrains, Neovim, Xcode and the AI coding agents — what each is for in 2026, recommended settings, and how to keep the configs in sync across machines.
-- [13. Containers & virtual machines](#13-containers-virtual-machines) — Containers on macOS in 2026 — OrbStack, Docker Desktop, Colima, Podman and Apple's own `container` compared; multi-arch images; Kubernetes locally; Linux and Windows VMs with UTM, Parallels, VMware Fusion and Apple's Virtualization framework.
-- [14. Cloud, network & DevOps tooling](#14-cloud-network-devops-tooling) — Cloud CLIs and credentials done safely, Terraform/OpenTofu, Kubernetes tooling, API clients, HTTP debugging, Tailscale for reaching your machines, and GitHub Actions locally.
-- [15. Databases & local development services](#15-databases-local-development-services) — Postgres, MySQL, SQLite, Redis, MongoDB and friends on a Mac — Homebrew services vs containers vs Postgres.app, GUI clients, local HTTPS and custom domains, and a sane local-dev workflow.
+- [09. Terminal & shell](#09-terminal--shell) — Choosing a terminal (Ghostty, iTerm2, WezTerm, Kitty, Warp), zsh configured properly without a framework, Starship, fzf, zoxide, the modern Rust CLI toolkit, tmux, SSH keys, and Touch ID for sudo.
+- [10. Dotfiles & Git](#10-dotfiles--git) — Version-controlling your configuration with a bare repo, chezmoi or stow; a complete Git setup for macOS (identity, signing with SSH keys, delta, aliases, global ignore); GitHub CLI; direnv; and secrets hygiene.
+- [11. Languages & runtimes](#11-languages--runtimes) — One version manager (mise) for everything, uv for Python, Node/Bun/Deno, Java, Go, Rust, C/C++, Swift, Ruby, .NET, and the ML stack (PyTorch MPS, MLX, Ollama) — with the 2026 release calendar.
+- [12. Editors, IDEs & AI coding tools](#12-editors-ides--ai-coding-tools) — VS Code, Cursor, Zed, JetBrains, Neovim, Xcode and the AI coding agents — what each is for in 2026, recommended settings, and how to keep the configs in sync across machines.
+- [13. Containers & virtual machines](#13-containers--virtual-machines) — Containers on macOS in 2026 — OrbStack, Docker Desktop, Colima, Podman and Apple's own `container` compared; multi-arch images; Kubernetes locally; Linux and Windows VMs with UTM, Parallels, VMware Fusion and Apple's Virtualization framework.
+- [14. Cloud, network & DevOps tooling](#14-cloud-network--devops-tooling) — Cloud CLIs and credentials done safely, Terraform/OpenTofu, Kubernetes tooling, API clients, HTTP debugging, Tailscale for reaching your machines, and GitHub Actions locally.
+- [15. Databases & local development services](#15-databases--local-development-services) — Postgres, MySQL, SQLite, Redis, MongoDB and friends on a Mac — Homebrew services vs containers vs Postgres.app, GUI clients, local HTTPS and custom domains, and a sane local-dev workflow.
 **Part IV — Security, backup & maintenance**
 
-- [16. Security & privacy](#16-security-privacy) — A realistic threat model, FileVault and its new recovery-key rules, Gatekeeper and notarisation, the firewall, passwords and passkeys, secrets on disk, permissions hygiene, browser privacy, Lockdown Mode, and what to do when a laptop is lost.
-- [17. Backup & recovery](#17-backup-recovery) — The 3-2-1 strategy on a Mac — Time Machine done right (encrypted APFS, exclusions), a second local copy, cloud backup, what iCloud is and isn't, testing restores, and recovering a Mac that won't boot.
-- [18. Performance & maintenance](#18-performance-maintenance) — Keeping a Mac fast for years — reading Activity Monitor and memory pressure correctly, reclaiming storage (System Data, caches, Docker, Xcode, Homebrew), auditing login items and launch agents, battery health and the 80% charge limit, thermals, Spotlight reindexing, and a low-effort maintenance routine.
+- [16. Security & privacy](#16-security--privacy) — A realistic threat model, FileVault and its new recovery-key rules, Gatekeeper and notarisation, the firewall, passwords and passkeys, secrets on disk, permissions hygiene, browser privacy, Lockdown Mode, and what to do when a laptop is lost.
+- [17. Backup & recovery](#17-backup--recovery) — The 3-2-1 strategy on a Mac — Time Machine done right (encrypted APFS, exclusions), a second local copy, cloud backup, what iCloud is and isn't, testing restores, and recovering a Mac that won't boot.
+- [18. Performance & maintenance](#18-performance--maintenance) — Keeping a Mac fast for years — reading Activity Monitor and memory pressure correctly, reclaiming storage (System Data, caches, Docker, Xcode, Homebrew), auditing login items and launch agents, battery health and the 80% charge limit, thermals, Spotlight reindexing, and a low-effort maintenance routine.
 **Part V — Daily driving & workflows**
 
 - [19. Daily-driver apps](#19-daily-driver-apps) — The non-developer half of the Mac — browsers, password managers, launchers, clipboard managers, notes, email, calendar, PDF, media, communication, and the utilities that make macOS feel finished. Free/open-source first, with the paid upgrade named where it's worth it.
 - [20. CS-student specific](#20-cs-student-specific) — What's different when the Mac is for a CS degree — free software through student programs, the course-by-course toolchain (C/C++, Java, Python, systems, ML, mobile, databases, theory), running x86 Linux and Windows when a class requires it, remote lab machines, LaTeX/Typst, note-taking, and surviving four years on one battery.
-- [21. Automation & scripting](#21-automation-scripting) — Making the Mac do things for you — Shortcuts (and running them from the shell), launchd for scheduled and event-driven jobs, Automator's remaining uses, AppleScript and JXA for controlling apps, Hammerspoon for Lua-powered hotkeys and window/system automation, Keyboard Maestro and BetterTouchTool, Folder Actions and Hazel, and a grab-bag of macOS-specific CLI tools every script should know about.
+- [21. Automation & scripting](#21-automation--scripting) — Making the Mac do things for you — Shortcuts (and running them from the shell), launchd for scheduled and event-driven jobs, Automator's remaining uses, AppleScript and JXA for controlling apps, Hammerspoon for Lua-powered hotkeys and window/system automation, Keyboard Maestro and BetterTouchTool, Folder Actions and Hazel, and a grab-bag of macOS-specific CLI tools every script should know about.
 - [22. Troubleshooting](#22-troubleshooting) — A diagnostic playbook for when the Mac misbehaves — the escalation ladder, reading the unified log and crash reports, fixing the classic developer breakages (Homebrew after an OS update, PATH problems, Xcode license, code-signing and Gatekeeper, permissions prompts, DNS, ports in use, Docker), Wi-Fi/Bluetooth/display/audio problems, Recovery mode, Safe Mode, DFU revive, and when a reinstall is actually the answer.
 **Part VI — Reference**
 
-- [23. Checklists & cheat sheets](#23-checklists-cheat-sheets) — The whole guide compressed into printable checklists — the day-one setup order, the 30-minute security pass, the developer-environment checklist, weekly/monthly maintenance, a new-project checklist, a pre-travel checklist, and one-page cheat sheets for the terminal, Homebrew, mise/uv, Git, containers, and macOS CLI tools.
-- [Appendix A — Bootstrap script](#appendix-a-bootstrap-script) — The complete, idempotent bootstrap script that turns a fresh Apple-silicon Mac into the setup this guide describes — Command Line Tools, Homebrew, Brewfile, mise/uv, Git and SSH, shell, Touch ID sudo, dotfiles — plus the macOS defaults script, the monthly cleanup script, and the security audit script. Read before running.
-- [Appendix B — Brewfile](#appendix-b-brewfile) — The complete Brewfile behind this guide — 100+ CLI tools, runtimes, container/cloud tooling, fonts, and every GUI app recommended in chapters 9–19, with the optional ones commented out. Plus how Brewfile syntax works, how to keep yours in sync, and how to split it per machine.
-- [Appendix C — Keyboard shortcuts](#appendix-c-keyboard-shortcuts) — Every keyboard shortcut worth knowing on macOS 26/27, grouped by context — system, windows and Spaces, Finder, text editing (including the Emacs bindings that work in every Cocoa text field), screenshots, Spotlight, Safari, Terminal/Ghostty, VS Code, and the modifier symbols decoded.
-- [Appendix D — Glossary](#appendix-d-glossary) — Plain-English definitions of the macOS, Apple-silicon, and developer-tooling terms used throughout the guide — from APFS and Activation Lock to XProtect and zsh — with pointers to the chapter that goes deeper.
-- [Appendix E — Sources & further reading](#appendix-e-sources-further-reading) — Where the facts in this guide come from and where to check them when they drift — Apple's own documentation and release notes, project changelogs, the community references worth trusting, release calendars for every runtime, and a note on how the guide was researched and how to report an error.
+- [23. Checklists & cheat sheets](#23-checklists--cheat-sheets) — The whole guide compressed into printable checklists — the day-one setup order, the 30-minute security pass, the developer-environment checklist, weekly/monthly maintenance, a new-project checklist, a pre-travel checklist, and one-page cheat sheets for the terminal, Homebrew, mise/uv, Git, containers, and macOS CLI tools.
+- [Appendix A — Bootstrap script](#appendix-a--bootstrap-script) — The complete, idempotent bootstrap script that turns a fresh Apple-silicon Mac into the setup this guide describes — Command Line Tools, Homebrew, Brewfile, mise/uv, Git and SSH, shell, Touch ID sudo, dotfiles — plus the macOS defaults script, the monthly cleanup script, and the security audit script. Read before running.
+- [Appendix B — Brewfile](#appendix-b--brewfile) — The complete Brewfile behind this guide — 100+ CLI tools, runtimes, container/cloud tooling, fonts, and every GUI app recommended in chapters 9–19, with the optional ones commented out. Plus how Brewfile syntax works, how to keep yours in sync, and how to split it per machine.
+- [Appendix C — Keyboard shortcuts](#appendix-c--keyboard-shortcuts) — Every keyboard shortcut worth knowing on macOS 26/27, grouped by context — system, windows and Spaces, Finder, text editing (including the Emacs bindings that work in every Cocoa text field), screenshots, Spotlight, Safari, Terminal/Ghostty, VS Code, and the modifier symbols decoded.
+- [Appendix D — Glossary](#appendix-d--glossary) — Plain-English definitions of the macOS, Apple-silicon, and developer-tooling terms used throughout the guide — from APFS and Activation Lock to XProtect and zsh — with pointers to the chapter that goes deeper.
+- [Appendix E — Sources & further reading](#appendix-e--sources--further-reading) — Where the facts in this guide come from and where to check them when they drift — Apple's own documentation and release notes, project changelogs, the community references worth trusting, release calendars for every runtime, and a note on how the guide was researched and how to report an error.
 
 ---
 
@@ -68,14 +68,14 @@ _For CS students, software engineers and everyone who lives on a Mac — 2026 ed
 - **Software engineers** joining a new job or replacing a laptop who want a reproducible, secure, fast environment on day one.
 - **Daily drivers** — people who live on their Mac for writing, research, media, school and life — who want the machine to get out of their way.
 
-You don't need to read it front to back. Each chapter stands alone, and the [checklists](23-checklists-and-cheat-sheets.html) at the end compress the whole thing into a few printable pages.
+You don't need to read it front to back. Each chapter stands alone, and the [checklists](#23-checklists--cheat-sheets) at the end compress the whole thing into a few printable pages.
 
 ### How to use this guide
 
-1. **In a hurry?** Read [Chapter 2 (first boot)](02-first-boot-and-migration.html), run the [bootstrap script](appendix-a-bootstrap-script.html), then skim the [checklists](23-checklists-and-cheat-sheets.html).
-2. **Buying a Mac?** Start with [Chapter 1](01-hardware-and-buying.html); it is written for September 2026 pricing and the M5/M6 lineup.
-3. **Already set up but it feels messy?** Jump to [Homebrew](08-homebrew.html), [Terminal &amp; shell](09-terminal-and-shell.html), [Dotfiles](10-dotfiles-and-git.html) and [Security](16-security-and-privacy.html).
-4. **Setting up for a specific stack?** [Languages &amp; runtimes](11-languages-and-runtimes.html), [Containers &amp; VMs](13-containers-and-vms.html) and [Databases &amp; local dev](15-databases-and-local-dev.html) are self-contained.
+1. **In a hurry?** Read [Chapter 2 (first boot)](#02-first-boot-setup-assistant--migration), run the [bootstrap script](#appendix-a--bootstrap-script), then skim the [checklists](#23-checklists--cheat-sheets).
+2. **Buying a Mac?** Start with [Chapter 1](#01-hardware--buying-guide); it is written for September 2026 pricing and the M5/M6 lineup.
+3. **Already set up but it feels messy?** Jump to [Homebrew](#08-homebrew), [Terminal &amp; shell](#09-terminal--shell), [Dotfiles](#10-dotfiles--git) and [Security](#16-security--privacy).
+4. **Setting up for a specific stack?** [Languages &amp; runtimes](#11-languages--runtimes), [Containers &amp; VMs](#13-containers--virtual-machines) and [Databases &amp; local dev](#15-databases--local-development-services) are self-contained.
 
 Conventions used throughout:
 
@@ -3476,7 +3476,7 @@ ps -axm -o rss,comm | head -11 | awk 'NR>1{printf "%6.0f MB  %s\n",$1/1024,$2}'
 top -o mem -stats pid,command,mem,cpu
 ```
 
-Rules of thumb for 2026 workloads (see [chapter 1](01-hardware-and-buying.html) for the buying angle):
+Rules of thumb for 2026 workloads (see [chapter 1](#01-hardware--buying-guide) for the buying angle):
 
 - **8 GB (MacBook Neo):** fine for editors, browsers, and one language runtime. Docker/OrbStack with a database plus a JVM plus Chrome will swap constantly.
 - **16 GB:** the comfortable floor for a CS student or web developer. Watch pressure when running containers *and* an Android/iOS simulator.
@@ -3505,7 +3505,7 @@ dust -d 2 ~
 ncdu ~
 ```
 
-Or use a GUI: **GrandPerspective** (free, treemap), **DaisyDisk** ($10, prettier, can scan hidden system volumes), or **OmniDiskSweeper** (free, plain list). All three are in the [Brewfile](appendix-b-brewfile.html).
+Or use a GUI: **GrandPerspective** (free, treemap), **DaisyDisk** ($10, prettier, can scan hidden system volumes), or **OmniDiskSweeper** (free, plain list). All three are in the [Brewfile](#appendix-b--brewfile).
 
 #### The usual suspects on a developer Mac
 
@@ -3527,7 +3527,7 @@ Or use a GUI: **GrandPerspective** (free, treemap), **DaisyDisk** ($10, prettier
 | `~/Downloads` | You know | Sort by size. A Hazel or Shortcuts rule to archive files older than 30 days helps. |
 | Local Time Machine snapshots | Hourly snapshots when the backup drive is unplugged | `tmutil listlocalsnapshots /` then `tmutil deletelocalsnapshots <date>`; macOS purges them itself when space gets low. |
 
-A one-shot cleanup you can run monthly (also in [Appendix A](appendix-a-bootstrap-script.html) as `scripts/cleanup.sh`):
+A one-shot cleanup you can run monthly (also in [Appendix A](#appendix-a--bootstrap-script) as `scripts/cleanup.sh`):
 
 ```sh
 #!/bin/sh
@@ -3557,7 +3557,7 @@ diskutil apfs list | grep -E "Capacity (In Use|Not Allocated)|Name"
 
 #### Keep 15% free
 
-APFS and SSD wear-leveling both want headroom. Below ~10% free, writes slow down, Time Machine local snapshots get purged constantly, and Xcode/Docker start failing in confusing ways. If you're routinely below that, the fix is an external SSD for media and project archives (see [chapter 17](17-backup-and-recovery.html)) or an honest look at whether you need three container runtimes.
+APFS and SSD wear-leveling both want headroom. Below ~10% free, writes slow down, Time Machine local snapshots get purged constantly, and Xcode/Docker start failing in confusing ways. If you're routinely below that, the fix is an external SSD for media and project archives (see [chapter 17](#17-backup--recovery)) or an honest look at whether you need three container runtimes.
 
 ### Login items and background processes
 
@@ -3595,7 +3595,7 @@ rm ~/Library/LaunchAgents/com.example.helper.plist
 Also check **Login Items → Extensions** for Finder Sync, Quick Look, Share, and Spotlight extensions from uninstalled apps; each one is a process that gets loaded on demand.
 
 > [!NOTE]
-> Homebrew services (`brew services list`) are launch agents too — `postgresql`, `redis`, `mysql` running at login are exactly the kind of thing you forget about. `brew services stop --all` before travel, or don't autostart databases at all and run `brew services run postgresql@18` when you need them (see [chapter 15](15-databases-and-local-dev.html)).
+> Homebrew services (`brew services list`) are launch agents too — `postgresql`, `redis`, `mysql` running at login are exactly the kind of thing you forget about. `brew services stop --all` before travel, or don't autostart databases at all and run `brew services run postgresql@18` when you need them (see [chapter 15](#15-databases--local-development-services)).
 
 ### Uninstalling properly
 
@@ -3656,14 +3656,14 @@ sudo mdutil -E /
 sudo mdutil -i off /Volumes/Backup
 ```
 
-Exclude build output from indexing to reduce churn: **System Settings → Spotlight → Search Privacy** (or Spotlight → Privacy on older versions) and add `~/code` (or specifically `node_modules`, `target`, `.build` — Spotlight doesn't do globs, so add the folders or accept indexing them). Many developers exclude their entire code directory and rely on the editor's search and `fd`/`rg` instead. Time Machine has a separate exclusion list (see [chapter 17](17-backup-and-recovery.html)).
+Exclude build output from indexing to reduce churn: **System Settings → Spotlight → Search Privacy** (or Spotlight → Privacy on older versions) and add `~/code` (or specifically `node_modules`, `target`, `.build` — Spotlight doesn't do globs, so add the folders or accept indexing them). Many developers exclude their entire code directory and rely on the editor's search and `fd`/`rg` instead. Time Machine has a separate exclusion list (see [chapter 17](#17-backup--recovery)).
 
 > [!TIP]
 > Alternative launchers (Raycast, Alfred) use Spotlight's metadata index for file search. If you turned indexing off to save CPU, file search in those breaks too.
 
 ### Updates
 
-- **macOS updates**: System Settings → General → Software Update. Turn on **Install Security Responses and system files** (background security patches). For feature updates, waiting a week or two after release is reasonable on a machine you depend on; security updates (26.6 fixed 155 CVEs) should not wait. See the [security chapter](16-security-and-privacy.html).
+- **macOS updates**: System Settings → General → Software Update. Turn on **Install Security Responses and system files** (background security patches). For feature updates, waiting a week or two after release is reasonable on a machine you depend on; security updates (26.6 fixed 155 CVEs) should not wait. See the [security chapter](#16-security--privacy).
 - **App Store apps**: automatic updates on.
 - **Homebrew**: `brew update && brew upgrade && brew cleanup` weekly, or `brew upgrade --greedy` to include casks with their own auto-updaters. Pin anything you can't afford to have change: `brew pin postgresql@18`.
 - **Casks with auto-updaters** (Chrome, VS Code, Slack, Zoom) update themselves; `brew upgrade` skips them unless `--greedy`.
@@ -3692,7 +3692,7 @@ df -h /  # <15% free? run cleanup.sh
 
 **Every semester / quarter:**
 
-- `brew bundle cleanup` to see what's installed that's not in your Brewfile — decide whether to add it or remove it (see [chapter 8](08-homebrew.html)).
+- `brew bundle cleanup` to see what's installed that's not in your Brewfile — decide whether to add it or remove it (see [chapter 8](#08-homebrew)).
 - `npx npkill` and `docker system prune -a` for abandoned projects.
 - Review **Privacy & Security** permissions (Full Disk Access, Screen Recording, Accessibility) and revoke stale ones.
 - Check macOS version against Apple's currently-supported list; if you're on an N-2 release, plan the upgrade.
@@ -3715,7 +3715,7 @@ df -h /  # <15% free? run cleanup.sh
 5. Activity Monitor → **Disk**, sort by Bytes Written. Spotlight or a sync client thrashing?
 6. `pmset -g thermlog` (or `sudo powermetrics`) — throttled from heat? Clear the vents, close the tab with the WebGL demo.
 7. Boot into **Safe Mode** (hold power → Options → hold ⇧ while choosing the volume) — if it's fast there, a third-party login item or extension is the cause. Binary-search the Login Items list.
-8. Still slow? [Chapter 22](22-troubleshooting.html) covers logs, Recovery, and when to reinstall.
+8. Still slow? [Chapter 22](#22-troubleshooting) covers logs, Recovery, and when to reinstall.
 
 [↑ Back to top](#table-of-contents)
 
@@ -3723,12 +3723,12 @@ df -h /  # <15% free? run cleanup.sh
 
 ## 19. Daily-driver apps
 
-A developer setup guide that stops at the terminal misses half the day. You'll spend as many hours in a browser, a notes app, a calendar, and Slack as in an editor, and the small utilities — a clipboard manager, a launcher, a window manager — are what make macOS feel *finished*. This chapter is the opinionated app list. Every item is available as a Homebrew cask (or App Store via `mas`) so the whole list installs from the [Brewfile](appendix-b-brewfile.html); the "Install" column gives the cask name.
+A developer setup guide that stops at the terminal misses half the day. You'll spend as many hours in a browser, a notes app, a calendar, and Slack as in an editor, and the small utilities — a clipboard manager, a launcher, a window manager — are what make macOS feel *finished*. This chapter is the opinionated app list. Every item is available as a Homebrew cask (or App Store via `mas`) so the whole list installs from the [Brewfile](#appendix-b--brewfile); the "Install" column gives the cask name.
 
 The bias throughout: **free and open source first**, paid where it's genuinely better, and nothing that needs a subscription to do a job a one-time purchase did in 2019. Prices are current as of September 2026 and will drift.
 
 > [!TIP]
-> Don't install all of this on day one. Install the **Tier 1** items (bold in each section), live with the Mac for a week, and add things when you notice a specific friction. A Mac with 15 well-chosen apps beats one with 60 half-configured ones — see [chapter 18](18-performance-and-maintenance.html) on login items.
+> Don't install all of this on day one. Install the **Tier 1** items (bold in each section), live with the Mac for a week, and add things when you notice a specific friction. A Mac with 15 well-chosen apps beats one with 60 half-configured ones — see [chapter 18](#18-performance--maintenance) on login items.
 
 ### Browsers
 
@@ -3751,7 +3751,7 @@ Browser profiles: Chrome and Firefox both support multiple profiles — one for 
 
 ### Password manager
 
-Non-negotiable. See [chapter 16](16-security-and-privacy.html) for the reasoning; here's the choice:
+Non-negotiable. See [chapter 16](#16-security--privacy) for the reasoning; here's the choice:
 
 | Option | Cost | Notes |
 |---|---|---|
@@ -3764,7 +3764,7 @@ Install: `bitwarden`, `1password` + `1password-cli`, `keepassxc`. Whatever you p
 
 ### Launcher
 
-Spotlight in macOS 26 is good — app launching, calculator, clipboard history (8 hours), file search, Shortcuts actions, Siri/AI answers, and `⌘1`–`⌘4` filtered views (see [chapter 4](04-finder-dock-spotlight.html)). Try living with it for a week before installing a replacement.
+Spotlight in macOS 26 is good — app launching, calculator, clipboard history (8 hours), file search, Shortcuts actions, Siri/AI answers, and `⌘1`–`⌘4` filtered views (see [chapter 4](#04-finder-dock--spotlight)). Try living with it for a week before installing a replacement.
 
 If you want more:
 
@@ -3790,7 +3790,7 @@ Whatever you use, exclude your password manager from history (all of the above s
 
 ### Window management
 
-Covered in depth in [chapter 6](06-window-management.html). Summary for the app list: macOS 26 tiling (drag to edge, `fn+ctrl` shortcuts) handles the basics; **Rectangle** (free) for keyboard-driven halves/thirds; **AeroSpace** (free) for i3-style tiling; **Raycast** has window commands built in. Install: `rectangle`, `aerospace`.
+Covered in depth in [chapter 6](#06-window-management-spaces--displays). Summary for the app list: macOS 26 tiling (drag to edge, `fn+ctrl` shortcuts) handles the basics; **Rectangle** (free) for keyboard-driven halves/thirds; **AeroSpace** (free) for i3-style tiling; **Raycast** has window commands built in. Install: `rectangle`, `aerospace`.
 
 ### Notes and knowledge
 
@@ -3833,13 +3833,13 @@ Almost all of these are Electron apps that want to run at login and eat 400 MB e
 
 ### Files, cloud, and sync
 
-- **iCloud Drive** — already there; Desktop & Documents sync is convenient and dangerous (see [chapter 2](02-first-boot-and-migration.html)). Good for documents; keep code out of it (Git repos + iCloud eviction = corruption risk).
+- **iCloud Drive** — already there; Desktop & Documents sync is convenient and dangerous (see [chapter 2](#02-first-boot-setup-assistant--migration)). Good for documents; keep code out of it (Git repos + iCloud eviction = corruption risk).
 - **Google Drive**, **Dropbox**, **OneDrive** — all use the File Provider API now, so they behave like iCloud (files on demand, no kernel extension). Install the one your school/work uses. Storage tiers are cheaper via a Google One / Microsoft 365 student plan.
 - **Syncthing** (free, open source, `syncthing`) — peer-to-peer folder sync without a cloud. Excellent for syncing an Obsidian vault or a projects folder between a laptop and a desktop.
 - **Maestral** (free, `maestral`) — open-source Dropbox client that's lighter than the official one.
 - **Transmit** ($45) or **Cyberduck** (free) for SFTP/S3 with a GUI; **Mountain Duck** to mount remote storage as a disk. For most engineers, `rsync`/`scp`/`rclone` in the terminal is enough.
 
-Finder quality-of-life (see [chapter 4](04-finder-dock-spotlight.html) for settings): **QuickLook plugins** — `qlmarkdown`, `syntax-highlight`, `quicklook-json`, `qlvideo` let space-bar preview handle Markdown, source code, JSON, and more video formats. Since macOS 15 these need explicit enabling in **System Settings → Login Items & Extensions → Quick Look**.
+Finder quality-of-life (see [chapter 4](#04-finder-dock--spotlight) for settings): **QuickLook plugins** — `qlmarkdown`, `syntax-highlight`, `quicklook-json`, `qlvideo` let space-bar preview handle Markdown, source code, JSON, and more video formats. Since macOS 15 these need explicit enabling in **System Settings → Login Items & Extensions → Quick Look**.
 
 ### PDFs and documents
 
@@ -3875,18 +3875,18 @@ Finder quality-of-life (see [chapter 4](04-finder-dock-spotlight.html) for setti
 | **Stats** | Free | CPU/GPU/memory/network/battery/temps in the menu bar. iStat Menus ($12) is the polished version. | `stats` |
 | **AlDente** | Free / $ | Charge limiter with more control than the built-in 26.4 limit. | `aldente` |
 | **KeyboardCleanTool** | Free | Locks the keyboard so you can wipe it. | `keyboardcleantool` |
-| **Karabiner-Elements** | Free | Key remapping; Caps Lock → Escape/Control, hyper key. See [chapter 5](05-keyboard-and-input.html). | `karabiner-elements` |
+| **Karabiner-Elements** | Free | Key remapping; Caps Lock → Escape/Control, hyper key. See [chapter 5](#05-keyboard-shortcuts--input). | `karabiner-elements` |
 | **BetterDisplay** | Free / $ | Fix scaling on non-Retina external monitors, virtual displays, brightness control for external monitors. | `betterdisplay` |
 | **MonitorControl** | Free | Brightness/volume keys control external displays over DDC. | `monitorcontrol` |
 | **Amphetamine** | Free | Keep the Mac awake for a presentation or a long download. Built-in `caffeinate -d` does the same from the terminal. | App Store |
-| **AppCleaner** / **Pearcleaner** | Free | Thorough uninstalls (see [chapter 18](18-performance-and-maintenance.html)). | `appcleaner`, `pearcleaner` |
+| **AppCleaner** / **Pearcleaner** | Free | Thorough uninstalls (see [chapter 18](#18-performance--maintenance)). | `appcleaner`, `pearcleaner` |
 | **The Unarchiver** | Free | Opens every archive format macOS's built-in tool doesn't (rar, 7z). Or `brew install sevenzip` and use the terminal. | `the-unarchiver` |
 | **Keka** | Free / $ | Archive creation with encryption and format choice. | `keka` |
-| **LuLu** | Free | Outbound firewall — see [chapter 16](16-security-and-privacy.html). | `lulu` |
+| **LuLu** | Free | Outbound firewall — see [chapter 16](#16-security--privacy). | `lulu` |
 | **Hidden Bar** / **Dozer** | Free | Simpler Ice alternatives. | `hiddenbar` |
 | **Latest** | Free | Checks all installed apps for updates (including non-Store, non-brew). | `latest` |
 | **Mos** / **LinearMouse** | Free | Smooth scrolling and per-device scroll direction for a mouse (so the mouse scrolls "normally" while the trackpad stays "natural"). | `mos`, `linearmouse` |
-| **Hammerspoon** | Free | Lua automation for windows, hotkeys, and system events — see [chapter 21](21-automation-and-scripting.html). | `hammerspoon` |
+| **Hammerspoon** | Free | Lua automation for windows, hotkeys, and system events — see [chapter 21](#21-automation--scripting). | `hammerspoon` |
 | **Numi** / **Soulver** | Free / $ | Natural-language calculator ("$1200 / 4 people in EUR"). Raycast and Spotlight do the simple cases. | `numi` |
 | **TextSniper** / built-in Live Text | $ / Free | OCR from any screen region. macOS Live Text does this in Preview and screenshots already; Shottr does it free. | — |
 | **Rocket** | Free | Slack-style `:emoji:` autocomplete everywhere. | `rocket` |
@@ -3898,11 +3898,11 @@ Finder quality-of-life (see [chapter 4](04-finder-dock-spotlight.html) for setti
 - **DevDocs** (free, web / `devdocs` desktop wrapper) — the free equivalent; works offline as a PWA.
 - **NetNewsWire** (free, open source, `netnewswire`) — RSS reader, iCloud sync. RSS is still the best way to follow release notes and blogs. **Reeder** ($) is the pretty one.
 - **Kindle**, **Apple Books** — built-in / App Store.
-- **Anki** (free, `anki`) — spaced repetition. See [chapter 20](20-cs-student-specific.html).
+- **Anki** (free, `anki`) — spaced repetition. See [chapter 20](#20-cs-student-specific).
 
 ### Terminal-adjacent GUI tools
 
-Covered in their own chapters, but for completeness in the app list: **Ghostty** or **iTerm2** ([chapter 9](09-terminal-and-shell.html)); **VS Code**, **Cursor**, **Zed**, **JetBrains Toolbox** ([chapter 12](12-editors-and-ides.html)); **OrbStack** ([chapter 13](13-containers-and-vms.html)); **TablePlus**, **Postico**, **DBeaver** ([chapter 15](15-databases-and-local-dev.html)); **Fork**, **Tower**, **GitHub Desktop**, **Sublime Merge** for Git GUIs ([chapter 10](10-dotfiles-and-git.html)); **Proxyman** or **Charles** for HTTP debugging; **Bruno**/**Postman**/**Insomnia** for API clients ([chapter 14](14-cloud-and-devops-tooling.html)); **Kaleidoscope** ($) or **Meld** (free) for visual diffs.
+Covered in their own chapters, but for completeness in the app list: **Ghostty** or **iTerm2** ([chapter 9](#09-terminal--shell)); **VS Code**, **Cursor**, **Zed**, **JetBrains Toolbox** ([chapter 12](#12-editors-ides--ai-coding-tools)); **OrbStack** ([chapter 13](#13-containers--virtual-machines)); **TablePlus**, **Postico**, **DBeaver** ([chapter 15](#15-databases--local-development-services)); **Fork**, **Tower**, **GitHub Desktop**, **Sublime Merge** for Git GUIs ([chapter 10](#10-dotfiles--git)); **Proxyman** or **Charles** for HTTP debugging; **Bruno**/**Postman**/**Insomnia** for API clients ([chapter 14](#14-cloud-network--devops-tooling)); **Kaleidoscope** ($) or **Meld** (free) for visual diffs.
 
 ### Games and fun (yes, really)
 
@@ -3910,16 +3910,16 @@ Mac gaming in 2026 is real: **Steam** (`steam`), **CrossOver** ($74 yr; runs Win
 
 ### What to skip
 
-- **Antivirus** — see [chapter 16](16-security-and-privacy.html). XProtect + Gatekeeper + common sense; Malwarebytes free for an occasional scan if paranoid.
-- **CleanMyMac, MacKeeper, "memory cleaners", "battery optimizers"** — see [chapter 18](18-performance-and-maintenance.html).
+- **Antivirus** — see [chapter 16](#16-security--privacy). XProtect + Gatekeeper + common sense; Malwarebytes free for an occasional scan if paranoid.
+- **CleanMyMac, MacKeeper, "memory cleaners", "battery optimizers"** — see [chapter 18](#18-performance--maintenance).
 - **Adobe Creative Cloud** unless a course requires it; Affinity and Pixelmator are free now.
-- **Java runtimes from java.com** — install via mise or `brew install openjdk` ([chapter 11](11-languages-and-runtimes.html)).
+- **Java runtimes from java.com** — install via mise or `brew install openjdk` ([chapter 11](#11-languages--runtimes)).
 - **Flash, Silverlight, Java browser plugins** — if a university system requires one, complain to IT; it's 2026.
 - **Anything that asks to install a kernel extension** on Apple silicon — legitimate software uses system extensions now; a kext is a red flag or abandonware.
 
 ### The Tier 1 list
 
-If you install nothing else from this chapter: **a password manager**, **Raycast or Alfred**, **a clipboard manager** (or Raycast's), **Rectangle or AeroSpace**, **Obsidian or Apple Notes**, **Itsycal**, **IINA**, **Shottr**, **Ice**, **Stats**, **AppCleaner**, **The Unarchiver**, **Karabiner-Elements** (if remapping), and **Zotero** (if writing). All are free. Everything is in [Appendix B](appendix-b-brewfile.html) with the optional items commented out.
+If you install nothing else from this chapter: **a password manager**, **Raycast or Alfred**, **a clipboard manager** (or Raycast's), **Rectangle or AeroSpace**, **Obsidian or Apple Notes**, **Itsycal**, **IINA**, **Shottr**, **Ice**, **Stats**, **AppCleaner**, **The Unarchiver**, **Karabiner-Elements** (if remapping), and **Zotero** (if writing). All are free. Everything is in [Appendix B](#appendix-b--brewfile) with the optional items commented out.
 
 [↑ Back to top](#table-of-contents)
 
@@ -3940,7 +3940,7 @@ Student status unlocks a surprising amount of software and services. Most need a
 |---|---|---|
 | **GitHub Student Developer Pack** | GitHub Pro (private repos w/ full features), **GitHub Copilot Pro free**, JetBrains all-products pack, Namecheap domain, DigitalOcean/Azure credits, 1Password (1 yr), Termius, Notion, and ~100 more | Apply at education.github.com. Re-verify each year. The single best perk list. |
 | **JetBrains Educational** | All IDEs (IntelliJ Ultimate, PyCharm Pro, CLion, WebStorm, DataGrip, GoLand, RustRover…) free | Direct or via GitHub pack. Renew annually. |
-| **Apple Education pricing** | ~10% off Macs, discounted AppleCare+; back-to-school promos usually add a gift card or accessories | Verified via UNiDAYS in most countries. See [chapter 1](01-hardware-and-buying.html). |
+| **Apple Education pricing** | ~10% off Macs, discounted AppleCare+; back-to-school promos usually add a gift card or accessories | Verified via UNiDAYS in most countries. See [chapter 1](#01-hardware--buying-guide). |
 | **Apple Developer Program** | Free to build and run on your own devices; $99 yr to publish. Some universities are in the **iOS Developer University Program** — ask | Sideloading your own app to your iPhone is free with a free Apple ID. |
 | **Microsoft 365** | Word/Excel/PowerPoint + 1 TB OneDrive, free at most universities | Through your school's portal. Also **Azure for Students**: $100 credit, no card. |
 | **Google Workspace for Education** | Usually unlimited-ish Drive, Colab (free GPU time), Gemini | Depends on your institution. Colab is the cheapest way to get a GPU for an ML course. |
@@ -3958,7 +3958,7 @@ Set a calendar reminder to re-verify GitHub Education and JetBrains each Septemb
 
 ### The course-by-course toolchain
 
-A CS degree touches a lot of languages. The approach from [chapter 11](11-languages-and-runtimes.html) — `mise` for runtimes, `uv` for Python, Homebrew for compilers — handles all of them. Here's what each typical course expects and the Mac-specific gotchas.
+A CS degree touches a lot of languages. The approach from [chapter 11](#11-languages--runtimes) — `mise` for runtimes, `uv` for Python, Homebrew for compilers — handles all of them. Here's what each typical course expects and the Mac-specific gotchas.
 
 #### Intro programming (Python / Java)
 
@@ -3970,7 +3970,7 @@ A CS degree touches a lot of languages. The approach from [chapter 11](11-langua
 
 This is where the Mac diverges most from what courses assume. Apple's `cc` is **Clang**, not GCC, and macOS is not Linux.
 
-- `xcode-select --install` gives you `clang`, `clang++`, `make`, `lldb`, `git` ([chapter 7](07-command-line-tools-and-xcode.html)). For most C/C++ coursework this is all you need. `gcc` on a Mac is a symlink to clang.
+- `xcode-select --install` gives you `clang`, `clang++`, `make`, `lldb`, `git` ([chapter 7](#07-command-line-tools-xcode--the-toolchain)). For most C/C++ coursework this is all you need. `gcc` on a Mac is a symlink to clang.
 - **If the course requires real GCC** (specific flags, `-fanalyzer`, GCC-only extensions, or an autograder that uses GCC): `brew install gcc` and invoke as `gcc-15` / `g++-15`. Or, better, do the work in a Linux container/VM (below) so your environment matches the grader.
 - **Valgrind does not run on Apple silicon macOS.** This is the #1 systems-course pain point. Options: (a) use Clang's sanitizers — `clang -fsanitize=address,undefined -g` catches most of what Valgrind would; (b) `leaks --atExit -- ./prog` (Apple's built-in leak checker); (c) run Valgrind inside an x86-64 or arm64 Linux container (Valgrind has arm64 Linux support). Most courses accept sanitizer output.
 - **GDB** is a pain on macOS (code signing required, and it's flaky on Apple silicon). Use **LLDB** — same concepts, slightly different commands (`b`, `r`, `n`, `s`, `p`, `bt` all work). Or debug in a Linux container with GDB. VS Code's C/C++ extension uses LLDB on Mac transparently; **CodeLLDB** is the better extension.
@@ -3979,7 +3979,7 @@ This is where the Mac diverges most from what courses assume. Apple's `cc` is **
 - **Make/CMake**: `brew install cmake ninja`. CLion (free) handles CMake projects well.
 - **Threads/OS courses**: xv6 (`riscv64` toolchain + qemu, above), Pintos (needs x86 — Linux VM), and anything with `fork()`-heavy code works natively.
 
-**Recommended setup for a systems course:** native Clang + sanitizers for daily work, plus an Ubuntu container (`orb create ubuntu:24.04 cs` or the course's Docker image) for the autograder-matching build and Valgrind/GDB. See [chapter 13](13-containers-and-vms.html). With OrbStack, `cd` into your project and run `orb -m cs make test` — the same files, Linux toolchain.
+**Recommended setup for a systems course:** native Clang + sanitizers for daily work, plus an Ubuntu container (`orb create ubuntu:24.04 cs` or the course's Docker image) for the autograder-matching build and Valgrind/GDB. See [chapter 13](#13-containers--virtual-machines). With OrbStack, `cd` into your project and run `orb -m cs make test` — the same files, Linux toolchain.
 
 #### Data structures & algorithms
 
@@ -3987,11 +3987,11 @@ Usually Java, C++, or Python; covered above. For competitive programming: `brew 
 
 #### Web development
 
-Node via `mise use -g node@24` (26 is LTS from October 2026); `pnpm` or `npm`. Everything in [chapter 11](11-languages-and-runtimes.html) applies. Browser DevTools in Chrome or Firefox. If the course uses PHP/Laravel: `brew install php composer` or Laravel Herd.
+Node via `mise use -g node@24` (26 is LTS from October 2026); `pnpm` or `npm`. Everything in [chapter 11](#11-languages--runtimes) applies. Browser DevTools in Chrome or Firefox. If the course uses PHP/Laravel: `brew install php composer` or Laravel Herd.
 
 #### Databases
 
-`brew install postgresql@18` and `brew services run postgresql@18`, or a container. `sqlite3` is preinstalled. **TablePlus** (free tier) or **DBeaver** (free) for a GUI. MySQL courses: `brew install mysql` or a `mysql:9` container. Oracle: only via container (`gvenzl/oracle-free`, arm64 available). SQL Server: `mcr.microsoft.com/azure-sql-edge` or the 2025 arm64 preview in a container. See [chapter 15](15-databases-and-local-dev.html).
+`brew install postgresql@18` and `brew services run postgresql@18`, or a container. `sqlite3` is preinstalled. **TablePlus** (free tier) or **DBeaver** (free) for a GUI. MySQL courses: `brew install mysql` or a `mysql:9` container. Oracle: only via container (`gvenzl/oracle-free`, arm64 available). SQL Server: `mcr.microsoft.com/azure-sql-edge` or the 2025 arm64 preview in a container. See [chapter 15](#15-databases--local-development-services).
 
 #### Machine learning & data science
 
@@ -4001,14 +4001,14 @@ The Mac is genuinely good here up to a point.
 - **PyTorch**: `uv add torch torchvision` — the **MPS** backend uses the GPU (`device = "mps"`). Fast enough for coursework and small models; not CUDA. Some ops still fall back to CPU (`PYTORCH_ENABLE_MPS_FALLBACK=1`).
 - **JAX**: `jax-metal` plugin, experimental. **TensorFlow**: `tensorflow-metal`, maintenance mode. Prefer PyTorch on a Mac.
 - **MLX** (Apple's framework): `uv add mlx mlx-lm` — the fastest way to run and fine-tune LLMs locally on Apple silicon. `mlx_lm.generate --model mlx-community/Llama-3.2-3B-Instruct-4bit --prompt "..."`.
-- **Local LLMs for studying**: **Ollama** (`brew install ollama`) or **LM Studio** (cask). A 16 GB Mac runs 7–8B models comfortably; 32 GB runs 20–30B; a 70B model wants 48 GB+. See [chapter 1](01-hardware-and-buying.html) for RAM planning.
+- **Local LLMs for studying**: **Ollama** (`brew install ollama`) or **LM Studio** (cask). A 16 GB Mac runs 7–8B models comfortably; 32 GB runs 20–30B; a 70B model wants 48 GB+. See [chapter 1](#01-hardware--buying-guide) for RAM planning.
 - **When you need CUDA** (a course that requires it, or a model that won't fit): Google Colab (free tier, or Pro $10 mo), Kaggle notebooks (free 30 hrs/week GPU), your department's GPU cluster (SSH + Slurm — see below), Lambda/RunPod/Vast.ai for cheap hourly rentals. The Mac becomes a thin client; **VS Code Remote-SSH** or **JupyterLab over an SSH tunnel** (`ssh -L 8888:localhost:8888 user@gpu-box`) makes it feel local.
 - **Jupyter**: `uv tool install jupyterlab`, or use VS Code's notebook UI (better diffing, git integration). **Positron** (Posit's VS Code fork for data science) or **RStudio** if the course is R-heavy (`brew install --cask r rstudio`; or `mise use r`).
 - **conda/Anaconda**: if a course insists, `brew install --cask miniforge`. Don't install full Anaconda — 5 GB, slow shell startup, and it hijacks `python` globally.
 
 #### Mobile development
 
-- **iOS/Swift**: install **Xcode** from the App Store (or `xcodes` — see [chapter 7](07-command-line-tools-and-xcode.html)); it's 12+ GB, budget storage and an hour. Simulators are another 5–8 GB per iOS version. This is the one course where the Mac is *required*, not merely nice.
+- **iOS/Swift**: install **Xcode** from the App Store (or `xcodes` — see [chapter 7](#07-command-line-tools-xcode--the-toolchain)); it's 12+ GB, budget storage and an hour. Simulators are another 5–8 GB per iOS version. This is the one course where the Mac is *required*, not merely nice.
 - **Android**: `brew install --cask android-studio`; the emulator runs arm64 Android images natively and fast on Apple silicon. Set `ANDROID_HOME` and add `platform-tools` to PATH for `adb`. Flutter: `mise use -g flutter`; React Native: Node + Watchman (`brew install watchman`) + Xcode/Android Studio.
 
 #### Theory, math, and writing-heavy courses
@@ -4028,7 +4028,7 @@ The Mac is genuinely good here up to a point.
 
 You will. The four routes, cheapest-friction first:
 
-1. **OrbStack Linux machine** (`orb create ubuntu:24.04`) — a full Ubuntu userland sharing your Mac filesystem, starts in a second, near-native speed. `orb -m ubuntu bash` drops you in; your `~/code` is at the same path. Handles 90% of "this only works on Linux." Free for personal/student use. See [chapter 13](13-containers-and-vms.html).
+1. **OrbStack Linux machine** (`orb create ubuntu:24.04`) — a full Ubuntu userland sharing your Mac filesystem, starts in a second, near-native speed. `orb -m ubuntu bash` drops you in; your `~/code` is at the same path. Handles 90% of "this only works on Linux." Free for personal/student use. See [chapter 13](#13-containers--virtual-machines).
 2. **The course's Docker image** — `docker run -it -v "$PWD":/work course/image` and your files are inside. Exactly matches the autograder.
 3. **x86-64 Linux** — for x86 assembly, Pintos, old binaries, or a course VM shipped as an `.ova`. Options: `orb create --arch amd64 ubuntu` (Rosetta-translated, surprisingly fast for compiles and gdb; you lose Rosetta on macOS 28, so prefer arm64 where possible); **UTM** (free; QEMU-based, full emulation — slow but runs anything, including that `.ova` after conversion); **VMware Fusion** (free since 2024) or **Parallels** (paid, $100 yr; student discount) both run **arm64** Linux/Windows fast but **not x86**. Full x86 emulation is 5–20× slower than native; fine for a shell and gdb, painful for builds. If a course truly needs x86 performance, use the department's Linux servers.
 4. **Remote Linux** — see the next section. A `$5/mo` VPS or the lab servers is often the least-friction x86 machine you'll ever have.
@@ -4062,16 +4062,16 @@ Host gpu1
   LocalForward 8888 localhost:8888   # Jupyter
 ```
 
-- **Keys, not passwords**: `ssh-keygen -t ed25519` and `ssh-copy-id lab`. Use `UseKeychain yes` + `AddKeysToAgent yes` so Touch ID (via the Keychain) unlocks the key. Full SSH setup in [chapter 9](09-terminal-and-shell.html).
+- **Keys, not passwords**: `ssh-keygen -t ed25519` and `ssh-copy-id lab`. Use `UseKeychain yes` + `AddKeysToAgent yes` so Touch ID (via the Keychain) unlocks the key. Full SSH setup in [chapter 9](#09-terminal--shell).
 - **Don't lose work to a dropped connection**: run long jobs in `tmux` on the server (`tmux new -s work`, later `tmux attach -t work`). Or **mosh** (`brew install mosh`; needs the server side installed) for a connection that survives Wi-Fi changes and sleep.
 - **Edit remotely as if local**: VS Code **Remote-SSH** (installs a server component in your home directory — works on most lab machines without root), or **Zed** remote, or JetBrains **Gateway**. Or edit locally and `rsync -avz --exclude .git ./ lab:~/proj/` before running. Or mount with `sshfs` (via `macfuse` — needs a system extension; the Finder integration is nice but flaky).
-- **Slurm clusters** (GPU/HPC): `sbatch job.sh`, `squeue -u $USER`, `srun --pty bash` for interactive; load modules with `module load cuda/12.6`. Keep a `~/.bashrc`/`.zshrc` on the cluster in your dotfiles repo with a hostname branch ([chapter 10](10-dotfiles-and-git.html)).
+- **Slurm clusters** (GPU/HPC): `sbatch job.sh`, `squeue -u $USER`, `srun --pty bash` for interactive; load modules with `module load cuda/12.6`. Keep a `~/.bashrc`/`.zshrc` on the cluster in your dotfiles repo with a hostname branch ([chapter 10](#10-dotfiles--git)).
 - **VPN**: universities require it off-campus; usually **Cisco Secure Client**, **GlobalProtect**, or **WireGuard**/**OpenVPN** profiles. Install from your IT portal, not Homebrew (licensing). Use split tunneling if offered so your Spotify doesn't go through campus.
 - **Cheap always-on Linux**: a $4–6/mo VPS (Hetzner, DigitalOcean w/ GitHub Education credits, Oracle Cloud's free arm64 tier) as a personal x86 or arm box, tunnel endpoint, and place to leave `tmux` running. **Tailscale** (free for personal, `brew install --cask tailscale`) puts your Mac, the VPS, and your phone on one private network — SSH to any of them from anywhere, no port forwarding.
 
 ### Version control for coursework
 
-Everything in [chapter 10](10-dotfiles-and-git.html), plus:
+Everything in [chapter 10](#10-dotfiles--git), plus:
 
 - **One repo per course** (`~/code/uni/cs240/`) with a folder per assignment, or one repo per assignment if the course uses GitHub Classroom (it will create them). *Private.* Public solutions violate most academic integrity policies, and a future employer searching your GitHub won't be impressed by `hw3_final_FINAL2.py`.
 - **Commit at every working state** — the autograder eating your submission, a bad `rm`, a laptop theft: all recoverable with a pushed commit.
@@ -4081,7 +4081,7 @@ Everything in [chapter 10](10-dotfiles-and-git.html), plus:
 
 ### Studying on the Mac
 
-- **Notes**: Obsidian or Apple Notes ([chapter 19](19-daily-driver-apps.html)). For lecture notes with math, Obsidian's MathJax (`$…$`) is the fastest path; **Notability**/**GoodNotes** on iPad with Sidecar/Universal Control if you handwrite.
+- **Notes**: Obsidian or Apple Notes ([chapter 19](#19-daily-driver-apps)). For lecture notes with math, Obsidian's MathJax (`$…$`) is the fastest path; **Notability**/**GoodNotes** on iPad with Sidecar/Universal Control if you handwrite.
 - **Spaced repetition**: **Anki** (`brew install --cask anki`) for anything with definitions — theory courses, networking layers, complexity classes, syscalls. Free on Mac; the iOS app is $25 once.
 - **Focus**: macOS **Focus modes** (Control Center) with per-Focus Home Screen/notification filtering; **Screen Time** app limits; **Cold Turkey**/**Focus** for hard blocking; **Raycast Focus** for lighter sessions. Keep Slack/Discord closed during study blocks (not just muted).
 - **Reading papers**: **Zotero** + Better BibTeX plugin exports `.bib` for LaTeX/Typst; **Skim** or **Preview** for annotation; **Sioyek** (`brew install --cask sioyek`) is a keyboard-driven PDF reader designed for papers and textbooks.
@@ -4091,12 +4091,12 @@ Everything in [chapter 10](10-dotfiles-and-git.html), plus:
 ### Battery and hardware, student edition
 
 - A MacBook Air M5 or Neo makes it through a full day of lectures on battery. A 14" Pro does too; a 16" Pro is heavy in a backpack — buy it only if you're genuinely doing local ML or video.
-- Enable the **80% charge limit** ([chapter 18](18-performance-and-maintenance.html)) if you mostly work at a desk; turn it off for exam weeks when you're never near an outlet.
+- Enable the **80% charge limit** ([chapter 18](#18-performance--maintenance)) if you mostly work at a desk; turn it off for exam weeks when you're never near an outlet.
 - **Low Power Mode** on battery for note-taking days.
 - Use the **USB-C charger from your phone** in lecture halls — any 20 W+ USB-C PD brick slow-charges a MacBook. Carry a compact 65–70 W GaN charger (Anker, UGREEN) rather than Apple's; it's smaller and charges the phone too.
 - **AppleCare+** is worth it for a laptop that lives in a backpack for four years; accidental damage claims are $99–299 vs. a $700+ screen. Education pricing discounts it.
-- **Find My** on, **Activation Lock** on (automatic with Find My), and **Stolen Device Protection** (macOS 26.4+) on. Laptop theft from libraries is common; a stolen Mac with Activation Lock is a brick for the thief. See [chapter 16](16-security-and-privacy.html).
-- Back up. Your thesis is not safe on one SSD. Time Machine to a $60 external drive plus GitHub for code plus iCloud/Backblaze for documents ([chapter 17](17-backup-and-recovery.html)).
+- **Find My** on, **Activation Lock** on (automatic with Find My), and **Stolen Device Protection** (macOS 26.4+) on. Laptop theft from libraries is common; a stolen Mac with Activation Lock is a brick for the thief. See [chapter 16](#16-security--privacy).
+- Back up. Your thesis is not safe on one SSD. Time Machine to a $60 external drive plus GitHub for code plus iCloud/Backblaze for documents ([chapter 17](#17-backup--recovery)).
 
 ### The honest list of Mac disadvantages for CS
 
@@ -4146,7 +4146,7 @@ Before writing automation, know the commands that make shell scripts on a Mac di
 | `sw_vers` / `uname -m` | macOS version / arch | `sw_vers -productVersion` → `26.6`; `uname -m` → `arm64` |
 | `diskutil` / `hdiutil` | Disks and disk images | `hdiutil create -size 1g -fs APFS -volname Scratch scratch.dmg`, `hdiutil attach scratch.dmg` |
 | `security` | Keychain from the shell | `security find-generic-password -s "MyAPI" -w` (read a secret) |
-| `codesign` / `spctl` / `xattr` | Signature, Gatekeeper, quarantine | `xattr -d com.apple.quarantine ./tool` (only if you trust it — see [chapter 16](16-security-and-privacy.html)) |
+| `codesign` / `spctl` / `xattr` | Signature, Gatekeeper, quarantine | `xattr -d com.apple.quarantine ./tool` (only if you trust it — see [chapter 16](#16-security--privacy)) |
 | `launchctl` | Manage launchd jobs | below |
 | `log` | Unified log | `log show --last 10m --predicate 'process == "kernel"'`, `log stream --predicate 'eventMessage contains "USB"'` |
 | `tmutil` | Time Machine | `tmutil startbackup`, `tmutil listlocalsnapshots /` |
@@ -4410,7 +4410,7 @@ for key, arrow in pairs({h="left", j="down", k="up", l="right"}) do
 end
 ```
 
-The API docs are at `hammerspoon.org/docs`; the **Spoons** repository has drop-in plugins (window grids, clipboard history, a Pomodoro timer, Spotify controls, `URLDispatcher` to route links to different browsers by domain — great for opening work links in Chrome and everything else in Safari). Hammerspoon needs **Accessibility** permission (prompted on first run). Combined with Karabiner mapping Caps Lock to hyper ([chapter 5](05-keyboard-and-input.html)), you get a whole layer of hotkeys that conflict with nothing.
+The API docs are at `hammerspoon.org/docs`; the **Spoons** repository has drop-in plugins (window grids, clipboard history, a Pomodoro timer, Spotify controls, `URLDispatcher` to route links to different browsers by domain — great for opening work links in Chrome and everything else in Safari). Hammerspoon needs **Accessibility** permission (prompted on first run). Combined with Karabiner mapping Caps Lock to hyper ([chapter 5](#05-keyboard-shortcuts--input)), you get a whole layer of hotkeys that conflict with nothing.
 
 ### Keyboard Maestro, BetterTouchTool, and friends
 
@@ -4419,7 +4419,7 @@ If you'd rather not write Lua:
 - **Keyboard Maestro** ($36 one-time) — macros triggered by hotkeys, typed strings, app launch/quit, USB/Wi-Fi/display changes, time, folder changes, MIDI, and more; actions for clicking, typing, menu selection, image-recognition clicks (the "find this button on screen" fallback for un-scriptable apps), AppleScript/shell/JXA/Swift, variables, loops, conditions. The most complete Mac automation tool, with a 20-year track record. The right choice for GUI-heavy automation and text expansion.
 - **BetterTouchTool** ($12 / $24 lifetime) — started as trackpad gesture customization (three-finger swipe → action), grew into hotkeys, window snapping, a Touch Bar replacement, and a Stream Deck controller, with a Hammerspoon-ish scripting layer. Best if gestures are what you want to customize.
 - **Hazel** ($42) — rule-based folder automation: "when a PDF whose contents match 'Invoice' appears in Downloads, rename it `YYYY-MM-invoice.pdf` and move to `~/Documents/Finance`", "move screenshots older than a week to an archive folder", "unzip and trash archives". Reliable, low-effort. macOS 26 Shortcuts folder triggers do the simple cases; Hazel does content matching and nested rules.
-- **Raycast** ([chapter 19](19-daily-driver-apps.html)) — Script Commands (`#!/bin/bash` with metadata comments) become launcher commands; extensions in TypeScript for anything with a UI.
+- **Raycast** ([chapter 19](#19-daily-driver-apps)) — Script Commands (`#!/bin/bash` with metadata comments) become launcher commands; extensions in TypeScript for anything with a UI.
 - **Espanso** (free, open source) — text expansion from a YAML file (`:sig` → your signature, `:date` → today, `:shrug` → ¯\\\_(ツ)\_/¯), with forms and shell-command output. Cross-platform. Keyboard Maestro and Raycast Snippets do this too.
 - **Alfred Workflows** — the equivalent for Alfred users.
 - **Shortcat** / **Homerow** — keyboard-click any UI element by label, for the un-scriptable.
@@ -4436,13 +4436,13 @@ A useful one: watch `~/Downloads` and unquarantine *nothing* automatically, but 
 
 ### Scripting languages for glue
 
-- **zsh/bash** for anything under 50 lines. macOS ships `bash` 3.2 (GPLv2 freeze) — write `#!/bin/zsh` or `#!/usr/bin/env bash` with `brew install bash` (5.x) and avoid bash-4 features in `/bin/bash` scripts. BSD `sed`/`awk`/`date`/`stat` differ from GNU (`brew install coreutils gnu-sed` adds `g`-prefixed GNU versions; see [chapter 9](09-terminal-and-shell.html)).
-- **Python** for anything longer. `#!/usr/bin/env -S uv run --script` with inline dependencies (PEP 723) makes single-file scripts with packages trivial — see [chapter 11](11-languages-and-runtimes.html). `pyobjc` gives Python access to every macOS framework if you need it.
+- **zsh/bash** for anything under 50 lines. macOS ships `bash` 3.2 (GPLv2 freeze) — write `#!/bin/zsh` or `#!/usr/bin/env bash` with `brew install bash` (5.x) and avoid bash-4 features in `/bin/bash` scripts. BSD `sed`/`awk`/`date`/`stat` differ from GNU (`brew install coreutils gnu-sed` adds `g`-prefixed GNU versions; see [chapter 9](#09-terminal--shell)).
+- **Python** for anything longer. `#!/usr/bin/env -S uv run --script` with inline dependencies (PEP 723) makes single-file scripts with packages trivial — see [chapter 11](#11-languages--runtimes). `pyobjc` gives Python access to every macOS framework if you need it.
 - **Swift scripts** — `#!/usr/bin/env swift` runs a `.swift` file directly. Slow start (compiles), but full access to AppKit/Foundation. Nice for tiny native utilities; `swift-sh` or a compiled binary for anything hot.
 - **JXA** when you need Apple Events and hate AppleScript.
 - **Node** — `zx` (Google) makes shell-scripting in JavaScript pleasant if that's your language.
 
-Keep scripts in `~/.local/bin` (on PATH via your `.zshrc`) inside the dotfiles repo ([chapter 10](10-dotfiles-and-git.html)), so every automation you write survives a reinstall.
+Keep scripts in `~/.local/bin` (on PATH via your `.zshrc`) inside the dotfiles repo ([chapter 10](#10-dotfiles--git)), so every automation you write survives a reinstall.
 
 ### Recipes
 
@@ -4491,7 +4491,7 @@ Most Mac problems fall into a dozen buckets, and each bucket has a fast fix. Thi
 #### Force-quitting and hung apps
 
 - `⌥⌘⎋` — Force Quit dialog. The Finder can be relaunched from here too.
-- **Activity Monitor** → select the process → ✕ → Force Quit. Red text = "Not Responding." See [chapter 18](18-performance-and-maintenance.html).
+- **Activity Monitor** → select the process → ✕ → Force Quit. Red text = "Not Responding." See [chapter 18](#18-performance--maintenance).
 - From the terminal: `pkill -x Slack`, `killall Dock` (restarts the Dock, harmless), `killall Finder`, `killall SystemUIServer`/`ControlCenter` (menu bar glitches), `sudo killall coreaudiod` (audio dropouts), `sudo killall bluetoothd` (Bluetooth), `killall WindowServer` (**logs you out**; fixes graphical corruption).
 
 #### The unified log
@@ -4547,7 +4547,7 @@ Apple-silicon Macs have one entry point to everything: **shut down, then press a
 
 **Stuck at the Apple logo/progress bar** for more than ~30 minutes: hold power to shut down; boot Safe Mode; if that fails, Recovery → Disk Utility → First Aid on the container and volume; then Reinstall macOS (keeps your data). **Flashing question mark/globe with a prohibition sign**: startup disk not found — Recovery → Disk Utility to check whether the volume exists, then set it via Startup Disk or reinstall.
 
-**Password/login issues**: wrong password on FileVault boot screen after a change — use the *old* password once (the pre-boot cache updates after a successful login). Forgot it: click "?" → reset with Apple Account or the FileVault recovery key (which macOS 26 can now store in iCloud Keychain / the Passwords app — [chapter 16](16-security-and-privacy.html)). Or Recovery → Terminal → `resetpassword`. **Activation Lock** asks for the Apple Account that enabled Find My; there's no bypass — if you bought a used Mac locked to someone else, that's a return.
+**Password/login issues**: wrong password on FileVault boot screen after a change — use the *old* password once (the pre-boot cache updates after a successful login). Forgot it: click "?" → reset with Apple Account or the FileVault recovery key (which macOS 26 can now store in iCloud Keychain / the Passwords app — [chapter 16](#16-security--privacy)). Or Recovery → Terminal → `resetpassword`. **Activation Lock** asks for the Apple Account that enabled Find My; there's no bypass — if you bought a used Mac locked to someone else, that's a return.
 
 #### DFU revive and restore
 
@@ -4567,9 +4567,9 @@ brew update-reset && brew update && brew doctor
 brew upgrade && brew reinstall $(brew list --formula | tr '\n' ' ')   # nuclear, if native libs broke
 ```
 
-`brew doctor` will complain about "unbrewed" files in `/opt/homebrew`; that's usually harmless. **"Warning: Your Xcode is outdated"** after a major OS update: install the Xcode that matches from the App Store (or `xcodes`). If `brew` itself is missing after an upgrade to macOS 27: the Homebrew prefix `/opt/homebrew` is intact; your shell just lost `eval "$(/opt/homebrew/bin/brew shellenv)"` from a reset `.zprofile` — re-add it ([chapter 8](08-homebrew.html)).
+`brew doctor` will complain about "unbrewed" files in `/opt/homebrew`; that's usually harmless. **"Warning: Your Xcode is outdated"** after a major OS update: install the Xcode that matches from the App Store (or `xcodes`). If `brew` itself is missing after an upgrade to macOS 27: the Homebrew prefix `/opt/homebrew` is intact; your shell just lost `eval "$(/opt/homebrew/bin/brew shellenv)"` from a reset `.zprofile` — re-add it ([chapter 8](#08-homebrew)).
 
-**Rosetta gone after upgrading to macOS 27**: Intel-only apps crash on launch with "You need to install Rosetta" or nothing. `softwareupdate --install-rosetta --agree-to-license`. Then audit: `find /Applications -name "*.app" -maxdepth 2 -exec sh -c 'file "$1/Contents/MacOS/"* 2>/dev/null | grep -q arm64 || echo "$1"' _ {} \;` lists apps with no arm64 slice — replace them before macOS 28, which drops Rosetta for good ([chapter 2](02-first-boot-and-migration.html)).
+**Rosetta gone after upgrading to macOS 27**: Intel-only apps crash on launch with "You need to install Rosetta" or nothing. `softwareupdate --install-rosetta --agree-to-license`. Then audit: `find /Applications -name "*.app" -maxdepth 2 -exec sh -c 'file "$1/Contents/MacOS/"* 2>/dev/null | grep -q arm64 || echo "$1"' _ {} \;` lists apps with no arm64 slice — replace them before macOS 28, which drops Rosetta for good ([chapter 2](#02-first-boot-setup-assistant--migration)).
 
 #### "command not found" and PATH
 
@@ -4579,27 +4579,27 @@ which -a python3 node git     # every match, in PATH order
 type ls                       # alias/function/builtin/file?
 ```
 
-Common causes: a fresh Terminal profile that runs `bash` instead of `zsh` (`chsh -s /bin/zsh`); `.zshrc` vs `.zprofile` confusion (Homebrew's `shellenv` belongs in `.zprofile`; interactive config in `.zshrc` — [chapter 9](09-terminal-and-shell.html)); `mise` not activated (`eval "$(mise activate zsh)"`); a GUI app (VS Code, Cursor) launched from the Dock inherits the *login* environment, not your shell's — launch from the terminal (`code .`) or set PATH in `.zprofile`/`.zshenv`. `path_helper` (`/etc/zprofile`) reorders PATH on login shells; if your order keeps getting scrambled, prepend in `.zshrc` instead.
+Common causes: a fresh Terminal profile that runs `bash` instead of `zsh` (`chsh -s /bin/zsh`); `.zshrc` vs `.zprofile` confusion (Homebrew's `shellenv` belongs in `.zprofile`; interactive config in `.zshrc` — [chapter 9](#09-terminal--shell)); `mise` not activated (`eval "$(mise activate zsh)"`); a GUI app (VS Code, Cursor) launched from the Dock inherits the *login* environment, not your shell's — launch from the terminal (`code .`) or set PATH in `.zprofile`/`.zshenv`. `path_helper` (`/etc/zprofile`) reorders PATH on login shells; if your order keeps getting scrambled, prepend in `.zshrc` instead.
 
 #### Xcode, simulators, and CLT
 
 - **"xcrun: error: invalid active developer path"** after an update: `xcode-select --install`, or point at Xcode: `sudo xcode-select -s /Applications/Xcode.app`.
 - Xcode won't launch/"damaged" after a download: `xattr -dr com.apple.quarantine /Applications/Xcode.app` and let it "verify" (5–10 min on first launch).
 - Simulator won't boot: `xcrun simctl shutdown all && xcrun simctl erase all` (wipes simulators), or delete `~/Library/Developer/CoreSimulator/Caches`.
-- Disk full: `~/Library/Developer/Xcode/DerivedData` and old runtimes — [chapter 18](18-performance-and-maintenance.html).
+- Disk full: `~/Library/Developer/Xcode/DerivedData` and old runtimes — [chapter 18](#18-performance--maintenance).
 - `git` suddenly asks to install CLT even though Xcode exists: `xcode-select -p` shows the path; if it's wrong, `-s` as above.
 
 #### Gatekeeper, code signing, and "damaged" apps
 
 - **"App is damaged and can't be opened. You should move it to the Trash"** — nearly always a *quarantine flag on an unsigned/ad-hoc-signed app*, not damage. If you trust the source: `xattr -d com.apple.quarantine /Applications/App.app` (or `-dr` for a folder). Homebrew casks do this automatically when the cask declares it.
-- **"Apple could not verify X is free of malware"** — Gatekeeper blocked an unnotarized app. There is no right-click-Open bypass anymore on macOS 26; open **System Settings → Privacy & Security**, scroll to the "was blocked" message, click **Open Anyway** within the hour, authenticate. Or `spctl` doesn't help — the `--add`/`--master-disable` options were removed. See [chapter 16](16-security-and-privacy.html) before doing this for random downloads.
+- **"Apple could not verify X is free of malware"** — Gatekeeper blocked an unnotarized app. There is no right-click-Open bypass anymore on macOS 26; open **System Settings → Privacy & Security**, scroll to the "was blocked" message, click **Open Anyway** within the hour, authenticate. Or `spctl` doesn't help — the `--add`/`--master-disable` options were removed. See [chapter 16](#16-security--privacy) before doing this for random downloads.
 - **Your own compiled binaries are "killed"/"Killed: 9"** — on Apple silicon, all executables must be signed, at least ad-hoc. Compilers do this automatically; if you copy a binary, or `strip`/`lipo`/patch it, re-sign: `codesign -s - -f ./binary`. Same fix for "code signature invalid" on downloaded CLI tools: `codesign -s - -f`, then `xattr -d com.apple.quarantine`.
 - **`dyld: Library not loaded`** — a Homebrew dependency was upgraded and the binary links to an old version: `brew reinstall <formula>` (or the tool that broke). For Python packages with native extensions, rebuild the venv.
-- **Tools compiled for the wrong architecture**: `file $(which tool)` shows `x86_64` vs `arm64`. An `x86_64` binary needs Rosetta; a Homebrew installed under Rosetta lives in `/usr/local` — you may have two Homebrews. Keep `/opt/homebrew` (arm64) and delete `/usr/local`'s unless you specifically need x86 packages ([chapter 8](08-homebrew.html)).
+- **Tools compiled for the wrong architecture**: `file $(which tool)` shows `x86_64` vs `arm64`. An `x86_64` binary needs Rosetta; a Homebrew installed under Rosetta lives in `/usr/local` — you may have two Homebrews. Keep `/opt/homebrew` (arm64) and delete `/usr/local`'s unless you specifically need x86 packages ([chapter 8](#08-homebrew)).
 
 #### Permissions and privacy prompts
 
-- **A CLI tool can't read `~/Documents`, `~/Desktop`, `~/Downloads` and gives `Operation not permitted`** even as root — TCC. Grant the *terminal app* (Ghostty/iTerm/Terminal) **Full Disk Access** in Privacy & Security, or move the data out of protected folders. Scripts run by launchd or cron inherit nothing; the interpreter needs the grant ([chapter 21](21-automation-and-scripting.html)).
+- **A CLI tool can't read `~/Documents`, `~/Desktop`, `~/Downloads` and gives `Operation not permitted`** even as root — TCC. Grant the *terminal app* (Ghostty/iTerm/Terminal) **Full Disk Access** in Privacy & Security, or move the data out of protected folders. Scripts run by launchd or cron inherit nothing; the interpreter needs the grant ([chapter 21](#21-automation--scripting)).
 - **An app keeps asking for Accessibility/Screen Recording after every update** — apps with changed signatures reset their TCC grant. Remove the app from the list and re-add it. Nuclear: `tccutil reset Accessibility com.example.app` (or `tccutil reset All` for everything — you'll re-approve each prompt).
 - **Camera/microphone not working in a browser or Zoom** — Privacy & Security → Camera/Microphone; toggle the app off and on. If the camera is "in use" with no app open: `sudo killall VDCAssistant` (and `AppleCameraAssistant`).
 - **"Operation not permitted" writing to `/usr/bin`, `/System`, `/bin`** — SIP + the sealed system volume. You don't. Install to `/usr/local/bin`, `/opt/homebrew/bin`, or `~/.local/bin`.
@@ -4637,8 +4637,8 @@ Notes: `localhost` resolves to both `127.0.0.1` and `::1` — a server bound to 
 - **Images run painfully slowly / "exec format error"** — you pulled an `amd64` image on arm64. Look for an arm64 tag or run with `--platform linux/amd64` (Rosetta-translated; works until macOS 28). Build multi-arch with `docker buildx`.
 - **Bind-mounted `node_modules`/file watching slow** — put dependencies in a named volume; OrbStack's VirtioFS is fast, Docker Desktop's is improved but still slower than native. Use `CHOKIDAR_USEPOLLING` only as a last resort.
 - **Ports "already allocated"** — an old container: `docker ps -a`, `docker rm -f`. Or AirPlay Receiver (above).
-- **Disk full** — `docker system df`, then `docker system prune -a --volumes` ([chapter 18](18-performance-and-maintenance.html)). Docker Desktop's `Docker.raw` doesn't shrink automatically; OrbStack's does.
-- Full guidance in [chapter 13](13-containers-and-vms.html).
+- **Disk full** — `docker system df`, then `docker system prune -a --volumes` ([chapter 18](#18-performance--maintenance)). Docker Desktop's `Docker.raw` doesn't shrink automatically; OrbStack's does.
+- Full guidance in [chapter 13](#13-containers--virtual-machines).
 
 #### Git and SSH
 
@@ -4646,16 +4646,16 @@ Notes: `localhost` resolves to both `127.0.0.1` and `::1` — a server bound to 
 - **Git keeps asking for a password over HTTPS** — `git config --global credential.helper osxkeychain`, or `gh auth login`. A *stale* token: delete the `github.com` entry in **Keychain Access** and retry.
 - **`fatal: detected dubious ownership`** — repo on an external drive or copied from another user: `git config --global --add safe.directory /path`.
 - **Case-insensitive filesystem surprises** (`Readme.md` vs `README.md` both "exist") — APFS is case-insensitive by default; `git config core.ignorecase false` and fix the names. Or make a case-sensitive APFS volume for code (Disk Utility → + Volume → APFS (Case-sensitive)) — useful for Android/Linux kernel work, otherwise unnecessary.
-- **`.DS_Store` committed** — global gitignore ([chapter 10](10-dotfiles-and-git.html)).
+- **`.DS_Store` committed** — global gitignore ([chapter 10](#10-dotfiles--git)).
 - **Commit signing fails after reboot** — `gpg-agent` needs `pinentry-mac` (`brew install pinentry-mac` and `pinentry-program /opt/homebrew/bin/pinentry-mac` in `~/.gnupg/gpg-agent.conf`); or switch to SSH signing (`gpg.format ssh`), which just works with the Keychain.
 
 #### Python, Node, and friends
 
 - **`python` not found** — macOS ships `python3` only; make `python` via `mise` or an alias. Never symlink system `python3`.
-- **Homebrew Python "externally-managed-environment"** — you tried `pip install` into Homebrew's Python. Use `uv` / venvs ([chapter 11](11-languages-and-runtimes.html)); don't `--break-system-packages`.
+- **Homebrew Python "externally-managed-environment"** — you tried `pip install` into Homebrew's Python. Use `uv` / venvs ([chapter 11](#11-languages--runtimes)); don't `--break-system-packages`.
 - **`EACCES` on `npm install -g`** — Node installed via mise/nvm doesn't need `sudo`; if you see this, your Node is from a system installer. Remove it and use mise.
 - **Native module fails to build (`node-gyp`, `psycopg2`, `cryptography`)** — CLT missing or outdated (`xcode-select --install`), or a missing brew library (`brew install postgresql@18 openssl@3` and set `LDFLAGS`/`CPPFLAGS` as `brew info` prints). After an OS update, `rm -rf node_modules && npm ci` / rebuild the venv.
-- **Slow shell startup** — `time zsh -i -c exit`; anything over ~300 ms is a plugin manager or `nvm`/`conda` init. Replace `nvm` with `mise`, lazy-load conda, use `zsh-defer` or `zinit`'s turbo mode ([chapter 9](09-terminal-and-shell.html)).
+- **Slow shell startup** — `time zsh -i -c exit`; anything over ~300 ms is a plugin manager or `nvm`/`conda` init. Replace `nvm` with `mise`, lazy-load conda, use `zsh-defer` or `zinit`'s turbo mode ([chapter 9](#09-terminal--shell)).
 
 ### Hardware and peripherals
 
@@ -4676,10 +4676,10 @@ Turn off/on; remove and re-pair the device; `sudo pkill bluetoothd`. Keyboard/mo
 
 #### External displays
 
-- **Blurry text on a 1080p/1440p monitor** — macOS drops sub-pixel AA; low-DPI panels look soft. Use a "Retina-class" (≥ 4K at 27") monitor for a crisp experience, or **BetterDisplay** to enable HiDPI scaled resolutions on lower-res panels ([chapter 19](19-daily-driver-apps.html)).
+- **Blurry text on a 1080p/1440p monitor** — macOS drops sub-pixel AA; low-DPI panels look soft. Use a "Retina-class" (≥ 4K at 27") monitor for a crisp experience, or **BetterDisplay** to enable HiDPI scaled resolutions on lower-res panels ([chapter 19](#19-daily-driver-apps)).
 - **Not detected** — check the cable (HDMI 2.1 or DP 1.4 capable; many cheap USB-C cables are USB 2.0 only with no video), the port (base M-series Macs support a limited number of external displays — check your model's spec), and try **System Settings → Displays → Detect Displays** (hold ⌥ to reveal). DisplayLink docks need their driver (Screen Recording permission) and have lag; prefer Thunderbolt docks with native DP alt-mode.
 - **Wrong refresh rate / HDR / color** — Displays → Advanced; set 60 Hz+ explicitly; disable HDR on monitors with poor HDR (most). "Flashing"/black-outs on a hub usually mean bandwidth — plug the display directly.
-- **Windows rearrange every time you dock** — macOS remembers arrangements by display identity; use a window manager restore (Rectangle "restore," AeroSpace, or a Hammerspoon `hs.screen.watcher` — [chapter 21](21-automation-and-scripting.html)).
+- **Windows rearrange every time you dock** — macOS remembers arrangements by display identity; use a window manager restore (Rectangle "restore," AeroSpace, or a Hammerspoon `hs.screen.watcher` — [chapter 21](#21-automation--scripting)).
 - **Brightness keys don't work on external** — `MonitorControl` (DDC/CI). Not possible over some DisplayLink docks.
 
 #### Audio
@@ -4688,7 +4688,7 @@ No sound / wrong device after unplugging headphones: **Control Center → Sound*
 
 #### Keyboard, trackpad, Touch ID
 
-Repeated keys or missed keys: **Keyboard → Key repeat / Delay**; `defaults write -g ApplePressAndHoldEnabled -bool false` if holding a key shows accents instead of repeating ([chapter 5](05-keyboard-and-input.html)). Karabiner stopped working after an update: re-approve its driver extension in Privacy & Security → Login Items & Extensions → Driver Extensions, and Input Monitoring. Touch ID not offered for `sudo`: the PAM line was reset by the update — use `/etc/pam.d/sudo_local` which survives updates ([chapter 9](09-terminal-and-shell.html)). Trackpad erratic: dirt/moisture; or a swelling battery underneath (a hardware issue — stop and get it checked if the trackpad clicks poorly or the case bulges).
+Repeated keys or missed keys: **Keyboard → Key repeat / Delay**; `defaults write -g ApplePressAndHoldEnabled -bool false` if holding a key shows accents instead of repeating ([chapter 5](#05-keyboard-shortcuts--input)). Karabiner stopped working after an update: re-approve its driver extension in Privacy & Security → Login Items & Extensions → Driver Extensions, and Input Monitoring. Touch ID not offered for `sudo`: the PAM line was reset by the update — use `/etc/pam.d/sudo_local` which survives updates ([chapter 9](#09-terminal--shell)). Trackpad erratic: dirt/moisture; or a swelling battery underneath (a hardware issue — stop and get it checked if the trackpad clicks poorly or the case bulges).
 
 #### USB, Thunderbolt, and storage
 
@@ -4696,18 +4696,18 @@ Drives not mounting: `diskutil list` (is it there?), `diskutil mount diskNsM`, D
 
 #### Battery and charging
 
-Not charging on a USB-C hub: the hub passes less wattage than the Mac wants; plug the charger directly. "Not charging" at 80% with the charge limit or Optimized Charging on is by design ([chapter 18](18-performance-and-maintenance.html)). Sudden battery drain: Activity Monitor → Energy → 12 hr Power; Wi-Fi/Bluetooth scanning in sleep (turn off "Wake for network access"); a stuck `mds` index; a browser tab with a video. `pmset -g assertions` while it should be asleep.
+Not charging on a USB-C hub: the hub passes less wattage than the Mac wants; plug the charger directly. "Not charging" at 80% with the charge limit or Optimized Charging on is by design ([chapter 18](#18-performance--maintenance)). Sudden battery drain: Activity Monitor → Energy → 12 hr Power; Wi-Fi/Bluetooth scanning in sleep (turn off "Wake for network access"); a stuck `mds` index; a browser tab with a video. `pmset -g assertions` while it should be asleep.
 
 ### macOS itself
 
 - **Settings won't stick / apps reset preferences** — `cfprefsd` cache: `killall cfprefsd`, or the app's plist is corrupt: `defaults delete com.vendor.app` (loses prefs) after backing up with `defaults export`.
 - **Finder slow / "The application Finder is not open"** — `killall Finder`; if persistent, delete `~/Library/Preferences/com.apple.finder.plist` and relaunch. Slow opening of a folder with thousands of items: switch to List view, disable icon previews and "Calculate all sizes."
-- **Spotlight not finding things** — `sudo mdutil -E /` ([chapter 18](18-performance-and-maintenance.html)).
+- **Spotlight not finding things** — `sudo mdutil -E /` ([chapter 18](#18-performance--maintenance)).
 - **Notification Center/Dock/menu bar glitching** — `killall Dock`, `killall NotificationCenter`, `killall ControlCenter`.
 - **Font problems, garbled text in one app** — Font Book → File → Validate Fonts; remove duplicates. Safe Mode clears font caches.
-- **Time Machine "preparing backup" forever** — [chapter 17](17-backup-and-recovery.html): `tmutil stopbackup`, remove the `.inProgress` bundle on the destination, restart.
-- **"Your system has run out of application memory"** — a leaking app; Activity Monitor → Memory sorted by Memory; Force Quit the top one. Chronic → more RAM or fewer Electron apps ([chapter 18](18-performance-and-maintenance.html)).
-- **Liquid Glass makes text hard to read** — Accessibility → Display → Reduce Transparency, or the Liquid Glass intensity slider in Appearance on macOS 27 ([chapter 3](03-system-settings.html)).
+- **Time Machine "preparing backup" forever** — [chapter 17](#17-backup--recovery): `tmutil stopbackup`, remove the `.inProgress` bundle on the destination, restart.
+- **"Your system has run out of application memory"** — a leaking app; Activity Monitor → Memory sorted by Memory; Force Quit the top one. Chronic → more RAM or fewer Electron apps ([chapter 18](#18-performance--maintenance)).
+- **Liquid Glass makes text hard to read** — Accessibility → Display → Reduce Transparency, or the Liquid Glass intensity slider in Appearance on macOS 27 ([chapter 3](#03-system-settings-pane-by-pane)).
 - **Software Update fails / "unable to check for updates"** — free space ≥ 20 GB? `sudo softwareupdate -l --verbose`; try from Recovery (Reinstall macOS keeps data and applies the update); check `/var/log/install.log`.
 - **iCloud sync stuck** — `brctl log --wait --shorten` shows the sync daemon live; often a single file with an illegal name or a huge one. `killall bird` (iCloud Drive daemon) restarts sync.
 
@@ -4715,7 +4715,7 @@ Not charging on a USB-C hub: the hub passes less wattage than the Mac wants; plu
 
 **Reinstall macOS (keep data)** — Recovery → Reinstall macOS. It replaces the system volume only; apps, files, and settings stay. Do this when: Safe Mode fixes things but you can't find the culprit, system daemons crash-loop, updates fail repeatedly. Takes 30–60 minutes. It's not the ritual it was on Intel; it's a reasonable step 7.
 
-**Erase and set up fresh** — Recovery → Disk Utility → erase the container (or System Settings → General → Transfer or Reset → **Erase All Content and Settings**, which is much faster and keeps the OS). Restore *selectively* from Time Machine or your dotfiles/Brewfile rather than Migration Assistant if you're doing this to escape accumulated cruft ([chapter 2](02-first-boot-and-migration.html), [Appendix A](appendix-a-bootstrap-script.html)).
+**Erase and set up fresh** — Recovery → Disk Utility → erase the container (or System Settings → General → Transfer or Reset → **Erase All Content and Settings**, which is much faster and keeps the OS). Restore *selectively* from Time Machine or your dotfiles/Brewfile rather than Migration Assistant if you're doing this to escape accumulated cruft ([chapter 2](#02-first-boot-setup-assistant--migration), [Appendix A](#appendix-a--bootstrap-script)).
 
 **Apple / authorized service** — Apple Diagnostics reports a code; the Mac panics with all peripherals unplugged and no third-party extensions; battery "Service Recommended"; liquid damage; the trackpad bulges; the display flickers in Recovery too (which rules out software). Book a Genius Bar or mail-in via the **Apple Support** app. Have a current backup and your Apple Account password; they will ask you to disable Find My / Activation Lock. AppleCare+ covers accidental damage with a deductible; the standard warranty is one year (two in the EU, plus consumer law).
 
@@ -4735,13 +4735,13 @@ Everything in the previous 22 chapters, boiled down to lists you can tick. Each 
 
 Doing these in order avoids redoing work (e.g., install Homebrew *before* restoring dotfiles that assume it; turn on FileVault *before* copying data so it's encrypted from the start).
 
-**Before unboxing** — [ch. 1](01-hardware-and-buying.html), [ch. 2](02-first-boot-and-migration.html)
+**Before unboxing** — [ch. 1](#01-hardware--buying-guide), [ch. 2](#02-first-boot-setup-assistant--migration)
 
 - [ ] Old Mac: Time Machine backup complete; dotfiles repo pushed; `brew bundle dump` committed; export browser data; note license keys; sign out of iMessage/Music if selling it.
 - [ ] Have your Apple Account password and a second trusted device for 2FA.
 - [ ] Decide: migrate (Migration Assistant, convenient) or fresh install (clean, this guide's default).
 
-**Setup Assistant** — [ch. 2](02-first-boot-and-migration.html)
+**Setup Assistant** — [ch. 2](#02-first-boot-setup-assistant--migration)
 
 - [ ] Language/region; connect Wi-Fi; skip Migration Assistant if going fresh.
 - [ ] Sign in with Apple Account (enables Find My/Activation Lock, iCloud Keychain).
@@ -4750,7 +4750,7 @@ Doing these in order avoids redoing work (e.g., install Homebrew *before* restor
 - [ ] Touch ID; Apple Pay optional; Siri optional; Screen Time skip; Analytics off.
 - [ ] Appearance: Auto.
 
-**First 15 minutes** — [ch. 3](03-system-settings.html), [ch. 16](16-security-and-privacy.html)
+**First 15 minutes** — [ch. 3](#03-system-settings-pane-by-pane), [ch. 16](#16-security--privacy)
 
 - [ ] Software Update → install everything; enable automatic security responses.
 - [ ] Privacy & Security: FileVault on (verify), Firewall on, Lockdown Mode no (unless needed), Stolen Device Protection on.
@@ -4761,13 +4761,13 @@ Doing these in order avoids redoing work (e.g., install Homebrew *before* restor
 - [ ] Finder: show path bar, status bar, extensions, `~/Library`; new window opens Home; search current folder.
 - [ ] Desktop & Dock: hot corners; Stage Manager off (or on, your call); click wallpaper to reveal desktop → "Only in Stage Manager".
 - [ ] Spotlight/Siri: pick your launcher shortcut plan (`⌘Space` for Spotlight or Raycast).
-- [ ] Run the `defaults write` script from [ch. 3](03-system-settings.html) (or `scripts/macos-defaults.sh` in [Appendix A](appendix-a-bootstrap-script.html)).
+- [ ] Run the `defaults write` script from [ch. 3](#03-system-settings-pane-by-pane) (or `scripts/macos-defaults.sh` in [Appendix A](#appendix-a--bootstrap-script)).
 
-**Developer bootstrap (30–60 min, mostly waiting)** — [ch. 7](07-command-line-tools-and-xcode.html)–[10](10-dotfiles-and-git.html)
+**Developer bootstrap (30–60 min, mostly waiting)** — [ch. 7](#07-command-line-tools-xcode--the-toolchain)–[10](#10-dotfiles--git)
 
 - [ ] `xcode-select --install` (Command Line Tools).
 - [ ] Install Homebrew; add `shellenv` to `~/.zprofile`; `brew doctor`.
-- [ ] `brew bundle --file=Brewfile` ([Appendix B](appendix-b-brewfile.html)) — terminal, editor, CLI tools, fonts, apps.
+- [ ] `brew bundle --file=Brewfile` ([Appendix B](#appendix-b--brewfile)) — terminal, editor, CLI tools, fonts, apps.
 - [ ] Ghostty (or chosen terminal) + Nerd Font; open it, close Terminal.app forever.
 - [ ] Clone dotfiles; run the installer/stow; new shell — prompt, aliases, plugins working.
 - [ ] `git config` user/email; generate `ssh-keygen -t ed25519`; add to GitHub (`gh auth login`); enable commit signing (SSH).
@@ -4777,7 +4777,7 @@ Doing these in order avoids redoing work (e.g., install Homebrew *before* restor
 - [ ] Containers: OrbStack (or Docker Desktop/`container`); `docker run hello-world`.
 - [ ] Full Xcode only if you need iOS/macOS dev (12 GB, App Store or `xcodes`).
 
-**Apps and accounts** — [ch. 19](19-daily-driver-apps.html)
+**Apps and accounts** — [ch. 19](#19-daily-driver-apps)
 
 - [ ] Password manager first; sign in; browser extension.
 - [ ] Browsers: default browser set; sync signed in; content blocker; profiles for work/personal.
@@ -4786,7 +4786,7 @@ Doing these in order avoids redoing work (e.g., install Homebrew *before* restor
 - [ ] Communication apps installed and set **not** to open at login.
 - [ ] Cloud storage clients; iCloud Drive Desktop & Documents sync decided (default: off for developers).
 
-**Before the end of day one** — [ch. 17](17-backup-and-recovery.html)
+**Before the end of day one** — [ch. 17](#17-backup--recovery)
 
 - [ ] Time Machine to an external drive (encrypted) — first backup running.
 - [ ] Cloud backup (Backblaze/Arq/iCloud) configured, or at least documents in iCloud Drive.
@@ -4796,7 +4796,7 @@ Doing these in order avoids redoing work (e.g., install Homebrew *before* restor
 
 ### The 30-minute security pass
 
-From [ch. 16](16-security-and-privacy.html). Do it on day one and again each semester.
+From [ch. 16](#16-security--privacy). Do it on day one and again each semester.
 
 - [ ] `fdesetup status` → FileVault On. Recovery key stored somewhere you can reach without the Mac.
 - [ ] Firewall on; "Block all incoming connections" off (breaks AirDrop/Handoff); stealth mode on.
@@ -4812,11 +4812,11 @@ From [ch. 16](16-security-and-privacy.html). Do it on day one and again each sem
 - [ ] Guest user off; auto-login off; login window shows name and password fields (not user list) on shared machines.
 - [ ] Secrets: none in dotfiles repo; API keys in Keychain or 1Password CLI; `.env` files gitignored.
 - [ ] SSH: ed25519 keys with passphrase in Keychain; `PasswordAuthentication no` on any server you own.
-- [ ] Run the audit script from [ch. 16](16-security-and-privacy.html); all green.
+- [ ] Run the audit script from [ch. 16](#16-security--privacy); all green.
 
 ### Developer environment checklist
 
-From [ch. 7](07-command-line-tools-and-xcode.html)–[15](15-databases-and-local-dev.html). Green means `which` finds it, it runs, and it's the version you expect.
+From [ch. 7](#07-command-line-tools-xcode--the-toolchain)–[15](#15-databases--local-development-services). Green means `which` finds it, it runs, and it's the version you expect.
 
 - [ ] `xcode-select -p` → `/Library/Developer/CommandLineTools` (or Xcode.app).
 - [ ] `brew doctor` → "ready to brew"; `brew --prefix` → `/opt/homebrew`; no `/usr/local` Homebrew unless intentional.
@@ -4849,7 +4849,7 @@ From [ch. 7](07-command-line-tools-and-xcode.html)–[15](15-databases-and-local
 
 ### Weekly / monthly / semester maintenance
 
-From [ch. 18](18-performance-and-maintenance.html), [ch. 17](17-backup-and-recovery.html).
+From [ch. 18](#18-performance--maintenance), [ch. 17](#17-backup--recovery).
 
 **Weekly (5 min)**
 
@@ -4870,11 +4870,11 @@ From [ch. 18](18-performance-and-maintenance.html), [ch. 17](17-backup-and-recov
 **Each semester / quarter (1 h)**
 
 - [ ] Restore test: open a random old file from Time Machine; `git clone` your dotfiles onto a fresh user account and run the installer.
-- [ ] Re-verify student offers (GitHub Education, JetBrains) — [ch. 20](20-cs-student-specific.html).
+- [ ] Re-verify student offers (GitHub Education, JetBrains) — [ch. 20](#20-cs-student-specific).
 - [ ] Privacy permissions audit; SSH keys audit on GitHub/servers (remove old machines); rotate API tokens older than a year.
 - [ ] `npx npkill`; `docker system prune -a`; `mise prune`; delete simulators you don't use.
 - [ ] Check macOS support status; plan the major upgrade ~2–4 weeks after release once your critical tools confirm compatibility.
-- [ ] Re-read the "What's new" section on the guide's [landing page](index.html); update Brewfile and dotfiles for tool changes.
+- [ ] Re-read the "What's new" section on the guide's [landing page](#table-of-contents); update Brewfile and dotfiles for tool changes.
 
 ### Before travel / a conference / an exam
 
@@ -4889,7 +4889,7 @@ From [ch. 18](18-performance-and-maintenance.html), [ch. 17](17-backup-and-recov
 
 ### Cheat sheet: macOS keyboard essentials
 
-The full table is [Appendix C](appendix-c-keyboard-shortcuts.html). The 20 that matter most:
+The full table is [Appendix C](#appendix-c--keyboard-shortcuts). The 20 that matter most:
 
 | Shortcut | Does |
 |---|---|
@@ -5065,7 +5065,7 @@ container run --rm -it alpine sh                  # Apple's container CLI
 | Ghostty | 1.3 | — | — |
 | VS Code | monthly | — | — |
 
-Exact numbers will drift — [Appendix E](appendix-e-sources.html) lists where to check.
+Exact numbers will drift — [Appendix E](#appendix-e--sources--further-reading) lists where to check.
 
 [↑ Back to top](#table-of-contents)
 
@@ -5073,10 +5073,10 @@ Exact numbers will drift — [Appendix E](appendix-e-sources.html) lists where t
 
 ## Appendix A — Bootstrap script
 
-Everything in [Part II](03-system-settings.html) and [Part III](07-command-line-tools-and-xcode.html) that can be automated, in four scripts that live in the repo's `scripts/` directory. They're written for **zsh on macOS 26/27, Apple silicon**, and every step is idempotent — run them again after a partial failure or on a Mac you set up by hand and they'll only do what's missing.
+Everything in [Part II](#03-system-settings-pane-by-pane) and [Part III](#07-command-line-tools-xcode--the-toolchain) that can be automated, in four scripts that live in the repo's `scripts/` directory. They're written for **zsh on macOS 26/27, Apple silicon**, and every step is idempotent — run them again after a partial failure or on a Mac you set up by hand and they'll only do what's missing.
 
 > [!WARNING]
-> **Read scripts before you run them.** Piping `curl` into a shell from a stranger's repo is exactly the habit [chapter 16](16-security-and-privacy.html) warns about. Clone the repo, open the files, delete the lines you disagree with (there will be some — these are opinions), then run. The scripts never touch `/System`, never disable Gatekeeper/SIP/FileVault, and ask before installing Rosetta or logging in to GitHub.
+> **Read scripts before you run them.** Piping `curl` into a shell from a stranger's repo is exactly the habit [chapter 16](#16-security--privacy) warns about. Clone the repo, open the files, delete the lines you disagree with (there will be some — these are opinions), then run. The scripts never touch `/System`, never disable Gatekeeper/SIP/FileVault, and ask before installing Rosetta or logging in to GitHub.
 
 ### Quick start
 
@@ -5369,17 +5369,17 @@ SUMMARY
 #### Notes on specific steps
 
 - **Command Line Tools headless install** uses the `softwareupdate` trick (touch the `.installondemand.in-progress` file so the CLT package shows up in `softwareupdate -l`). If Apple's catalog doesn't list it — happens for a few days around a new macOS release — the script falls back to the GUI prompt and waits for Enter.
-- **Homebrew** is installed with `NONINTERACTIVE=1`; analytics are turned off. The `shellenv` line goes in `~/.zprofile` (login shells) so GUI apps launched from the Dock also see `/opt/homebrew/bin` — see [chapter 8](08-homebrew.html) and [chapter 22](22-troubleshooting.html) on PATH.
-- **Rosetta** is opt-in because macOS 27 removes it by default and macOS 28 removes it entirely; installing it hides the Intel-only apps you should be replacing ([chapter 2](02-first-boot-and-migration.html)).
+- **Homebrew** is installed with `NONINTERACTIVE=1`; analytics are turned off. The `shellenv` line goes in `~/.zprofile` (login shells) so GUI apps launched from the Dock also see `/opt/homebrew/bin` — see [chapter 8](#08-homebrew) and [chapter 22](#22-troubleshooting) on PATH.
+- **Rosetta** is opt-in because macOS 27 removes it by default and macOS 28 removes it entirely; installing it hides the Intel-only apps you should be replacing ([chapter 2](#02-first-boot-setup-assistant--migration)).
 - **Brewfile filtering**: `mas` lines are dropped if you're not signed in to the App Store (the install would fail); `vscode` extension lines are dropped if VS Code isn't in the selected set. `--no-upgrade` keeps an already-installed formula at its version rather than upgrading mid-bootstrap.
-- **SSH signing** for Git commits is configured instead of GPG: no agent to babysit, the same key you use for GitHub auth, verified badge on GitHub once uploaded as a *signing* key (the script does this via `gh ssh-key add --type signing` if you log in) — [chapter 10](10-dotfiles-and-git.html).
-- **Touch ID for sudo** is written to `/etc/pam.d/sudo_local`, which macOS 14+ preserves across updates (`/etc/pam.d/sudo` is reset by every update) — [chapter 9](09-terminal-and-shell.html).
+- **SSH signing** for Git commits is configured instead of GPG: no agent to babysit, the same key you use for GitHub auth, verified badge on GitHub once uploaded as a *signing* key (the script does this via `gh ssh-key add --type signing` if you log in) — [chapter 10](#10-dotfiles--git).
+- **Touch ID for sudo** is written to `/etc/pam.d/sudo_local`, which macOS 14+ preserves across updates (`/etc/pam.d/sudo` is reset by every update) — [chapter 9](#09-terminal--shell).
 - **The `.zshrc` starter** is appended only if there's no `starship init` line already; it's meant to be replaced by your dotfiles. Order matters: `zsh-syntax-highlighting` must be sourced last.
 - **`sudo` keep-alive + `caffeinate`** prevent the two classic bootstrap failures: the sudo timestamp expiring during a long `brew bundle`, and the Mac sleeping halfway through.
 
 ### `scripts/macos-defaults.sh`
 
-The `defaults write` collection from [chapter 3](03-system-settings.html), expanded. Every line is a preference you could set by clicking; nothing here needs a reboot except keyboard repeat rate, trackpad settings, and Stage Manager (log out/in). Run it standalone with `zsh scripts/macos-defaults.sh`; re-running is harmless.
+The `defaults write` collection from [chapter 3](#03-system-settings-pane-by-pane), expanded. Every line is a preference you could set by clicking; nothing here needs a reboot except keyboard repeat rate, trackpad settings, and Stage Manager (log out/in). Run it standalone with `zsh scripts/macos-defaults.sh`; re-running is harmless.
 
 ```sh
 #!/bin/zsh
@@ -5537,7 +5537,7 @@ To find the key for any setting not covered: `defaults read > /tmp/a; (change it
 
 ### `scripts/cleanup.sh`
 
-The monthly disk cleanup from [chapter 18](18-performance-and-maintenance.html). Removes only things that regenerate: Homebrew caches and orphaned dependencies, Xcode DerivedData and unavailable simulators, stopped containers and dangling images, package-manager caches, old logs, Trash, and Time Machine local snapshots. Prints how much it freed.
+The monthly disk cleanup from [chapter 18](#18-performance--maintenance). Removes only things that regenerate: Homebrew caches and orphaned dependencies, Xcode DerivedData and unavailable simulators, stopped containers and dangling images, package-manager caches, old logs, Trash, and Time Machine local snapshots. Prints how much it freed.
 
 ```sh
 #!/bin/sh
@@ -5563,7 +5563,7 @@ echo "→ Snapshots";    tmutil listlocalsnapshots / 2>/dev/null | sed 's/.*\.//
 after=$(df -k / | awk 'NR==2{print $4}')
 echo "Freed ~$(( (after - before) / 1024 )) MB. Free now: $(df -h / | awk 'NR==2{print $4}')"
 ```
-Schedule it with launchd (monthly on the 1st at 12:00) — see [chapter 21](21-automation-and-scripting.html) for the plist pattern:
+Schedule it with launchd (monthly on the 1st at 12:00) — see [chapter 21](#21-automation--scripting) for the plist pattern:
 
 ```sh
 mkdir -p ~/Library/LaunchAgents
@@ -5583,7 +5583,7 @@ launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.macos-setup.cleanup.
 
 ### `scripts/audit.sh`
 
-A read-only security and health check from [chapter 16](16-security-and-privacy.html): FileVault, firewall, Gatekeeper, SIP, screensaver password, guest account, automatic updates, sharing services, SSH server, launch agents and system extensions counts, disk space, last Time Machine backup, uptime, Rosetta presence, SSH key, Touch ID sudo. Run it after bootstrap and each semester.
+A read-only security and health check from [chapter 16](#16-security--privacy): FileVault, firewall, Gatekeeper, SIP, screensaver password, guest account, automatic updates, sharing services, SSH server, launch agents and system extensions counts, disk space, last Time Machine backup, uptime, Rosetta presence, SSH key, Touch ID sudo. Run it after bootstrap and each semester.
 
 ```sh
 #!/bin/zsh
@@ -5629,7 +5629,7 @@ The intended end state is that **your dotfiles repo** owns the configuration and
 └── ssh/ config           # no keys!
 ```
 
-Then bootstrap becomes: `zsh bootstrap.sh --no-apps --no-defaults --dotfiles git@github.com:you/dotfiles.git` and your `install.sh` does the rest. [Chapter 10](10-dotfiles-and-git.html) covers stow vs chezmoi vs a bare repo, secrets handling, and per-machine branches.
+Then bootstrap becomes: `zsh bootstrap.sh --no-apps --no-defaults --dotfiles git@github.com:you/dotfiles.git` and your `install.sh` does the rest. [Chapter 10](#10-dotfiles--git) covers stow vs chezmoi vs a bare repo, secrets handling, and per-machine branches.
 
 [↑ Back to top](#table-of-contents)
 
@@ -5637,7 +5637,7 @@ Then bootstrap becomes: `zsh bootstrap.sh --no-apps --no-defaults --dotfiles git
 
 ## Appendix B — Brewfile
 
-`brew bundle` reads a Ruby-flavoured manifest and installs everything in it — formulae, casks, Mac App Store apps (via `mas`), and VS Code extensions. It is the single most useful file in a dotfiles repo: the whole software side of a Mac in 300 lines, reproducible with one command. [Chapter 8](08-homebrew.html) explains Homebrew itself; this appendix is the manifest.
+`brew bundle` reads a Ruby-flavoured manifest and installs everything in it — formulae, casks, Mac App Store apps (via `mas`), and VS Code extensions. It is the single most useful file in a dotfiles repo: the whole software side of a Mac in 300 lines, reproducible with one command. [Chapter 8](#08-homebrew) explains Homebrew itself; this appendix is the manifest.
 
 ```sh
 brew bundle --file=scripts/Brewfile          # install what's listed (skips what's already there)
@@ -5649,8 +5649,8 @@ brew bundle dump --force --describe          # regenerate from what's installed 
 ### Conventions in this file
 
 - Lines starting with `#cask`, `#brew`, `#mas`, `#vscode` (no space) are **opt-in alternatives** — remove the `#` to enable. Lines starting with `# ` are commentary.
-- The **uncommented** set is the guide's default recommendation: a full developer CLI, `mise` + `uv`, container/cloud tooling, Nerd Fonts, Ghostty, VS Code, OrbStack, Firefox, and the Tier-1 daily-driver apps from [chapter 19](19-daily-driver-apps.html). On a fast connection it's ~15–25 minutes and ~8 GB (Xcode excluded).
-- `restart_service: false` on `postgresql@18` and `redis` means they're installed but **not** started at login — `brew services run postgresql@18` when you need them ([chapter 15](15-databases-and-local-dev.html)).
+- The **uncommented** set is the guide's default recommendation: a full developer CLI, `mise` + `uv`, container/cloud tooling, Nerd Fonts, Ghostty, VS Code, OrbStack, Firefox, and the Tier-1 daily-driver apps from [chapter 19](#19-daily-driver-apps). On a fast connection it's ~15–25 minutes and ~8 GB (Xcode excluded).
+- `restart_service: false` on `postgresql@18` and `redis` means they're installed but **not** started at login — `brew services run postgresql@18` when you need them ([chapter 15](#15-databases--local-development-services)).
 - `mas` entries need you to be signed in to the App Store; the bootstrap script drops them otherwise. Find IDs with `mas search "name"`.
 - `vscode` entries run `code --install-extension`; they're skipped if VS Code isn't installed.
 - Third-party taps (`supabase/tap`, `nikitabobko/tap`) will prompt for trust on first use under Homebrew 6 — that's the new tap-trust feature working as intended.
@@ -6066,7 +6066,7 @@ brew "postgresql@18", restart_service: (host == "studio")
 
 ### Keeping it honest
 
-Every month (the routine in [chapter 18](18-performance-and-maintenance.html)):
+Every month (the routine in [chapter 18](#18-performance--maintenance)):
 
 ```sh
 brew bundle cleanup --file=~/.dotfiles/Brewfile    # lists things you installed ad hoc
@@ -6094,7 +6094,7 @@ Everything below is a default unless marked *(set up in ch. N)*. Change any syst
 
 | Shortcut | Action |
 |---|---|
-| `⌘Space` | Spotlight (or Raycast/Alfred if you swapped them — [ch. 4](04-finder-dock-spotlight.html)) |
+| `⌘Space` | Spotlight (or Raycast/Alfred if you swapped them — [ch. 4](#04-finder-dock--spotlight)) |
 | `⌘⇧Space` | Visual Intelligence (macOS 27) / Siri type-to |
 | `⌘Tab`, `⌘⇧Tab` | Next / previous app (hold ⌘, tap Tab, `Q` to quit the highlighted app, `H` to hide, `↑`/`↓` to see its windows) |
 | `` ⌘` ``, `` ⌘⇧` `` | Next / previous window of the current app |
@@ -6119,7 +6119,7 @@ Everything below is a default unless marked *(set up in ch. N)*. Change any syst
 | `⌥` + click Wi-Fi/Bluetooth/Sound menu icon | Diagnostic details |
 | `⌘⌥⌃8` | Invert colors *(enable in Accessibility → Keyboard → Shortcut)* |
 | `⌥⌘F5` | Accessibility shortcuts panel |
-| `⌃⌥⌘⇧` (hyper) + key | Your Hammerspoon/Karabiner layer *(set up in [ch. 5](05-keyboard-and-input.html), [ch. 21](21-automation-and-scripting.html))* |
+| `⌃⌥⌘⇧` (hyper) + key | Your Hammerspoon/Karabiner layer *(set up in [ch. 5](#05-keyboard-shortcuts--input), [ch. 21](#21-automation--scripting))* |
 
 ### Windows, Spaces, tiling
 
@@ -6141,7 +6141,7 @@ Everything below is a default unless marked *(set up in ch. N)*. Change any syst
 | `⌃⌘` + drag anywhere in a window | Move window *(with `NSWindowShouldDragOnGesture` from the defaults script)* |
 | Double-click title bar | Zoom or minimize (Desktop & Dock setting) |
 | `⌥⌘W` on a window edge | *(Rectangle)* — defaults are `⌃⌥←` `⌃⌥→` halves, `⌃⌥↩` maximize, `⌃⌥C` center, `⌃⌥⌘←/→` next display |
-| `⌥H/J/K/L` | *(AeroSpace default)* focus left/down/up/right; `⌥⇧` + same to move; `⌥1–9` workspaces; `⌥/` toggle tiles/accordion — [ch. 6](06-window-management.html) |
+| `⌥H/J/K/L` | *(AeroSpace default)* focus left/down/up/right; `⌥⇧` + same to move; `⌥1–9` workspaces; `⌥/` toggle tiles/accordion — [ch. 6](#06-window-management-spaces--displays) |
 
 ### Finder
 
@@ -6177,7 +6177,7 @@ Everything below is a default unless marked *(set up in ch. N)*. Change any syst
 
 ### Text editing (works in every Cocoa text field)
 
-These come from the Cocoa text system (Emacs bindings via `~/Library/KeyBindings/DefaultKeyBinding.dict`, [ch. 5](05-keyboard-and-input.html)). They work in Safari's address bar, Mail, Notes, Xcode, Slack, VS Code (mostly), and the Terminal.
+These come from the Cocoa text system (Emacs bindings via `~/Library/KeyBindings/DefaultKeyBinding.dict`, [ch. 5](#05-keyboard-shortcuts--input)). They work in Safari's address bar, Mail, Notes, Xcode, Slack, VS Code (mostly), and the Terminal.
 
 | Shortcut | Action |
 |---|---|
@@ -6215,7 +6215,7 @@ These come from the Cocoa text system (Emacs bindings via `~/Library/KeyBindings
 | `⌃` + any of the above | To clipboard instead of file |
 | `⌘⇧4` then `Space` then `⌘` + click menu | Capture a menu with its title |
 | Click the floating thumbnail | Markup; drag it into any app |
-| `⌘⇧C` in Shottr *(if installed)* | Capture area with pixel measurement/OCR — [ch. 19](19-daily-driver-apps.html) |
+| `⌘⇧C` in Shottr *(if installed)* | Capture area with pixel measurement/OCR — [ch. 19](#19-daily-driver-apps) |
 
 ### Spotlight (macOS 26/27)
 
@@ -6281,7 +6281,7 @@ Chrome/Firefox share most; Firefox uses `⌘⌥I` for DevTools too, Chrome `⌘�
 | `⌘⇧↩` | Zoom split (Ghostty) |
 | `⌘⇧,` | Reload config (Ghostty) |
 | `⌘⌃F` | Fullscreen |
-| `⌘⇧Q` (Ghostty) | Toggle quick terminal *(set up in [ch. 9](09-terminal-and-shell.html))* |
+| `⌘⇧Q` (Ghostty) | Toggle quick terminal *(set up in [ch. 9](#09-terminal--shell))* |
 | `⌥←` / `⌥→` | Word jump *(Option as Meta / `macos-option-as-alt = true`)* |
 | `⌥` + click | Move cursor in the shell line |
 | `⌘` + double-click URL / `⌘` + click | Open link |
@@ -6323,7 +6323,7 @@ Chrome/Firefox share most; Firefox uses `⌘⌥I` for DevTools too, Chrome `⌘�
 | `⌘⇧V` / `⌘K V` | Markdown preview / to the side |
 | `⌘K ⌘S` | Keyboard shortcuts editor |
 | `⌘K ⌘T` | Color theme |
-| `⌘I` / `⌘⇧I` / `⌃⌘I` | Inline chat / agent panel / chat *(Copilot/Cursor vary — [ch. 12](12-editors-and-ides.html))* |
+| `⌘I` / `⌘⇧I` / `⌃⌘I` | Inline chat / agent panel / chat *(Copilot/Cursor vary — [ch. 12](#12-editors-ides--ai-coding-tools))* |
 | `F5` / `F9` / `F10` / `F11` | Debug start / breakpoint / step over / step into |
 | `⌘⇧M` | Problems panel |
 | `⌘K M` | Change language mode |
@@ -6338,14 +6338,14 @@ Cursor: same base, plus `⌘K` inline edit, `⌘L` chat, `⌘I` composer/agent. 
 | From options: select disk → hold `⇧` → Continue in Safe Mode | Safe Mode |
 | From options: `⌘D` | Apple Diagnostics |
 | Options → Continue → Utilities → Terminal | Recovery Terminal (`resetpassword`, `diskutil`) |
-| `⌘R`, `⌘⌥R`, `⌘⌥P R`, `⇧⌃⌥`+power | **Do nothing on Apple silicon** (Intel-era key combos) — see [ch. 22](22-troubleshooting.html) |
+| `⌘R`, `⌘⌥R`, `⌘⌥P R`, `⇧⌃⌥`+power | **Do nothing on Apple silicon** (Intel-era key combos) — see [ch. 22](#22-troubleshooting) |
 
 ### Making your own
 
 - **System Settings → Keyboard → Keyboard Shortcuts → App Shortcuts → +**: pick an app (or All Applications), type the *exact* menu item text (including `…` via `⌥;`), press keys. This is how you give any menu command a shortcut without a third-party tool.
-- **Shortcuts app** → any Shortcut → ⓘ → Add Keyboard Shortcut: global hotkeys for automations ([ch. 21](21-automation-and-scripting.html)).
-- **Karabiner-Elements**: Caps Lock → Escape when tapped / Hyper when held; swap `⌥`/`⌘` for PC keyboards; per-device rules ([ch. 5](05-keyboard-and-input.html)).
-- **Hammerspoon**: `hs.hotkey.bind(hyper, "t", …)` for anything Lua can do ([ch. 21](21-automation-and-scripting.html)).
+- **Shortcuts app** → any Shortcut → ⓘ → Add Keyboard Shortcut: global hotkeys for automations ([ch. 21](#21-automation--scripting)).
+- **Karabiner-Elements**: Caps Lock → Escape when tapped / Hyper when held; swap `⌥`/`⌘` for PC keyboards; per-device rules ([ch. 5](#05-keyboard-shortcuts--input)).
+- **Hammerspoon**: `hs.hotkey.bind(hyper, "t", …)` for anything Lua can do ([ch. 21](#21-automation--scripting)).
 - **Conflict check**: `⌘Space` (Spotlight vs Raycast vs input source switch), `⌃Space` (input source vs editor completion), `⌘⇧Space` (Visual Intelligence vs Raycast defaults), `⌃←→` (Spaces vs terminal word jump — use `⌥←→` in the terminal instead), `F11` (Show Desktop vs debugger step) — disable the system side in Keyboard Shortcuts if an app needs the key.
 
 [↑ Back to top](#table-of-contents)
@@ -6356,205 +6356,205 @@ Cursor: same base, plus `⌘K` inline edit, `⌘L` chat, `⌘I` composer/agent. 
 
 Alphabetical. Bold terms are defined elsewhere in this list. Chapter references point to where the concept matters in practice.
 
-**Activation Lock** — Anti-theft tie between a Mac and the Apple Account that enabled Find My. A locked Mac can't be erased and reactivated without that account's credentials. Automatic when Find My is on. → [ch. 16](16-security-and-privacy.html)
+**Activation Lock** — Anti-theft tie between a Mac and the Apple Account that enabled Find My. A locked Mac can't be erased and reactivated without that account's credentials. Automatic when Find My is on. → [ch. 16](#16-security--privacy)
 
-**ad-hoc signing** — A code signature with no developer identity (`codesign -s -`). Apple silicon requires *every* executable to be signed at least ad-hoc; compilers do it automatically. Ad-hoc-signed apps trip **Gatekeeper** when downloaded. → [ch. 22](22-troubleshooting.html)
+**ad-hoc signing** — A code signature with no developer identity (`codesign -s -`). Apple silicon requires *every* executable to be signed at least ad-hoc; compilers do it automatically. Ad-hoc-signed apps trip **Gatekeeper** when downloaded. → [ch. 22](#22-troubleshooting)
 
-**AeroSpace** — Open-source i3-style tiling window manager for macOS that doesn't need Accessibility hacks or SIP changes. → [ch. 6](06-window-management.html)
+**AeroSpace** — Open-source i3-style tiling window manager for macOS that doesn't need Accessibility hacks or SIP changes. → [ch. 6](#06-window-management-spaces--displays)
 
-**agent (launch agent)** — A **launchd** job that runs as your user when you're logged in (`~/Library/LaunchAgents`). Compare **daemon**. → [ch. 21](21-automation-and-scripting.html)
+**agent (launch agent)** — A **launchd** job that runs as your user when you're logged in (`~/Library/LaunchAgents`). Compare **daemon**. → [ch. 21](#21-automation--scripting)
 
-**AirPlay Receiver** — macOS feature that listens on ports 5000 and 7000 and collides with dev servers. Turn off in AirDrop & Handoff settings. → [ch. 22](22-troubleshooting.html)
+**AirPlay Receiver** — macOS feature that listens on ports 5000 and 7000 and collides with dev servers. Turn off in AirDrop & Handoff settings. → [ch. 22](#22-troubleshooting)
 
-**APFS** — Apple File System (2017). Copy-on-write, snapshots, clones, native encryption, space-sharing volumes inside a **container**. Case-insensitive by default. → [ch. 17](17-backup-and-recovery.html), [ch. 18](18-performance-and-maintenance.html)
+**APFS** — Apple File System (2017). Copy-on-write, snapshots, clones, native encryption, space-sharing volumes inside a **container**. Case-insensitive by default. → [ch. 17](#17-backup--recovery), [ch. 18](#18-performance--maintenance)
 
 **Apple Account** — Formerly Apple ID. Your identity for iCloud, App Store, Find My, Activation Lock, and the FileVault recovery-key escrow option.
 
 **Apple Intelligence** — Apple's on-device + **Private Cloud Compute** AI features: Writing Tools, Siri answers in Spotlight, Shortcuts "Use Model" action, Visual Intelligence. Requires M1+ and 8 GB.
 
-**Apple silicon** — Apple's ARM64 system-on-chip family (M1–M6, A18 Pro in the MacBook Neo). **Unified memory**, integrated GPU/Neural Engine, no upgradeable RAM. macOS 27 runs *only* on Apple silicon. → [ch. 1](01-hardware-and-buying.html)
+**Apple silicon** — Apple's ARM64 system-on-chip family (M1–M6, A18 Pro in the MacBook Neo). **Unified memory**, integrated GPU/Neural Engine, no upgradeable RAM. macOS 27 runs *only* on Apple silicon. → [ch. 1](#01-hardware--buying-guide)
 
 **arm64 / aarch64** — The 64-bit ARM instruction set Apple silicon executes natively. Contrast **x86_64**. Also the Docker platform string `linux/arm64`.
 
-**Automator** — 2005-era visual automation app; mostly superseded by **Shortcuts**, still useful for Quick Actions and legacy `.workflow` files. → [ch. 21](21-automation-and-scripting.html)
+**Automator** — 2005-era visual automation app; mostly superseded by **Shortcuts**, still useful for Quick Actions and legacy `.workflow` files. → [ch. 21](#21-automation--scripting)
 
-**Brewfile** — A `brew bundle` manifest listing formulae, casks, `mas` apps, and VS Code extensions. → [ch. 8](08-homebrew.html), [Appendix B](appendix-b-brewfile.html)
+**Brewfile** — A `brew bundle` manifest listing formulae, casks, `mas` apps, and VS Code extensions. → [ch. 8](#08-homebrew), [Appendix B](#appendix-b--brewfile)
 
-**cask** — A Homebrew package that installs a GUI app (or font, or driver) rather than a CLI tool: `brew install --cask ghostty`. → [ch. 8](08-homebrew.html)
+**cask** — A Homebrew package that installs a GUI app (or font, or driver) rather than a CLI tool: `brew install --cask ghostty`. → [ch. 8](#08-homebrew)
 
 **Cellar** — Where Homebrew keeps installed formula versions (`/opt/homebrew/Cellar/<name>/<version>`), symlinked into `/opt/homebrew/bin`.
 
-**chezmoi / stow** — Dotfile managers. GNU Stow symlinks a repo's tree into `~`; chezmoi templates and encrypts per-machine. → [ch. 10](10-dotfiles-and-git.html)
+**chezmoi / stow** — Dotfile managers. GNU Stow symlinks a repo's tree into `~`; chezmoi templates and encrypts per-machine. → [ch. 10](#10-dotfiles--git)
 
-**CLT (Command Line Tools)** — Apple's ~1 GB package with `clang`, `git`, `make`, `lldb`, SDK headers; installed by `xcode-select --install`. Enough for most development without the 12 GB Xcode. → [ch. 7](07-command-line-tools-and-xcode.html)
+**CLT (Command Line Tools)** — Apple's ~1 GB package with `clang`, `git`, `make`, `lldb`, SDK headers; installed by `xcode-select --install`. Enough for most development without the 12 GB Xcode. → [ch. 7](#07-command-line-tools-xcode--the-toolchain)
 
-**Compose** — Docker's multi-container spec (`compose.yaml`). Apple's `container` tool doesn't support it; OrbStack and Docker Desktop do. → [ch. 13](13-containers-and-vms.html)
+**Compose** — Docker's multi-container spec (`compose.yaml`). Apple's `container` tool doesn't support it; OrbStack and Docker Desktop do. → [ch. 13](#13-containers--virtual-machines)
 
-**container (Apple)** — Apple's open-source `container` CLI (1.0 in 2025) that runs each Linux container in its own lightweight VM using the **Virtualization framework**. Fast and secure; no Compose, smaller ecosystem than Docker. → [ch. 13](13-containers-and-vms.html)
+**container (Apple)** — Apple's open-source `container` CLI (1.0 in 2025) that runs each Linux container in its own lightweight VM using the **Virtualization framework**. Fast and secure; no Compose, smaller ecosystem than Docker. → [ch. 13](#13-containers--virtual-machines)
 
 **container (APFS)** — The partition-level object inside which APFS volumes share space. `diskutil apfs list`.
 
 **Continuity / Handoff / Universal Control / Sidecar** — Apple's cross-device features: pick up tasks across devices, use one keyboard/mouse across a Mac and iPad, use an iPad as a display.
 
-**daemon (launch daemon)** — A **launchd** job that runs as root at boot, before any login (`/Library/LaunchDaemons`). → [ch. 21](21-automation-and-scripting.html)
+**daemon (launch daemon)** — A **launchd** job that runs as root at boot, before any login (`/Library/LaunchDaemons`). → [ch. 21](#21-automation--scripting)
 
-**`defaults`** — CLI for reading/writing preference **plists**: `defaults write com.apple.dock autohide -bool true`. → [ch. 3](03-system-settings.html), [Appendix A](appendix-a-bootstrap-script.html)
+**`defaults`** — CLI for reading/writing preference **plists**: `defaults write com.apple.dock autohide -bool true`. → [ch. 3](#03-system-settings-pane-by-pane), [Appendix A](#appendix-a--bootstrap-script)
 
-**DFU mode** — Device Firmware Update mode; lets a second Mac revive or restore an Apple-silicon Mac's firmware and recoveryOS over USB-C via Apple Configurator/Finder. → [ch. 22](22-troubleshooting.html)
+**DFU mode** — Device Firmware Update mode; lets a second Mac revive or restore an Apple-silicon Mac's firmware and recoveryOS over USB-C via Apple Configurator/Finder. → [ch. 22](#22-troubleshooting)
 
-**Dock** — The app launcher/switcher strip. Auto-hide it. → [ch. 4](04-finder-dock-spotlight.html)
+**Dock** — The app launcher/switcher strip. Auto-hide it. → [ch. 4](#04-finder-dock--spotlight)
 
-**dotfiles** — Your configuration files (`.zshrc`, `.gitconfig`, editor settings…), ideally in a Git repo with an idempotent installer. → [ch. 10](10-dotfiles-and-git.html)
+**dotfiles** — Your configuration files (`.zshrc`, `.gitconfig`, editor settings…), ideally in a Git repo with an idempotent installer. → [ch. 10](#10-dotfiles--git)
 
-**Electron** — Framework for building desktop apps from web tech; Slack, Discord, VS Code, Spotify, Notion. Memory-hungry (300–800 MB each). → [ch. 18](18-performance-and-maintenance.html)
+**Electron** — Framework for building desktop apps from web tech; Slack, Discord, VS Code, Spotify, Notion. Memory-hungry (300–800 MB each). → [ch. 18](#18-performance--maintenance)
 
-**Erase All Content and Settings** — One-click factory reset (System Settings → General → Transfer or Reset) that keeps macOS installed; much faster than reinstalling. → [ch. 22](22-troubleshooting.html)
+**Erase All Content and Settings** — One-click factory reset (System Settings → General → Transfer or Reset) that keeps macOS installed; much faster than reinstalling. → [ch. 22](#22-troubleshooting)
 
-**FileVault** — Full-disk encryption for the startup volume, keyed to your login password plus a recovery key (which macOS 26 can store in iCloud Keychain/Passwords). On Apple silicon it's nearly free in performance. Turn it on. → [ch. 16](16-security-and-privacy.html)
+**FileVault** — Full-disk encryption for the startup volume, keyed to your login password plus a recovery key (which macOS 26 can store in iCloud Keychain/Passwords). On Apple silicon it's nearly free in performance. Turn it on. → [ch. 16](#16-security--privacy)
 
-**File Provider** — The API cloud-storage apps (iCloud Drive, Dropbox, OneDrive, Google Drive) use for files-on-demand. Files can be "evicted" (cloud-only placeholders) — dangerous for Git repos. → [ch. 19](19-daily-driver-apps.html)
+**File Provider** — The API cloud-storage apps (iCloud Drive, Dropbox, OneDrive, Google Drive) use for files-on-demand. Files can be "evicted" (cloud-only placeholders) — dangerous for Git repos. → [ch. 19](#19-daily-driver-apps)
 
-**Finder** — The file manager. → [ch. 4](04-finder-dock-spotlight.html)
+**Finder** — The file manager. → [ch. 4](#04-finder-dock--spotlight)
 
-**Focus** — Per-context notification filtering modes (Do Not Disturb, Work, Study…), syncable across devices and usable as Shortcuts triggers. → [ch. 21](21-automation-and-scripting.html)
+**Focus** — Per-context notification filtering modes (Do Not Disturb, Work, Study…), syncable across devices and usable as Shortcuts triggers. → [ch. 21](#21-automation--scripting)
 
-**formula** — A Homebrew package definition for a CLI tool or library, built from source or installed as a prebuilt **bottle**. → [ch. 8](08-homebrew.html)
+**formula** — A Homebrew package definition for a CLI tool or library, built from source or installed as a prebuilt **bottle**. → [ch. 8](#08-homebrew)
 
-**Full Disk Access** — The **TCC** permission that lets an app (e.g., your terminal) read protected folders (Mail, Messages, Time Machine backups, other users). Granted per app in Privacy & Security. → [ch. 16](16-security-and-privacy.html)
+**Full Disk Access** — The **TCC** permission that lets an app (e.g., your terminal) read protected folders (Mail, Messages, Time Machine backups, other users). Granted per app in Privacy & Security. → [ch. 16](#16-security--privacy)
 
-**Gatekeeper** — The launch-time check that downloaded apps are signed by a known developer and **notarized**. macOS 26 removed the right-click-Open bypass; use Privacy & Security → Open Anyway. → [ch. 16](16-security-and-privacy.html)
+**Gatekeeper** — The launch-time check that downloaded apps are signed by a known developer and **notarized**. macOS 26 removed the right-click-Open bypass; use Privacy & Security → Open Anyway. → [ch. 16](#16-security--privacy)
 
-**Ghostty** — Fast, native (Swift/Zig) GPU terminal emulator with a plain-text config; this guide's default terminal. 1.3 as of September 2026. → [ch. 9](09-terminal-and-shell.html)
+**Ghostty** — Fast, native (Swift/Zig) GPU terminal emulator with a plain-text config; this guide's default terminal. 1.3 as of September 2026. → [ch. 9](#09-terminal--shell)
 
-**Golden Gate** — macOS 27 (ships 14 September 2026). Apple-silicon only; Liquid Glass intensity slider; Siri/AI in Spotlight; Rosetta removed from the default install. → [ch. 2](02-first-boot-and-migration.html)
+**Golden Gate** — macOS 27 (ships 14 September 2026). Apple-silicon only; Liquid Glass intensity slider; Siri/AI in Spotlight; Rosetta removed from the default install. → [ch. 2](#02-first-boot-setup-assistant--migration)
 
-**Hammerspoon** — Lua scripting bridge to macOS APIs for hotkeys, windows, and system events. → [ch. 21](21-automation-and-scripting.html)
+**Hammerspoon** — Lua scripting bridge to macOS APIs for hotkeys, windows, and system events. → [ch. 21](#21-automation--scripting)
 
-**Homebrew** — The de facto macOS package manager (`brew`), installed under `/opt/homebrew` on Apple silicon. Version 6.0 (2026) added tap trust prompts, `brew exec`, parallel bundle installs; Intel support is Tier 3. → [ch. 8](08-homebrew.html)
+**Homebrew** — The de facto macOS package manager (`brew`), installed under `/opt/homebrew` on Apple silicon. Version 6.0 (2026) added tap trust prompts, `brew exec`, parallel bundle installs; Intel support is Tier 3. → [ch. 8](#08-homebrew)
 
-**hyper key** — A single key (usually Caps Lock via Karabiner) that sends `⌃⌥⇧⌘` together, giving you a conflict-free modifier layer for your own shortcuts. → [ch. 5](05-keyboard-and-input.html)
+**hyper key** — A single key (usually Caps Lock via Karabiner) that sends `⌃⌥⇧⌘` together, giving you a conflict-free modifier layer for your own shortcuts. → [ch. 5](#05-keyboard-shortcuts--input)
 
-**iCloud Drive** — Apple's file sync. "Desktop & Documents Folders" sync is convenient and risky for developers. → [ch. 2](02-first-boot-and-migration.html)
+**iCloud Drive** — Apple's file sync. "Desktop & Documents Folders" sync is convenient and risky for developers. → [ch. 2](#02-first-boot-setup-assistant--migration)
 
 **iCloud Keychain** — Encrypted sync of passwords, passkeys, Wi-Fi passwords, and (since macOS 26) the FileVault recovery key; surfaced in the **Passwords** app.
 
-**idempotent** — A script you can run repeatedly with the same end result — the property every bootstrap and dotfiles installer should have. → [Appendix A](appendix-a-bootstrap-script.html)
+**idempotent** — A script you can run repeatedly with the same end result — the property every bootstrap and dotfiles installer should have. → [Appendix A](#appendix-a--bootstrap-script)
 
-**JXA** — JavaScript for Automation; the JavaScript face of Apple Events, alternative to AppleScript. Run via `osascript -l JavaScript`. → [ch. 21](21-automation-and-scripting.html)
+**JXA** — JavaScript for Automation; the JavaScript face of Apple Events, alternative to AppleScript. Run via `osascript -l JavaScript`. → [ch. 21](#21-automation--scripting)
 
-**Karabiner-Elements** — Low-level keyboard remapper (driver extension). Caps Lock → Escape/Control, hyper key, per-device profiles. → [ch. 5](05-keyboard-and-input.html)
+**Karabiner-Elements** — Low-level keyboard remapper (driver extension). Caps Lock → Escape/Control, hyper key, per-device profiles. → [ch. 5](#05-keyboard-shortcuts--input)
 
-**kernel extension (kext)** — Legacy third-party kernel code. Effectively dead on Apple silicon (needs Reduced Security); modern software uses **system extensions**. A kext requirement is a red flag. → [ch. 16](16-security-and-privacy.html)
+**kernel extension (kext)** — Legacy third-party kernel code. Effectively dead on Apple silicon (needs Reduced Security); modern software uses **system extensions**. A kext requirement is a red flag. → [ch. 16](#16-security--privacy)
 
-**Keychain** — macOS's encrypted credential store (`security` CLI, Keychain Access app). Where SSH passphrases, Git tokens, and API keys should live. → [ch. 21](21-automation-and-scripting.html)
+**Keychain** — macOS's encrypted credential store (`security` CLI, Keychain Access app). Where SSH passphrases, Git tokens, and API keys should live. → [ch. 21](#21-automation--scripting)
 
-**launchd** — macOS's init system and job scheduler; replaces cron/systemd. Jobs are **plists** in LaunchAgents/LaunchDaemons folders, managed with `launchctl`. → [ch. 21](21-automation-and-scripting.html)
+**launchd** — macOS's init system and job scheduler; replaces cron/systemd. Jobs are **plists** in LaunchAgents/LaunchDaemons folders, managed with `launchctl`. → [ch. 21](#21-automation--scripting)
 
-**Liquid Glass** — The translucent design language introduced in macOS 26 Tahoe; macOS 27 adds an intensity slider. Reduce Transparency in Accessibility if it hurts readability. → [ch. 3](03-system-settings.html)
+**Liquid Glass** — The translucent design language introduced in macOS 26 Tahoe; macOS 27 adds an intensity slider. Reduce Transparency in Accessibility if it hurts readability. → [ch. 3](#03-system-settings-pane-by-pane)
 
-**LLDB** — Apple's debugger (LLVM). Use it instead of GDB on macOS. → [ch. 20](20-cs-student-specific.html)
+**LLDB** — Apple's debugger (LLVM). Use it instead of GDB on macOS. → [ch. 20](#20-cs-student-specific)
 
-**Lockdown Mode** — Extreme security mode for people at risk of targeted attack; disables many features. Not for general use. → [ch. 16](16-security-and-privacy.html)
+**Lockdown Mode** — Extreme security mode for people at risk of targeted attack; disables many features. Not for general use. → [ch. 16](#16-security--privacy)
 
-**Login Items & Extensions** — System Settings pane listing apps that open at login and background agents you can toggle. Audit it. → [ch. 18](18-performance-and-maintenance.html)
+**Login Items & Extensions** — System Settings pane listing apps that open at login and background agents you can toggle. Audit it. → [ch. 18](#18-performance--maintenance)
 
-**`mas`** — CLI for the Mac App Store; used in Brewfiles for App Store apps. → [Appendix B](appendix-b-brewfile.html)
+**`mas`** — CLI for the Mac App Store; used in Brewfiles for App Store apps. → [Appendix B](#appendix-b--brewfile)
 
-**Memory Pressure** — Activity Monitor's graph of how hard macOS is working to keep memory available. Green fine; sustained yellow/red = you need more RAM or fewer apps. More meaningful than "Memory Used". → [ch. 18](18-performance-and-maintenance.html)
+**Memory Pressure** — Activity Monitor's graph of how hard macOS is working to keep memory available. Green fine; sustained yellow/red = you need more RAM or fewer apps. More meaningful than "Memory Used". → [ch. 18](#18-performance--maintenance)
 
-**Migration Assistant** — Apple's tool for moving accounts, apps, and data from an old Mac/backup/PC. Convenient, brings cruft. → [ch. 2](02-first-boot-and-migration.html)
+**Migration Assistant** — Apple's tool for moving accounts, apps, and data from an old Mac/backup/PC. Convenient, brings cruft. → [ch. 2](#02-first-boot-setup-assistant--migration)
 
-**mise** — Polyglot runtime version manager (Node, Python, Java, Go, Rust, Ruby…) replacing nvm/pyenv/rbenv/asdf; also tasks and env vars. → [ch. 11](11-languages-and-runtimes.html)
+**mise** — Polyglot runtime version manager (Node, Python, Java, Go, Rust, Ruby…) replacing nvm/pyenv/rbenv/asdf; also tasks and env vars. → [ch. 11](#11-languages--runtimes)
 
-**Mission Control** — Overview of all windows and **Spaces**. `⌃↑`. → [ch. 6](06-window-management.html)
+**Mission Control** — Overview of all windows and **Spaces**. `⌃↑`. → [ch. 6](#06-window-management-spaces--displays)
 
-**MLX** — Apple's array/ML framework optimized for Apple silicon's unified memory; the fastest way to run LLMs locally on a Mac. → [ch. 20](20-cs-student-specific.html)
+**MLX** — Apple's array/ML framework optimized for Apple silicon's unified memory; the fastest way to run LLMs locally on a Mac. → [ch. 20](#20-cs-student-specific)
 
-**MPS** — Metal Performance Shaders; PyTorch's GPU backend on Apple silicon (`device="mps"`). Not CUDA. → [ch. 20](20-cs-student-specific.html)
+**MPS** — Metal Performance Shaders; PyTorch's GPU backend on Apple silicon (`device="mps"`). Not CUDA. → [ch. 20](#20-cs-student-specific)
 
-**Nerd Font** — A monospace font patched with thousands of icons (Powerline, devicons) that prompts like Starship and tools like eza use. → [ch. 9](09-terminal-and-shell.html)
+**Nerd Font** — A monospace font patched with thousands of icons (Powerline, devicons) that prompts like Starship and tools like eza use. → [ch. 9](#09-terminal--shell)
 
-**notarization** — Apple's automated malware scan of developer-signed apps; required for **Gatekeeper** to allow a download without warnings. → [ch. 16](16-security-and-privacy.html)
+**notarization** — Apple's automated malware scan of developer-signed apps; required for **Gatekeeper** to allow a download without warnings. → [ch. 16](#16-security--privacy)
 
-**OrbStack** — Fast, light Docker-compatible container runtime and Linux VM manager for macOS; this guide's default. Free for personal use. → [ch. 13](13-containers-and-vms.html)
+**OrbStack** — Fast, light Docker-compatible container runtime and Linux VM manager for macOS; this guide's default. Free for personal use. → [ch. 13](#13-containers--virtual-machines)
 
-**Optimized Battery Charging / Charge Limit** — Battery-health features: the first learns your schedule and holds at 80%; the second (macOS 26.4+) caps at 80% always. → [ch. 18](18-performance-and-maintenance.html)
+**Optimized Battery Charging / Charge Limit** — Battery-health features: the first learns your schedule and holds at 80%; the second (macOS 26.4+) caps at 80% always. → [ch. 18](#18-performance--maintenance)
 
-**passkey** — Phishing-resistant public-key login credential synced via iCloud Keychain (or a password manager), replacing passwords on supporting sites. → [ch. 16](16-security-and-privacy.html)
+**passkey** — Phishing-resistant public-key login credential synced via iCloud Keychain (or a password manager), replacing passwords on supporting sites. → [ch. 16](#16-security--privacy)
 
-**Passwords app** — Apple's built-in password manager (macOS 15+) with passkeys, TOTP, shared groups, and a Windows/Chrome extension. → [ch. 19](19-daily-driver-apps.html)
+**Passwords app** — Apple's built-in password manager (macOS 15+) with passkeys, TOTP, shared groups, and a Windows/Chrome extension. → [ch. 19](#19-daily-driver-apps)
 
-**PATH** — The ordered list of directories the shell searches for commands. `/opt/homebrew/bin` must come before `/usr/bin`. Set in `~/.zprofile`. → [ch. 9](09-terminal-and-shell.html), [ch. 22](22-troubleshooting.html)
+**PATH** — The ordered list of directories the shell searches for commands. `/opt/homebrew/bin` must come before `/usr/bin`. Set in `~/.zprofile`. → [ch. 9](#09-terminal--shell), [ch. 22](#22-troubleshooting)
 
-**plist** — Property list; XML or binary key–value file used for preferences and launchd jobs. Inspect with `plutil -p`, edit with `defaults`. → [ch. 3](03-system-settings.html)
+**plist** — Property list; XML or binary key–value file used for preferences and launchd jobs. Inspect with `plutil -p`, edit with `defaults`. → [ch. 3](#03-system-settings-pane-by-pane)
 
 **Private Cloud Compute** — Apple's server-side AI processing with verifiable privacy guarantees, used when a request is too large for on-device models.
 
 **Private Relay** — iCloud+ feature that proxies Safari traffic through two hops to hide IP and DNS from sites and your ISP.
 
-**purgeable space** — Storage macOS can reclaim on demand (caches, local snapshots, evicted cloud files); counted as "available" by Finder but not by `df`. → [ch. 18](18-performance-and-maintenance.html)
+**purgeable space** — Storage macOS can reclaim on demand (caches, local snapshots, evicted cloud files); counted as "available" by Finder but not by `df`. → [ch. 18](#18-performance--maintenance)
 
-**Quick Action** — A Shortcut or Automator workflow exposed in Finder's right-click menu and the Touch Bar/Services menu. → [ch. 21](21-automation-and-scripting.html)
+**Quick Action** — A Shortcut or Automator workflow exposed in Finder's right-click menu and the Touch Bar/Services menu. → [ch. 21](#21-automation--scripting)
 
-**Quick Look** — Space-bar file preview in Finder; extensible with plugins (Markdown, source code, JSON). → [ch. 4](04-finder-dock-spotlight.html)
+**Quick Look** — Space-bar file preview in Finder; extensible with plugins (Markdown, source code, JSON). → [ch. 4](#04-finder-dock--spotlight)
 
-**Raycast** — Extensible launcher with clipboard history, window management, snippets, and an extension store; the common Spotlight replacement. → [ch. 19](19-daily-driver-apps.html)
+**Raycast** — Extensible launcher with clipboard history, window management, snippets, and an extension store; the common Spotlight replacement. → [ch. 19](#19-daily-driver-apps)
 
-**Recovery (macOS Recovery / recoveryOS)** — The hidden boot environment (hold power → Options) with Disk Utility, Reinstall macOS, Time Machine restore, Terminal, Startup Security Utility. → [ch. 22](22-troubleshooting.html)
+**Recovery (macOS Recovery / recoveryOS)** — The hidden boot environment (hold power → Options) with Disk Utility, Reinstall macOS, Time Machine restore, Terminal, Startup Security Utility. → [ch. 22](#22-troubleshooting)
 
-**Rosetta 2** — Apple's translation layer that runs **x86_64** Mac binaries (and, via OrbStack/Docker, x86 Linux containers) on Apple silicon. Not installed by default on macOS 27 (`softwareupdate --install-rosetta`); removed entirely in macOS 28. → [ch. 2](02-first-boot-and-migration.html)
+**Rosetta 2** — Apple's translation layer that runs **x86_64** Mac binaries (and, via OrbStack/Docker, x86 Linux containers) on Apple silicon. Not installed by default on macOS 27 (`softwareupdate --install-rosetta`); removed entirely in macOS 28. → [ch. 2](#02-first-boot-setup-assistant--migration)
 
-**Safe Mode** — Boot with only Apple extensions and no login items (hold ⇧ when choosing the startup disk). The fastest "is it my software or the OS?" test. → [ch. 22](22-troubleshooting.html)
+**Safe Mode** — Boot with only Apple extensions and no login items (hold ⇧ when choosing the startup disk). The fastest "is it my software or the OS?" test. → [ch. 22](#22-troubleshooting)
 
-**sealed system volume (SSV)** — The read-only, cryptographically signed volume holding macOS itself (`/System`, `/usr/bin`). You can't modify it; install into `/opt`, `/usr/local`, or `~`. → [ch. 16](16-security-and-privacy.html)
+**sealed system volume (SSV)** — The read-only, cryptographically signed volume holding macOS itself (`/System`, `/usr/bin`). You can't modify it; install into `/opt`, `/usr/local`, or `~`. → [ch. 16](#16-security--privacy)
 
-**Shortcuts** — Apple's cross-device visual automation app; on macOS 26 gained triggers (time, app, folder, Wi-Fi, Focus) and an AI "Use Model" action. Runnable from the shell with `shortcuts run`. → [ch. 21](21-automation-and-scripting.html)
+**Shortcuts** — Apple's cross-device visual automation app; on macOS 26 gained triggers (time, app, folder, Wi-Fi, Focus) and an AI "Use Model" action. Runnable from the shell with `shortcuts run`. → [ch. 21](#21-automation--scripting)
 
-**SIP (System Integrity Protection)** — Kernel-enforced protection of system files and processes even from root. Leave it enabled. `csrutil status`. → [ch. 16](16-security-and-privacy.html)
+**SIP (System Integrity Protection)** — Kernel-enforced protection of system files and processes even from root. Leave it enabled. `csrutil status`. → [ch. 16](#16-security--privacy)
 
-**Spaces** — Virtual desktops; swipe or `⌃←→`. Assign apps per Space; turn off automatic reordering. → [ch. 6](06-window-management.html)
+**Spaces** — Virtual desktops; swipe or `⌃←→`. Assign apps per Space; turn off automatic reordering. → [ch. 6](#06-window-management-spaces--displays)
 
-**Spotlight** — System search and launcher (`⌘Space`). macOS 26 added `⌘1–4` filtered views, clipboard history, Actions, and AI answers. Index managed by `mds`; rebuild with `mdutil -E /`. → [ch. 4](04-finder-dock-spotlight.html)
+**Spotlight** — System search and launcher (`⌘Space`). macOS 26 added `⌘1–4` filtered views, clipboard history, Actions, and AI answers. Index managed by `mds`; rebuild with `mdutil -E /`. → [ch. 4](#04-finder-dock--spotlight)
 
-**Stage Manager** — Optional window-grouping mode with recent apps in a side strip. Off by default in this guide. → [ch. 6](06-window-management.html)
+**Stage Manager** — Optional window-grouping mode with recent apps in a side strip. Off by default in this guide. → [ch. 6](#06-window-management-spaces--displays)
 
-**Starship** — Fast, cross-shell prompt configured in `starship.toml`. → [ch. 9](09-terminal-and-shell.html)
+**Starship** — Fast, cross-shell prompt configured in `starship.toml`. → [ch. 9](#09-terminal--shell)
 
-**Stolen Device Protection** — macOS 26.4+ feature requiring biometrics (no password fallback) and a security delay for sensitive changes when the Mac is away from familiar locations. → [ch. 16](16-security-and-privacy.html)
+**Stolen Device Protection** — macOS 26.4+ feature requiring biometrics (no password fallback) and a security delay for sensitive changes when the Mac is away from familiar locations. → [ch. 16](#16-security--privacy)
 
-**system extension** — Modern, user-space replacement for **kexts**: network extensions (VPNs, LuLu), endpoint security (antivirus), driver extensions (Karabiner). Listed by `systemextensionsctl list`. → [ch. 16](16-security-and-privacy.html)
+**system extension** — Modern, user-space replacement for **kexts**: network extensions (VPNs, LuLu), endpoint security (antivirus), driver extensions (Karabiner). Listed by `systemextensionsctl list`. → [ch. 16](#16-security--privacy)
 
-**System Data** — The Storage pane's catch-all category (caches, snapshots, container images, simulators). Legitimately 30–100 GB on a dev Mac. → [ch. 18](18-performance-and-maintenance.html)
+**System Data** — The Storage pane's catch-all category (caches, snapshots, container images, simulators). Legitimately 30–100 GB on a dev Mac. → [ch. 18](#18-performance--maintenance)
 
-**Tahoe** — macOS 26 (2025–26). Liquid Glass, new Spotlight, Shortcuts triggers, the last release supporting a few Intel Macs. 26.6 is current as of September 2026. → [ch. 2](02-first-boot-and-migration.html)
+**Tahoe** — macOS 26 (2025–26). Liquid Glass, new Spotlight, Shortcuts triggers, the last release supporting a few Intel Macs. 26.6 is current as of September 2026. → [ch. 2](#02-first-boot-setup-assistant--migration)
 
-**tap** — A third-party Homebrew repository (`brew tap owner/repo`). Homebrew 6 asks you to trust a tap before installing from it. → [ch. 8](08-homebrew.html)
+**tap** — A third-party Homebrew repository (`brew tap owner/repo`). Homebrew 6 asks you to trust a tap before installing from it. → [ch. 8](#08-homebrew)
 
-**TCC (Transparency, Consent, and Control)** — The permissions system behind Privacy & Security prompts (Camera, Full Disk Access, Accessibility, Automation, Screen Recording…). `tccutil reset` clears grants. → [ch. 16](16-security-and-privacy.html), [ch. 22](22-troubleshooting.html)
+**TCC (Transparency, Consent, and Control)** — The permissions system behind Privacy & Security prompts (Camera, Full Disk Access, Accessibility, Automation, Screen Recording…). `tccutil reset` clears grants. → [ch. 16](#16-security--privacy), [ch. 22](#22-troubleshooting)
 
-**Thunderbolt / USB4 / USB-C** — The Mac's ports. Same connector, different capabilities: TB4/5 = 40–80 Gbps, displays, PCIe; USB-C cables may be USB 2.0 only with no video. → [ch. 1](01-hardware-and-buying.html), [ch. 22](22-troubleshooting.html)
+**Thunderbolt / USB4 / USB-C** — The Mac's ports. Same connector, different capabilities: TB4/5 = 40–80 Gbps, displays, PCIe; USB-C cables may be USB 2.0 only with no video. → [ch. 1](#01-hardware--buying-guide), [ch. 22](#22-troubleshooting)
 
-**Time Machine** — Apple's versioned backup to an external disk or network share; hourly local **snapshots** when the disk is away. → [ch. 17](17-backup-and-recovery.html)
+**Time Machine** — Apple's versioned backup to an external disk or network share; hourly local **snapshots** when the disk is away. → [ch. 17](#17-backup--recovery)
 
-**Touch ID for sudo** — Configured via `/etc/pam.d/sudo_local` so terminal `sudo` accepts a fingerprint. → [ch. 9](09-terminal-and-shell.html)
+**Touch ID for sudo** — Configured via `/etc/pam.d/sudo_local` so terminal `sudo` accepts a fingerprint. → [ch. 9](#09-terminal--shell)
 
-**unified log** — The system-wide structured log (`log show`, `log stream`, Console app) replacing text log files. → [ch. 22](22-troubleshooting.html)
+**unified log** — The system-wide structured log (`log show`, `log stream`, Console app) replacing text log files. → [ch. 22](#22-troubleshooting)
 
-**unified memory** — Apple silicon's single memory pool shared by CPU, GPU, and Neural Engine. Why "Memory Used" looks high and why RAM size matters for local ML. → [ch. 1](01-hardware-and-buying.html), [ch. 18](18-performance-and-maintenance.html)
+**unified memory** — Apple silicon's single memory pool shared by CPU, GPU, and Neural Engine. Why "Memory Used" looks high and why RAM size matters for local ML. → [ch. 1](#01-hardware--buying-guide), [ch. 18](#18-performance--maintenance)
 
-**uv** — Astral's fast Python package/project/interpreter manager replacing pip, venv, pipx, pyenv, and poetry for most uses. → [ch. 11](11-languages-and-runtimes.html)
+**uv** — Astral's fast Python package/project/interpreter manager replacing pip, venv, pipx, pyenv, and poetry for most uses. → [ch. 11](#11-languages--runtimes)
 
-**Virtualization framework** — Apple's built-in hypervisor API used by OrbStack, UTM (Apple mode), Docker Desktop, `container`, Parallels, and VMware Fusion for fast arm64 VMs. → [ch. 13](13-containers-and-vms.html)
+**Virtualization framework** — Apple's built-in hypervisor API used by OrbStack, UTM (Apple mode), Docker Desktop, `container`, Parallels, and VMware Fusion for fast arm64 VMs. → [ch. 13](#13-containers--virtual-machines)
 
 **Visual Intelligence** — macOS 27 screen-understanding feature (`⌘⇧Space`) that identifies and acts on what's on screen.
 
-**x86_64 / amd64** — The Intel/AMD 64-bit instruction set. Needs **Rosetta 2** on a Mac; `linux/amd64` containers are translated. Gone entirely with macOS 28. → [ch. 2](02-first-boot-and-migration.html), [ch. 13](13-containers-and-vms.html)
+**x86_64 / amd64** — The Intel/AMD 64-bit instruction set. Needs **Rosetta 2** on a Mac; `linux/amd64` containers are translated. Gone entirely with macOS 28. → [ch. 2](#02-first-boot-setup-assistant--migration), [ch. 13](#13-containers--virtual-machines)
 
-**Xcode** — Apple's IDE and SDKs (12+ GB); required for iOS/macOS app development, optional otherwise. Manage versions with `xcodes`. → [ch. 7](07-command-line-tools-and-xcode.html)
+**Xcode** — Apple's IDE and SDKs (12+ GB); required for iOS/macOS app development, optional otherwise. Manage versions with `xcodes`. → [ch. 7](#07-command-line-tools-xcode--the-toolchain)
 
-**XProtect** — Apple's built-in, silently updated malware scanner and remediation (XProtect Remediator). One reason third-party antivirus is unnecessary for most people. → [ch. 16](16-security-and-privacy.html)
+**XProtect** — Apple's built-in, silently updated malware scanner and remediation (XProtect Remediator). One reason third-party antivirus is unnecessary for most people. → [ch. 16](#16-security--privacy)
 
-**zsh** — The default shell since Catalina. Config order: `.zshenv` → `.zprofile` (login) → `.zshrc` (interactive). → [ch. 9](09-terminal-and-shell.html)
+**zsh** — The default shell since Catalina. Config order: `.zshenv` → `.zprofile` (login) → `.zshrc` (interactive). → [ch. 9](#09-terminal--shell)
 
 [↑ Back to top](#table-of-contents)
 
@@ -6573,11 +6573,11 @@ Working notes from the research pass live in the repo's [`research/`](https://gi
 | macOS release notes (developer) | developer.apple.com/documentation/macos-release-notes — every 26.x / 27 build, with known issues |
 | macOS user guide | support.apple.com/guide/mac-help — System Settings panes, Spotlight, Finder, Time Machine, Shortcuts |
 | Security releases and CVE lists | support.apple.com/100100 (Apple security releases) — what each update fixed; the 26.6 entry lists 155 CVEs |
-| Apple Platform Security Guide | support.apple.com/guide/security — FileVault, Secure Enclave, Gatekeeper, SIP, sealed system volume, Activation Lock; the authoritative reference behind [ch. 16](16-security-and-privacy.html) |
+| Apple Platform Security Guide | support.apple.com/guide/security — FileVault, Secure Enclave, Gatekeeper, SIP, sealed system volume, Activation Lock; the authoritative reference behind [ch. 16](#16-security--privacy) |
 | Apple Platform Deployment | support.apple.com/guide/deployment — MDM-era detail on `defaults`, profiles, startup security, DFU revive |
 | Rosetta 2 | support.apple.com/102527 — install instructions and the macOS 27/28 removal notice |
 | Spotlight keyboard shortcuts | support.apple.com/guide/mac-help/mh26783 — the `⌘1`–`⌘4` views and quick keys |
-| Mac keyboard shortcuts | support.apple.com/102650 — the canonical list behind [Appendix C](appendix-c-keyboard-shortcuts.html) |
+| Mac keyboard shortcuts | support.apple.com/102650 — the canonical list behind [Appendix C](#appendix-c--keyboard-shortcuts) |
 | Startup key combinations (Apple silicon) | support.apple.com/102603 — hold-power options, Safe Mode, Diagnostics |
 | Revive or restore with Apple Configurator | support.apple.com/108900 — DFU procedure per model |
 | Apple Diagnostics reference codes | support.apple.com/102550 |
@@ -6619,7 +6619,7 @@ Working notes from the research pass live in the repo's [`research/`](https://gi
 | VS Code | code.visualstudio.com/docs; code.visualstudio.com/updates (monthly); keyboard reference PDF (macOS) |
 | Cursor / Zed / JetBrains | docs.cursor.com; zed.dev/docs; jetbrains.com/help; jetbrains.com/community/education (free student licenses) |
 | GitHub Copilot | docs.github.com/copilot; education.github.com/pack (Student Developer Pack terms) |
-| Stack Overflow Developer Survey | survey.stackoverflow.co — the 2026 edition is the source for editor share figures quoted in [ch. 12](12-editors-and-ides.html) |
+| Stack Overflow Developer Survey | survey.stackoverflow.co — the 2026 edition is the source for editor share figures quoted in [ch. 12](#12-editors-ides--ai-coding-tools) |
 | OrbStack | docs.orbstack.dev — Docker, Linux machines, Rosetta, pricing/licensing |
 | Docker Desktop | docs.docker.com/desktop/setup/install/mac-install; docker.com/pricing (subscription tiers) |
 | Podman / Colima / Lima | podman.io/docs; github.com/abiosoft/colima; lima-vm.io |
@@ -6641,18 +6641,18 @@ Working notes from the research pass live in the repo's [`research/`](https://gi
 ### Community references worth trusting
 
 - **Mr. Macintosh** (mrmacintosh.com) — meticulous tracking of every macOS build, installer download links, and update quirks; the first place to look when an update misbehaves.
-- **Howard Oakley, The Eclectic Light Company** (eclecticlight.co) — deep, tested explanations of APFS, Time Machine, XProtect, the unified log, Apple silicon boot and security; Oakley's free utilities (Mints, Silent Knight, T2M2) are referenced in [ch. 17](17-backup-and-recovery.html) and [ch. 22](22-troubleshooting.html).
-- **Six Colors** (sixcolors.com) and **Daring Fireball** (daringfireball.net) — informed commentary on Apple releases; the Six Colors FileVault/recovery-key write-up informed [ch. 16](16-security-and-privacy.html).
+- **Howard Oakley, The Eclectic Light Company** (eclecticlight.co) — deep, tested explanations of APFS, Time Machine, XProtect, the unified log, Apple silicon boot and security; Oakley's free utilities (Mints, Silent Knight, T2M2) are referenced in [ch. 17](#17-backup--recovery) and [ch. 22](#22-troubleshooting).
+- **Six Colors** (sixcolors.com) and **Daring Fireball** (daringfireball.net) — informed commentary on Apple releases; the Six Colors FileVault/recovery-key write-up informed [ch. 16](#16-security--privacy).
 - **MacRumors** (macrumors.com) and **9to5Mac** (9to5mac.com) — release roundups and hardware buyer's guides (macrumors.com/roundup); good for "what changed in 26.x" summaries and the MacBook Neo/M5/M6 launch coverage.
 - **Michael Tsai's blog** (mjtsai.com) — link roundups on macOS developer and security issues, with the discussion that follows each change (Gatekeeper's right-click removal, TCC changes, Rosetta's retirement).
-- **ERNW macOS hardening guide** (github.com/ernw/hardening) and the **macOS Security and Privacy Guide** (github.com/drduh/macOS-Security-and-Privacy-Guide) — the two community hardening references [ch. 16](16-security-and-privacy.html) draws from and deliberately trims for a daily-driver machine.
+- **ERNW macOS hardening guide** (github.com/ernw/hardening) and the **macOS Security and Privacy Guide** (github.com/drduh/macOS-Security-and-Privacy-Guide) — the two community hardening references [ch. 16](#16-security--privacy) draws from and deliberately trims for a daily-driver machine.
 - **Apple Stack Exchange** (apple.stackexchange.com) and **Ask Different** — the searchable Q&A corpus for "why does macOS do X"; look for answers with `man` page citations.
 - **awesome-mac** (github.com/jaywcjlove/awesome-mac) and **Awesome macOS Command Line** (github.com/herrbischoff/awesome-macos-command-line) — exhaustive app and `defaults` lists; the latter is the best index of `defaults write` keys.
 - **macos-defaults.com** — visual, per-key documentation of `defaults write` settings with screenshots of the effect.
-- **Mathias Bynens's `.macos`** (github.com/mathiasbynens/dotfiles) — the ancestor of every macOS defaults script, including [Appendix A](appendix-a-bootstrap-script.html)'s; many keys are now obsolete, so treat it as history.
+- **Mathias Bynens's `.macos`** (github.com/mathiasbynens/dotfiles) — the ancestor of every macOS defaults script, including [Appendix A](#appendix-a--bootstrap-script)'s; many keys are now obsolete, so treat it as history.
 - **launchd.info** — the friendliest reference for `launchd.plist` keys.
 - **The Arch Wiki** (wiki.archlinux.org) — for anything that's really about zsh, tmux, Git, SSH, or Neovim, it's the clearest documentation on the internet regardless of OS.
-- **Julia Evans's zines** (wizardzines.com) — Git, the shell, DNS, and networking explained better than anywhere else; recommended reading in [ch. 20](20-cs-student-specific.html).
+- **Julia Evans's zines** (wizardzines.com) — Git, the shell, DNS, and networking explained better than anywhere else; recommended reading in [ch. 20](#20-cs-student-specific).
 - **The Missing Semester of Your CS Education** (missing.csail.mit.edu) — MIT's course on the shell, editors, Git, debugging, and metaprogramming; the natural companion to Part III of this guide.
 - **r/macapps**, **r/MacOS**, **r/macsysadmin**, **MacAdmins Slack** (macadmins.org) — where practical fixes surface first, especially for enterprise/university-managed Macs.
 

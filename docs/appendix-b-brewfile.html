@@ -72,7 +72,7 @@
   </aside>
   <main id="content" class="content">
     <article class="prose">
-<h1 id="appendix-b-brewfile">Appendix B — Brewfile</h1>
+<h1 id="appendix-b--brewfile">Appendix B — Brewfile</h1>
 <p><code>brew bundle</code> reads a Ruby-flavoured manifest and installs everything in it — formulae, casks, Mac App Store apps (via <code>mas</code>), and VS Code extensions. It is the single most useful file in a dotfiles repo: the whole software side of a Mac in 300 lines, reproducible with one command. <a href="08-homebrew.html">Chapter 8</a> explains Homebrew itself; this appendix is the manifest.</p>
 <div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew bundle --file=scripts/Brewfile          # install what's listed (skips what's already there)
 brew bundle check --file=scripts/Brewfile    # what's missing?

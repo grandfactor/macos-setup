@@ -72,7 +72,7 @@
   </aside>
   <main id="content" class="content">
     <article class="prose">
-<h1 id="dotfiles-git">Dotfiles &amp; Git</h1>
+<h1 id="dotfiles--git">Dotfiles &amp; Git</h1>
 <p>Everything you configured in the last three chapters lives in text files. Put them in a Git repository and a new Mac — or a reset one — goes from Setup Assistant to <em>your</em> environment in twenty minutes. This chapter also sets up Git itself the way a working engineer has it, because the defaults are from 2005.</p>
 <h2 id="what-counts-as-dotfiles">What counts as dotfiles<a class="anchor" href="#what-counts-as-dotfiles" aria-label="Permalink">#</a></h2>
 <p>Anything under <code>~</code> that starts with a <code>.</code>, plus the modern <code>~/.config/*</code> tree:</p>
@@ -105,7 +105,7 @@ chezmoi cd &amp;&amp; git add -A &amp;&amp; git commit -m "…" &amp;&amp; git p
 # new machine — one line, including running your install scripts:
 sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply you</code></pre></div>
 <p>A secrets template line: <code>token = {{ onepasswordRead "op://Private/GitHub/token" }}</code> — chezmoi calls the 1Password CLI at apply time. Machine-specific data lives in <code>~/.config/chezmoi/chezmoi.toml</code> (<code>[data] email = "…"</code>, <code>work = true</code>).</p>
-<h3 id="3-gnu-stow-yadm-nix-home-manager">3. GNU Stow / yadm / Nix Home Manager<a class="anchor" href="#3-gnu-stow-yadm-nix-home-manager" aria-label="Permalink">#</a></h3>
+<h3 id="3-gnu-stow--yadm--nix-home-manager">3. GNU Stow / yadm / Nix Home Manager<a class="anchor" href="#3-gnu-stow--yadm--nix-home-manager" aria-label="Permalink">#</a></h3>
 <ul>
 <li><strong>Stow</strong> (<code>brew install stow</code>): keep <code>~/dotfiles/zsh/.zshrc</code>, <code>~/dotfiles/ghostty/.config/ghostty/config</code>, run <code>stow zsh ghostty</code> to symlink them into <code>~</code>. Simple, transparent, no templating. Very popular.</li>
 <li><strong>yadm</strong>: the bare-repo trick with templating and encryption bolted on.</li>
@@ -312,7 +312,7 @@ layout python                  # or `use mise` / `use flake` (nix) — activates
 <li class="lvl2"><a href="#three-ways-to-manage-them">Three ways to manage them</a></li>
 <li class="lvl3"><a href="#1-the-bare-repo-trick-zero-tools">1. The bare-repo trick (zero tools)</a></li>
 <li class="lvl3"><a href="#2-chezmoi-recommended-for-more-than-one-machine">2. chezmoi (recommended for more than one machine)</a></li>
-<li class="lvl3"><a href="#3-gnu-stow-yadm-nix-home-manager">3. GNU Stow / yadm / Nix Home Manager</a></li>
+<li class="lvl3"><a href="#3-gnu-stow--yadm--nix-home-manager">3. GNU Stow / yadm / Nix Home Manager</a></li>
 <li class="lvl2"><a href="#repository-layout-and-bootstrap">Repository layout and bootstrap</a></li>
 <li class="lvl2"><a href="#git-configured-properly">Git, configured properly</a></li>
 <li class="lvl2"><a href="#github-cli">GitHub CLI</a></li>

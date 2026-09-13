@@ -72,9 +72,9 @@
   </aside>
   <main id="content" class="content">
     <article class="prose">
-<h1 id="command-line-tools-xcode-the-toolchain">Command Line Tools, Xcode &amp; the toolchain</h1>
+<h1 id="command-line-tools-xcode--the-toolchain">Command Line Tools, Xcode &amp; the toolchain</h1>
 <p>Every compiler, <code>git</code>, <code>make</code>, and the system SDK on macOS come from Apple's developer tools. You have two ways to get them, and the right choice depends on whether you will ever build an iOS/macOS app.</p>
-<h2 id="command-line-tools-clt-what-almost-everyone-needs">Command Line Tools (CLT) — what almost everyone needs<a class="anchor" href="#command-line-tools-clt-what-almost-everyone-needs" aria-label="Permalink">#</a></h2>
+<h2 id="command-line-tools-clt--what-almost-everyone-needs">Command Line Tools (CLT) — what almost everyone needs<a class="anchor" href="#command-line-tools-clt--what-almost-everyone-needs" aria-label="Permalink">#</a></h2>
 <div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">xcode-select --install</code></pre></div>
 <p>A dialog appears; click <em>Install</em>. This downloads ~2 GB into <code>/Library/Developer/CommandLineTools</code> and gives you:</p>
 <ul>
@@ -91,7 +91,7 @@ git --version</code></pre></div>
 <p><strong>Updating</strong>: CLT updates arrive via <code>System Settings → Software Update</code> (they're listed as "Command Line Tools for Xcode"). If Homebrew complains that the CLT are outdated or "not installed" after a macOS upgrade, the fix is always:</p>
 <div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">sudo rm -rf /Library/Developer/CommandLineTools
 xcode-select --install</code></pre></div>
-<h2 id="full-xcode-when-you-need-it">Full Xcode — when you need it<a class="anchor" href="#full-xcode-when-you-need-it" aria-label="Permalink">#</a></h2>
+<h2 id="full-xcode--when-you-need-it">Full Xcode — when you need it<a class="anchor" href="#full-xcode--when-you-need-it" aria-label="Permalink">#</a></h2>
 <p>Install Xcode if you will:</p>
 <ul>
 <li>build apps for iOS, iPadOS, macOS, watchOS, tvOS or visionOS (Swift/SwiftUI/UIKit);</li>
@@ -165,8 +165,8 @@ rm -rf ~/Library/Caches/com.apple.dt.Xcode/*</code></pre></div>
     </footer>
   </main>
   <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
-<li class="lvl2"><a href="#command-line-tools-clt-what-almost-everyone-needs">Command Line Tools (CLT) — what almost everyone needs</a></li>
-<li class="lvl2"><a href="#full-xcode-when-you-need-it">Full Xcode — when you need it</a></li>
+<li class="lvl2"><a href="#command-line-tools-clt--what-almost-everyone-needs">Command Line Tools (CLT) — what almost everyone needs</a></li>
+<li class="lvl2"><a href="#full-xcode--when-you-need-it">Full Xcode — when you need it</a></li>
 <li class="lvl3"><a href="#xcode-27-in-one-paragraph">Xcode 27 in one paragraph</a></li>
 <li class="lvl3"><a href="#simulators-and-disk-space">Simulators and disk space</a></li>
 <li class="lvl3"><a href="#command-line-builds-without-opening-xcode">Command-line builds without opening Xcode</a></li>

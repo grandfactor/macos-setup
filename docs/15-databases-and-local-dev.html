@@ -72,7 +72,7 @@
   </aside>
   <main id="content" class="content">
     <article class="prose">
-<h1 id="databases-local-development-services">Databases &amp; local development services</h1>
+<h1 id="databases--local-development-services">Databases &amp; local development services</h1>
 <p>Two philosophies for local services: <strong>install natively via Homebrew</strong> (fastest, always on, shares your filesystem) or <strong>run in containers</strong> (isolated, version-per-project, throwaway). Both are fine; the mistake is mixing them for the <em>same</em> service and then wondering which Postgres is answering on 5432.</p>
 <h2 id="which-approach">Which approach<a class="anchor" href="#which-approach" aria-label="Permalink">#</a></h2>
 <div class="table-wrap"><table><thead><tr><th></th><th>Homebrew service / Postgres.app</th><th>Containers (OrbStack/Docker Compose)</th></tr></thead><tbody><tr><td>Speed</td><td>Native; no VM overhead; fastest for heavy queries and large imports</td><td>Very fast on OrbStack; a little file-share overhead for bind-mounted data</td></tr><tr><td>Versions</td><td>One major version per formula (<code>postgresql@17</code>); switching is fiddly</td><td>Any version per project, side by side, trivially</td></tr><tr><td>Isolation</td><td>Shared server, many databases</td><td>Each project its own server; <code>down -v</code> wipes it</td></tr><tr><td>Always-on cost</td><td>Runs at login if you <code>brew services start</code> — small battery/memory cost</td><td>Only when the project is up</td></tr><tr><td>Team parity</td><td>Differs from CI/production</td><td>Same image as CI/production</td></tr><tr><td>Recommendation</td><td><strong>Solo/student with one Postgres for everything; SQLite; Redis</strong></td><td><strong>Anything with a <code>compose.yaml</code>; multiple versions; team projects</strong></td></tr></tbody></table></div>
@@ -92,11 +92,11 @@ psql -c "select version();"</code></pre></div>
 <p>The Compose snippet in Chapter 13. One-off: <code>docker run -d --name pg -e POSTGRES_PASSWORD=pg -p 5432:5432 -v pgdata:/var/lib/postgresql/data postgres:17</code>. Use a <strong>named volume</strong> (not a bind mount) for the data directory — bind-mounted Postgres data on macOS is slower and has had permission quirks. If you also run a Homebrew Postgres, map the container to another port (<code>5433:5432</code>) or stop the service.</p>
 <h3 id="extensions">Extensions<a class="anchor" href="#extensions" aria-label="Permalink">#</a></h3>
 <p>PostGIS, pgvector, TimescaleDB etc.: <code>brew install postgis pgvector</code> (built against the Homebrew formula), or use images that bundle them (<code>pgvector/pgvector:pg17</code>, <code>timescale/timescaledb</code>, <code>postgis/postgis</code>). Postgres.app bundles PostGIS and pgvector.</p>
-<h2 id="mysql-mariadb">MySQL / MariaDB<a class="anchor" href="#mysql-mariadb" aria-label="Permalink">#</a></h2>
+<h2 id="mysql--mariadb">MySQL / MariaDB<a class="anchor" href="#mysql--mariadb" aria-label="Permalink">#</a></h2>
 <p><code>brew install mysql</code> (9.x) or <code>mysql@8.4</code> (LTS), <code>brew services start mysql</code>, <code>mysql_secure_installation</code>. MariaDB is <code>brew install mariadb</code>. In containers: <code>mysql:8.4</code> / <code>mariadb:11</code> — set <code>MYSQL_ROOT_PASSWORD</code>. Client-only: <code>brew install mysql-client</code>. <strong>mycli</strong> for a better shell.</p>
 <h2 id="sqlite">SQLite<a class="anchor" href="#sqlite" aria-label="Permalink">#</a></h2>
 <p>Already on macOS (<code>/usr/bin/sqlite3</code>), but Apple's build is older and lacks some extensions; <code>brew install sqlite</code> installs a current version keg-only (<code>$(brew --prefix sqlite)/bin/sqlite3</code>). <strong>litecli</strong> (<code>uv tool install litecli</code>) for a friendlier shell; <strong>DB Browser for SQLite</strong> or <strong>TablePlus</strong> for a GUI; <strong>Datasette</strong> to explore a SQLite file in the browser. <strong>DuckDB</strong> (<code>brew install duckdb</code>) is SQLite's analytical sibling — the fastest way to query CSV/Parquet files from the shell, and it reads Postgres/MySQL too. For 90% of coursework and side projects SQLite (or Turso/libSQL) is the right database.</p>
-<h2 id="redis-valkey-friends">Redis, Valkey &amp; friends<a class="anchor" href="#redis-valkey-friends" aria-label="Permalink">#</a></h2>
+<h2 id="redis-valkey--friends">Redis, Valkey &amp; friends<a class="anchor" href="#redis-valkey--friends" aria-label="Permalink">#</a></h2>
 <p><code>brew install redis</code> (Redis 8, back under an OSI licence) or <code>brew install valkey</code> (the Linux Foundation fork); <code>brew services start redis</code>; <code>redis-cli ping</code>. Container: <code>redis:8-alpine</code> / <code>valkey/valkey</code>. <strong>RedisInsight</strong> or <strong>Another Redis Desktop Manager</strong> for a GUI. <strong>Dragonfly</strong> and <strong>KeyDB</strong> are drop-in alternatives if a project uses them.</p>
 <h2 id="mongodb">MongoDB<a class="anchor" href="#mongodb" aria-label="Permalink">#</a></h2>
 <p>MongoDB's server isn't in Homebrew core (licence): <code>brew tap --trust mongodb/brew &amp;&amp; brew install mongodb-community</code>, <code>brew services start mongodb-community</code>; or the <code>mongo:8</code> container — the usual choice. <strong>MongoDB Compass</strong> (GUI) and <code>mongosh</code> (<code>brew install mongosh</code>).</p>
@@ -147,9 +147,9 @@ psql -c "select version();"</code></pre></div>
 <li class="lvl3"><a href="#native-homebrew">Native (Homebrew)</a></li>
 <li class="lvl3"><a href="#in-a-container">In a container</a></li>
 <li class="lvl3"><a href="#extensions">Extensions</a></li>
-<li class="lvl2"><a href="#mysql-mariadb">MySQL / MariaDB</a></li>
+<li class="lvl2"><a href="#mysql--mariadb">MySQL / MariaDB</a></li>
 <li class="lvl2"><a href="#sqlite">SQLite</a></li>
-<li class="lvl2"><a href="#redis-valkey-friends">Redis, Valkey &amp; friends</a></li>
+<li class="lvl2"><a href="#redis-valkey--friends">Redis, Valkey &amp; friends</a></li>
 <li class="lvl2"><a href="#mongodb">MongoDB</a></li>
 <li class="lvl2"><a href="#everything-else-briefly">Everything else, briefly</a></li>
 <li class="lvl2"><a href="#gui-database-clients">GUI database clients</a></li>
