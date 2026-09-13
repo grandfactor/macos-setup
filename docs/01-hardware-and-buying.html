@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hardware &amp; buying guide — The macOS Setup Guide</title>
+<meta name="description" content="Which Mac to buy in late 2026, how much RAM and storage you actually need, education pricing, refurbs, and the accessories that matter.">
+<meta property="og:title" content="Hardware &amp; buying guide — The macOS Setup Guide">
+<meta property="og:description" content="Which Mac to buy in late 2026, how much RAM and storage you actually need, education pricing, refurbs, and the accessories that matter.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li class="active"><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="hardware-buying-guide">Hardware &amp; buying guide</h1>
+<div class="admonition important"><p class="admonition-title">Important</p><p><strong>The one-paragraph answer.</strong> For a CS student or a working software engineer in September 2026 the sweet spot is a <strong>MacBook Air M5 (13" or 15") with 24 GB of memory and 512 GB–1 TB of storage</strong>, bought through the Apple Education Store. If you compile large native codebases, run several containers plus an IDE plus a browser all day, or do ML work, step up to a <strong>14" MacBook Pro with M5 Pro (24–48 GB)</strong>. Do <strong>not</strong> buy 8 GB of RAM for development work in 2026, and do <strong>not</strong> buy an Intel Mac at any price.</p></div>
+<h2 id="the-2026-mac-lineup-at-a-glance">The 2026 Mac lineup at a glance<a class="anchor" href="#the-2026-mac-lineup-at-a-glance" aria-label="Permalink">#</a></h2>
+<p>Everything Apple currently sells is Apple silicon. The table shows US list price and <em>education</em> price (see <a href="#education-pricing-and-back-to-school">Education pricing</a>) for the base configuration.</p>
+<div class="table-wrap"><table><thead><tr><th>Mac</th><th>Chip</th><th>Base memory / storage</th><th>Max memory</th><th>Displays (external)</th><th>Price (edu)</th><th>Released</th></tr></thead><tbody><tr><td><strong>MacBook Neo 13"</strong></td><td>A18 Pro (6-core CPU, 5-core GPU)</td><td>8 GB / 256 GB</td><td>8 GB</td><td>1 × 4K60</td><td>$599 ($499)</td><td>Mar 2026</td></tr><tr><td><strong>MacBook Air 13" / 15"</strong></td><td>M5 (10-core CPU, 8- or 10-core GPU)</td><td>16 GB / 512 GB</td><td>32 GB</td><td>2</td><td>from $1,099 / $1,299</td><td>Mar 2026</td></tr><tr><td><strong>MacBook Pro 14"</strong></td><td>M5</td><td>16 GB / 1 TB</td><td>32 GB</td><td>2</td><td>$1,699 ($1,599)</td><td>Oct 2025 / Mar 2026</td></tr><tr><td><strong>MacBook Pro 14" / 16"</strong></td><td>M5 Pro (15- or 18-core CPU)</td><td>24 GB / 1 TB</td><td>64 GB</td><td>2</td><td>$2,199 / $2,699 ($2,049 / $2,499)</td><td>Mar 2026</td></tr><tr><td><strong>MacBook Pro 14" / 16"</strong></td><td>M5 Max (18-core CPU, up to 40-core GPU)</td><td>36 GB / 2 TB</td><td>128 GB</td><td>4</td><td>$3,599 / $3,899 ($3,299 / $3,599)</td><td>Mar 2026</td></tr><tr><td><strong>iMac 24"</strong></td><td>M4</td><td>16 GB / 256 GB</td><td>32 GB</td><td>1–2</td><td>$1,299</td><td>Oct 2024</td></tr><tr><td><strong>Mac mini</strong></td><td><strong>M6</strong> (12-core CPU, 12-core GPU)</td><td>16 GB / 256 GB</td><td>32 GB</td><td>3</td><td>$899 ($799)</td><td>Sep 22 2026</td></tr><tr><td><strong>Mac mini</strong></td><td>M5 Pro</td><td>24 GB / 512 GB</td><td>64 GB</td><td>3</td><td>$1,699 ($1,599)</td><td>Sep 22 2026</td></tr><tr><td><strong>Mac Studio</strong></td><td>M5 Max</td><td>36 GB / 512 GB</td><td>128 GB</td><td>5+</td><td>$2,499 ($2,299)</td><td>Sep 22 2026</td></tr><tr><td><strong>Mac Studio</strong></td><td>M5 Ultra (up to 36-core CPU, 80-core GPU)</td><td>96 GB / 1 TB</td><td>512 GB</td><td>8</td><td>$5,499 ($5,099)</td><td>Sep 22 2026 (512 GB late Oct)</td></tr><tr><td><strong>Mac Pro</strong></td><td>M2 Ultra</td><td>64 GB / 1 TB</td><td>192 GB</td><td>8</td><td>$6,999</td><td>2023 (stale)</td></tr></tbody></table></div>
+<p>Notes on the generation you're buying into:</p>
+<ul>
+<li><strong>M5 family (late 2025–2026)</strong> introduced <em>Neural Accelerators in every GPU core</em> (Apple claims ~4× AI throughput vs M4-class), a new "super core + performance core" CPU layout on Pro/Max, 2× faster SSDs, and the Apple <strong>N1</strong> wireless chip (Wi‑Fi 7, Bluetooth 6). All MacBook Pros have Thunderbolt 5.</li>
+<li><strong>M6</strong> debuted in the Mac mini (announced Aug 25, 2026) — 12 CPU cores, "world's fastest single-thread," 170 GB/s memory bandwidth. Expect M6 MacBook Pros (widely rumoured to bring OLED displays) in late 2026 or 2027. If you can wait and you want a Pro, that's the one thing worth waiting for. Nobody should wait for anything to buy an Air.</li>
+<li>The <strong>MacBook Neo</strong> is Apple's $599 Mac. It uses the iPhone-class A18 Pro, has <strong>8 GB of RAM soldered with no upgrade</strong>, one USB 3 port and one USB 2 port, no Touch ID on the base model, Wi‑Fi 6E, and a 500-nit sRGB display. It runs macOS 26.3+ and 27 fine.</li>
+</ul>
+<h2 id="how-to-choose">How to choose<a class="anchor" href="#how-to-choose" aria-label="Permalink">#</a></h2>
+<h3 id="laptop-or-desktop">Laptop or desktop?<a class="anchor" href="#laptop-or-desktop" aria-label="Permalink">#</a></h3>
+<p>Students: laptop, always. You will carry it to lectures, labs, group projects, and interviews. Engineers with a fixed desk: a <strong>Mac mini M6 ($899) plus a good monitor</strong> is the best price/performance in the lineup by a wide margin, and a second-hand M1/M2 Air for travel costs less than the upgrade from Air to Pro. Many people end up with exactly that pair.</p>
+<h3 id="air-vs-pro">Air vs Pro<a class="anchor" href="#air-vs-pro" aria-label="Permalink">#</a></h3>
+<p>The Air is fanless. In sustained all-core loads (long compiles, video export, training a model locally) it throttles after several minutes; in bursty developer work (edit, build, test, browse) you will not notice. The Pro gets you:</p>
+<ul>
+<li>active cooling → sustained performance,</li>
+<li>the Liquid Retina <strong>XDR</strong> display (mini-LED, 1600 nits HDR, 120 Hz ProMotion, optional nano-texture) vs the Air's 500-nit 60 Hz IPS,</li>
+<li>3 Thunderbolt ports + HDMI + SDXC vs 2 Thunderbolt ports,</li>
+<li>with M5 Pro/Max: more memory, more bandwidth, more external displays,</li>
+<li>better speakers/mics (matters more than you think for remote interviews and calls),</li>
+<li>up to 24 hours battery (16" M5 Pro) — the Air is ~15–18 hours in practice.</li>
+</ul>
+<p>If your budget stretches to a 14" Pro with plain <strong>M5</strong>, compare it against a 15" Air with <strong>more memory</strong> at the same price: for most students the Air with 24–32 GB is the better machine, because memory is what runs out first.</p>
+<h3 id="13-vs-14-vs-15-vs-16">13" vs 14" vs 15" vs 16"<a class="anchor" href="#13-vs-14-vs-15-vs-16" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>13" Air (1.24 kg)</strong>: best for commuting and cramped lecture desks; you'll use an external monitor at home.</li>
+<li><strong>15" Air (1.51 kg)</strong>: the "one machine" size for most people — the extra screen matters when you're not docked.</li>
+<li><strong>14" Pro (1.55–1.60 kg)</strong>: the professional default; same footprint as the 13" Air with a vastly better screen.</li>
+<li><strong>16" Pro (2.14 kg)</strong>: desktop-replacement. Heavy in a backpack every day; superb if you rarely move it.</li>
+</ul>
+<h3 id="the-macbook-neo-should-a-cs-student-buy-one">The MacBook Neo: should a CS student buy one?<a class="anchor" href="#the-macbook-neo-should-a-cs-student-buy-one" aria-label="Permalink">#</a></h3>
+<p><strong>Honestly: only if $599/$499 is the ceiling.</strong> It will run VS Code, a browser, Python, Java, Node, Git, and a lecture's worth of tabs. The 8 GB limit becomes painful the moment you add Docker/OrbStack (which reserves memory for a Linux VM), an Android emulator, IntelliJ on a big project, or a local LLM. macOS will swap to the fast SSD and keep working, but you'll feel it, and constant heavy swapping shortens SSD life. If you choose a Neo, take the 512 GB model, keep containers off the machine (use a cloud VM or the university's servers), and plan to replace it after 2–3 years. The M5 Air at $999 (edu) with 16 GB is a far better four-year investment.</p>
+<h2 id="memory-the-decision-that-actually-matters">Memory: the decision that actually matters<a class="anchor" href="#memory-the-decision-that-actually-matters" aria-label="Permalink">#</a></h2>
+<p>Apple silicon uses <strong>unified memory</strong>: CPU, GPU and Neural Engine share one pool, and <em>it cannot be upgraded later</em>. Buy for the last year you'll own the machine, not the first.</p>
+<div class="table-wrap"><table><thead><tr><th>Your workload</th><th>Minimum</th><th>Comfortable</th><th>Notes</th></tr></thead><tbody><tr><td>Notes, browser, Office, light Python/Java coursework</td><td>16 GB</td><td>16 GB</td><td>8 GB works but swaps heavily with many tabs.</td></tr><tr><td>Typical CS degree: IDE + browser + Docker/OrbStack + Slack/Discord + music</td><td>16 GB</td><td><strong>24 GB</strong></td><td>24 GB is the 2026 sweet spot; the upgrade is ~$200 (edu).</td></tr><tr><td>Full-stack dev: several services in containers, Postgres, Node, an Electron IDE, Figma</td><td>24 GB</td><td><strong>32 GB</strong></td><td>Docker Desktop alone likes 4–8 GB; OrbStack is lighter.</td></tr><tr><td>Mobile dev: Xcode + iOS Simulator + Android Studio + emulator</td><td>24 GB</td><td>32–48 GB</td><td>Two emulators plus Xcode indexing is brutal on 16 GB.</td></tr><tr><td>Systems / big native builds (LLVM, Chromium, game engines), VMs</td><td>32 GB</td><td>48–64 GB</td><td>Also want M5 Pro/Max for the core count.</td></tr><tr><td>Local LLMs &amp; ML: 7B–14B models quantised</td><td>24–32 GB</td><td>48 GB+</td><td>Model size in GB ≈ memory needed; 128 GB M5 Max runs 70B-class models; 512 GB M5 Ultra runs ~400B.</td></tr></tbody></table></div>
+<p>Rules of thumb:</p>
+<ul>
+<li>macOS itself is happy at 16 GB; the <em>browser</em> and <em>Electron apps</em> are what eat memory (every Chrome/Slack/VS Code/Discord window is a small Chromium).</li>
+<li>Memory pressure (Activity Monitor → Memory → the graph at the bottom) should stay <strong>green</strong>. Yellow occasionally is fine. Red means you bought too little.</li>
+<li>Do not "save" on memory to afford storage. Storage can be extended externally; memory cannot.</li>
+</ul>
+<h2 id="storage">Storage<a class="anchor" href="#storage" aria-label="Permalink">#</a></h2>
+<ul>
+<li>macOS + Xcode + a normal set of apps ≈ 60–90 GB. Xcode alone is ~15 GB installed and its iOS Simulator runtimes add 8–10 GB <em>each</em> (Chapter 7 shows how to prune them). Docker/OrbStack images balloon to tens of GB if you never <code>prune</code>. Node projects have <code>node_modules</code> folders of 500 MB+. A local LLM is 4–40 GB per model.</li>
+<li><strong>512 GB</strong> is the realistic floor for a developer in 2026. <strong>1 TB</strong> if you do mobile, ML, video, or games. The MacBook Pro now <em>starts</em> at 1 TB (M5 Pro) / 2 TB (M5 Max), which is why it looks expensive next to the Air.</li>
+<li>Apple's SSDs are fast (the M5 Pro/Max models and the new Mac Studio have ~2× the throughput of M4) and integrated; an external Thunderbolt 5 NVMe enclosure (~$80 + a 2 TB drive ~$130) is a fine place for VMs, media, and cold projects.</li>
+<li>256 GB is only acceptable on a Mac mini used as a desktop with an external drive, or a Neo used as a Chromebook.</li>
+</ul>
+<h2 id="cpu-gpu-how-much-do-cores-matter">CPU &amp; GPU: how much do cores matter?<a class="anchor" href="#cpu-gpu-how-much-do-cores-matter" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Compiles and test suites scale with performance cores.</strong> Base M5 (10 cores: 4P+6E) is already faster than an M1 Pro. M5 Pro (15/18 cores) is ~40–60% faster on parallel builds. M5 Max adds GPU, memory bandwidth (up to 614 GB/s on Mac Studio) and memory capacity more than CPU.</li>
+<li><strong>GPU</strong> matters for ML (Metal/MLX/PyTorch MPS), game development, and video. It does not matter for web/backend/algorithms coursework.</li>
+<li><strong>External displays</strong>: base M5 drives <strong>two</strong> external displays (Air/Pro), M5 Pro two, M5 Max four, Mac mini three, Mac Studio up to eight. The Neo drives <strong>one</strong>. If you want two monitors on a base chip, you can — this was a real limitation on M1/M2 base chips and is not any more.</li>
+</ul>
+<h2 id="education-pricing-and-back-to-school">Education pricing and Back to School<a class="anchor" href="#education-pricing-and-back-to-school" aria-label="Permalink">#</a></h2>
+<ul>
+<li>Apple's <strong>Education Store</strong> (apple.com/us-edu/store) is open year-round to current and newly accepted college students, their parents buying on their behalf, and educators at any level. Typical savings: <strong>$100 on Air/mini, $100–$300 on Pro/Studio</strong>, up to <strong>10% off AppleCare+</strong>. Verification is via UNiDAYS in some countries; in the US it's effectively honour-based at checkout for online orders (Apple may ask for proof).</li>
+<li>The <strong>Back to School promotion</strong> (usually early July → late September) stacks on top: in 2026 it's an Apple Gift Card of <strong>up to $150</strong> with a qualifying Mac. It's live at time of writing but ends soon; if you're reading this in October, it's gone until next summer.</li>
+<li><strong>Refurbished</strong> (apple.com/shop/refurbished): ~15% off, new battery and outer shell, full one-year warranty, AppleCare-eligible. A refurbished M4 Pro 14" is frequently the best value in the store. Stock changes daily; the M5 Air appears there from ~6 months after launch.</li>
+<li>Most universities have a campus store or a Dell/Apple portal with equivalent pricing; check before you buy — some bundle AppleCare or a discount code.</li>
+<li><strong>Trade-in</strong> values from Apple are conservative; selling a working M1/M2 Mac privately (Swappa, eBay, local) returns 20–40% more.</li>
+<li>US only: Apple Card Monthly Installments (0% APR, 12–24 months) and the new <strong>Apple Upgrade</strong> leasing program (Klarna, from ~$49/month for a Mac Studio) exist. Leasing a laptop you'll keep for four years is rarely the right call.</li>
+</ul>
+<h2 id="warranty-applecare-or-not">Warranty: AppleCare+ or not?<a class="anchor" href="#warranty-applecare-or-not" aria-label="Permalink">#</a></h2>
+<ul>
+<li>Every Mac has a one-year limited warranty and 90 days of phone support. In the EU/UK/Australia, consumer law extends coverage of defects to 2–6 years regardless.</li>
+<li><strong>AppleCare+ for Mac</strong> covers accidental damage (unlimited incidents, $99 screen / $299 other), battery replacement below 80%, and extends the warranty to 3 years (or annual/monthly rolling). For a laptop you carry to class every day, the screen-crack maths usually favours buying it: an out-of-warranty MacBook Pro display is $600–$900. For a Mac mini on a desk, skip it.</li>
+<li><strong>AppleCare One</strong> (US, $19.99/month) covers three devices with theft &amp; loss on eligible iPhones/iPads; if you already have it, adding your Mac is $5.99/month.</li>
+<li>Students: buy it at the edu discount at purchase time, or within 60 days.</li>
+</ul>
+<h2 id="accessories-that-are-actually-worth-it">Accessories that are actually worth it<a class="anchor" href="#accessories-that-are-actually-worth-it" aria-label="Permalink">#</a></h2>
+<p><strong>Buy on day one</strong></p>
+<ul>
+<li>A <strong>second charger</strong> for your desk or bag: any USB‑C PD charger ≥ 70 W (Anker, Ugreen, Apple's 70 W). The 16" Pro fast-charges from a 96 W+ brick; the Air ships with a 35 W dual-port or 70 W depending on config — the 70 W is worth the +$20.</li>
+<li>A <strong>USB‑C hub or Thunderbolt dock</strong> if you use an external monitor and wired Ethernet. A Thunderbolt 4/5 dock ($150–$300, CalDigit, OWC, Anker) gives you one-cable docking with charging; a $40 USB‑C hub covers HDMI + 2 USB-A + card reader.</li>
+<li>A <strong>sleeve</strong> for the backpack (tomtoc, Bellroy, Incase).</li>
+</ul>
+<p><strong>External display</strong></p>
+<ul>
+<li>Coding is where <strong>pixel density</strong> matters most. Look for <strong>"Retina-class"</strong>: 4K at 27" (163 ppi) or 5K at 27" (218 ppi) — text is crisp at 2× scaling. A 1440p 27" monitor (109 ppi) looks blurry next to your MacBook; a 4K 32" (138 ppi) is a good compromise for people who want <em>space</em>.</li>
+<li>Value: LG/Dell/BenQ 27" 4K IPS with USB‑C ($300–$500). Premium: <strong>Apple Studio Display (2026)</strong> — 27" 5K 60 Hz, 600 nits, 12 MP camera, Thunderbolt 5, $1,599 — or the <strong>Studio Display XDR</strong> — 5K mini-LED 120 Hz, 2000 nits, $3,299. The Samsung ViewFinity S9 and ASUS ProArt 5K are the 5K alternatives around $1,000–$1,300.</li>
+<li>Avoid ultra-wides <em>for code</em> unless you're sure: macOS's window management is happier with two 16:9 panels.</li>
+</ul>
+<p><strong>Input</strong></p>
+<ul>
+<li>Any keyboard works. Popular with developers: Apple Magic Keyboard with Touch ID (Touch ID unlock for <code>sudo</code> and 1Password is genuinely nice), Keychron K-series/Q-series (Mac layout, hot-swap), HHKB, NuPhy Air. Chapter 5 covers key remapping, so Windows layouts are fine too.</li>
+<li>Trackpad vs mouse is personal. The Magic Trackpad enables all the gestures Chapter 6 relies on; Logitech MX Master 3S is the developer-mouse default (Logi Options+ maps its gesture button to Mission Control).</li>
+<li>A <strong>webcam</strong> is unnecessary: the 12 MP Center Stage camera on Air/Pro (and Continuity Camera from an iPhone) is better than most external cameras.</li>
+</ul>
+<p><strong>Audio</strong>: AirPods Pro 3 or any Bluetooth headset works; for many calls a wired USB headset removes Bluetooth latency and drop-outs.</p>
+<p><strong>Storage</strong>: a 2 TB external SSD ($130–$180) for Time Machine (Chapter 17). Get one at least equal in size to your internal drive.</p>
+<h2 id="second-hand-and-older-apple-silicon">Second-hand and older Apple silicon<a class="anchor" href="#second-hand-and-older-apple-silicon" aria-label="Permalink">#</a></h2>
+<p>If you're buying used, the ladder of value in 2026 is:</p>
+<ol>
+<li><strong>M4 / M4 Pro MacBook Pro (2024)</strong> — still current-feeling, supports everything, 16 GB base.</li>
+<li><strong>M3 Pro/Max (2023)</strong> — excellent; the M3 <em>base</em> MacBook Air/Pro 8 GB models are the ones to skip.</li>
+<li><strong>M2 Air 16 GB (2022)</strong> — the best cheap developer Mac; fanless but fast enough.</li>
+<li><strong>M1 Pro/Max 14"/16" (2021)</strong> — legendary battery, still faster than a Neo, 16–64 GB. A 32 GB M1 Max for $900 is a steal.</li>
+<li><strong>M1 Air 16 GB (2020)</strong> — fine for coursework, starting to feel its age with Electron apps.</li>
+</ol>
+<p>All of these run macOS 27 Golden Gate and will get updates for years (Apple typically supports Macs for 6–8 years). Check battery cycle count (<strong>System Settings → General → About → System Report → Power</strong>; under 500 cycles is good), that Find My is off (Activation Lock!), and that it's not MDM-enrolled (a corporate/school device will re-enrol on erase).</p>
+<div class="admonition caution"><p class="admonition-title">Caution</p><p><strong>Do not buy an Intel Mac in 2026, even for free-ish money.</strong> macOS 26 Tahoe is the last version they run; security updates end around 2029; Homebrew moves Intel macOS to unsupported this month (no new binary packages) and deletes support in September 2027; Rosetta is going away; battery and thermals are far worse. A $599 MacBook Neo is a better computer than any Intel MacBook ever made.</p></div>
+<h2 id="what-about-a-windows-or-linux-laptop-instead">What about a Windows or Linux laptop instead?<a class="anchor" href="#what-about-a-windows-or-linux-laptop-instead" aria-label="Permalink">#</a></h2>
+<p>A fair question for a CS student. Reasons people choose Mac for CS: a Unix userland with a polished GUI, the only platform for iOS/macOS development, best-in-class laptop hardware (battery, display, trackpad, speakers, silence), excellent local-AI performance per watt thanks to unified memory, and the fact that most of your future colleagues' dotfiles and tutorials assume it. Reasons to choose otherwise: you need CUDA (NVIDIA) for ML research, you target Windows-only software (some CAD/EE tooling), you want to dual-boot or run bare-metal Linux (Asahi Linux runs on M1/M2 only, not M3+), or budget — a $600 Neo has real limits and a $600 ThinkPad may have 16 GB and be upgradeable.</p>
+<p>You can of course run Linux inside macOS trivially (Chapter 13), and Windows via Parallels or VMware Fusion (free for personal use) — both run Windows 11 ARM, which now runs x86 apps well.</p>
+<h2 id="checklist-before-you-click-buy">Checklist before you click Buy<a class="anchor" href="#checklist-before-you-click-buy" aria-label="Permalink">#</a></h2>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> Apple silicon, not Intel.</li>
+<li class="task"><input type="checkbox" disabled> ≥ 16 GB memory (24 GB if you'll ever run containers or an emulator; 32 GB+ for mobile/ML).</li>
+<li class="task"><input type="checkbox" disabled> ≥ 512 GB storage (1 TB if mobile/ML/video).</li>
+<li class="task"><input type="checkbox" disabled> Bought through the Education Store (or refurb), with the Back to School gift card if in season.</li>
+<li class="task"><input type="checkbox" disabled> AppleCare+ decided (yes for a daily-carried laptop).</li>
+<li class="task"><input type="checkbox" disabled> Charger ≥ 70 W, sleeve, a Time Machine SSD.</li>
+<li class="task"><input type="checkbox" disabled> If used: Activation Lock off, no MDM, battery &lt; 500 cycles.</li>
+</ul>
+    </article>
+    
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/01-hardware-and-buying.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/01-hardware-and-buying.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#the-2026-mac-lineup-at-a-glance">The 2026 Mac lineup at a glance</a></li>
+<li class="lvl2"><a href="#how-to-choose">How to choose</a></li>
+<li class="lvl3"><a href="#laptop-or-desktop">Laptop or desktop?</a></li>
+<li class="lvl3"><a href="#air-vs-pro">Air vs Pro</a></li>
+<li class="lvl3"><a href="#13-vs-14-vs-15-vs-16">13" vs 14" vs 15" vs 16"</a></li>
+<li class="lvl3"><a href="#the-macbook-neo-should-a-cs-student-buy-one">The MacBook Neo: should a CS student buy one?</a></li>
+<li class="lvl2"><a href="#memory-the-decision-that-actually-matters">Memory: the decision that actually matters</a></li>
+<li class="lvl2"><a href="#storage">Storage</a></li>
+<li class="lvl2"><a href="#cpu-gpu-how-much-do-cores-matter">CPU &amp; GPU: how much do cores matter?</a></li>
+<li class="lvl2"><a href="#education-pricing-and-back-to-school">Education pricing and Back to School</a></li>
+<li class="lvl2"><a href="#warranty-applecare-or-not">Warranty: AppleCare+ or not?</a></li>
+<li class="lvl2"><a href="#accessories-that-are-actually-worth-it">Accessories that are actually worth it</a></li>
+<li class="lvl2"><a href="#second-hand-and-older-apple-silicon">Second-hand and older Apple silicon</a></li>
+<li class="lvl2"><a href="#what-about-a-windows-or-linux-laptop-instead">What about a Windows or Linux laptop instead?</a></li>
+<li class="lvl2"><a href="#checklist-before-you-click-buy">Checklist before you click Buy</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>

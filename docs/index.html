@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The macOS Setup Guide</title>
+<meta name="description" content="For CS students, software engineers and everyone who lives on a Mac — 2026 edition">
+<meta property="og:title" content="The macOS Setup Guide">
+<meta property="og:description" content="For CS students, software engineers and everyone who lives on a Mac — 2026 edition">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home active" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="the-macos-setup-guide">The macOS Setup Guide</h1>
+<div class="hero">
+<p class="lede">A complete, opinionated, deeply researched guide to setting up a Mac for computer science students, software engineers, and anyone who uses a Mac as their daily machine. From which Mac to buy, through the first boot, to a fully tuned development environment, security posture, backup strategy and automation layer — with the reasoning behind every recommendation.</p>
+<div class="badges">
+<span class="badge">macOS 26 Tahoe &amp; 27 Golden Gate</span>
+<span class="badge">Apple silicon (M1 → M6)</span>
+<span class="badge">Homebrew 6</span>
+<span class="badge">Reviewed September 2026</span>
+<span class="badge">~30 chapters · fully scriptable</span>
+</div>
+</div>
+<h2 id="who-this-is-for">Who this is for<a class="anchor" href="#who-this-is-for" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>CS students</strong> starting a degree (or a bootcamp) who just got a Mac and want to set it up <em>once, properly</em>, without cargo-culting a random dotfiles repo.</li>
+<li><strong>Software engineers</strong> joining a new job or replacing a laptop who want a reproducible, secure, fast environment on day one.</li>
+<li><strong>Daily drivers</strong> — people who live on their Mac for writing, research, media, school and life — who want the machine to get out of their way.</li>
+</ul>
+<p>You don't need to read it front to back. Each chapter stands alone, and the <a href="23-checklists-and-cheat-sheets.html">checklists</a> at the end compress the whole thing into a few printable pages.</p>
+<h2 id="how-to-use-this-guide">How to use this guide<a class="anchor" href="#how-to-use-this-guide" aria-label="Permalink">#</a></h2>
+<ol>
+<li><strong>In a hurry?</strong> Read <a href="02-first-boot-and-migration.html">Chapter 2 (first boot)</a>, run the <a href="appendix-a-bootstrap-script.html">bootstrap script</a>, then skim the <a href="23-checklists-and-cheat-sheets.html">checklists</a>.</li>
+<li><strong>Buying a Mac?</strong> Start with <a href="01-hardware-and-buying.html">Chapter 1</a>; it is written for September 2026 pricing and the M5/M6 lineup.</li>
+<li><strong>Already set up but it feels messy?</strong> Jump to <a href="08-homebrew.html">Homebrew</a>, <a href="09-terminal-and-shell.html">Terminal &amp;amp; shell</a>, <a href="10-dotfiles-and-git.html">Dotfiles</a> and <a href="16-security-and-privacy.html">Security</a>.</li>
+<li><strong>Setting up for a specific stack?</strong> <a href="11-languages-and-runtimes.html">Languages &amp;amp; runtimes</a>, <a href="13-containers-and-vms.html">Containers &amp;amp; VMs</a> and <a href="15-databases-and-local-dev.html">Databases &amp;amp; local dev</a> are self-contained.</li>
+</ol>
+<p>Conventions used throughout:</p>
+<div class="table-wrap"><table><thead><tr><th>Convention</th><th>Meaning</th></tr></thead><tbody><tr><td><kbd>⌘</kbd> <kbd>⌥</kbd> <kbd>⌃</kbd> <kbd>⇧</kbd> <kbd>fn</kbd>/<kbd>🌐</kbd></td><td>Command, Option, Control, Shift, Function/Globe</td></tr><tr><td><code>System Settings → General → Software Update</code></td><td>Navigate the Settings app in that order</td></tr><tr><td><code>$ command</code></td><td>Run in a terminal; the <code>$</code> is a prompt, don't type it (the copy button strips it)</td></tr><tr><td><strong>Recommended</strong> / <em>Alternative</em> / <del>Avoid</del></td><td>Our default pick / a fine substitute / something we actively steer you away from</td></tr><tr><td>Note / Tip / Warning callouts</td><td>Read these; they save hours</td></tr></tbody></table></div>
+<p>Every recommendation comes with a <em>why</em>. If you disagree with the <em>why</em>, you'll know exactly what to swap.</p>
+<h2 id="whats-new-in-2026-and-why-this-guide-exists">What's new in 2026 (and why this guide exists)<a class="anchor" href="#whats-new-in-2026-and-why-this-guide-exists" aria-label="Permalink">#</a></h2>
+<p>The Mac platform changed more in 2025–2026 than in the previous five years combined, and most setup guides on the internet haven't caught up:</p>
+<ul>
+<li><strong>macOS 27 "Golden Gate" ships September 14, 2026</strong> and is <strong>Apple-silicon only</strong>. Intel Macs stay on macOS 26 Tahoe (security updates until ~2029). Rosetta 2 is removed for general apps in macOS 28 (fall 2027) — so this guide is uncompromisingly <em>arm64-native first</em>.</li>
+<li><strong>The lineup is completely new</strong>: MacBook Neo ($599, A18 Pro, 8 GB), MacBook Air M5, MacBook Pro M5 / M5 Pro / M5 Max, Mac mini M6 and M5 Pro, Mac Studio M5 Max / M5 Ultra, two new Studio Displays. Chapter 1 tells you which one to actually buy.</li>
+<li><strong>Apple shipped its own container runtime</strong> (<code>container</code>, on the Containerization framework) and Docker Desktop is no longer the automatic answer.</li>
+<li><strong>Homebrew 6</strong> introduced tap trust, an "ask before install" default, parallel <code>brew bundle</code>, <code>brew exec</code>, and is dropping Intel bottles this month.</li>
+<li><strong>Spotlight became a real launcher</strong> (apps, files, actions, clipboard history, Quick Keys) and in Golden Gate hosts Siri AI. The Raycast/Alfred question has a different answer now.</li>
+<li><strong>Security defaults moved</strong>: FileVault is on by default at setup, its recovery key lives in iCloud Keychain and the Passwords app, Stolen Device Protection came to MacBooks, Gatekeeper lost its right-click bypass, and encrypted HFS+ backup drives are deprecated.</li>
+<li><strong>Tooling consolidated</strong>: <code>mise</code> and <code>uv</code> replaced a zoo of version managers; Ghostty matured into the default terminal recommendation; Zed, Cursor and VS Code split the editor market three ways; AI coding agents live in the terminal and in Xcode 27.</li>
+</ul>
+<p>Everything below reflects that world. Where a fact is likely to age (a version number, a price), it is dated so you can judge it.</p>
+<h2 id="a-note-on-opinions">A note on opinions<a class="anchor" href="#a-note-on-opinions" aria-label="Permalink">#</a></h2>
+<p>This guide is opinionated on purpose. Beginners are paralysed by "it depends"; experts already know when to deviate. So each section gives a <strong>default</strong>, one or two <strong>alternatives</strong>, and the <strong>reason</strong>. When a tool is <em>free for students</em> or <em>free for personal use</em>, we say so, because that matters when you're on a budget.</p>
+<p>Nothing here is sponsored. Prices are US list prices at the time of review; education pricing is noted where Apple or a vendor offers it.</p>
+<h2 id="contributing-and-corrections">Contributing and corrections<a class="anchor" href="#contributing-and-corrections" aria-label="Permalink">#</a></h2>
+<p>The source is plain Markdown in the <a href="https://github.com/grandfactor/macos-setup/tree/main/guide" target="_blank" rel="noopener"><code>guide/</code></a> directory of the repository; the site and the single-file <code>GUIDE.md</code> are generated from it by a dependency-free Python script (<code>python3 build.py</code>). Found a mistake, a stale price or a better tool? Open an issue or a pull request.</p>
+<h2 id="chapters">All chapters</h2>
+<h2 class="part-title" id="part-i-before-you-start">Part I — Before you start</h2><div class="cards">
+<a class="card" href="01-hardware-and-buying.html"><span class="card-num">01</span><span class="card-title">Hardware &amp; buying guide</span><span class="card-desc">Which Mac to buy in late 2026, how much RAM and storage you actually need, education pricing, refurbs, and the accessories that matter.</span></a>
+</div>
+    </article>
+    
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/GUIDE.md" target="_blank" rel="noopener">Read the whole guide as one Markdown file</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#who-this-is-for">Who this is for</a></li>
+<li class="lvl2"><a href="#how-to-use-this-guide">How to use this guide</a></li>
+<li class="lvl2"><a href="#whats-new-in-2026-and-why-this-guide-exists">What's new in 2026 (and why this guide exists)</a></li>
+<li class="lvl2"><a href="#a-note-on-opinions">A note on opinions</a></li>
+<li class="lvl2"><a href="#contributing-and-corrections">Contributing and corrections</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
