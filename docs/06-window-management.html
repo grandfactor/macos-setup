@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Window management, Spaces &amp; displays — The macOS Setup Guide</title>
+<meta name="description" content="Spaces, Mission Control, native tiling, Stage Manager, and the third-party window managers (Rectangle, Raycast, AeroSpace, yabai) — which one fits how you work, and how to set up multiple displays.">
+<meta property="og:title" content="Window management, Spaces &amp; displays — The macOS Setup Guide">
+<meta property="og:description" content="Spaces, Mission Control, native tiling, Stage Manager, and the third-party window managers (Rectangle, Raycast, AeroSpace, yabai) — which one fits how you work, and how to set up multiple displays.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li class="active"><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="window-management-spaces-displays">Window management, Spaces &amp; displays</h1>
+<p>macOS's window model confuses newcomers: there is no "maximise" in the Windows sense, apps can have many windows across many desktops, and full-screen is its own thing. Once you understand the three layers — <strong>Spaces</strong>, <strong>tiling</strong>, and <strong>switching</strong> — it's very fast. This chapter sets up the built-ins, then picks a third-party manager if you want more.</p>
+<h2 id="mental-model">Mental model<a class="anchor" href="#mental-model" aria-label="Permalink">#</a></h2>
+<ul>
+<li>A <strong>Space</strong> (virtual desktop) is a full-screen canvas. Each display has its own set of Spaces (<code>Displays have separate Spaces</code>: on). Full-screen apps become their own Space.</li>
+<li><strong>Windows</strong> float in a Space. macOS remembers window positions per app and restores them on relaunch (Golden Gate also restores them across display connect/disconnect much better than before).</li>
+<li><strong>The green button</strong> (or double-clicking the title bar) <em>zooms/fills</em> the window to the content's natural size or the full screen; <strong>holding <kbd>⌥</kbd></strong> while clicking it fills the screen without entering full-screen mode; <strong>hovering</strong> it shows the tiling menu (Fill, Center, Left/Right/Top/Bottom halves, quarters, <em>Move to display</em>, <em>Enter Full Screen</em>).</li>
+<li><strong>Hiding</strong> (<kbd>⌘</kbd><kbd>H</kbd>) an app removes its windows but keeps it in <kbd>⌘</kbd><kbd>Tab</kbd>; <strong>minimising</strong> (<kbd>⌘</kbd><kbd>M</kbd>) sends the window to the Dock and <em>out</em> of <kbd>⌘</kbd><kbd>Tab</kbd> — which is why most Mac users never minimise.</li>
+</ul>
+<h2 id="native-window-tiling-sequoia">Native window tiling (Sequoia+)<a class="anchor" href="#native-window-tiling-sequoia" aria-label="Permalink">#</a></h2>
+<p>macOS finally does Windows-style snapping:</p>
+<ul>
+<li><strong>Drag a window to a screen edge</strong> → it tiles to that half (top edge = fill; corners = quarters). A ghost outline previews the result. Hold <kbd>⌥</kbd> while dragging to get the outline immediately.</li>
+<li><strong>Keyboard</strong>: <kbd>fn</kbd><kbd>⌃</kbd><kbd>←</kbd>/<kbd>→</kbd>/<kbd>↑</kbd>/<kbd>↓</kbd> = left half / right half / top half / bottom half; <kbd>fn</kbd><kbd>⌃</kbd><kbd>F</kbd> = fill; <kbd>fn</kbd><kbd>⌃</kbd><kbd>C</kbd> = centre; <kbd>fn</kbd><kbd>⌃</kbd><kbd>⇧</kbd> + arrows = quarters; <kbd>fn</kbd><kbd>⌃</kbd><kbd>R</kbd> = revert. On external keyboards without <kbd>fn</kbd>, use <kbd>🌐</kbd> or remap in <code>Keyboard Shortcuts → Windows</code>, where you can also <strong>rebind these</strong> to <kbd>⌃</kbd><kbd>⌥</kbd> + arrows (the Rectangle convention).</li>
+<li><strong>Menu</strong>: <code>Window → Move &amp; Resize</code> lists every arrangement, including <em>Left &amp; Right</em>, <em>Top &amp; Bottom</em>, <em>Quarters</em> which arrange <strong>two or four windows at once</strong>.</li>
+<li>Settings: <code>Desktop &amp; Dock → Windows</code>: <strong>Tiled windows have margins: off</strong> (tight), <em>Drag windows to screen edges to tile</em>: on, <em>Drag windows to menu bar to fill screen</em>: on, <em>Hold ⌥ key while dragging windows to tile</em>: on.</li>
+</ul>
+<p>For a lot of people — two windows side-by-side, one maximised, occasionally thirds — this is enough, and it needs no Accessibility permission. Its limits: no thirds/two-thirds by keyboard, no "move to next display" hotkey, no per-app rules, and the snapping zones are a bit coarse. That's where the third-party tools come in.</p>
+<h2 id="spaces-and-mission-control">Spaces and Mission Control<a class="anchor" href="#spaces-and-mission-control" aria-label="Permalink">#</a></h2>
+<p>Set up once:</p>
+<ol>
+<li><code>System Settings → Desktop &amp; Dock → Mission Control</code>: <strong>Automatically rearrange Spaces based on most recent use: OFF</strong>. This is the single most important setting — with it on, your Spaces shuffle constantly and <kbd>⌃</kbd><kbd>3</kbd> stops meaning anything.</li>
+<li><code>Keyboard → Keyboard Shortcuts… → Mission Control</code>: enable <strong>Switch to Desktop 1…9</strong> (<kbd>⌃</kbd><kbd>1</kbd>…<kbd>⌃</kbd><kbd>9</kbd>). They appear only after the Spaces exist — create them first.</li>
+<li>Open Mission Control (<kbd>⌃</kbd><kbd>↑</kbd>, three/four-finger swipe up, or <kbd>F3</kbd>), hover top-right → <strong>+</strong> to add Spaces. Create 4–6 and give them roles — e.g. <strong>1 Communication</strong> (mail, Slack), <strong>2 Browser/research</strong>, <strong>3 Code</strong> (editor + terminal), <strong>4 Second project / school</strong>, <strong>5 Media/notes</strong>. Right-click a Space in Mission Control to rename? (Not possible — but Spaces auto-name from full-screen apps; wallpaper per Space is possible: set a wallpaper while on that Space.)</li>
+<li><strong>Assign apps to Spaces</strong>: right-click an app's Dock icon → <em>Options → Assign To → This Desktop</em>. Slack always opens on 1, your IDE on 3, etc. <em>All Desktops</em> is great for a music player or a floating notes window. <code>When switching to an application, switch to a Space with open windows for the application</code>: on — so <kbd>⌘</kbd><kbd>Tab</kbd> to Slack jumps to Space 1.</li>
+<li>Move windows between Spaces by dragging them to the edge of the screen (hold briefly), dragging onto a Space thumbnail in Mission Control, or — fastest — <strong>start dragging the window, then press <kbd>⌃</kbd><kbd>←</kbd>/<kbd>→</kbd></strong> with the other hand.</li>
+</ol>
+<p>Trackpad: three- or four-finger horizontal swipe switches Spaces, up opens Mission Control, down shows the current app's windows (App Exposé). <code>Accessibility → Display → Reduce motion</code> makes the switch instant instead of sliding.</p>
+<p>Full-screen (<kbd>⌃</kbd><kbd>⌘</kbd><kbd>F</kbd>) is a Space of its own that hides the menu bar and Dock. Great for a single-window focus session on a laptop screen; awkward on a big monitor. <strong>Split View</strong> (hover the green button → <em>Tile Window to Left of Screen</em>) puts two full-screen apps side by side with a draggable divider.</p>
+<h2 id="stage-manager">Stage Manager<a class="anchor" href="#stage-manager" aria-label="Permalink">#</a></h2>
+<p><code>Control Center → Stage Manager</code> (or Desktop &amp; Dock). It groups windows into "stages" shown as thumbnails on the left; clicking one swaps the whole set in. It's a different metaphor from Spaces — like having your open windows as a deck of cards. Some people love it for a single laptop screen; most developers find Spaces + tiling more predictable and leave it off. If you try it, turn off <em>Show recent apps</em> to reclaim the left strip and use <code>Click wallpaper to reveal desktop: Only in Stage Manager</code>.</p>
+<h2 id="third-party-window-managers">Third-party window managers<a class="anchor" href="#third-party-window-managers" aria-label="Permalink">#</a></h2>
+<p>Three tiers, from "just snapping" to "i3 on macOS". All need <strong>Accessibility</strong> permission (<code>Privacy &amp; Security → Accessibility</code>); the tilers also want <strong>Screen Recording</strong> to read window titles in some cases.</p>
+<h3 id="tier-1-snapping-and-hotkeys-most-people">Tier 1 — snapping and hotkeys (most people)<a class="anchor" href="#tier-1-snapping-and-hotkeys-most-people" aria-label="Permalink">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th>Tool</th><th>Price</th><th>Why pick it</th></tr></thead><tbody><tr><td><strong>Rectangle</strong></td><td>Free, OSS</td><td>The classic. <kbd>⌃</kbd><kbd>⌥</kbd> + arrows/U/I/J/K/Enter/C for halves, quarters, thirds, maximise, centre, <em>next display</em> (<kbd>⌃</kbd><kbd>⌥</kbd><kbd>⌘</kbd><kbd>→</kbd>). Snap areas configurable. <strong>Rectangle Pro</strong> ($10) adds layouts, pinning, app-specific rules, stage-like "throw".</td></tr><tr><td><strong>Raycast window management</strong></td><td>Free (part of Raycast)</td><td>Same actions as Rectangle, assigned via Raycast hotkeys, plus <em>Reasonable Size</em>, <em>Almost Maximize</em>, custom sizes. If you already run Raycast, don't install a second tool.</td></tr><tr><td><strong>Loop</strong></td><td>Free, OSS</td><td>Hold a trigger key and move the mouse for a radial menu of positions. Pretty, fast, very configurable; the choice for people who don't want to memorise 15 chords.</td></tr><tr><td><strong>Swish</strong></td><td>$16</td><td>Trackpad-gesture window management (swipe on a title bar to tile). Great with Magic Trackpad.</td></tr><tr><td><strong>BetterSnapTool / Magnet / Moom</strong></td><td>$3–$10</td><td>Fine; older, still maintained. Moom's custom grid palette remains unique.</td></tr></tbody></table></div>
+<p><strong>Recommendation</strong>: Rectangle if you don't use Raycast; Raycast's built-in commands if you do. Bind: left/right halves, left/right two-thirds, maximise, centre, next display, and "reasonable size". That covers 95% of real use.</p>
+<h3 id="tier-2-automatic-tiling-without-disabling-security">Tier 2 — automatic tiling without disabling security<a class="anchor" href="#tier-2-automatic-tiling-without-disabling-security" aria-label="Permalink">#</a></h3>
+<p><strong>AeroSpace</strong> (free, OSS) is the most recommended tiler in 2026. It's an i3-like tree tiler: every new window is auto-placed in a split; you move focus with <kbd>⌥</kbd><kbd>H/J/K/L</kbd>, move windows with <kbd>⌥</kbd><kbd>⇧</kbd><kbd>H/J/K/L</kbd>, switch layout (tiles ↔ accordion) with <kbd>⌥</kbd><kbd>/</kbd>, and jump to <em>workspaces</em> with <kbd>⌥</kbd><kbd>1</kbd>…<kbd>9</kbd>. Crucially it <strong>does not use macOS Spaces</strong> (it emulates workspaces by hiding windows off-screen), so it needs <strong>no SIP changes</strong>, works on locked-down work machines, and switches workspaces with zero animation. Config is a single <code>~/.aerospace.toml</code> — dotfiles-friendly. Pair it with <strong>JankyBorders</strong> (active-window highlight) and <strong>Sketchybar</strong> if you want a Linux-rice look.</p>
+<p>Minimal <code>~/.aerospace.toml</code> to get started:</p>
+<div class="codeblock"><span class="code-lang">toml</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-toml">start-at-login = true
+after-startup-command = ['exec-and-forget borders active_color=0xff58a6ff width=5.0']
+default-root-container-layout = 'tiles'
+accordion-padding = 30
+[gaps]
+inner.horizontal = 8
+inner.vertical = 8
+outer.left = 8
+outer.bottom = 8
+outer.top = 8
+outer.right = 8
+
+[mode.main.binding]
+alt-h = 'focus left'
+alt-j = 'focus down'
+alt-k = 'focus up'
+alt-l = 'focus right'
+alt-shift-h = 'move left'
+alt-shift-j = 'move down'
+alt-shift-k = 'move up'
+alt-shift-l = 'move right'
+alt-slash = 'layout tiles horizontal vertical'
+alt-comma = 'layout accordion horizontal vertical'
+alt-f = 'fullscreen'
+alt-shift-f = 'layout floating tiling'
+alt-minus = 'resize smart -50'
+alt-equal = 'resize smart +50'
+alt-1 = 'workspace 1'
+alt-2 = 'workspace 2'
+alt-3 = 'workspace 3'
+alt-4 = 'workspace 4'
+alt-shift-1 = 'move-node-to-workspace 1'
+alt-shift-2 = 'move-node-to-workspace 2'
+alt-shift-3 = 'move-node-to-workspace 3'
+alt-shift-4 = 'move-node-to-workspace 4'
+alt-tab = 'workspace-back-and-forth'
+alt-shift-semicolon = 'mode service'
+
+[mode.service.binding]
+esc = ['reload-config', 'mode main']
+r = ['flatten-workspace-tree', 'mode main']
+f = ['layout floating tiling', 'mode main']
+
+# Float apps that hate tiling
+[[on-window-detected]]
+if.app-id = 'com.apple.systempreferences'
+run = 'layout floating'
+[[on-window-detected]]
+if.app-id = 'com.apple.finder'
+run = 'layout floating'</code></pre></div>
+<p><strong>Amethyst</strong> (free, OSS) is the simpler xmonad-style option: fewer concepts, works with real Spaces, good if AeroSpace feels like too much.</p>
+<h3 id="tier-3-yabai-maximum-control-some-sip-cost">Tier 3 — yabai (maximum control, some SIP cost)<a class="anchor" href="#tier-3-yabai-maximum-control-some-sip-cost" aria-label="Permalink">#</a></h3>
+<p><strong>yabai</strong> (free, OSS) + <strong>skhd</strong> (hotkey daemon) is the deepest tiler: BSP layouts, real Spaces integration, window opacity, borders, scripting via a Unix socket. Its full power (creating/destroying/moving Spaces, focusing across displays with animation off, window shadows/opacity) requires <strong>partially disabling System Integrity Protection</strong> and loading a scripting addition into Dock.app:</p>
+<ol>
+<li>Boot to Recovery (hold power → Options → Terminal): <code>csrutil enable --without fs --without debug --without nvram</code> (Apple silicon).</li>
+<li>Reboot, then <code>sudo nvram boot-args=-arm64e_preview_abi</code>, reboot again.</li>
+<li>Add the sudoers line yabai's wiki gives so it can load the scripting addition without a password.</li>
+</ol>
+<p><strong>This weakens your machine's security posture</strong> (kernel/debug protections) and Apple sometimes breaks the addition on major macOS releases — check yabai's issue tracker before installing Golden Gate. Many yabai users run it <em>without</em> the scripting addition (SIP untouched) and accept losing Space manipulation; that is a reasonable middle path. On a work-managed Mac, don't touch SIP; use AeroSpace.</p>
+<h3 id="choosing">Choosing<a class="anchor" href="#choosing" aria-label="Permalink">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th>You…</th><th>Use</th></tr></thead><tbody><tr><td>Just want snap-to-half and maximise</td><td>Native tiling + Rectangle or Raycast</td></tr><tr><td>Use a big monitor and want thirds/two-thirds and quick centring</td><td>Rectangle / Raycast / Loop</td></tr><tr><td>Come from i3/sway/Hyprland and miss auto-tiling</td><td><strong>AeroSpace</strong></td></tr><tr><td>Want auto-tiling but keep real macOS Spaces and swipes</td><td>Amethyst, or yabai without SIP changes</td></tr><tr><td>Want everything scriptable and don't mind SIP tweaks</td><td>yabai + skhd (+ sketchybar)</td></tr><tr><td>Prefer gestures</td><td>Swish, or Loop</td></tr></tbody></table></div>
+<h2 id="multiple-displays">Multiple displays<a class="anchor" href="#multiple-displays" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Arrangement</strong>: <code>Displays → Arrange…</code> (or drag the thumbnails). Put the display with the white bar as your <strong>main display</strong> — the Dock and new windows land there. With a laptop in clamshell, the external becomes main automatically.</li>
+<li><strong>Displays have separate Spaces</strong> (Mission Control): <strong>on</strong>. Each display gets its own Spaces and menu bar. Off gives one giant Space spanning displays (useful for a single ultra-wide + laptop stretched layout, rarely otherwise).</li>
+<li><strong>Move a window to another display</strong>: drag; or hover the green button → <em>Move to <display></em>; or Rectangle's <kbd>⌃</kbd><kbd>⌥</kbd><kbd>⌘</kbd><kbd>←</kbd>/<kbd>→</kbd>; or AeroSpace's <code>move-node-to-monitor</code>.</li>
+<li><strong>Scaling</strong>: for a 4K 27" pick the "looks like 2560×1440" (2×-ish) or 3008×1692 option; text stays sharp because macOS renders at 2× and downsamples. 5K 27" = perfect 2× at 2560×1440. A 1440p 27" monitor runs at 1× and text looks thin — that's the display, not a setting.</li>
+<li><strong>Refresh rate</strong>: choose the max in <code>Displays</code>. Golden Gate exposes more high-res and high-refresh modes over Thunderbolt/HDMI and remembers window positions per display configuration much more reliably.</li>
+<li><strong>Clamshell</strong>: closed lid + external display + power + external keyboard/mouse works out of the box. Keep the lid <em>open</em> an inch if the laptop gets hot under sustained load (the keyboard deck dissipates heat).</li>
+<li><strong>DisplayLink / USB-only docks</strong>: avoid if you can. Thunderbolt/USB4 docks drive displays natively via DisplayPort Alt Mode; DisplayLink needs a driver (screen-recording permission, occasional flicker, no HDCP). If a cheap dock's second monitor doesn't appear, it's DisplayLink.</li>
+<li><strong>Two displays on base M-chips</strong> (M5 Air/Pro): supported natively since M3 (Air needs the lid closed for two externals on M3; M4/M5 Air drives two with lid open). The Neo drives one.</li>
+<li><strong>Sidecar</strong> turns an iPad into a display (wired or wireless, touch supported better in GG). <strong>Universal Control</strong> shares one keyboard/mouse across a Mac and iPad sitting next to each other — enable in <code>Displays → Advanced</code>.</li>
+<li><strong>iPhone Mirroring</strong> (Sequoia+) puts your iPhone on the Mac desktop, resizable in GG; iPhone notifications arrive on the Mac. Useful for testing your own iOS app while coding.</li>
+</ul>
+<h2 id="focus-follows-mouse-and-other-linux-habits">Focus-follows-mouse and other Linux habits<a class="anchor" href="#focus-follows-mouse-and-other-linux-habits" aria-label="Permalink">#</a></h2>
+<p>macOS has no system-wide focus-follows-mouse; AeroSpace/yabai offer it for their windows, and Ghostty/iTerm2 have it for their splits. Sloppy-focus fans generally adjust. Middle-click-to-paste doesn't exist outside X11 terminals (XQuartz). Workspaces-per-monitor behaviour is what <code>Displays have separate Spaces</code> gives you. Keyboard-driven everything: see the shortcuts in Chapter 5.</p>
+<h2 id="recommended-setups">Recommended setups<a class="anchor" href="#recommended-setups" aria-label="Permalink">#</a></h2>
+<p><strong>Student on a 13"/15" laptop, no monitor</strong>: native tiling for halves; 4 Spaces with roles; <kbd>⌃</kbd><kbd>1–4</kbd> bound; full-screen for the editor during deep work; Raycast or Rectangle for "maximise" and "centre". Reduce motion on.</p>
+<p><strong>Engineer with a 27" 5K + laptop</strong>: main display = the 27"; separate Spaces on; editor two-thirds left / terminal one-third right (Rectangle <kbd>⌃</kbd><kbd>⌥</kbd><kbd>E</kbd>/<kbd>T</kbd>) on Space 1 of the big screen; browser on Space 2; comms on the laptop screen. Assign Slack/Mail to the laptop display's Space.</p>
+<p><strong>Tiling enthusiast</strong>: AeroSpace + JankyBorders, 6 workspaces, apps assigned by <code>on-window-detected</code> rules, System Settings/Finder/dialog-heavy apps floated, Ghostty as the terminal with its own splits, <code>alt-tab</code> back-and-forth. Native Spaces unused; Mission Control gestures disabled to avoid confusion.</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="05-keyboard-and-input.html"><span>Previous</span><strong>Keyboard, shortcuts &amp; input</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/06-window-management.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/06-window-management.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#mental-model">Mental model</a></li>
+<li class="lvl2"><a href="#native-window-tiling-sequoia">Native window tiling (Sequoia+)</a></li>
+<li class="lvl2"><a href="#spaces-and-mission-control">Spaces and Mission Control</a></li>
+<li class="lvl2"><a href="#stage-manager">Stage Manager</a></li>
+<li class="lvl2"><a href="#third-party-window-managers">Third-party window managers</a></li>
+<li class="lvl3"><a href="#tier-1-snapping-and-hotkeys-most-people">Tier 1 — snapping and hotkeys (most people)</a></li>
+<li class="lvl3"><a href="#tier-2-automatic-tiling-without-disabling-security">Tier 2 — automatic tiling without disabling security</a></li>
+<li class="lvl3"><a href="#tier-3-yabai-maximum-control-some-sip-cost">Tier 3 — yabai (maximum control, some SIP cost)</a></li>
+<li class="lvl3"><a href="#choosing">Choosing</a></li>
+<li class="lvl2"><a href="#multiple-displays">Multiple displays</a></li>
+<li class="lvl2"><a href="#focus-follows-mouse-and-other-linux-habits">Focus-follows-mouse and other Linux habits</a></li>
+<li class="lvl2"><a href="#recommended-setups">Recommended setups</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
