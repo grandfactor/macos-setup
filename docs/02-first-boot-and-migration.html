@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>First boot, Setup Assistant &amp; migration — The macOS Setup Guide</title>
+<meta name="description" content="Setup Assistant choices that are hard to undo, clean install vs Migration Assistant, the first 30 minutes, and getting to a known-good baseline.">
+<meta property="og:title" content="First boot, Setup Assistant &amp; migration — The macOS Setup Guide">
+<meta property="og:description" content="Setup Assistant choices that are hard to undo, clean install vs Migration Assistant, the first 30 minutes, and getting to a known-good baseline.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li class="active"><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="first-boot-setup-assistant-migration">First boot, Setup Assistant &amp; migration</h1>
+<p>The first fifteen minutes with a new Mac contain three or four decisions that are annoying to reverse later: the account name, whether FileVault is on, how much you hand to iCloud, and whether you migrate an old mess onto a clean machine. This chapter walks through them in order, then gets you to a known-good baseline before you install anything.</p>
+<h2 id="before-you-unbox-decide-these-three-things">Before you unbox: decide these three things<a class="anchor" href="#before-you-unbox-decide-these-three-things" aria-label="Permalink">#</a></h2>
+<ol>
+<li><strong>Clean install or migrate?</strong> See <a href="#migrate-or-start-clean">below</a>. Short version: <em>migrate documents and settings, not applications</em>, unless the old Mac was set up recently and carefully.</li>
+<li><strong>Which Apple Account?</strong> Use your <strong>personal</strong> Apple Account, not a university or employer one — those get deleted when you leave, taking purchases, iCloud data and Find My with you. If the Mac is company-owned and MDM-enrolled, follow IT's instructions; the rest of this guide still applies inside the constraints they set.</li>
+<li><strong>Short username.</strong> Setup Assistant derives your home folder name (<code>/Users/&lt;short name&gt;</code>) from your full name. Pick something short, lowercase, no spaces — <code>alex</code>, not <code>Alexandra Kowalski</code>. Renaming it later is possible but fiddly, and it appears in every path you'll ever paste into a chat.</li>
+</ol>
+<h2 id="setup-assistant-step-by-step">Setup Assistant, step by step<a class="anchor" href="#setup-assistant-step-by-step" aria-label="Permalink">#</a></h2>
+<p>The order below is macOS 26/27 on a new Mac; a wiped Mac is the same.</p>
+<div class="table-wrap"><table><thead><tr><th>Screen</th><th>Recommendation</th><th>Why</th></tr></thead><tbody><tr><td>Language / Country</td><td>Your real region.</td><td>Affects date formats, keyboard, App Store country. Changeable later.</td></tr><tr><td>Accessibility</td><td>Skip unless needed.</td><td>All of it lives in System Settings → Accessibility.</td></tr><tr><td>Wi‑Fi</td><td>Join your network.</td><td>Needed for activation on Apple silicon.</td></tr><tr><td>Migration Assistant</td><td><strong>"Not now"</strong> if you want a clean setup; see below.</td><td>You can run it later from <code>/Applications/Utilities</code>.</td></tr><tr><td>Sign in with your Apple Account</td><td><strong>Sign in.</strong></td><td>Enables Find My (anti-theft), iCloud Keychain (passwords, FileVault recovery key), Passwords app, Continuity. Use 2FA.</td></tr><tr><td>Create a computer account</td><td>Full name; <strong>short username lowercase</strong>; strong password; <strong>"Allow my Apple Account to reset this password" — yes</strong> unless you have a strict threat model.</td><td>The reset option is your safety net if you forget the login password; the Recovery Key covers the FileVault side.</td></tr><tr><td>Location Services</td><td>Yes.</td><td>Find My, time zone, Weather; per-app control later.</td></tr><tr><td>Analytics</td><td>Off (both toggles) unless you want to help Apple.</td><td></td></tr><tr><td>Screen Time</td><td>Skip.</td><td></td></tr><tr><td>Siri &amp; Apple Intelligence</td><td>Enable if you want; Apple Intelligence downloads ~7 GB of models — fine to enable, configurable later.</td><td>On Golden Gate, Siri AI is turned on in Settings afterwards anyway.</td></tr><tr><td><strong>FileVault</strong></td><td><strong>On.</strong> Since Tahoe it's on by default when signed into an Apple Account. Let it store the key in iCloud Keychain.</td><td>Full-disk encryption; Chapter 16 explains the recovery-key change.</td></tr><tr><td>Touch ID</td><td>Enrol at least two fingers.</td><td>Unlock, <code>sudo</code> (Chapter 9), password managers, App Store.</td></tr><tr><td>Apple Pay</td><td>Optional.</td><td></td></tr><tr><td>Appearance</td><td>Auto.</td><td>Chapter 3 tunes Liquid Glass.</td></tr></tbody></table></div>
+<p>When you land on the desktop: <strong>do not start installing apps yet.</strong> Do the baseline below first — ten minutes that save reinstalling.</p>
+<h2 id="migrate-or-start-clean">Migrate or start clean?<a class="anchor" href="#migrate-or-start-clean" aria-label="Permalink">#</a></h2>
+<p><strong>Migration Assistant</strong> (from a Time Machine backup, another Mac over Wi‑Fi/Thunderbolt, or a Windows PC) copies user accounts, applications, settings and files. It works remarkably well and is the right choice for <em>non-technical</em> users. For developers it has a downside: it faithfully copies the accumulated cruft of years — three Python installs, a <code>/usr/local</code> Homebrew from Intel days, launch agents from apps deleted in 2022, and 40 GB of <code>node_modules</code>.</p>
+<div class="table-wrap"><table><thead><tr><th>Coming from</th><th>Do this</th></tr></thead><tbody><tr><td><strong>Brand new to Mac</strong> (Windows/Linux/Chromebook)</td><td>Clean start. Copy documents via cloud drive or external SSD. Windows Migration Assistant is fine for photos/mail/contacts.</td></tr><tr><td><strong>Old Mac set up carelessly (most people)</strong></td><td>Clean start + selective migration: sign in to iCloud, copy <code>~/Documents</code>, <code>~/Pictures</code>, <code>~/Developer</code> from a Time Machine or external drive, reinstall apps via a Brewfile (Chapter 8). Keep the old Mac (or its backup) for a month.</td></tr><tr><td><strong>Old Mac with dotfiles + Brewfile</strong></td><td>Clean start, then <code>git clone</code> your dotfiles and <code>brew bundle</code>. This is the payoff of Chapter 10. Under an hour.</td></tr><tr><td><strong>Old Intel Mac</strong></td><td><strong>Do not migrate applications.</strong> It would drag x86 binaries and an Intel Homebrew onto an arm64 machine, and Rosetta is on its way out. Migrate files only.</td></tr><tr><td><strong>Company laptop → company laptop</strong></td><td>Whatever IT says; usually Migration Assistant or MDM re-provisioning.</td></tr><tr><td><strong>No time this week</strong></td><td>Migrate everything now, do the clean start over a weekend later. Time Machine makes this safe.</td></tr></tbody></table></div>
+<p>If you do run Migration Assistant, untick <em>Applications</em> and <em>Other files and folders</em> in the selection screen to get "files and settings only".</p>
+<p>Sources, fastest to slowest: a <strong>Time Machine drive</strong> plugged in directly; <strong>Mac-to-Mac over a Thunderbolt cable</strong>; Mac-to-Mac over Wi‑Fi (hours for 500 GB). iCloud Drive with Desktop &amp; Documents sync makes files <em>appear</em> once you sign in, but they download on demand — don't rely on it as your only copy during the switch.</p>
+<h2 id="the-first-30-minutes-get-to-a-known-good-baseline">The first 30 minutes: get to a known-good baseline<a class="anchor" href="#the-first-30-minutes-get-to-a-known-good-baseline" aria-label="Permalink">#</a></h2>
+<p>Each item is expanded in later chapters; this is the checklist.</p>
+<h3 id="1-update-macos">1. Update macOS<a class="anchor" href="#1-update-macos" aria-label="Permalink">#</a></h3>
+<p><code>System Settings → General → Software Update</code>. New Macs ship with an image that's weeks or months old. Install everything, reboot. Then click ⓘ next to <em>Automatic Updates</em> and turn on <strong>all</strong> of: <em>Check for updates</em>, <em>Download new updates</em>, <em>Install macOS updates</em>, <em>Install application updates from the App Store</em>, <em>Install Security Responses and system files</em>. Also enable <strong>Background Security Improvements</strong> if shown (Tahoe+). Rapid Security Responses (versions with a letter suffix like 27.0.1 (a)) are how Apple patches actively exploited bugs within days — you want them.</p>
+<div class="admonition note"><p class="admonition-title">Note</p><p><strong>Golden Gate day-one note.</strong> macOS 27 releases September 14, 2026. If your Mac arrived with Tahoe 26.6, you'll be offered 27.0 as a ~15–20 GB delta update. It's fine to install on day one on a fresh machine; on a work machine with critical tools, waiting for 27.0.1 or 27.1 (2–6 weeks) is the conservative choice. Also note: <strong>installing macOS 27 removes Rosetta 2</strong> if it was present — it can be reinstalled (<code>softwareupdate --install-rosetta --agree-to-license</code>), but treat that as a signal to find arm64 versions of whatever needed it.</p></div>
+<h3 id="2-verify-filevault-and-save-the-recovery-key">2. Verify FileVault and save the Recovery Key<a class="anchor" href="#2-verify-filevault-and-save-the-recovery-key" aria-label="Permalink">#</a></h3>
+<p><code>System Settings → Privacy &amp; Security → FileVault</code> should say <strong>On</strong>. Click <strong>Show</strong> next to the Recovery Key (authenticate with Touch ID) and store the 24-character key in your password manager <em>as well as</em> letting it sit in iCloud Keychain. Chapter 16 has the details and the <code>fdesetup validaterecovery</code> check.</p>
+<h3 id="3-find-my-and-anti-theft">3. Find My and anti-theft<a class="anchor" href="#3-find-my-and-anti-theft" aria-label="Permalink">#</a></h3>
+<p><code>System Settings → [Your name] → iCloud → Find My Mac</code>: on. On Apple silicon this also enables <strong>Activation Lock</strong>, so a stolen Mac can't be erased and reused. On a MacBook, also enable <strong>Stolen Device Protection</strong> (<code>System Settings → Touch ID &amp; Password</code>, macOS 26.4+).</p>
+<h3 id="4-fix-the-basics-that-annoy-developers">4. Fix the basics that annoy developers<a class="anchor" href="#4-fix-the-basics-that-annoy-developers" aria-label="Permalink">#</a></h3>
+<p>Ten quick settings — the rest of System Settings is Chapter 3:</p>
+<ul>
+<li><code>Keyboard → Key repeat rate</code>: fastest. <code>Delay until repeat</code>: shortest.</li>
+<li><code>Keyboard → Press 🌐 key to</code>: <strong>Do Nothing</strong> (or Show Emoji &amp; Symbols). Stops accidental emoji pickers.</li>
+<li><code>Keyboard → Text Input → Edit…</code>: turn <strong>off</strong> <em>Correct spelling automatically</em>, <em>Capitalize words automatically</em>, <em>Add period with double-space</em>, and <strong>especially</strong> <em>Use smart quotes and dashes</em>. Smart quotes turn <code>"hello"</code> into <code>“hello”</code> in code pasted into chat, Notes and TextEdit.</li>
+<li><code>Trackpad → Point &amp; Click → Tap to click</code>: on. <code>Tracking speed</code>: 7–8 of 10. <code>Trackpad → More Gestures → App Exposé</code>: on.</li>
+<li><code>Desktop &amp; Dock → Automatically hide and show the Dock</code>: on. <code>Show recent applications in Dock</code>: off.</li>
+<li><code>Desktop &amp; Dock → Hot Corners…</code>: bottom-right → <em>Lock Screen</em>; top-right → <em>Mission Control</em>.</li>
+<li><code>Desktop &amp; Dock → Mission Control → Automatically rearrange Spaces based on most recent use</code>: <strong>off</strong> (predictable ⌃1–⌃9 desktops).</li>
+<li><code>Lock Screen → Require password after screen saver begins or display is turned off</code>: <em>Immediately</em> or <em>After 1 minute</em>.</li>
+<li><code>General → AirDrop &amp; Handoff → AirDrop</code>: <em>Contacts Only</em>.</li>
+<li><code>Appearance → Show scroll bars</code>: <strong>Always</strong> (wide tables and code views).</li>
+</ul>
+<h3 id="5-finder-sanity">5. Finder sanity<a class="anchor" href="#5-finder-sanity" aria-label="Permalink">#</a></h3>
+<p>Finder → <code>Settings</code> (<kbd>⌘</kbd><kbd>,</kbd>):</p>
+<ul>
+<li><em>General</em> → New Finder windows show: <strong>your home folder</strong>.</li>
+<li><em>Sidebar</em>: tick your home folder and <em>Hard disks</em>; <strong>untick Recents</strong>.</li>
+<li><em>Advanced</em>: <strong>Show all filename extensions</strong>; <strong>Keep folders on top</strong> (both); <em>When performing a search</em>: <strong>Search the Current Folder</strong>; untick <em>Show warning before changing an extension</em>.</li>
+<li>In any window: <code>View → Show Path Bar</code>, <code>View → Show Status Bar</code>, <code>View → as List</code>, then <code>View → Show View Options → Use as Defaults</code>.</li>
+<li>Hidden files toggle: <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> — you need it for <code>.zshrc</code>, <code>.git</code>, <code>.env</code>.</li>
+</ul>
+<h3 id="6-create-your-directory-structure">6. Create your directory structure<a class="anchor" href="#6-create-your-directory-structure" aria-label="Permalink">#</a></h3>
+<p>Decide now where code lives; every script you write will assume it.</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">mkdir -p ~/Developer/{scratch,forks,school,work}</code></pre></div>
+<p><code>~/Developer</code> is special: macOS gives it a hammer icon, and it's outside the cloud-synced folders. <strong>Never put repositories inside iCloud Drive, Dropbox, OneDrive or Google Drive</strong> — sync clients fight with Git and build tools and will eventually corrupt <code>.git</code> or upload gigabytes of <code>node_modules</code>. <code>~/code</code>, <code>~/src</code> or <code>~/Projects</code> are equally fine; avoid spaces.</p>
+<h3 id="7-install-the-command-line-developer-tools">7. Install the command-line developer tools<a class="anchor" href="#7-install-the-command-line-developer-tools" aria-label="Permalink">#</a></h3>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">xcode-select --install</code></pre></div>
+<p>This installs <code>git</code>, <code>clang</code>, <code>make</code>, <code>swift</code> and the SDK headers (~2 GB) without the full 15 GB Xcode. Homebrew needs it. Full Xcode is only for iOS/macOS app development — Chapter 7.</p>
+<h3 id="8-sign-in-where-it-matters">8. Sign in where it matters<a class="anchor" href="#8-sign-in-where-it-matters" aria-label="Permalink">#</a></h3>
+<ul>
+<li>App Store (for Xcode and Apple-signed apps; <code>mas</code> in your Brewfile uses it).</li>
+<li>Your password manager — Chapter 16. <strong>Set it up before creating any new accounts</strong>; you'll create dozens of developer-service accounts this month.</li>
+<li>Campus Wi‑Fi (802.1X profiles install from your university's onboarding page).</li>
+</ul>
+<h3 id="9-take-a-snapshot">9. Take a snapshot<a class="anchor" href="#9-take-a-snapshot" aria-label="Permalink">#</a></h3>
+<p>Plug in your Time Machine SSD and let it do the first backup (Chapter 17). If the next hours of installing go wrong, you can revert to a clean macOS in fifteen minutes.</p>
+<h2 id="the-macos-filesystem-for-developers">The macOS filesystem for developers<a class="anchor" href="#the-macos-filesystem-for-developers" aria-label="Permalink">#</a></h2>
+<p>A quick map so the rest of the guide makes sense.</p>
+<div class="table-wrap"><table><thead><tr><th>Path</th><th>What lives there</th><th>Notes</th></tr></thead><tbody><tr><td><code>/System</code>, <code>/usr</code>, <code>/bin</code>, <code>/sbin</code></td><td>The <strong>sealed system volume</strong>: read-only, cryptographically signed.</td><td>You <em>cannot</em> write here even as root (SIP). Use Homebrew's prefix instead.</td></tr><tr><td><code>/Library</code></td><td>System-wide settings, launch daemons, fonts, Application Support for all users.</td><td>Needs admin.</td></tr><tr><td><code>/Applications</code></td><td>Apps for all users. Homebrew casks install here.</td><td></td></tr><tr><td><code>/opt/homebrew</code></td><td><strong>Homebrew on Apple silicon</strong> (<code>bin/</code>, <code>Cellar/</code>, <code>Caskroom/</code>).</td><td><code>/usr/local</code> is the <em>Intel</em> prefix — its presence on an arm64 Mac means someone installed x86 Homebrew under Rosetta.</td></tr><tr><td><code>~</code> (<code>/Users/&lt;you&gt;</code>)</td><td><code>Desktop</code>, <code>Documents</code>, <code>Downloads</code>, <code>Library</code>, <code>Movies</code>, <code>Music</code>, <code>Pictures</code>, <code>Public</code>, <code>Developer</code>.</td><td></td></tr><tr><td><code>~/Library</code></td><td>Your app settings (<code>Preferences/*.plist</code>), <code>Caches</code>, <code>Application Support</code>, <code>LaunchAgents</code>, <code>Containers</code> (sandboxed apps), <code>Mobile Documents</code> (iCloud Drive), <code>Keychains</code>.</td><td>Hidden by default.</td></tr><tr><td><code>~/.config</code>, <code>~/.local</code>, <code>~/.cache</code></td><td>XDG directories used by modern CLI tools (Ghostty, mise, starship, nvim, gh…).</td><td>Chapter 10 puts these under version control.</td></tr><tr><td><code>/private/etc</code>, <code>/private/var</code>, <code>/private/tmp</code></td><td>Unix config, variable data, temp; <code>/etc</code>, <code>/var</code>, <code>/tmp</code> are symlinks to them.</td><td><code>/etc/zshrc</code>, <code>/etc/paths</code>, <code>/etc/hosts</code>, <code>/etc/ssh/</code> live here.</td></tr><tr><td><code>/Volumes</code></td><td>Mounted disks, DMGs, network shares.</td><td>Your boot volume is <code>/</code> and also <code>/Volumes/Macintosh HD</code>.</td></tr><tr><td><code>/Applications/Utilities</code></td><td>Terminal, Activity Monitor, Disk Utility, Console, Migration Assistant, Screen Sharing…</td><td></td></tr></tbody></table></div>
+<p>Two Apple-silicon concepts worth knowing on day one:</p>
+<ul>
+<li><strong>APFS volume group</strong>: your disk is one APFS container holding a sealed <em>System</em> volume, a <em>Data</em> volume (mounted at <code>/System/Volumes/Data</code> and firmlinked into the tree so it looks like one filesystem), <em>Preboot</em>, <em>Recovery</em> and <em>VM</em> (swap). Snapshots are cheap, which is how Time Machine local snapshots and macOS updates roll back.</li>
+<li><strong>Recovery</strong>: shut down, then <em>press and hold the power button</em> until "Loading startup options" appears → <em>Options</em>. From there: reinstall macOS, restore from Time Machine, Disk Utility, <strong>Startup Security Utility</strong> (needed for kernel extensions and some tiling window managers — Chapter 6), Terminal. There is no <kbd>⌘</kbd><kbd>R</kbd> on Apple silicon.</li>
+</ul>
+<h2 id="erasing-and-reinstalling">Erasing and reinstalling<a class="anchor" href="#erasing-and-reinstalling" aria-label="Permalink">#</a></h2>
+<p><code>System Settings → General → Transfer or Reset → Erase All Content and Settings</code> wipes the Data volume, removes your Apple Account and Activation Lock, and returns to Setup Assistant in ~5 minutes <em>without</em> reinstalling macOS. It's the right way to sell a Mac and the fastest way to restart a botched setup. For a fully fresh OS image, use Recovery → Reinstall macOS, or restore the Mac from another Mac via Finder/Apple Configurator with an IPSW (DFU mode) — the nuclear option for a Mac that won't boot.</p>
+<h2 id="common-first-week-problems">Common first-week problems<a class="anchor" href="#common-first-week-problems" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>"Your system has run out of application memory" / beach-balling on 8–16 GB</strong>: check Activity Monitor → Memory → <em>Memory Pressure</em>. Close Chrome tabs, quit idle Electron apps. Revisit Chapter 1's memory table before Apple's 14-day return window closes.</li>
+<li><strong>Battery draining fast for two days</strong>: Spotlight indexing, Photos analysis and Apple Intelligence model downloads run flat out after setup. It settles.</li>
+<li><strong>A dialog asks for a password you don't recognise</strong>: usually your <em>login</em> password (for Keychain), not your Apple Account password. If a <em>former owner's</em> Apple Account is requested, the Mac has Activation Lock — return it.</li>
+<li><strong>Migration brought over an Intel Homebrew</strong> (<code>/usr/local/bin/brew</code> exists; <code>brew config</code> shows <code>Rosetta 2: true</code>): uninstall it (Chapter 8) and install fresh under <code>/opt/homebrew</code>.</li>
+<li><strong>Can't find Launchpad</strong>: removed in Tahoe. <kbd>⌘</kbd><kbd>Space</kbd> then <kbd>⌘</kbd><kbd>1</kbd> shows the Apps grid (Chapter 4), or pinch with four fingers on the trackpad.</li>
+</ul>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="01-hardware-and-buying.html"><span>Previous</span><strong>Hardware &amp; buying guide</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/02-first-boot-and-migration.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/02-first-boot-and-migration.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#before-you-unbox-decide-these-three-things">Before you unbox: decide these three things</a></li>
+<li class="lvl2"><a href="#setup-assistant-step-by-step">Setup Assistant, step by step</a></li>
+<li class="lvl2"><a href="#migrate-or-start-clean">Migrate or start clean?</a></li>
+<li class="lvl2"><a href="#the-first-30-minutes-get-to-a-known-good-baseline">The first 30 minutes: get to a known-good baseline</a></li>
+<li class="lvl3"><a href="#1-update-macos">1. Update macOS</a></li>
+<li class="lvl3"><a href="#2-verify-filevault-and-save-the-recovery-key">2. Verify FileVault and save the Recovery Key</a></li>
+<li class="lvl3"><a href="#3-find-my-and-anti-theft">3. Find My and anti-theft</a></li>
+<li class="lvl3"><a href="#4-fix-the-basics-that-annoy-developers">4. Fix the basics that annoy developers</a></li>
+<li class="lvl3"><a href="#5-finder-sanity">5. Finder sanity</a></li>
+<li class="lvl3"><a href="#6-create-your-directory-structure">6. Create your directory structure</a></li>
+<li class="lvl3"><a href="#7-install-the-command-line-developer-tools">7. Install the command-line developer tools</a></li>
+<li class="lvl3"><a href="#8-sign-in-where-it-matters">8. Sign in where it matters</a></li>
+<li class="lvl3"><a href="#9-take-a-snapshot">9. Take a snapshot</a></li>
+<li class="lvl2"><a href="#the-macos-filesystem-for-developers">The macOS filesystem for developers</a></li>
+<li class="lvl2"><a href="#erasing-and-reinstalling">Erasing and reinstalling</a></li>
+<li class="lvl2"><a href="#common-first-week-problems">Common first-week problems</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
