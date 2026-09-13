@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Checklists &amp; cheat sheets — The macOS Setup Guide</title>
+<meta name="description" content="The whole guide compressed into printable checklists — the day-one setup order, the 30-minute security pass, the developer-environment checklist, weekly/monthly maintenance, a new-project checklist, a pre-travel checklist, and one-page cheat sheets for the terminal, Homebrew, mise/uv, Git, containers, and macOS CLI tools.">
+<meta property="og:title" content="Checklists &amp; cheat sheets — The macOS Setup Guide">
+<meta property="og:description" content="The whole guide compressed into printable checklists — the day-one setup order, the 30-minute security pass, the developer-environment checklist, weekly/monthly maintenance, a new-project checklist, a pre-travel checklist, and one-page cheat sheets for the terminal, Homebrew, mise/uv, Git, containers, and macOS CLI tools.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+<li><a href="15-databases-and-local-dev.html"><span class="nav-num">15</span>Databases &amp; local development services</a></li>
+</ul>
+<p class="nav-part">Part IV — Security, backup &amp; maintenance</p><ul>
+<li><a href="16-security-and-privacy.html"><span class="nav-num">16</span>Security &amp; privacy</a></li>
+<li><a href="17-backup-and-recovery.html"><span class="nav-num">17</span>Backup &amp; recovery</a></li>
+<li><a href="18-performance-and-maintenance.html"><span class="nav-num">18</span>Performance &amp; maintenance</a></li>
+</ul>
+<p class="nav-part">Part V — Daily driving &amp; workflows</p><ul>
+<li><a href="19-daily-driver-apps.html"><span class="nav-num">19</span>Daily-driver apps</a></li>
+<li><a href="20-cs-student-specific.html"><span class="nav-num">20</span>CS-student specific</a></li>
+<li><a href="21-automation-and-scripting.html"><span class="nav-num">21</span>Automation &amp; scripting</a></li>
+<li><a href="22-troubleshooting.html"><span class="nav-num">22</span>Troubleshooting</a></li>
+</ul>
+<p class="nav-part">Part VI — Reference</p><ul>
+<li class="active"><a href="23-checklists-and-cheat-sheets.html"><span class="nav-num">23</span>Checklists &amp; cheat sheets</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="checklists-cheat-sheets">Checklists &amp; cheat sheets</h1>
+<p>Everything in the previous 22 chapters, boiled down to lists you can tick. Each item links back to where it's explained. Print this page (<code>⌘P</code> — the site has a print stylesheet) or keep it open on a second screen during setup day.</p>
+<h2 id="day-one-the-setup-order">Day one: the setup order<a class="anchor" href="#day-one-the-setup-order" aria-label="Permalink">#</a></h2>
+<p>Doing these in order avoids redoing work (e.g., install Homebrew <em>before</em> restoring dotfiles that assume it; turn on FileVault <em>before</em> copying data so it's encrypted from the start).</p>
+<p><strong>Before unboxing</strong> — <a href="01-hardware-and-buying.html">ch. 1</a>, <a href="02-first-boot-and-migration.html">ch. 2</a></p>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> Old Mac: Time Machine backup complete; dotfiles repo pushed; <code>brew bundle dump</code> committed; export browser data; note license keys; sign out of iMessage/Music if selling it.</li>
+<li class="task"><input type="checkbox" disabled> Have your Apple Account password and a second trusted device for 2FA.</li>
+<li class="task"><input type="checkbox" disabled> Decide: migrate (Migration Assistant, convenient) or fresh install (clean, this guide's default).</li>
+</ul>
+<p><strong>Setup Assistant</strong> — <a href="02-first-boot-and-migration.html">ch. 2</a></p>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> Language/region; connect Wi-Fi; skip Migration Assistant if going fresh.</li>
+<li class="task"><input type="checkbox" disabled> Sign in with Apple Account (enables Find My/Activation Lock, iCloud Keychain).</li>
+<li class="task"><input type="checkbox" disabled> Account name short and lowercase (<code>alex</code>, not <code>Alex Smith</code>) — it becomes your home folder.</li>
+<li class="task"><input type="checkbox" disabled> <strong>Turn on FileVault</strong> when offered; choose iCloud/Passwords app for the recovery key.</li>
+<li class="task"><input type="checkbox" disabled> Touch ID; Apple Pay optional; Siri optional; Screen Time skip; Analytics off.</li>
+<li class="task"><input type="checkbox" disabled> Appearance: Auto.</li>
+</ul>
+<p><strong>First 15 minutes</strong> — <a href="03-system-settings.html">ch. 3</a>, <a href="16-security-and-privacy.html">ch. 16</a></p>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> Software Update → install everything; enable automatic security responses.</li>
+<li class="task"><input type="checkbox" disabled> Privacy &amp; Security: FileVault on (verify), Firewall on, Lockdown Mode no (unless needed), Stolen Device Protection on.</li>
+<li class="task"><input type="checkbox" disabled> Lock Screen: require password immediately after sleep; screen saver 5 min.</li>
+<li class="task"><input type="checkbox" disabled> Trackpad: Tap to click, tracking speed, three-finger drag (Accessibility).</li>
+<li class="task"><input type="checkbox" disabled> Keyboard: key repeat fast, delay short; Caps Lock → Escape/Control; <code>fn</code> key → "Do Nothing" or Dictation off; disable press-and-hold accents.</li>
+<li class="task"><input type="checkbox" disabled> Dock: auto-hide, smaller, remove default apps, "Show recent apps" off.</li>
+<li class="task"><input type="checkbox" disabled> Finder: show path bar, status bar, extensions, <code>~/Library</code>; new window opens Home; search current folder.</li>
+<li class="task"><input type="checkbox" disabled> Desktop &amp; Dock: hot corners; Stage Manager off (or on, your call); click wallpaper to reveal desktop → "Only in Stage Manager".</li>
+<li class="task"><input type="checkbox" disabled> Spotlight/Siri: pick your launcher shortcut plan (<code>⌘Space</code> for Spotlight or Raycast).</li>
+<li class="task"><input type="checkbox" disabled> Run the <code>defaults write</code> script from <a href="03-system-settings.html">ch. 3</a> (or <code>scripts/macos-defaults.sh</code> in <a href="appendix-a-bootstrap-script.html">Appendix A</a>).</li>
+</ul>
+<p><strong>Developer bootstrap (30–60 min, mostly waiting)</strong> — <a href="07-command-line-tools-and-xcode.html">ch. 7</a>–<a href="10-dotfiles-and-git.html">10</a></p>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> <code>xcode-select --install</code> (Command Line Tools).</li>
+<li class="task"><input type="checkbox" disabled> Install Homebrew; add <code>shellenv</code> to <code>~/.zprofile</code>; <code>brew doctor</code>.</li>
+<li class="task"><input type="checkbox" disabled> <code>brew bundle --file=Brewfile</code> (<a href="appendix-b-brewfile.html">Appendix B</a>) — terminal, editor, CLI tools, fonts, apps.</li>
+<li class="task"><input type="checkbox" disabled> Ghostty (or chosen terminal) + Nerd Font; open it, close Terminal.app forever.</li>
+<li class="task"><input type="checkbox" disabled> Clone dotfiles; run the installer/stow; new shell — prompt, aliases, plugins working.</li>
+<li class="task"><input type="checkbox" disabled> <code>git config</code> user/email; generate <code>ssh-keygen -t ed25519</code>; add to GitHub (<code>gh auth login</code>); enable commit signing (SSH).</li>
+<li class="task"><input type="checkbox" disabled> Touch ID for <code>sudo</code> (<code>/etc/pam.d/sudo_local</code>).</li>
+<li class="task"><input type="checkbox" disabled> <code>mise</code> installed and activated; <code>mise use -g node@lts python@3.13 …</code>; <code>uv</code> for Python.</li>
+<li class="task"><input type="checkbox" disabled> Editor: sign in to Settings Sync; extensions restored; <code>code</code>/<code>cursor</code>/<code>zed</code> CLI on PATH.</li>
+<li class="task"><input type="checkbox" disabled> Containers: OrbStack (or Docker Desktop/<code>container</code>); <code>docker run hello-world</code>.</li>
+<li class="task"><input type="checkbox" disabled> Full Xcode only if you need iOS/macOS dev (12 GB, App Store or <code>xcodes</code>).</li>
+</ul>
+<p><strong>Apps and accounts</strong> — <a href="19-daily-driver-apps.html">ch. 19</a></p>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> Password manager first; sign in; browser extension.</li>
+<li class="task"><input type="checkbox" disabled> Browsers: default browser set; sync signed in; content blocker; profiles for work/personal.</li>
+<li class="task"><input type="checkbox" disabled> Launcher (Raycast/Alfred) hotkey; clipboard manager; window manager (Rectangle/AeroSpace) — grant Accessibility.</li>
+<li class="task"><input type="checkbox" disabled> Menu bar: Ice, Stats, Itsycal.</li>
+<li class="task"><input type="checkbox" disabled> Communication apps installed and set <strong>not</strong> to open at login.</li>
+<li class="task"><input type="checkbox" disabled> Cloud storage clients; iCloud Drive Desktop &amp; Documents sync decided (default: off for developers).</li>
+</ul>
+<p><strong>Before the end of day one</strong> — <a href="17-backup-and-recovery.html">ch. 17</a></p>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> Time Machine to an external drive (encrypted) — first backup running.</li>
+<li class="task"><input type="checkbox" disabled> Cloud backup (Backblaze/Arq/iCloud) configured, or at least documents in iCloud Drive.</li>
+<li class="task"><input type="checkbox" disabled> Verify Find My shows the Mac; note the serial number in your password manager.</li>
+<li class="task"><input type="checkbox" disabled> <code>brew bundle dump --force --describe</code> — commit the actual Brewfile to dotfiles.</li>
+<li class="task"><input type="checkbox" disabled> Reboot once. Everything should come back exactly as you left it.</li>
+</ul>
+<h2 id="the-30-minute-security-pass">The 30-minute security pass<a class="anchor" href="#the-30-minute-security-pass" aria-label="Permalink">#</a></h2>
+<p>From <a href="16-security-and-privacy.html">ch. 16</a>. Do it on day one and again each semester.</p>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> <code>fdesetup status</code> → FileVault On. Recovery key stored somewhere you can reach without the Mac.</li>
+<li class="task"><input type="checkbox" disabled> Firewall on; "Block all incoming connections" off (breaks AirDrop/Handoff); stealth mode on.</li>
+<li class="task"><input type="checkbox" disabled> Gatekeeper at default ("App Store &amp; Known Developers"). Understand the Privacy &amp; Security → Open Anyway flow; never <code>xattr -d</code> random downloads.</li>
+<li class="task"><input type="checkbox" disabled> Automatic updates on (macOS, App Store, security responses). Homebrew upgraded weekly.</li>
+<li class="task"><input type="checkbox" disabled> Password manager with unique passwords; passkeys where offered; 2FA on Apple Account, GitHub, email, bank; hardware key (YubiKey) for Apple Account and GitHub if you can.</li>
+<li class="task"><input type="checkbox" disabled> Lock screen: immediately; hot corner or <code>⌃⌘Q</code> habit; require password after screen saver.</li>
+<li class="task"><input type="checkbox" disabled> Stolen Device Protection on; Find My on; Activation Lock verified.</li>
+<li class="task"><input type="checkbox" disabled> Privacy → review Full Disk Access, Accessibility, Screen Recording, Input Monitoring, Automation, Location; revoke anything you don't recognize.</li>
+<li class="task"><input type="checkbox" disabled> Sharing: everything off unless used (Screen Sharing, Remote Login/SSH, File Sharing, Remote Management).</li>
+<li class="task"><input type="checkbox" disabled> Safari/browser: block cross-site tracking; Private Relay if iCloud+; DNS over HTTPS profile or router-level.</li>
+<li class="task"><input type="checkbox" disabled> Optional: LuLu outbound firewall; Little Snitch; Objective-See tools (BlockBlock, KnockKnock).</li>
+<li class="task"><input type="checkbox" disabled> Guest user off; auto-login off; login window shows name and password fields (not user list) on shared machines.</li>
+<li class="task"><input type="checkbox" disabled> Secrets: none in dotfiles repo; API keys in Keychain or 1Password CLI; <code>.env</code> files gitignored.</li>
+<li class="task"><input type="checkbox" disabled> SSH: ed25519 keys with passphrase in Keychain; <code>PasswordAuthentication no</code> on any server you own.</li>
+<li class="task"><input type="checkbox" disabled> Run the audit script from <a href="16-security-and-privacy.html">ch. 16</a>; all green.</li>
+</ul>
+<h2 id="developer-environment-checklist">Developer environment checklist<a class="anchor" href="#developer-environment-checklist" aria-label="Permalink">#</a></h2>
+<p>From <a href="07-command-line-tools-and-xcode.html">ch. 7</a>–<a href="15-databases-and-local-dev.html">15</a>. Green means <code>which</code> finds it, it runs, and it's the version you expect.</p>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> <code>xcode-select -p</code> → <code>/Library/Developer/CommandLineTools</code> (or Xcode.app).</li>
+<li class="task"><input type="checkbox" disabled> <code>brew doctor</code> → "ready to brew"; <code>brew --prefix</code> → <code>/opt/homebrew</code>; no <code>/usr/local</code> Homebrew unless intentional.</li>
+<li class="task"><input type="checkbox" disabled> Shell: <code>echo $SHELL</code> → <code>/bin/zsh</code>; <code>time zsh -i -c exit</code> &lt; 300 ms; prompt shows git branch; <code>fzf</code> <code>⌃R</code> history; <code>zoxide</code>; <code>eza</code>/<code>bat</code>/<code>fd</code>/<code>rg</code>/<code>jq</code> installed.</li>
+<li class="task"><input type="checkbox" disabled> Terminal: Nerd Font renders icons; true color (<code>curl -s https://gist.githubusercontent.com/lifepillar/09a44b8cf0f9397465614e622979107f/raw/24-bit-color.sh | bash</code>); <code>⌥</code> as Meta; copy-on-select decided.</li>
+<li class="task"><input type="checkbox" disabled> <code>git --version</code> (Homebrew's, not Apple's, if you want latest); <code>git config --global -l</code> shows name, email, <code>init.defaultBranch main</code>, <code>pull.rebase</code>, signing, <code>core.excludesfile</code> with <code>.DS_Store</code>.</li>
+<li class="task"><input type="checkbox" disabled> <code>ssh -T git@github.com</code> → authenticated; <code>gh auth status</code> ok.</li>
+<li class="task"><input type="checkbox" disabled> <code>mise doctor</code> clean; <code>mise ls</code> shows global tools; <code>node -v</code>, <code>python3 -V</code>, <code>java -version</code>, <code>go version</code>, <code>rustc -V</code> as needed.</li>
+<li class="task"><input type="checkbox" disabled> <code>uv --version</code>; <code>uv python list</code> shows installed interpreters; no global <code>pip install</code>s.</li>
+<li class="task"><input type="checkbox" disabled> Editor opens from the CLI (<code>code .</code>); formatting on save; language servers; Copilot/agent configured (or deliberately off).</li>
+<li class="task"><input type="checkbox" disabled> <code>docker version</code> client + server; <code>docker context ls</code> points at the intended runtime; <code>docker compose version</code>.</li>
+<li class="task"><input type="checkbox" disabled> Databases: <code>psql --version</code>; <code>brew services list</code> shows what autostarts (ideally nothing); TablePlus/DBeaver connects.</li>
+<li class="task"><input type="checkbox" disabled> Cloud CLIs authed as needed (<code>aws sts get-caller-identity</code>, <code>gcloud auth list</code>, <code>az account show</code>); <code>kubectl config get-contexts</code>.</li>
+<li class="task"><input type="checkbox" disabled> <code>~/code</code> (or your layout) exists; excluded from Spotlight and Time Machine as decided; not inside iCloud Drive.</li>
+<li class="task"><input type="checkbox" disabled> Dotfiles repo: <code>git status</code> clean; <code>install.sh</code> idempotent; Brewfile current.</li>
+<li class="task"><input type="checkbox" disabled> <code>~/.local/bin</code> on PATH; personal scripts there.</li>
+</ul>
+<h2 id="new-project-checklist">New project checklist<a class="anchor" href="#new-project-checklist" aria-label="Permalink">#</a></h2>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> <code>mkdir ~/code/&lt;org&gt;/&lt;project&gt; &amp;&amp; cd</code> there; <code>git init</code> (or <code>gh repo create --private --clone</code>).</li>
+<li class="task"><input type="checkbox" disabled> <code>.tool-versions</code> / <code>mise.toml</code> pins runtime versions; <code>mise install</code>.</li>
+<li class="task"><input type="checkbox" disabled> Python: <code>uv init</code> → <code>pyproject.toml</code>; <code>uv add …</code>; <code>.venv</code> gitignored (uv does it). Node: <code>npm init</code>/<code>pnpm init</code>; <code>engines</code> field; lockfile committed.</li>
+<li class="task"><input type="checkbox" disabled> <code>.gitignore</code> for the stack + <code>.DS_Store</code> (global) + <code>.env</code>.</li>
+<li class="task"><input type="checkbox" disabled> <code>.editorconfig</code>; formatter/linter config (<code>ruff</code>, <code>biome</code>/<code>prettier</code>, <code>gofmt</code>…); pre-commit hooks (<code>pre-commit</code> or <code>lefthook</code>).</li>
+<li class="task"><input type="checkbox" disabled> <code>README.md</code> with one-command setup and run instructions; <code>LICENSE</code> if public.</li>
+<li class="task"><input type="checkbox" disabled> <code>compose.yaml</code> for databases/services; <code>.env.example</code> committed, <code>.env</code> not.</li>
+<li class="task"><input type="checkbox" disabled> CI: GitHub Actions workflow running tests on push (<code>actions/setup-node</code>/<code>setup-python</code> with the same pinned version).</li>
+<li class="task"><input type="checkbox" disabled> Editor workspace settings (<code>.vscode/settings.json</code>, recommended extensions) if the team shares them; Copilot disabled per-workspace if the course forbids it.</li>
+<li class="task"><input type="checkbox" disabled> First commit, push, branch protection on <code>main</code> for group work.</li>
+</ul>
+<h2 id="weekly-monthly-semester-maintenance">Weekly / monthly / semester maintenance<a class="anchor" href="#weekly-monthly-semester-maintenance" aria-label="Permalink">#</a></h2>
+<p>From <a href="18-performance-and-maintenance.html">ch. 18</a>, <a href="17-backup-and-recovery.html">ch. 17</a>.</p>
+<p><strong>Weekly (5 min)</strong></p>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> <code>brew update &amp;&amp; brew upgrade &amp;&amp; brew cleanup</code>; <code>mise upgrade</code>.</li>
+<li class="task"><input type="checkbox" disabled> <code>uptime</code> &gt; 14 days → reboot.</li>
+<li class="task"><input type="checkbox" disabled> <code>df -h /</code> &lt; 15% free → cleanup script.</li>
+<li class="task"><input type="checkbox" disabled> Time Machine ran in the last 24 h (<code>tmutil latestbackup</code>).</li>
+</ul>
+<p><strong>Monthly (15 min)</strong></p>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> Run <code>scripts/cleanup.sh</code> (brew, Xcode DerivedData, Docker prune, package caches, Trash, local snapshots).</li>
+<li class="task"><input type="checkbox" disabled> Login Items &amp; Extensions: remove anything unfamiliar or unused.</li>
+<li class="task"><input type="checkbox" disabled> Battery: cycle count noted; charge limit on if docked; <code>pmset -g batt</code>.</li>
+<li class="task"><input type="checkbox" disabled> <code>brew bundle cleanup</code> → decide add-to-Brewfile vs uninstall; commit the Brewfile.</li>
+<li class="task"><input type="checkbox" disabled> Password manager: security report / breached-password check.</li>
+<li class="task"><input type="checkbox" disabled> macOS point update installed.</li>
+</ul>
+<p><strong>Each semester / quarter (1 h)</strong></p>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> Restore test: open a random old file from Time Machine; <code>git clone</code> your dotfiles onto a fresh user account and run the installer.</li>
+<li class="task"><input type="checkbox" disabled> Re-verify student offers (GitHub Education, JetBrains) — <a href="20-cs-student-specific.html">ch. 20</a>.</li>
+<li class="task"><input type="checkbox" disabled> Privacy permissions audit; SSH keys audit on GitHub/servers (remove old machines); rotate API tokens older than a year.</li>
+<li class="task"><input type="checkbox" disabled> <code>npx npkill</code>; <code>docker system prune -a</code>; <code>mise prune</code>; delete simulators you don't use.</li>
+<li class="task"><input type="checkbox" disabled> Check macOS support status; plan the major upgrade ~2–4 weeks after release once your critical tools confirm compatibility.</li>
+<li class="task"><input type="checkbox" disabled> Re-read the "What's new" section on the guide's <a href="index.html">landing page</a>; update Brewfile and dotfiles for tool changes.</li>
+</ul>
+<h2 id="before-travel-a-conference-an-exam">Before travel / a conference / an exam<a class="anchor" href="#before-travel-a-conference-an-exam" aria-label="Permalink">#</a></h2>
+<ul class="task-list">
+<li class="task"><input type="checkbox" disabled> Backup completed <em>today</em>; laptop bag also has the charger (65 W GaN) and a USB-C cable; power bank if flying.</li>
+<li class="task"><input type="checkbox" disabled> Find My verified; Stolen Device Protection on; auto-lock immediate.</li>
+<li class="task"><input type="checkbox" disabled> Charge limit off the night before (charge to 100%); Low Power Mode on when on battery.</li>
+<li class="task"><input type="checkbox" disabled> <code>brew services stop --all</code>; quit Docker; close Electron apps not needed → hours more battery.</li>
+<li class="task"><input type="checkbox" disabled> Offline: docs downloaded (Dash/DevDocs), papers in Zotero synced, repos pulled, <code>uv sync</code>/<code>npm ci</code> run, lecture slides saved locally, Apple Maps offline area.</li>
+<li class="task"><input type="checkbox" disabled> Border crossing: consider logging out of sensitive accounts; FileVault means a powered-off Mac is safe; know your jurisdiction's rules.</li>
+<li class="task"><input type="checkbox" disabled> Presenting: Do Not Disturb Focus scheduled; notifications off on the projector display; screen mirroring resolution tested; HDMI/USB-C adapter packed; <code>caffeinate -d</code> or Amphetamine.</li>
+<li class="task"><input type="checkbox" disabled> Exam with lockdown browser: install and test days before; disable Karabiner/Hammerspoon/clipboard managers that proctoring software flags; know the Wi-Fi.</li>
+</ul>
+<h2 id="cheat-sheet-macos-keyboard-essentials">Cheat sheet: macOS keyboard essentials<a class="anchor" href="#cheat-sheet-macos-keyboard-essentials" aria-label="Permalink">#</a></h2>
+<p>The full table is <a href="appendix-c-keyboard-shortcuts.html">Appendix C</a>. The 20 that matter most:</p>
+<div class="table-wrap"><table><thead><tr><th>Shortcut</th><th>Does</th></tr></thead><tbody><tr><td><code>⌘Space</code></td><td>Spotlight (or your launcher)</td></tr><tr><td><code>⌘Tab</code> / <code>⌘\</code>`</td><td>Switch apps / switch windows of the current app</td></tr><tr><td><code>⌘Q</code> / <code>⌘W</code> / <code>⌘H</code> / <code>⌘M</code></td><td>Quit / close window / hide / minimize</td></tr><tr><td><code>⌥⌘⎋</code></td><td>Force Quit dialog</td></tr><tr><td><code>⌘,</code></td><td>Preferences of any app</td></tr><tr><td><code>⌘⇧3</code> / <code>⌘⇧4</code> / <code>⌘⇧5</code></td><td>Screenshot full / selection / toolbar &amp; recording (add <code>⌃</code> → clipboard)</td></tr><tr><td><code>⌃⌘Q</code></td><td>Lock screen</td></tr><tr><td><code>⌃↑</code> / <code>⌃←→</code></td><td>Mission Control / switch Spaces</td></tr><tr><td><code>fn</code> (Globe) + <code>E</code> / <code>Q</code> / <code>C</code> / <code>N</code> / <code>D</code></td><td>Emoji / Quick Note / Control Center / Notifications / Dictation</td></tr><tr><td><code>⌘⇧.</code></td><td>Toggle hidden files (Finder/open dialogs)</td></tr><tr><td><code>⌘⇧G</code></td><td>Go to folder (Finder/open dialogs — type or paste a path)</td></tr><tr><td><code>Space</code></td><td>Quick Look selected file</td></tr><tr><td><code>⌘⌫</code> / <code>⌘⇧⌫</code></td><td>Move to Trash / empty Trash</td></tr><tr><td><code>⌘↑</code> / <code>⌘↓</code> / <code>⌘O</code></td><td>Parent folder / open (Finder)</td></tr><tr><td><code>⌃A</code> / <code>⌃E</code> / <code>⌃K</code> / <code>⌥←→</code></td><td>Emacs-style line editing in every text field</td></tr><tr><td><code>⌘⇧V</code></td><td>Paste and match style (most apps)</td></tr><tr><td><code>⌃⌘Space</code></td><td>Character viewer (emoji/symbols) — or <code>fn E</code></td></tr><tr><td><code>⌘⌥D</code></td><td>Toggle Dock</td></tr><tr><td><code>⌘⌥⌃8</code> (via Accessibility shortcut)</td><td>Invert colors — set up in Accessibility → Shortcut</td></tr><tr><td>Hold <code>⌥</code> while clicking menu bar icons</td><td>Extra info (Wi-Fi diagnostics, Bluetooth details, Sound devices)</td></tr></tbody></table></div>
+<h2 id="cheat-sheet-terminal-on-macos">Cheat sheet: terminal on macOS<a class="anchor" href="#cheat-sheet-terminal-on-macos" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># Files
+open .                     # Finder here          open -a "Visual Studio Code" file
+open -R file               # reveal in Finder     qlmanage -p file 2&gt;/dev/null  # Quick Look
+pbcopy &lt; file ; pbpaste    # clipboard            trash file    # brew install trash
+mdfind -onlyin ~ "query"   # Spotlight search     mdls file     # metadata
+ls -la@                    # extended attrs       xattr -d com.apple.quarantine file
+du -shx * | sort -rh | head  # what's big         dust / ncdu   # interactive
+
+# System
+sw_vers ; uname -m ; uptime ; system_profiler SPHardwareDataType
+memory_pressure | tail -1 ; sysctl vm.swapusage ; df -h /
+top -o cpu -stats pid,command,cpu,mem ; sudo powermetrics --samplers smc -n1 -i1000
+pmset -g batt ; pmset -g assertions ; caffeinate -dis cmd
+softwareupdate -l ; softwareupdate --install-rosetta --agree-to-license
+launchctl list | grep -v com.apple ; launchctl bootout gui/$(id -u)/label
+log show --last 10m --predicate 'messageType == error' --style compact
+diskutil list ; diskutil apfs list ; tmutil listlocalsnapshots /
+defaults read com.apple.dock ; defaults write -g KeyRepeat -int 2 ; killall Dock
+
+# Network
+lsof -nP -iTCP -sTCP:LISTEN            # who's listening
+kill $(lsof -t -iTCP:3000)             # free a port
+sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder   # flush DNS
+scutil --dns | grep nameserver | sort -u ; sudo wdutil info
+networksetup -listallhardwareports ; ipconfig getifaddr en0
+
+# Security
+fdesetup status ; spctl --status ; csrutil status ; sudo pfctl -s info
+security find-generic-password -s name -w      # read a Keychain secret
+codesign -dv --verbose=2 /Applications/App.app ; codesign -s - -f ./bin
+
+# Automation
+osascript -e 'display notification "done" with title "build"'
+shortcuts run "Name" ; say "done" ; afplay /System/Library/Sounds/Glass.aiff</code></pre></div>
+<h2 id="cheat-sheet-homebrew-6">Cheat sheet: Homebrew 6<a class="anchor" href="#cheat-sheet-homebrew-6" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew install pkg          brew install --cask app      brew uninstall --zap app
+brew search x             brew info x                  brew home x
+brew update               brew upgrade [--greedy]      brew cleanup --prune=all -s
+brew outdated             brew pin x / brew unpin x    brew autoremove
+brew list --formula       brew list --cask             brew leaves   # top-level only
+brew deps --tree x        brew uses --installed x      brew doctor
+brew services list        brew services run x          brew services start/stop x
+brew bundle dump --force --describe       brew bundle [--file=~/Brewfile]     brew bundle cleanup
+brew tap user/repo        brew untap user/repo         # Homebrew 6: taps prompt for trust
+brew exec cmd             # run with Homebrew's env (6.0)
+brew --prefix [x]         brew --cache                 brew shellenv
+HOMEBREW_NO_AUTO_UPDATE=1 brew install x               # skip update this once</code></pre></div>
+<h2 id="cheat-sheet-mise-uv">Cheat sheet: mise + uv<a class="anchor" href="#cheat-sheet-mise-uv" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># mise — runtimes
+mise use -g node@lts python@3.13 java@21 go@latest    # global
+mise use node@24                                       # per-project → mise.toml
+mise install ; mise ls ; mise ls-remote node ; mise outdated ; mise upgrade
+mise exec node@22 -- node script.js ; mise run task    # tasks from mise.toml
+mise doctor ; mise prune ; mise self-update
+mise settings set idiomatic_version_file_enable_tools node,python   # .nvmrc/.python-version
+
+# uv — Python
+uv python install 3.13 ; uv python list ; uv python pin 3.13
+uv init ; uv add requests ; uv add --dev pytest ruff ; uv remove x
+uv sync ; uv lock ; uv run pytest ; uv run script.py
+uv tool install ruff ; uvx black .        # global tools, isolated (pipx replacement)
+uv pip install -r requirements.txt        # pip-compatible mode inside .venv
+uv venv ; source .venv/bin/activate       # if you want a classic venv
+uv cache clean
+# inline script deps (PEP 723):  # /// script \n # dependencies = ["httpx"] \n # ///</code></pre></div>
+<h2 id="cheat-sheet-git">Cheat sheet: Git<a class="anchor" href="#cheat-sheet-git" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">git init -b main ; gh repo create --private --source=. --push
+git status -sb ; git add -p ; git commit -m "type(scope): msg" ; git push -u origin HEAD
+git switch -c feature ; git switch - ; git branch -d feature
+git fetch --prune ; git pull --rebase ; git rebase -i origin/main
+git stash push -m "wip" ; git stash pop ; git stash list
+git log --oneline --graph --all -20 ; git log -p --follow file ; git blame -w -C file
+git diff --staged ; git diff main...HEAD ; git difftool
+git restore file ; git restore --staged file ; git reset --soft HEAD~1 ; git revert sha
+git reflog                                    # undo almost anything
+git worktree add ../proj-fix fix-branch       # parallel checkouts
+git bisect start ; git bisect bad ; git bisect good sha ; git bisect run ./test.sh
+git config --global rerere.enabled true       # remember conflict resolutions
+gh pr create --fill ; gh pr checkout 42 ; gh pr view --web ; gh run watch
+# signing (SSH):  git config --global gpg.format ssh ; user.signingkey ~/.ssh/id_ed25519.pub ; commit.gpgsign true</code></pre></div>
+<h2 id="cheat-sheet-containers">Cheat sheet: containers<a class="anchor" href="#cheat-sheet-containers" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">docker context ls ; docker context use orbstack
+docker run --rm -it -v "$PWD":/w -w /w -p 8080:80 image cmd
+docker run -d --name pg -e POSTGRES_PASSWORD=pw -p 5432:5432 -v pgdata:/var/lib/postgresql/data postgres:18
+docker ps -a ; docker logs -f name ; docker exec -it name sh ; docker stop name ; docker rm -f name
+docker build -t app . ; docker buildx build --platform linux/arm64,linux/amd64 -t app --push .
+docker run --platform linux/amd64 image          # x86 image via Rosetta (until macOS 28)
+docker compose up -d ; docker compose logs -f svc ; docker compose down -v
+docker system df ; docker system prune -a --volumes ; docker image prune
+orb create ubuntu:24.04 dev ; orb -m dev bash ; orb list ; orb stop dev    # OrbStack Linux machines
+container run --rm -it alpine sh                  # Apple's container CLI</code></pre></div>
+<h2 id="cheat-sheet-where-things-live">Cheat sheet: where things live<a class="anchor" href="#cheat-sheet-where-things-live" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>What</th><th>Path</th></tr></thead><tbody><tr><td>Homebrew</td><td><code>/opt/homebrew</code> (<code>bin/</code>, <code>Cellar/</code>, <code>Caskroom/</code>, <code>etc/</code>, <code>var/</code>)</td></tr><tr><td>Command Line Tools</td><td><code>/Library/Developer/CommandLineTools</code></td></tr><tr><td>Xcode</td><td><code>/Applications/Xcode.app</code>; <code>~/Library/Developer/Xcode/DerivedData</code></td></tr><tr><td>Shell config</td><td><code>~/.zshenv</code> → <code>~/.zprofile</code> (login) → <code>~/.zshrc</code> (interactive); system: <code>/etc/zshrc</code>, <code>/etc/paths.d/</code></td></tr><tr><td>User launch agents</td><td><code>~/Library/LaunchAgents</code> (3rd-party system: <code>/Library/LaunchAgents</code>, <code>/Library/LaunchDaemons</code>)</td></tr><tr><td>App preferences</td><td><code>~/Library/Preferences/*.plist</code>; sandboxed: <code>~/Library/Containers/&lt;bundle&gt;/Data/Library/Preferences</code></td></tr><tr><td>App support/data</td><td><code>~/Library/Application Support/&lt;App&gt;</code></td></tr><tr><td>Caches / logs</td><td><code>~/Library/Caches</code>, <code>~/Library/Logs</code>, <code>/Library/Logs/DiagnosticReports</code></td></tr><tr><td>Mise / uv / cargo / go</td><td><code>~/.local/share/mise</code>, <code>~/.cache/uv</code> + <code>~/.local/share/uv</code>, <code>~/.cargo</code>, <code>~/go</code></td></tr><tr><td>SSH / GPG</td><td><code>~/.ssh</code> (<code>config</code>, keys, <code>known_hosts</code>), <code>~/.gnupg</code></td></tr><tr><td>Keychains</td><td><code>~/Library/Keychains</code>; system <code>/Library/Keychains</code></td></tr><tr><td>Fonts</td><td><code>~/Library/Fonts</code> (user), <code>/Library/Fonts</code> (all users)</td></tr><tr><td>iCloud Drive</td><td><code>~/Library/Mobile Documents/com~apple~CloudDocs</code></td></tr><tr><td>Screenshots default</td><td><code>~/Desktop</code> (change: <code>defaults write com.apple.screencapture location …</code>)</td></tr><tr><td>Time Machine local snapshots</td><td>hidden; <code>tmutil listlocalsnapshots /</code></td></tr><tr><td>Hosts file</td><td><code>/etc/hosts</code> (then flush DNS)</td></tr><tr><td>Sudo Touch ID</td><td><code>/etc/pam.d/sudo_local</code></td></tr><tr><td>System (read-only, sealed)</td><td><code>/System</code>, <code>/usr/bin</code>, <code>/bin</code>; writable: <code>/usr/local</code>, <code>/opt</code>, <code>/Library</code>, <code>~</code></td></tr></tbody></table></div>
+<h2 id="cheat-sheet-version-and-support-timeline-september-2026">Cheat sheet: version and support timeline (September 2026)<a class="anchor" href="#cheat-sheet-version-and-support-timeline-september-2026" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>Thing</th><th>Current</th><th>Next</th><th>Notes</th></tr></thead><tbody><tr><td>macOS</td><td>26.6 Tahoe</td><td><strong>27 Golden Gate — 14 Sept 2026</strong></td><td>Apple-silicon only; Rosetta removed on 27 (reinstallable), gone in 28</td></tr><tr><td>Security updates</td><td>26.x, 25.x (Sequoia), 24.x (Sonoma)</td><td>24 drops when 27 ships</td><td>Stay within N-1</td></tr><tr><td>Xcode</td><td>26.x</td><td>27 with macOS 27</td><td>~12 GB</td></tr><tr><td>Homebrew</td><td>6.x</td><td>—</td><td>tap trust prompts, <code>brew exec</code>, Intel Tier 3</td></tr><tr><td>Node</td><td>24 LTS (active)</td><td><strong>26 LTS — Oct 2026</strong></td><td>New yearly release model</td></tr><tr><td>Python</td><td>3.14</td><td><strong>3.15 — Oct 2026</strong></td><td>Use <code>uv</code></td></tr><tr><td>Java</td><td>25 LTS</td><td>27 LTS Sept 2027</td><td>21 still common in courses</td></tr><tr><td>Go / Rust</td><td>1.27 / 1.9x</td><td>6-month / 6-week cadence</td><td><code>mise use go@latest</code></td></tr><tr><td>PostgreSQL</td><td>18</td><td>19 — Sept/Oct 2026</td><td><code>postgresql@18</code></td></tr><tr><td>Ghostty</td><td>1.3</td><td>—</td><td>—</td></tr><tr><td>VS Code</td><td>monthly</td><td>—</td><td>—</td></tr></tbody></table></div>
+<p>Exact numbers will drift — <a href="appendix-e-sources.html">Appendix E</a> lists where to check.</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="22-troubleshooting.html"><span>Previous</span><strong>Troubleshooting</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/23-checklists-and-cheat-sheets.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/23-checklists-and-cheat-sheets.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#day-one-the-setup-order">Day one: the setup order</a></li>
+<li class="lvl2"><a href="#the-30-minute-security-pass">The 30-minute security pass</a></li>
+<li class="lvl2"><a href="#developer-environment-checklist">Developer environment checklist</a></li>
+<li class="lvl2"><a href="#new-project-checklist">New project checklist</a></li>
+<li class="lvl2"><a href="#weekly-monthly-semester-maintenance">Weekly / monthly / semester maintenance</a></li>
+<li class="lvl2"><a href="#before-travel-a-conference-an-exam">Before travel / a conference / an exam</a></li>
+<li class="lvl2"><a href="#cheat-sheet-macos-keyboard-essentials">Cheat sheet: macOS keyboard essentials</a></li>
+<li class="lvl2"><a href="#cheat-sheet-terminal-on-macos">Cheat sheet: terminal on macOS</a></li>
+<li class="lvl2"><a href="#cheat-sheet-homebrew-6">Cheat sheet: Homebrew 6</a></li>
+<li class="lvl2"><a href="#cheat-sheet-mise-uv">Cheat sheet: mise + uv</a></li>
+<li class="lvl2"><a href="#cheat-sheet-git">Cheat sheet: Git</a></li>
+<li class="lvl2"><a href="#cheat-sheet-containers">Cheat sheet: containers</a></li>
+<li class="lvl2"><a href="#cheat-sheet-where-things-live">Cheat sheet: where things live</a></li>
+<li class="lvl2"><a href="#cheat-sheet-version-and-support-timeline-september-2026">Cheat sheet: version and support timeline (September 2026)</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
