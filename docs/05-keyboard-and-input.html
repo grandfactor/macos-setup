@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Keyboard, shortcuts &amp; input — The macOS Setup Guide</title>
+<meta name="description" content="Modifier remaps, Caps Lock as Control/Escape, Karabiner-Elements, text navigation shortcuts every Mac user should know, input sources, and coming from Windows/Linux keyboards.">
+<meta property="og:title" content="Keyboard, shortcuts &amp; input — The macOS Setup Guide">
+<meta property="og:description" content="Modifier remaps, Caps Lock as Control/Escape, Karabiner-Elements, text navigation shortcuts every Mac user should know, input sources, and coming from Windows/Linux keyboards.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li class="active"><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="keyboard-shortcuts-input">Keyboard, shortcuts &amp; input</h1>
+<p>macOS is a keyboard-first operating system wearing a mouse-first costume. Nearly everything has a shortcut, most text fields share the same Emacs-derived navigation keys, and modifier keys are remappable at the system level. Learn this chapter once and every app gets faster.</p>
+<h2 id="the-modifier-keys-and-what-they-mean">The modifier keys and what they mean<a class="anchor" href="#the-modifier-keys-and-what-they-mean" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>Symbol</th><th>Role</th></tr></thead><tbody><tr><td>Command</td><td><kbd>⌘</kbd></td><td>App-level actions: copy, paste, save, quit, switch apps. Equivalent to <kbd>Ctrl</kbd> on Windows/Linux for <em>shortcuts</em>.</td></tr><tr><td>Option (Alt)</td><td><kbd>⌥</kbd></td><td>Modifies: word-wise movement, special characters, alternate menu items (hold ⌥ while a menu is open to see them).</td></tr><tr><td>Control</td><td><kbd>⌃</kbd></td><td>Terminal/Emacs-style text editing (<kbd>⌃</kbd><kbd>A</kbd>, <kbd>⌃</kbd><kbd>E</kbd>, <kbd>⌃</kbd><kbd>K</kbd>), window/Space management, right-click (<kbd>⌃</kbd>-click).</td></tr><tr><td>Shift</td><td><kbd>⇧</kbd></td><td>Extend selection; reverse direction of many shortcuts.</td></tr><tr><td>Function / Globe</td><td><kbd>fn</kbd> / <kbd>🌐</kbd></td><td>Function-row behaviour; emoji picker; a fourth modifier in some apps. On Apple silicon it's also used by native window tiling (<kbd>fn</kbd><kbd>⌃</kbd><kbd>←</kbd>).</td></tr><tr><td>Caps Lock</td><td></td><td>Wasted real estate — remap it (below).</td></tr></tbody></table></div>
+<p>The key insight for switchers: <strong><kbd>⌘</kbd> is where your thumb is</strong>, so <kbd>⌘</kbd><kbd>C</kbd>/<kbd>V</kbd>/<kbd>Z</kbd>/<kbd>S</kbd>/<kbd>W</kbd>/<kbd>Q</kbd>/<kbd>T</kbd> are one-hand chords, and <kbd>⌃</kbd> is free for the terminal — <kbd>⌃</kbd><kbd>C</kbd> interrupts a process while <kbd>⌘</kbd><kbd>C</kbd> copies, with no conflict. This is why the Mac terminal experience is nicer than Windows'.</p>
+<h2 id="remap-caps-lock-do-this-today">Remap Caps Lock (do this today)<a class="anchor" href="#remap-caps-lock-do-this-today" aria-label="Permalink">#</a></h2>
+<p><code>System Settings → Keyboard → Keyboard Shortcuts… → Modifier Keys</code>. Choose the keyboard in the dropdown (each keyboard is remapped separately) and set <strong>Caps Lock → ⌃ Control</strong>. Control is the most useful key with the worst factory position; on the home row it makes terminal editing, tmux prefixes, and IDE shortcuts effortless. Vim users often prefer <strong>Caps Lock → ⎋ Escape</strong>, or — with Karabiner — <em>Escape when tapped, Control when held</em> (the "dual-role" setup), which is what most heavy keyboard users end up with.</p>
+<p>While you're there, on a <strong>Windows-layout keyboard</strong>, swap <strong>⌥ Option ↔ ⌘ Command</strong> so the key next to the space bar is Command like on a Mac keyboard. (Many mechanical keyboards have a hardware Mac/Win switch or DIP setting — use that instead if present.)</p>
+<h2 id="karabiner-elements-the-remapper">Karabiner-Elements: the remapper<a class="anchor" href="#karabiner-elements-the-remapper" aria-label="Permalink">#</a></h2>
+<p>For anything beyond the five modifier keys, <strong>Karabiner-Elements</strong> (free, open source, <code>brew install --cask karabiner-elements</code>) is the standard. It runs as a system extension (approve it in <code>System Settings → General → Login Items &amp; Extensions → Driver Extensions</code>, and grant <em>Input Monitoring</em>). Popular "complex modifications" you can import from its online rules gallery or write yourself:</p>
+<ul>
+<li><strong>Caps Lock → Escape if alone, Control if held</strong> (the canonical one).</li>
+<li><strong>Hyper key</strong>: Caps Lock → <kbd>⌘</kbd><kbd>⌥</kbd><kbd>⌃</kbd><kbd>⇧</kbd> when held — a fifth modifier no app uses, so <kbd>Hyper</kbd><kbd>T</kbd> can launch your terminal, <kbd>Hyper</kbd><kbd>H/J/K/L</kbd> can be arrows, etc. Pairs beautifully with Raycast hotkeys or a window manager.</li>
+<li><strong>Right ⌘ → Change input source</strong>, <strong>Right ⌥ → Fn</strong> for keyboards that lack it.</li>
+<li><strong>Vim-style navigation layer</strong> (hold a key → H/J/K/L become arrows everywhere).</li>
+<li><strong>Per-device profiles</strong>: a different map for your external mechanical keyboard vs the built-in one.</li>
+<li><strong>Swap ⌥ and ⌘ only on external PC keyboards</strong> (Karabiner does this per device, unlike System Settings' per-keyboard dropdown which sometimes forgets).</li>
+</ul>
+<p>A minimal <code>~/.config/karabiner/karabiner.json</code> "Caps Lock dual role" rule:</p>
+<div class="codeblock"><span class="code-lang">json</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-json">{
+  "description": "Caps Lock → Escape (tap) / Control (hold)",
+  "manipulators": [{
+    "type": "basic",
+    "from": { "key_code": "caps_lock", "modifiers": { "optional": ["any"] } },
+    "to": [{ "key_code": "left_control" }],
+    "to_if_alone": [{ "key_code": "escape" }]
+  }]
+}</code></pre></div>
+<p>Karabiner's config is JSON and lives in <code>~/.config/karabiner/</code>, so it belongs in your dotfiles (Chapter 10). Alternatives: <strong>Hyperkey</strong> (just the Hyper key, one click), <strong>Keyboard Maestro</strong> (paid; macros, not just remaps — Chapter 21), or a QMK/ZMK/VIA-programmable keyboard where the remap lives in the firmware and follows the keyboard.</p>
+<h2 id="text-editing-shortcuts-that-work-everywhere">Text editing shortcuts that work everywhere<a class="anchor" href="#text-editing-shortcuts-that-work-everywhere" aria-label="Permalink">#</a></h2>
+<p>These work in every native text field — Safari, Mail, Notes, Slack's composer, the address bar, Xcode, even most Electron apps — because they're implemented by the Cocoa text system, not the app.</p>
+<div class="table-wrap"><table><thead><tr><th>Action</th><th>Shortcut</th></tr></thead><tbody><tr><td>Move by word</td><td><kbd>⌥</kbd><kbd>←</kbd> / <kbd>⌥</kbd><kbd>→</kbd></td></tr><tr><td>Start / end of line</td><td><kbd>⌘</kbd><kbd>←</kbd> / <kbd>⌘</kbd><kbd>→</kbd> (also <kbd>⌃</kbd><kbd>A</kbd> / <kbd>⌃</kbd><kbd>E</kbd>)</td></tr><tr><td>Start / end of document</td><td><kbd>⌘</kbd><kbd>↑</kbd> / <kbd>⌘</kbd><kbd>↓</kbd></td></tr><tr><td>Page up / down</td><td><kbd>fn</kbd><kbd>↑</kbd> / <kbd>fn</kbd><kbd>↓</kbd> (<kbd>⌃</kbd><kbd>V</kbd> down)</td></tr><tr><td>Select (add <kbd>⇧</kbd> to any movement)</td><td><kbd>⌥</kbd><kbd>⇧</kbd><kbd>→</kbd> selects a word; <kbd>⌘</kbd><kbd>⇧</kbd><kbd>←</kbd> to line start</td></tr><tr><td>Delete word back / forward</td><td><kbd>⌥</kbd><kbd>⌫</kbd> / <kbd>⌥</kbd><kbd>fn</kbd><kbd>⌫</kbd> (<kbd>⌥</kbd><kbd>D</kbd> in terminals)</td></tr><tr><td>Delete to line start</td><td><kbd>⌘</kbd><kbd>⌫</kbd></td></tr><tr><td>Delete to line end</td><td><kbd>⌃</kbd><kbd>K</kbd> (kills to <em>macOS</em> kill buffer; <kbd>⌃</kbd><kbd>Y</kbd> yanks it back)</td></tr><tr><td>Forward delete</td><td><kbd>fn</kbd><kbd>⌫</kbd> or <kbd>⌃</kbd><kbd>D</kbd></td></tr><tr><td>Transpose two characters</td><td><kbd>⌃</kbd><kbd>T</kbd></td></tr><tr><td>Move line (Notes/Pages/Xcode)</td><td><kbd>⌃</kbd><kbd>⌘</kbd><kbd>↑</kbd>/<kbd>↓</kbd></td></tr><tr><td>Emacs-style char/line movement</td><td><kbd>⌃</kbd><kbd>F</kbd>/<kbd>B</kbd>/<kbd>N</kbd>/<kbd>P</kbd></td></tr><tr><td>Paste and match style (plain text)</td><td><kbd>⌘</kbd><kbd>⌥</kbd><kbd>⇧</kbd><kbd>V</kbd></td></tr><tr><td>Look up / define selected word</td><td><kbd>⌃</kbd><kbd>⌘</kbd><kbd>D</kbd> (or three-finger tap)</td></tr><tr><td>Emoji &amp; symbols picker</td><td><kbd>⌃</kbd><kbd>⌘</kbd><kbd>Space</kbd> (or <kbd>🌐</kbd> if you left it enabled)</td></tr><tr><td>Special characters</td><td>Hold <kbd>⌥</kbd>: <kbd>⌥</kbd><kbd>-</kbd> en dash –, <kbd>⌥</kbd><kbd>⇧</kbd><kbd>-</kbd> em dash —, <kbd>⌥</kbd><kbd>;</kbd> …, <kbd>⌥</kbd><kbd>8</kbd> •, <kbd>⌥</kbd><kbd>2</kbd> ™, <kbd>⌥</kbd><kbd>G</kbd> ©, <kbd>⌥</kbd><kbd>E</kbd> then vowel → é, <kbd>⌥</kbd><kbd>U</kbd> then vowel → ü, <kbd>⌥</kbd><kbd>N</kbd> then n → ñ</td></tr><tr><td>Accents on a held key</td><td>Hold <kbd>e</kbd> → picker (disable with <code>ApplePressAndHoldEnabled false</code> to get key repeat instead — Chapter 3)</td></tr></tbody></table></div>
+<p>You can add or override these globally by editing <code>~/Library/KeyBindings/DefaultKeyBinding.dict</code> (create it). Windows switchers who want <kbd>Home</kbd>/<kbd>End</kbd> to mean line start/end rather than document start/end:</p>
+<div class="codeblock"><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code>{
+  "\UF729"  = moveToBeginningOfLine:;                       /* Home */
+  "\UF72B"  = moveToEndOfLine:;                             /* End  */
+  "$\UF729" = moveToBeginningOfLineAndModifySelection:;     /* Shift-Home */
+  "$\UF72B" = moveToEndOfLineAndModifySelection:;           /* Shift-End  */
+  "^\UF729" = moveToBeginningOfDocument:;                   /* Ctrl-Home */
+  "^\UF72B" = moveToEndOfDocument:;                         /* Ctrl-End */
+}</code></pre></div>
+<p>Log out and back in. (Electron apps and terminals have their own keymaps and ignore this file.)</p>
+<h2 id="system-shortcuts-worth-memorising">System shortcuts worth memorising<a class="anchor" href="#system-shortcuts-worth-memorising" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>Category</th><th>Shortcut</th><th>Does</th></tr></thead><tbody><tr><td><strong>Apps</strong></td><td><kbd>⌘</kbd><kbd>Tab</kbd> / <kbd>⌘</kbd><kbd>`</kbd></td><td>Switch apps / windows of the current app</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>Q</kbd> / <kbd>⌘</kbd><kbd>W</kbd> / <kbd>⌘</kbd><kbd>⌥</kbd><kbd>W</kbd></td><td>Quit app / close window or tab / close all windows</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>H</kbd> / <kbd>⌘</kbd><kbd>⌥</kbd><kbd>H</kbd></td><td>Hide app / hide all others</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>M</kbd></td><td>Minimise (prefer ⌘H — minimised windows vanish from ⌘Tab)</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>⌥</kbd><kbd>⎋</kbd></td><td>Force Quit dialog</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>,</kbd></td><td>App settings — universal</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>⇧</kbd><kbd>/</kbd></td><td>Help menu search — finds <em>any</em> menu item by name, then arrow to it</td></tr><tr><td><strong>Window</strong></td><td><kbd>fn</kbd><kbd>⌃</kbd><kbd>←</kbd>/<kbd>→</kbd>/<kbd>↑</kbd>/<kbd>↓</kbd></td><td>Native tiling: left/right half, fill, centre (Chapter 6)</td></tr><tr><td></td><td><kbd>fn</kbd><kbd>⌃</kbd><kbd>⇧</kbd> + arrows</td><td>Quarters</td></tr><tr><td></td><td><kbd>fn</kbd><kbd>⌃</kbd><kbd>R</kbd></td><td>Return to previous size</td></tr><tr><td></td><td><kbd>⌃</kbd><kbd>⌘</kbd><kbd>F</kbd> / <kbd>fn</kbd><kbd>F</kbd></td><td>Full screen</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>N</kbd> / <kbd>⌘</kbd><kbd>T</kbd></td><td>New window / tab</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>⇧</kbd><kbd>[</kbd> / <kbd>]</kbd>, <kbd>⌃</kbd><kbd>Tab</kbd></td><td>Previous/next tab (works in Safari, Terminal, Finder, VS Code…)</td></tr><tr><td><strong>Spaces</strong></td><td><kbd>⌃</kbd><kbd>←</kbd>/<kbd>→</kbd></td><td>Previous/next Space</td></tr><tr><td></td><td><kbd>⌃</kbd><kbd>1</kbd>…<kbd>9</kbd></td><td>Jump to Space N (enable in Keyboard Shortcuts → Mission Control)</td></tr><tr><td></td><td><kbd>⌃</kbd><kbd>↑</kbd> / <kbd>⌃</kbd><kbd>↓</kbd></td><td>Mission Control / App Exposé</td></tr><tr><td></td><td><kbd>fn</kbd><kbd>H</kbd> or <kbd>F11</kbd></td><td>Show desktop</td></tr><tr><td><strong>System</strong></td><td><kbd>⌘</kbd><kbd>Space</kbd></td><td>Spotlight (Search or Ask on GG)</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>⇧</kbd><kbd>Space</kbd></td><td>Visual Intelligence (GG)</td></tr><tr><td></td><td><kbd>⌃</kbd><kbd>⌘</kbd><kbd>Q</kbd></td><td>Lock screen</td></tr><tr><td></td><td><kbd>⌥</kbd><kbd>⌘</kbd><kbd>⏏</kbd> / <kbd>⌃</kbd><kbd>⇧</kbd><kbd>Power</kbd></td><td>Sleep / display sleep</td></tr><tr><td></td><td><kbd>⌃</kbd><kbd>⌘</kbd><kbd>Power</kbd></td><td>Force restart (hold)</td></tr><tr><td></td><td><kbd>⌥</kbd>-click menu bar items (Wi‑Fi, Sound, Bluetooth, Battery)</td><td>Debug/detail views: BSSID, channel, sample rate, condition</td></tr><tr><td></td><td><kbd>⌥</kbd><kbd>⇧</kbd> + volume/brightness keys</td><td>Quarter-step adjustments</td></tr><tr><td><strong>Screenshots</strong></td><td><kbd>⌘</kbd><kbd>⇧</kbd><kbd>3</kbd> / <kbd>4</kbd> / <kbd>5</kbd></td><td>Full screen / selection / the toolbar (record, timer, options). Add <kbd>⌃</kbd> to copy to clipboard instead of saving. In ⌘⇧4, press <kbd>Space</kbd> to capture a window, hold <kbd>⌥</kbd> to omit the shadow.</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>⇧</kbd><kbd>6</kbd></td><td>Touch Bar (old) / Visual Intelligence region (GG)</td></tr><tr><td><strong>Finder / Save dialogs</strong></td><td><kbd>⌘</kbd><kbd>⇧</kbd><kbd>G</kbd> or <code>/</code> or <code>~</code></td><td>Go to path — works inside Open/Save dialogs too; drag a folder onto the dialog to jump there</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>D</kbd> in dialogs</td><td>"Don't Save" / Desktop</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>⌫</kbd> in dialogs</td><td>"Delete"/"Don't Save" (the destructive default)</td></tr><tr><td></td><td><kbd>⌘</kbd><kbd>.</kbd> / <kbd>⎋</kbd></td><td>Cancel</td></tr></tbody></table></div>
+<h2 id="keyboard-navigation-of-the-ui">Keyboard navigation of the UI<a class="anchor" href="#keyboard-navigation-of-the-ui" aria-label="Permalink">#</a></h2>
+<ul>
+<li><code>System Settings → Keyboard → Keyboard navigation</code>: <strong>on</strong>. Then <kbd>Tab</kbd> moves through <em>all</em> controls (buttons too), <kbd>Space</kbd> presses, <kbd>Return</kbd> is the default button, <kbd>⎋</kbd> cancels.</li>
+<li><kbd>⌃</kbd><kbd>F2</kbd> (or <kbd>fn</kbd><kbd>⌃</kbd><kbd>F2</kbd>) focuses the <strong>menu bar</strong>; type to jump to a menu; arrows navigate. <kbd>⌃</kbd><kbd>F3</kbd> focuses the Dock. <kbd>⌃</kbd><kbd>F8</kbd> focuses menu bar extras (status items).</li>
+<li><kbd>⌘</kbd><kbd>⇧</kbd><kbd>/</kbd> opens Help → Search: type any menu command; it highlights where it lives and pressing <kbd>Return</kbd> runs it. This is the fastest way to run an obscure command in any app.</li>
+<li>In dialogs, the first letter of a button often activates it when Full Keyboard Access is on.</li>
+</ul>
+<h2 id="custom-app-shortcuts">Custom app shortcuts<a class="anchor" href="#custom-app-shortcuts" aria-label="Permalink">#</a></h2>
+<p><code>System Settings → Keyboard → Keyboard Shortcuts… → App Shortcuts → +</code>. Pick an app (or <em>All Applications</em>), type the <strong>exact menu item title</strong> (including <code>…</code> typed as <kbd>⌥</kbd><kbd>;</kbd>), assign a key. Examples people set:</p>
+<ul>
+<li><em>All Applications</em>: <code>Merge All Windows</code> → <kbd>⌘</kbd><kbd>⇧</kbd><kbd>M</kbd>; <code>Export as PDF…</code> → <kbd>⌘</kbd><kbd>⇧</kbd><kbd>E</kbd>; <code>Move Window to Left Side of Screen</code> → something ergonomic.</li>
+<li><em>Safari</em>: <code>Show Web Inspector</code> if the default clashes; <code>Pin Tab</code>.</li>
+<li><em>Finder</em>: <code>New Terminal at Folder</code> → <kbd>⌘</kbd><kbd>⌥</kbd><kbd>T</kbd>.</li>
+<li><em>Mail</em>: <code>Archive</code> → <kbd>⌘</kbd><kbd>E</kbd>.</li>
+</ul>
+<p>Menu items in the <em>Services</em> submenu are enabled here too (<code>Keyboard Shortcuts → Services</code>) — turn off the dozens you never use; they clutter every right-click menu.</p>
+<h2 id="function-keys-and-the-touch-bars-legacy">Function keys and the Touch Bar's legacy<a class="anchor" href="#function-keys-and-the-touch-bars-legacy" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Use F1, F2, etc. keys as standard function keys</strong>: <code>Keyboard → Keyboard Shortcuts… → Function Keys</code>. Developers using IDE debuggers (<kbd>F5</kbd>–<kbd>F11</kbd>) usually turn this <strong>on</strong> and hit <kbd>fn</kbd> for brightness/volume. Alternatively keep media keys and let the IDE bindings use <kbd>fn</kbd>.</li>
+<li>Per-app exceptions: <code>Keyboard → Keyboard Shortcuts… → Function Keys</code> has none, but Karabiner can switch behaviour per app (e.g. standard F-keys only in Xcode/IntelliJ/VS Code).</li>
+</ul>
+<h2 id="input-sources-and-typing-in-other-languages">Input sources and typing in other languages<a class="anchor" href="#input-sources-and-typing-in-other-languages" aria-label="Permalink">#</a></h2>
+<ul>
+<li><code>Keyboard → Text Input → Edit… → +</code> to add layouts/languages. <strong>Show Input menu in menu bar</strong>. Switch with <kbd>⌃</kbd><kbd>Space</kbd> (previous) / <kbd>⌃</kbd><kbd>⌥</kbd><kbd>Space</kbd> (next) — <strong>and make sure this doesn't collide with <kbd>⌘</kbd><kbd>Space</kbd> for Spotlight</strong> (check the <em>Input Sources</em> section of Keyboard Shortcuts).</li>
+<li><strong>Automatically switch to a document's input source</strong>: on if you write in two scripts.</li>
+<li><strong>Unicode Hex Input</strong> layout: hold <kbd>⌥</kbd> and type a code point (<code>2192</code> → →). Handy for maths symbols.</li>
+<li><strong>US International – PC</strong> or <strong>ABC – Extended</strong> give dead keys for accents on a US keyboard; the standard <strong>ABC</strong> layout has them via <kbd>⌥</kbd> chords as shown above.</li>
+<li><strong>Dictation</strong> (<kbd>🌐</kbd> twice by default, or set your own): on-device, offline, punctuation by voice ("comma", "new line"), works in any text field. Golden Gate's improved dictation (M3+, 12 GB+) is noticeably more accurate.</li>
+</ul>
+<h2 id="coming-from-windows-or-linux-the-translation-table">Coming from Windows or Linux: the translation table<a class="anchor" href="#coming-from-windows-or-linux-the-translation-table" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>You press on Windows/Linux</th><th>On Mac</th><th>Notes</th></tr></thead><tbody><tr><td><kbd>Ctrl</kbd><kbd>C</kbd>/<kbd>V</kbd>/<kbd>X</kbd>/<kbd>Z</kbd>/<kbd>S</kbd>/<kbd>A</kbd>/<kbd>F</kbd></td><td><kbd>⌘</kbd> + same letter</td><td>Universal</td></tr><tr><td><kbd>Alt</kbd><kbd>Tab</kbd></td><td><kbd>⌘</kbd><kbd>Tab</kbd> (apps) + <kbd>⌘</kbd><kbd>`</kbd> (windows)</td><td>Or install AltTab</td></tr><tr><td><kbd>Alt</kbd><kbd>F4</kbd></td><td><kbd>⌘</kbd><kbd>Q</kbd> (quit) / <kbd>⌘</kbd><kbd>W</kbd> (close window)</td><td>Closing the last window does <em>not</em> quit a Mac app</td></tr><tr><td><kbd>Win</kbd> / <kbd>Super</kbd></td><td><kbd>⌘</kbd><kbd>Space</kbd></td><td>Launch anything</td></tr><tr><td><kbd>Win</kbd><kbd>D</kbd></td><td><kbd>fn</kbd><kbd>H</kbd> / <kbd>F11</kbd></td><td>Show desktop</td></tr><tr><td><kbd>Win</kbd><kbd>L</kbd></td><td><kbd>⌃</kbd><kbd>⌘</kbd><kbd>Q</kbd></td><td>Lock</td></tr><tr><td><kbd>Win</kbd><kbd>←</kbd>/<kbd>→</kbd></td><td><kbd>fn</kbd><kbd>⌃</kbd><kbd>←</kbd>/<kbd>→</kbd></td><td>Snap halves (or Rectangle/Raycast)</td></tr><tr><td><kbd>Win</kbd><kbd>Shift</kbd><kbd>S</kbd></td><td><kbd>⌘</kbd><kbd>⇧</kbd><kbd>4</kbd> (+<kbd>⌃</kbd> to clipboard)</td><td>Screenshot region</td></tr><tr><td><kbd>PrtSc</kbd></td><td><kbd>⌘</kbd><kbd>⇧</kbd><kbd>3</kbd></td><td></td></tr><tr><td><kbd>Home</kbd>/<kbd>End</kbd></td><td><kbd>⌘</kbd><kbd>←</kbd>/<kbd>→</kbd></td><td>Line start/end (or remap Home/End as above)</td></tr><tr><td><kbd>Ctrl</kbd><kbd>Home</kbd>/<kbd>End</kbd></td><td><kbd>⌘</kbd><kbd>↑</kbd>/<kbd>↓</kbd></td><td>Document start/end</td></tr><tr><td><kbd>Ctrl</kbd><kbd>←</kbd>/<kbd>→</kbd></td><td><kbd>⌥</kbd><kbd>←</kbd>/<kbd>→</kbd></td><td>Word-wise</td></tr><tr><td><kbd>Ctrl</kbd><kbd>Backspace</kbd></td><td><kbd>⌥</kbd><kbd>⌫</kbd></td><td>Delete word</td></tr><tr><td><kbd>Delete</kbd></td><td><kbd>fn</kbd><kbd>⌫</kbd></td><td>Forward delete; <kbd>⌫</kbd> alone is Backspace</td></tr><tr><td><kbd>F2</kbd> rename</td><td><kbd>Return</kbd> on a Finder item</td><td><kbd>Return</kbd> renames; <kbd>⌘</kbd><kbd>O</kbd> opens</td></tr><tr><td><kbd>Ctrl</kbd><kbd>Shift</kbd><kbd>Esc</kbd></td><td><kbd>⌘</kbd><kbd>⌥</kbd><kbd>⎋</kbd> / Activity Monitor</td><td>Force Quit / task manager</td></tr><tr><td>Right-click</td><td><kbd>⌃</kbd>-click, two-finger tap, or right side of Magic Mouse</td><td></td></tr><tr><td>Middle-click</td><td>Three-finger tap (with MiddleClick app) or <kbd>⌘</kbd>-click for links</td><td></td></tr><tr><td><kbd>Ctrl</kbd><kbd>Alt</kbd><kbd>T</kbd> (terminal)</td><td>none by default</td><td>Bind in Ghostty/iTerm2 (global hotkey window) or Raycast</td></tr><tr><td><kbd>Alt</kbd> + accelerator letters in menus</td><td>none</td><td>Use <kbd>⌘</kbd><kbd>⇧</kbd><kbd>/</kbd> and type the command name</td></tr></tbody></table></div>
+<p>Two things trip up switchers for a week: (1) <strong><kbd>⌘</kbd><kbd>W</kbd> closes the window but the app stays open</strong> with its menu bar — that's normal, and it relaunches instantly; quit with <kbd>⌘</kbd><kbd>Q</kbd> when you mean it. (2) <strong>Menus live in the menu bar at the top of the screen</strong>, not in each window; the <em>active app's</em> menus are shown. Both stop being weird by Friday.</p>
+<h2 id="hardware-keyboard-notes">Hardware keyboard notes<a class="anchor" href="#hardware-keyboard-notes" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Keyboard layout wizard</strong> appears the first time you plug in an unknown keyboard (ISO vs ANSI detection). If <kbd>§</kbd> and <kbd><code>&lt;/kbd&gt; are swapped on a European keyboard, rerun it: </code>Keyboard → Change Keyboard Type…<code> (or Karabiner's *Devices* tab has a per-device </code>§<code>/</code><code> </code> `` swap).</li>
+<li><strong>Mechanical keyboards with QMK/VIA</strong>: set the Mac layout in firmware (swap GUI/Alt, map F-keys to media as you like). Then nothing in macOS needs remapping and the board works identically on your Linux box.</li>
+<li><strong>Bluetooth lag</strong>: pair via USB-C once (Apple keyboards), keep the dongle in a USB-A port rather than a hub for Logitech Bolt receivers, and avoid 2.4 GHz Wi‑Fi congestion — Apple's N1 chip (M5 Pro/Max, M6) with Bluetooth 6 is markedly better here.</li>
+<li><strong>Two keyboards, two layouts</strong>: <code>Keyboard → Text Input → Edit…</code> is global, but Karabiner can force a per-device input source.</li>
+</ul>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="04-finder-dock-spotlight.html"><span>Previous</span><strong>Finder, Dock &amp; Spotlight</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/05-keyboard-and-input.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/05-keyboard-and-input.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#the-modifier-keys-and-what-they-mean">The modifier keys and what they mean</a></li>
+<li class="lvl2"><a href="#remap-caps-lock-do-this-today">Remap Caps Lock (do this today)</a></li>
+<li class="lvl2"><a href="#karabiner-elements-the-remapper">Karabiner-Elements: the remapper</a></li>
+<li class="lvl2"><a href="#text-editing-shortcuts-that-work-everywhere">Text editing shortcuts that work everywhere</a></li>
+<li class="lvl2"><a href="#system-shortcuts-worth-memorising">System shortcuts worth memorising</a></li>
+<li class="lvl2"><a href="#keyboard-navigation-of-the-ui">Keyboard navigation of the UI</a></li>
+<li class="lvl2"><a href="#custom-app-shortcuts">Custom app shortcuts</a></li>
+<li class="lvl2"><a href="#function-keys-and-the-touch-bars-legacy">Function keys and the Touch Bar's legacy</a></li>
+<li class="lvl2"><a href="#input-sources-and-typing-in-other-languages">Input sources and typing in other languages</a></li>
+<li class="lvl2"><a href="#coming-from-windows-or-linux-the-translation-table">Coming from Windows or Linux: the translation table</a></li>
+<li class="lvl2"><a href="#hardware-keyboard-notes">Hardware keyboard notes</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
