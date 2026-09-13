@@ -187,7 +187,7 @@ Two things trip up switchers for a week: (1) **<kbd>⌘</kbd><kbd>W</kbd> closes
 
 ## Hardware keyboard notes
 
-- **Keyboard layout wizard** appears the first time you plug in an unknown keyboard (ISO vs ANSI detection). If <kbd>§</kbd> and <kbd>`</kbd> are swapped on a European keyboard, rerun it: `Keyboard → Change Keyboard Type…` (or Karabiner's *Devices* tab has a per-device `§`/`` ` `` swap).
+- **Keyboard layout wizard** appears the first time you plug in an unknown keyboard (ISO vs ANSI detection). If <kbd>§</kbd> and <kbd>&#96;</kbd> (backtick) are swapped on a European keyboard, rerun it: `Keyboard → Change Keyboard Type…` (or Karabiner's *Devices* tab has a per-device §/backtick swap).
 - **Mechanical keyboards with QMK/VIA**: set the Mac layout in firmware (swap GUI/Alt, map F-keys to media as you like). Then nothing in macOS needs remapping and the board works identically on your Linux box.
 - **Bluetooth lag**: pair via USB-C once (Apple keyboards), keep the dongle in a USB-A port rather than a hub for Logitech Bolt receivers, and avoid 2.4 GHz Wi‑Fi congestion — Apple's N1 chip (M5 Pro/Max, M6) with Bluetooth 6 is markedly better here.
 - **Two keyboards, two layouts**: `Keyboard → Text Input → Edit…` is global, but Karabiner can force a per-device input source.

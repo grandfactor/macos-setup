@@ -1019,7 +1019,7 @@ Two things trip up switchers for a week: (1) **<kbd>⌘</kbd><kbd>W</kbd> closes
 
 ### Hardware keyboard notes
 
-- **Keyboard layout wizard** appears the first time you plug in an unknown keyboard (ISO vs ANSI detection). If <kbd>§</kbd> and <kbd>`</kbd> are swapped on a European keyboard, rerun it: `Keyboard → Change Keyboard Type…` (or Karabiner's *Devices* tab has a per-device `§`/`` ` `` swap).
+- **Keyboard layout wizard** appears the first time you plug in an unknown keyboard (ISO vs ANSI detection). If <kbd>§</kbd> and <kbd>&#96;</kbd> (backtick) are swapped on a European keyboard, rerun it: `Keyboard → Change Keyboard Type…` (or Karabiner's *Devices* tab has a per-device §/backtick swap).
 - **Mechanical keyboards with QMK/VIA**: set the Mac layout in firmware (swap GUI/Alt, map F-keys to media as you like). Then nothing in macOS needs remapping and the board works identically on your Linux box.
 - **Bluetooth lag**: pair via USB-C once (Apple keyboards), keep the dongle in a USB-A port rather than a hub for Logitech Bolt receivers, and avoid 2.4 GHz Wi‑Fi congestion — Apple's N1 chip (M5 Pro/Max, M6) with Bluetooth 6 is markedly better here.
 - **Two keyboards, two layouts**: `Keyboard → Text Input → Edit…` is global, but Karabiner can force a per-device input source.
@@ -1170,7 +1170,7 @@ run = 'layout floating'
 
 - **Arrangement**: `Displays → Arrange…` (or drag the thumbnails). Put the display with the white bar as your **main display** — the Dock and new windows land there. With a laptop in clamshell, the external becomes main automatically.
 - **Displays have separate Spaces** (Mission Control): **on**. Each display gets its own Spaces and menu bar. Off gives one giant Space spanning displays (useful for a single ultra-wide + laptop stretched layout, rarely otherwise).
-- **Move a window to another display**: drag; or hover the green button → *Move to <display>*; or Rectangle's <kbd>⌃</kbd><kbd>⌥</kbd><kbd>⌘</kbd><kbd>←</kbd>/<kbd>→</kbd>; or AeroSpace's `move-node-to-monitor`.
+- **Move a window to another display**: drag; or hover the green button → *Move to &lt;display&gt;*; or Rectangle's <kbd>⌃</kbd><kbd>⌥</kbd><kbd>⌘</kbd><kbd>←</kbd>/<kbd>→</kbd>; or AeroSpace's `move-node-to-monitor`.
 - **Scaling**: for a 4K 27" pick the "looks like 2560×1440" (2×-ish) or 3008×1692 option; text stays sharp because macOS renders at 2× and downsamples. 5K 27" = perfect 2× at 2560×1440. A 1440p 27" monitor runs at 1× and text looks thin — that's the display, not a setting.
 - **Refresh rate**: choose the max in `Displays`. Golden Gate exposes more high-res and high-refresh modes over Thunderbolt/HDMI and remembers window positions per display configuration much more reliably.
 - **Clamshell**: closed lid + external display + power + external keyboard/mouse works out of the box. Keep the lid *open* an inch if the laptop gets hot under sustained load (the keyboard deck dissipates heat).

@@ -145,7 +145,7 @@ run = 'layout floating'
 
 - **Arrangement**: `Displays → Arrange…` (or drag the thumbnails). Put the display with the white bar as your **main display** — the Dock and new windows land there. With a laptop in clamshell, the external becomes main automatically.
 - **Displays have separate Spaces** (Mission Control): **on**. Each display gets its own Spaces and menu bar. Off gives one giant Space spanning displays (useful for a single ultra-wide + laptop stretched layout, rarely otherwise).
-- **Move a window to another display**: drag; or hover the green button → *Move to <display>*; or Rectangle's <kbd>⌃</kbd><kbd>⌥</kbd><kbd>⌘</kbd><kbd>←</kbd>/<kbd>→</kbd>; or AeroSpace's `move-node-to-monitor`.
+- **Move a window to another display**: drag; or hover the green button → *Move to &lt;display&gt;*; or Rectangle's <kbd>⌃</kbd><kbd>⌥</kbd><kbd>⌘</kbd><kbd>←</kbd>/<kbd>→</kbd>; or AeroSpace's `move-node-to-monitor`.
 - **Scaling**: for a 4K 27" pick the "looks like 2560×1440" (2×-ish) or 3008×1692 option; text stays sharp because macOS renders at 2× and downsamples. 5K 27" = perfect 2× at 2560×1440. A 1440p 27" monitor runs at 1× and text looks thin — that's the display, not a setting.
 - **Refresh rate**: choose the max in `Displays`. Golden Gate exposes more high-res and high-refresh modes over Thunderbolt/HDMI and remembers window positions per display configuration much more reliably.
 - **Clamshell**: closed lid + external display + power + external keyboard/mouse works out of the box. Keep the lid *open* an inch if the laptop gets hot under sustained load (the keyboard deck dissipates heat).
