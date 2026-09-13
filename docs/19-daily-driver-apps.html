@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Daily-driver apps — The macOS Setup Guide</title>
+<meta name="description" content="The non-developer half of the Mac — browsers, password managers, launchers, clipboard managers, notes, email, calendar, PDF, media, communication, and the utilities that make macOS feel finished. Free/open-source first, with the paid upgrade named where it&#x27;s worth it.">
+<meta property="og:title" content="Daily-driver apps — The macOS Setup Guide">
+<meta property="og:description" content="The non-developer half of the Mac — browsers, password managers, launchers, clipboard managers, notes, email, calendar, PDF, media, communication, and the utilities that make macOS feel finished. Free/open-source first, with the paid upgrade named where it&#x27;s worth it.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+<li><a href="15-databases-and-local-dev.html"><span class="nav-num">15</span>Databases &amp; local development services</a></li>
+</ul>
+<p class="nav-part">Part IV — Security, backup &amp; maintenance</p><ul>
+<li><a href="16-security-and-privacy.html"><span class="nav-num">16</span>Security &amp; privacy</a></li>
+<li><a href="17-backup-and-recovery.html"><span class="nav-num">17</span>Backup &amp; recovery</a></li>
+<li><a href="18-performance-and-maintenance.html"><span class="nav-num">18</span>Performance &amp; maintenance</a></li>
+</ul>
+<p class="nav-part">Part V — Daily driving &amp; workflows</p><ul>
+<li class="active"><a href="19-daily-driver-apps.html"><span class="nav-num">19</span>Daily-driver apps</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="daily-driver-apps">Daily-driver apps</h1>
+<p>A developer setup guide that stops at the terminal misses half the day. You'll spend as many hours in a browser, a notes app, a calendar, and Slack as in an editor, and the small utilities — a clipboard manager, a launcher, a window manager — are what make macOS feel <em>finished</em>. This chapter is the opinionated app list. Every item is available as a Homebrew cask (or App Store via <code>mas</code>) so the whole list installs from the <a href="appendix-b-brewfile.html">Brewfile</a>; the "Install" column gives the cask name.</p>
+<p>The bias throughout: <strong>free and open source first</strong>, paid where it's genuinely better, and nothing that needs a subscription to do a job a one-time purchase did in 2019. Prices are current as of September 2026 and will drift.</p>
+<div class="admonition tip"><p class="admonition-title">Tip</p><p>Don't install all of this on day one. Install the <strong>Tier 1</strong> items (bold in each section), live with the Mac for a week, and add things when you notice a specific friction. A Mac with 15 well-chosen apps beats one with 60 half-configured ones — see <a href="18-performance-and-maintenance.html">chapter 18</a> on login items.</p></div>
+<h2 id="browsers">Browsers<a class="anchor" href="#browsers" aria-label="Permalink">#</a></h2>
+<p>Your browser is the app you use most. Have two: a primary for daily life and a secondary for testing, isolated logins, and "the site that only works in Chrome."</p>
+<div class="table-wrap"><table><thead><tr><th>Browser</th><th>Engine</th><th>Why</th><th>Install</th></tr></thead><tbody><tr><td><strong>Safari</strong></td><td>WebKit</td><td>Best battery life by a wide margin (often 1–2 hours more than Chrome), tightest OS integration (Passwords, Handoff, Tab Groups, Apple Pay), strong tracker blocking. Extensions are fewer but the essentials exist. Included with macOS.</td><td>built-in</td></tr><tr><td><strong>Firefox</strong></td><td>Gecko</td><td>The only major non-Chromium engine, excellent privacy defaults, container tabs (Multi-Account Containers) for isolating logins, uBlock Origin works fully.</td><td><code>firefox</code></td></tr><tr><td><strong>Zen</strong></td><td>Gecko</td><td>Firefox-based with an Arc-like vertical sidebar, workspaces, split view. The usual recommendation for people who liked Arc (which has been frozen since 2025).</td><td><code>zen</code></td></tr><tr><td><strong>Chrome</strong></td><td>Chromium</td><td>The compatibility baseline; DevTools are the reference; Google account integration. Heavier on battery and memory. Since Manifest V3, uBlock Origin is Lite-only.</td><td><code>google-chrome</code></td></tr><tr><td><strong>Brave</strong></td><td>Chromium</td><td>Chrome compatibility with built-in ad/tracker blocking; turn off the crypto/rewards features on first run.</td><td><code>brave-browser</code></td></tr><tr><td><strong>Vivaldi</strong>, <strong>Orion</strong></td><td>Chromium / WebKit</td><td>Vivaldi for power-user tab management; Orion (Kagi) for WebKit with Chrome <em>and</em> Firefox extension support — still occasionally rough.</td><td><code>vivaldi</code>, <code>orion</code></td></tr></tbody></table></div>
+<p>Recommendation for a student/engineer: <strong>Safari as the daily driver</strong> (battery, integration) plus <strong>Firefox or Chrome for development</strong> with DevTools and extensions. Set the default in <strong>System Settings → Desktop &amp; Dock → Default web browser</strong>.</p>
+<p>Extensions worth having regardless of browser: a content blocker (uBlock Origin on Firefox; AdGuard or Wipr 2 on Safari; uBlock Origin Lite on Chrome), your password manager's extension, and <strong>Refined GitHub</strong>. Safari extensions are installed from the App Store (many are free).</p>
+<p>Browser profiles: Chrome and Firefox both support multiple profiles — one for university/work accounts, one personal — which is cleaner than juggling logins. Safari has profiles since macOS 14 (<strong>Safari → Settings → Profiles</strong>).</p>
+<h2 id="password-manager">Password manager<a class="anchor" href="#password-manager" aria-label="Permalink">#</a></h2>
+<p>Non-negotiable. See <a href="16-security-and-privacy.html">chapter 16</a> for the reasoning; here's the choice:</p>
+<div class="table-wrap"><table><thead><tr><th>Option</th><th>Cost</th><th>Notes</th></tr></thead><tbody><tr><td><strong>Apple Passwords</strong></td><td>Free</td><td>The built-in app (since macOS 15) with passkeys, TOTP codes, shared groups, Wi-Fi passwords, and a Windows/Chrome extension. Enough for most people who live in Apple's ecosystem. Now also stores your FileVault recovery key.</td></tr><tr><td><strong>Bitwarden</strong></td><td>Free / $10 yr</td><td>Open source, cross-platform, self-hostable (Vaultwarden). Free tier has everything one person needs; Premium adds TOTP and file attachments. The default recommendation if you use Android/Windows/Linux too.</td></tr><tr><td><strong>1Password</strong></td><td>$36 yr / $60 family</td><td>The most polished UI, best browser integration, SSH agent, developer CLI (<code>op</code>) for secrets in scripts and env vars. Worth it if your team uses it or you want the SSH/CLI features. Free for GitHub Student Developer Pack holders (one year).</td></tr><tr><td><strong>KeePassXC</strong></td><td>Free</td><td>Local-only database file; sync it yourself. For people who don't want a cloud in the loop.</td></tr></tbody></table></div>
+<p>Install: <code>bitwarden</code>, <code>1password</code> + <code>1password-cli</code>, <code>keepassxc</code>. Whatever you pick, turn off Safari/Chrome's own password saving so you don't end up with three overlapping vaults.</p>
+<h2 id="launcher">Launcher<a class="anchor" href="#launcher" aria-label="Permalink">#</a></h2>
+<p>Spotlight in macOS 26 is good — app launching, calculator, clipboard history (8 hours), file search, Shortcuts actions, Siri/AI answers, and <code>⌘1</code>–<code>⌘4</code> filtered views (see <a href="04-finder-dock-spotlight.html">chapter 4</a>). Try living with it for a week before installing a replacement.</p>
+<p>If you want more:</p>
+<div class="table-wrap"><table><thead><tr><th>Launcher</th><th>Cost</th><th>Why</th></tr></thead><tbody><tr><td><strong>Raycast</strong></td><td>Free core; Pro $8 mo for AI/cloud sync</td><td>The current default among developers. Extension store (GitHub, Jira, Linear, Homebrew, color pickers, snippets, window management), scriptable in TypeScript, unlimited clipboard history, floating notes, quick AI chat. The free tier is genuinely complete.</td></tr><tr><td><strong>Alfred</strong></td><td>Free; Powerpack £34 one-time</td><td>The veteran. Workflows are extremely capable; one-time purchase; lighter than Raycast. If you dislike subscriptions and Electron-adjacent UIs, Alfred.</td></tr><tr><td><strong>LaunchBar</strong></td><td>$29</td><td>Mature, fast, keyboard-centric; smaller community.</td></tr></tbody></table></div>
+<p>Bind the launcher to <code>⌘Space</code> and move Spotlight to <code>⌥Space</code> (or vice versa) in <strong>System Settings → Keyboard → Keyboard Shortcuts → Spotlight</strong>. Install: <code>raycast</code>, <code>alfred</code>, <code>launchbar</code>.</p>
+<h2 id="clipboard-manager">Clipboard manager<a class="anchor" href="#clipboard-manager" aria-label="Permalink">#</a></h2>
+<p>The single highest-value utility most people don't know they need. Copy several things, paste any of them later, with search.</p>
+<ul>
+<li><strong>Spotlight's built-in history</strong> (macOS 26): <code>⌘Space</code> then <code>⌘4</code>. Eight hours only, no pinning. Fine to start.</li>
+<li><strong>Raycast Clipboard History</strong> — if you already run Raycast, it's there (<code>⌥⌘C</code> by default, configurable), searchable, with images and pinning.</li>
+<li><strong>Maccy</strong> (free, open source) — a menu bar clipboard history with fuzzy search. The lightweight standalone pick. <code>maccy</code></li>
+<li><strong>Paste</strong> ($15 yr) — the pretty one, with iCloud sync to iPhone and pinboards. Subscription.</li>
+<li><strong>CopyQ</strong> (free) — cross-platform, scriptable, uglier. For people who also use Linux.</li>
+</ul>
+<p>Whatever you use, exclude your password manager from history (all of the above support ignoring apps — set it).</p>
+<h2 id="window-management">Window management<a class="anchor" href="#window-management" aria-label="Permalink">#</a></h2>
+<p>Covered in depth in <a href="06-window-management.html">chapter 6</a>. Summary for the app list: macOS 26 tiling (drag to edge, <code>fn+ctrl</code> shortcuts) handles the basics; <strong>Rectangle</strong> (free) for keyboard-driven halves/thirds; <strong>AeroSpace</strong> (free) for i3-style tiling; <strong>Raycast</strong> has window commands built in. Install: <code>rectangle</code>, <code>aerospace</code>.</p>
+<h2 id="notes-and-knowledge">Notes and knowledge<a class="anchor" href="#notes-and-knowledge" aria-label="Permalink">#</a></h2>
+<p>The genre where opinions run hottest. Pick by <em>where your notes need to be</em> rather than features.</p>
+<div class="table-wrap"><table><thead><tr><th>App</th><th>Cost</th><th>Sync</th><th>Why</th></tr></thead><tbody><tr><td><strong>Apple Notes</strong></td><td>Free</td><td>iCloud</td><td>Fast, reliable, searchable, handles PDFs and handwriting from iPad, shared folders, Quick Note (<code>fn+Q</code>). Underrated for lecture notes and general life. Not Markdown; export is awkward.</td></tr><tr><td><strong>Obsidian</strong></td><td>Free (Sync $4–8 mo; or sync via iCloud/Git)</td><td>Files on disk</td><td>Markdown files in a folder you own, linked notes, graph view, thousands of community plugins, Canvas, vim mode. The default for CS students who want notes to outlive any company. Sync with iCloud Drive for free, or Obsidian Git plugin.</td></tr><tr><td><strong>Notion</strong></td><td>Free personal; Plus $10 mo</td><td>Cloud</td><td>Databases, kanban, shared team wikis, templates. Great for project/course tracking; slow, online-only-ish, and your data is in their format. Free for students with a <code>.edu</code> email.</td></tr><tr><td><strong>Bear</strong></td><td>$30 yr</td><td>iCloud</td><td>Beautiful Markdown-flavored notes with tags; Apple-only.</td></tr><tr><td><strong>Logseq</strong> / <strong>Anytype</strong></td><td>Free</td><td>Files / P2P</td><td>Outliner-style (Logseq) and Notion-like but local-first (Anytype) alternatives.</td></tr><tr><td><strong>Zotero</strong></td><td>Free</td><td>Cloud (300 MB free)</td><td>Reference manager for papers; Safari/Chrome connector saves PDFs and metadata in one click. Essential from the first research-heavy course onward.</td></tr></tbody></table></div>
+<p>Recommendation: <strong>Obsidian for coursework and long-term knowledge, Apple Notes for everything ephemeral</strong>, Zotero the moment you have to cite anything. Install: <code>obsidian</code>, <code>notion</code>, <code>bear</code> (App Store), <code>logseq</code>, <code>anytype</code>, <code>zotero</code>.</p>
+<h2 id="tasks-calendar-and-time">Tasks, calendar, and time<a class="anchor" href="#tasks-calendar-and-time" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Reminders + Calendar</strong> (built-in) are more than enough for most students. Reminders has smart lists, tags, subtasks, and natural language ("Submit lab Friday 5pm"). Calendar supports Google/Outlook/CalDAV accounts and shows in the menu bar via <strong>Itsycal</strong> (free) or <strong>Dato</strong>.</li>
+<li><strong>Things 3</strong> ($50 one-time for Mac, separate iPhone/iPad) — the most pleasant task manager on the platform; no subscription. <strong>Todoist</strong> (free / $4 mo) for cross-platform and natural-language entry. <strong>OmniFocus</strong> if you're deep into GTD.</li>
+<li><strong>Fantastical</strong> ($57 yr) is the calendar power tool (natural-language entry, multiple calendar sets, Zoom integration); the free tier is fine as a menu bar calendar. <strong>BusyCal</strong> ($50 one-time) is the no-subscription alternative.</li>
+<li><strong>Toggl Track</strong> (free) or <strong>Timing</strong> ($) if you bill hours or want to know where the day went.</li>
+<li><strong>Itsycal</strong> (<code>itsycal</code>, free) — a tiny menu bar calendar. Nearly everyone should install this.</li>
+</ul>
+<h2 id="email">Email<a class="anchor" href="#email" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Apple Mail</strong> — free, private, handles Gmail/Exchange/IMAP, Hide My Email, mail categorization since macOS 15. Rules and smart mailboxes are underused. The right default for most people.</li>
+<li><strong>Thunderbird</strong> — free, open source, cross-platform, extension ecosystem, good for multiple accounts and heavy filtering.</li>
+<li><strong>Mimestream</strong> ($50 yr) — native Gmail client that speaks the Gmail API (labels, categories, snooze) properly. If you live in Gmail and dislike the web UI, this is the one.</li>
+<li><strong>Spark</strong>, <strong>Superhuman</strong> ($30 mo) — AI-assisted triage; Superhuman is very fast and very expensive.</li>
+<li><strong>Proton Mail / Fastmail apps</strong> if that's your provider.</li>
+</ul>
+<p>Set your default mail client in <strong>Mail → Settings → General</strong> (yes, the setting lives inside Mail.app even for choosing another app).</p>
+<h2 id="communication">Communication<a class="anchor" href="#communication" aria-label="Permalink">#</a></h2>
+<p>Almost all of these are Electron apps that want to run at login and eat 400 MB each. Install the ones you actually need and set them to <em>not</em> open at login; open them when you sit down to work.</p>
+<p><code>slack</code>, <code>discord</code>, <code>zoom</code>, <code>microsoft-teams</code>, <code>signal</code>, <code>telegram</code>, <code>whatsapp</code>. <strong>Messages</strong> and <strong>FaceTime</strong> are built in and, in 2026, do RCS with Android users. For Slack and Discord specifically, the browser version is usually fine and saves memory.</p>
+<h2 id="files-cloud-and-sync">Files, cloud, and sync<a class="anchor" href="#files-cloud-and-sync" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>iCloud Drive</strong> — already there; Desktop &amp; Documents sync is convenient and dangerous (see <a href="02-first-boot-and-migration.html">chapter 2</a>). Good for documents; keep code out of it (Git repos + iCloud eviction = corruption risk).</li>
+<li><strong>Google Drive</strong>, <strong>Dropbox</strong>, <strong>OneDrive</strong> — all use the File Provider API now, so they behave like iCloud (files on demand, no kernel extension). Install the one your school/work uses. Storage tiers are cheaper via a Google One / Microsoft 365 student plan.</li>
+<li><strong>Syncthing</strong> (free, open source, <code>syncthing</code>) — peer-to-peer folder sync without a cloud. Excellent for syncing an Obsidian vault or a projects folder between a laptop and a desktop.</li>
+<li><strong>Maestral</strong> (free, <code>maestral</code>) — open-source Dropbox client that's lighter than the official one.</li>
+<li><strong>Transmit</strong> ($45) or <strong>Cyberduck</strong> (free) for SFTP/S3 with a GUI; <strong>Mountain Duck</strong> to mount remote storage as a disk. For most engineers, <code>rsync</code>/<code>scp</code>/<code>rclone</code> in the terminal is enough.</li>
+</ul>
+<p>Finder quality-of-life (see <a href="04-finder-dock-spotlight.html">chapter 4</a> for settings): <strong>QuickLook plugins</strong> — <code>qlmarkdown</code>, <code>syntax-highlight</code>, <code>quicklook-json</code>, <code>qlvideo</code> let space-bar preview handle Markdown, source code, JSON, and more video formats. Since macOS 15 these need explicit enabling in <strong>System Settings → Login Items &amp; Extensions → Quick Look</strong>.</p>
+<h2 id="pdfs-and-documents">PDFs and documents<a class="anchor" href="#pdfs-and-documents" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Preview</strong> — built-in, does annotation, form filling, signatures, page reorder, merge (drag thumbnails between windows), and image conversion. Most people never need more.</li>
+<li><strong>Skim</strong> (free, <code>skim</code>) — PDF reader for academics: notes, highlights with export, SyncTeX for LaTeX, presentation mode.</li>
+<li><strong>PDF Expert</strong> ($80 yr or one-time tier) — if you edit PDFs heavily.</li>
+<li><strong>Zotero</strong> handles paper PDFs (see above).</li>
+<li><strong>Pages / Numbers / Keynote</strong> (free, App Store) — perfectly good, and Keynote is the best presentation app on any platform.</li>
+<li><strong>Microsoft 365</strong> — free for most students through their university; install via <code>microsoft-office</code> or the Mac App Store. Word compatibility matters when a professor requires <code>.docx</code>.</li>
+<li><strong>LibreOffice</strong> (free, <code>libreoffice</code>) — for when you need an office suite with no account.</li>
+<li><strong>Typora</strong> ($15) / <strong>MacDown</strong> (free) / <strong>iA Writer</strong> ($50) — Markdown editors when you want to write prose rather than code. Or just VS Code with a Markdown preview.</li>
+<li><strong>LaTeX</strong>: <code>mactex-no-gui</code> (cask, ~2 GB) plus <strong>TeXShop</strong> or VS Code with LaTeX Workshop; or <strong>Overleaf</strong> in the browser for collaborative writing. <strong>Typst</strong> (<code>typst</code>) is the modern alternative that compiles instantly and has a much saner syntax; most students writing solo papers should try it first.</li>
+</ul>
+<h2 id="media">Media<a class="anchor" href="#media" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>IINA</strong> (free, open source, <code>iina</code>) — the video player. Plays everything (mpv underneath), native macOS UI, picture-in-picture, Touch Bar/Trackpad gestures. Uninstall VLC.</li>
+<li><strong>Music / TV</strong> — built-in; Apple Music student plan is $6 mo with Apple TV+ included.</li>
+<li><strong>Spotify</strong> (<code>spotify</code>) — set it not to open at login; it's 500 MB of Electron.</li>
+<li><strong>Photos</strong> — built-in and good; iCloud Photos is the sync you already pay for.</li>
+<li><strong>Pixelmator Pro</strong> (now Apple's, free since 2025) / <strong>Affinity</strong> (now free from Canva since 2025 — Photo, Designer, Publisher in one app) — the serious image editing choices; both one-time or free, no Adobe subscription.</li>
+<li><strong>Shottr</strong> (free, <code>shottr</code>) — screenshot tool with pixel measurement, OCR, scrolling capture, annotations. The built-in <code>⌘⇧5</code> is fine; Shottr is better. <strong>CleanShot X</strong> ($29) is the polished paid option.</li>
+<li><strong>Kap</strong> (free, <code>kap</code>) / <strong>Screen Studio</strong> ($89) — screen recording as GIF/MP4; Screen Studio adds the auto-zoom effects you see in every product demo.</li>
+<li><strong>HandBrake</strong> (<code>handbrake</code>), <strong>ffmpeg</strong> (<code>brew install ffmpeg</code>) — transcoding.</li>
+<li><strong>Audacity</strong> (<code>audacity</code>) / <strong>Ocenaudio</strong> — audio editing.</li>
+<li><strong>OBS</strong> (<code>obs</code>) — streaming and recording.</li>
+<li><strong>ImageOptim</strong> (free, <code>imageoptim</code>) — drag-and-drop lossless image compression before committing assets to a repo.</li>
+</ul>
+<h2 id="menu-bar-and-system-utilities">Menu bar and system utilities<a class="anchor" href="#menu-bar-and-system-utilities" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>App</th><th>Cost</th><th>What</th><th>Install</th></tr></thead><tbody><tr><td><strong>Ice</strong></td><td>Free</td><td>Hides menu bar icons behind a divider (Bartender alternative after its ownership change). Essential on a notch MacBook where icons vanish.</td><td><code>jordanbaird-ice</code></td></tr><tr><td><strong>Stats</strong></td><td>Free</td><td>CPU/GPU/memory/network/battery/temps in the menu bar. iStat Menus ($12) is the polished version.</td><td><code>stats</code></td></tr><tr><td><strong>AlDente</strong></td><td>Free / $</td><td>Charge limiter with more control than the built-in 26.4 limit.</td><td><code>aldente</code></td></tr><tr><td><strong>KeyboardCleanTool</strong></td><td>Free</td><td>Locks the keyboard so you can wipe it.</td><td><code>keyboardcleantool</code></td></tr><tr><td><strong>Karabiner-Elements</strong></td><td>Free</td><td>Key remapping; Caps Lock → Escape/Control, hyper key. See <a href="05-keyboard-and-input.html">chapter 5</a>.</td><td><code>karabiner-elements</code></td></tr><tr><td><strong>BetterDisplay</strong></td><td>Free / $</td><td>Fix scaling on non-Retina external monitors, virtual displays, brightness control for external monitors.</td><td><code>betterdisplay</code></td></tr><tr><td><strong>MonitorControl</strong></td><td>Free</td><td>Brightness/volume keys control external displays over DDC.</td><td><code>monitorcontrol</code></td></tr><tr><td><strong>Amphetamine</strong></td><td>Free</td><td>Keep the Mac awake for a presentation or a long download. Built-in <code>caffeinate -d</code> does the same from the terminal.</td><td>App Store</td></tr><tr><td><strong>AppCleaner</strong> / <strong>Pearcleaner</strong></td><td>Free</td><td>Thorough uninstalls (see <a href="18-performance-and-maintenance.html">chapter 18</a>).</td><td><code>appcleaner</code>, <code>pearcleaner</code></td></tr><tr><td><strong>The Unarchiver</strong></td><td>Free</td><td>Opens every archive format macOS's built-in tool doesn't (rar, 7z). Or <code>brew install sevenzip</code> and use the terminal.</td><td><code>the-unarchiver</code></td></tr><tr><td><strong>Keka</strong></td><td>Free / $</td><td>Archive creation with encryption and format choice.</td><td><code>keka</code></td></tr><tr><td><strong>LuLu</strong></td><td>Free</td><td>Outbound firewall — see <a href="16-security-and-privacy.html">chapter 16</a>.</td><td><code>lulu</code></td></tr><tr><td><strong>Hidden Bar</strong> / <strong>Dozer</strong></td><td>Free</td><td>Simpler Ice alternatives.</td><td><code>hiddenbar</code></td></tr><tr><td><strong>Latest</strong></td><td>Free</td><td>Checks all installed apps for updates (including non-Store, non-brew).</td><td><code>latest</code></td></tr><tr><td><strong>Mos</strong> / <strong>LinearMouse</strong></td><td>Free</td><td>Smooth scrolling and per-device scroll direction for a mouse (so the mouse scrolls "normally" while the trackpad stays "natural").</td><td><code>mos</code>, <code>linearmouse</code></td></tr><tr><td><strong>Hammerspoon</strong></td><td>Free</td><td>Lua automation for windows, hotkeys, and system events — see <a href="21-automation-and-scripting.html">chapter 21</a>.</td><td><code>hammerspoon</code></td></tr><tr><td><strong>Numi</strong> / <strong>Soulver</strong></td><td>Free / $</td><td>Natural-language calculator ("$1200 / 4 people in EUR"). Raycast and Spotlight do the simple cases.</td><td><code>numi</code></td></tr><tr><td><strong>TextSniper</strong> / built-in Live Text</td><td>$ / Free</td><td>OCR from any screen region. macOS Live Text does this in Preview and screenshots already; Shottr does it free.</td><td>—</td></tr><tr><td><strong>Rocket</strong></td><td>Free</td><td>Slack-style <code>:emoji:</code> autocomplete everywhere.</td><td><code>rocket</code></td></tr><tr><td><strong>Klack</strong> / <strong>Keyclick</strong></td><td>$</td><td>Mechanical keyboard sounds. No reason, just fun.</td><td><code>klack</code></td></tr></tbody></table></div>
+<h2 id="reading-and-reference">Reading and reference<a class="anchor" href="#reading-and-reference" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Dash</strong> ($30) — offline API documentation for 200+ languages/frameworks with instant search; integrates with Raycast/Alfred and every editor. Paid, one-time, worth it for anyone who reads docs daily. <code>dash</code></li>
+<li><strong>DevDocs</strong> (free, web / <code>devdocs</code> desktop wrapper) — the free equivalent; works offline as a PWA.</li>
+<li><strong>NetNewsWire</strong> (free, open source, <code>netnewswire</code>) — RSS reader, iCloud sync. RSS is still the best way to follow release notes and blogs. <strong>Reeder</strong> ($) is the pretty one.</li>
+<li><strong>Kindle</strong>, <strong>Apple Books</strong> — built-in / App Store.</li>
+<li><strong>Anki</strong> (free, <code>anki</code>) — spaced repetition. See <a href="20-cs-student-specific.html">chapter 20</a>.</li>
+</ul>
+<h2 id="terminal-adjacent-gui-tools">Terminal-adjacent GUI tools<a class="anchor" href="#terminal-adjacent-gui-tools" aria-label="Permalink">#</a></h2>
+<p>Covered in their own chapters, but for completeness in the app list: <strong>Ghostty</strong> or <strong>iTerm2</strong> (<a href="09-terminal-and-shell.html">chapter 9</a>); <strong>VS Code</strong>, <strong>Cursor</strong>, <strong>Zed</strong>, <strong>JetBrains Toolbox</strong> (<a href="12-editors-and-ides.html">chapter 12</a>); <strong>OrbStack</strong> (<a href="13-containers-and-vms.html">chapter 13</a>); <strong>TablePlus</strong>, <strong>Postico</strong>, <strong>DBeaver</strong> (<a href="15-databases-and-local-dev.html">chapter 15</a>); <strong>Fork</strong>, <strong>Tower</strong>, <strong>GitHub Desktop</strong>, <strong>Sublime Merge</strong> for Git GUIs (<a href="10-dotfiles-and-git.html">chapter 10</a>); <strong>Proxyman</strong> or <strong>Charles</strong> for HTTP debugging; <strong>Bruno</strong>/<strong>Postman</strong>/<strong>Insomnia</strong> for API clients (<a href="14-cloud-and-devops-tooling.html">chapter 14</a>); <strong>Kaleidoscope</strong> ($) or <strong>Meld</strong> (free) for visual diffs.</p>
+<h2 id="games-and-fun-yes-really">Games and fun (yes, really)<a class="anchor" href="#games-and-fun-yes-really" aria-label="Permalink">#</a></h2>
+<p>Mac gaming in 2026 is real: <strong>Steam</strong> (<code>steam</code>), <strong>CrossOver</strong> ($74 yr; runs Windows games via Wine + Apple's Game Porting Toolkit), <strong>Whisky</strong> (free, <code>whisky</code> — the free Wine/GPTK wrapper), and Apple's own Games app (macOS 26) for Arcade and Store titles. <strong>Heroic</strong> for Epic/GOG. <strong>OpenEmu</strong> for retro. Set Steam to <em>not</em> launch at login.</p>
+<h2 id="what-to-skip">What to skip<a class="anchor" href="#what-to-skip" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Antivirus</strong> — see <a href="16-security-and-privacy.html">chapter 16</a>. XProtect + Gatekeeper + common sense; Malwarebytes free for an occasional scan if paranoid.</li>
+<li><strong>CleanMyMac, MacKeeper, "memory cleaners", "battery optimizers"</strong> — see <a href="18-performance-and-maintenance.html">chapter 18</a>.</li>
+<li><strong>Adobe Creative Cloud</strong> unless a course requires it; Affinity and Pixelmator are free now.</li>
+<li><strong>Java runtimes from java.com</strong> — install via mise or <code>brew install openjdk</code> (<a href="11-languages-and-runtimes.html">chapter 11</a>).</li>
+<li><strong>Flash, Silverlight, Java browser plugins</strong> — if a university system requires one, complain to IT; it's 2026.</li>
+<li><strong>Anything that asks to install a kernel extension</strong> on Apple silicon — legitimate software uses system extensions now; a kext is a red flag or abandonware.</li>
+</ul>
+<h2 id="the-tier-1-list">The Tier 1 list<a class="anchor" href="#the-tier-1-list" aria-label="Permalink">#</a></h2>
+<p>If you install nothing else from this chapter: <strong>a password manager</strong>, <strong>Raycast or Alfred</strong>, <strong>a clipboard manager</strong> (or Raycast's), <strong>Rectangle or AeroSpace</strong>, <strong>Obsidian or Apple Notes</strong>, <strong>Itsycal</strong>, <strong>IINA</strong>, <strong>Shottr</strong>, <strong>Ice</strong>, <strong>Stats</strong>, <strong>AppCleaner</strong>, <strong>The Unarchiver</strong>, <strong>Karabiner-Elements</strong> (if remapping), and <strong>Zotero</strong> (if writing). All are free. Everything is in <a href="appendix-b-brewfile.html">Appendix B</a> with the optional items commented out.</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="18-performance-and-maintenance.html"><span>Previous</span><strong>Performance &amp; maintenance</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/19-daily-driver-apps.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/19-daily-driver-apps.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#browsers">Browsers</a></li>
+<li class="lvl2"><a href="#password-manager">Password manager</a></li>
+<li class="lvl2"><a href="#launcher">Launcher</a></li>
+<li class="lvl2"><a href="#clipboard-manager">Clipboard manager</a></li>
+<li class="lvl2"><a href="#window-management">Window management</a></li>
+<li class="lvl2"><a href="#notes-and-knowledge">Notes and knowledge</a></li>
+<li class="lvl2"><a href="#tasks-calendar-and-time">Tasks, calendar, and time</a></li>
+<li class="lvl2"><a href="#email">Email</a></li>
+<li class="lvl2"><a href="#communication">Communication</a></li>
+<li class="lvl2"><a href="#files-cloud-and-sync">Files, cloud, and sync</a></li>
+<li class="lvl2"><a href="#pdfs-and-documents">PDFs and documents</a></li>
+<li class="lvl2"><a href="#media">Media</a></li>
+<li class="lvl2"><a href="#menu-bar-and-system-utilities">Menu bar and system utilities</a></li>
+<li class="lvl2"><a href="#reading-and-reference">Reading and reference</a></li>
+<li class="lvl2"><a href="#terminal-adjacent-gui-tools">Terminal-adjacent GUI tools</a></li>
+<li class="lvl2"><a href="#games-and-fun-yes-really">Games and fun (yes, really)</a></li>
+<li class="lvl2"><a href="#what-to-skip">What to skip</a></li>
+<li class="lvl2"><a href="#the-tier-1-list">The Tier 1 list</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
