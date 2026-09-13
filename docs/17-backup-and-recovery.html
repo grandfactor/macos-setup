@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Backup &amp; recovery — The macOS Setup Guide</title>
+<meta name="description" content="The 3-2-1 strategy on a Mac — Time Machine done right (encrypted APFS, exclusions), a second local copy, cloud backup, what iCloud is and isn&#x27;t, testing restores, and recovering a Mac that won&#x27;t boot.">
+<meta property="og:title" content="Backup &amp; recovery — The macOS Setup Guide">
+<meta property="og:description" content="The 3-2-1 strategy on a Mac — Time Machine done right (encrypted APFS, exclusions), a second local copy, cloud backup, what iCloud is and isn&#x27;t, testing restores, and recovering a Mac that won&#x27;t boot.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+<li><a href="15-databases-and-local-dev.html"><span class="nav-num">15</span>Databases &amp; local development services</a></li>
+</ul>
+<p class="nav-part">Part IV — Security, backup &amp; maintenance</p><ul>
+<li><a href="16-security-and-privacy.html"><span class="nav-num">16</span>Security &amp; privacy</a></li>
+<li class="active"><a href="17-backup-and-recovery.html"><span class="nav-num">17</span>Backup &amp; recovery</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="backup-recovery">Backup &amp; recovery</h1>
+<p>A developer's Mac holds three kinds of data: <strong>code</strong> (should already be on a Git remote), <strong>documents and media</strong> (irreplaceable), and <strong>configuration</strong> (your dotfiles repo). The goal is to make losing the laptop — to theft, a spilled coffee, a failed SSD, a bad <code>rm -rf</code>, or ransomware — cost you an afternoon instead of a semester. The industry rule is <strong>3-2-1</strong>: three copies, on two different media, one off-site. On a Mac that's cheap and mostly automatic.</p>
+<h2 id="the-plan">The plan<a class="anchor" href="#the-plan" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>Copy</th><th>Tool</th><th>Cost</th><th>Protects against</th></tr></thead><tbody><tr><td>1. The Mac itself</td><td>—</td><td>—</td><td>—</td></tr><tr><td>2. <strong>Local, versioned</strong></td><td><strong>Time Machine</strong> to an encrypted external SSD (or a NAS)</td><td>$100–$180 once</td><td>Deleted/overwritten files, bad updates, dead SSD, "I need the version from Tuesday"</td></tr><tr><td>3. <strong>Off-site, continuous</strong></td><td><strong>Backblaze</strong> (or iCloud Drive for documents + Git for code)</td><td>$9/mo, or $0 with iCloud+Git</td><td>Theft, fire, both copies in the same bag</td></tr><tr><td>Bonus</td><td><strong>Git remotes</strong> for code, <strong>dotfiles repo</strong> for config, <strong>password manager</strong> for secrets</td><td>free</td><td>The stuff Time Machine restores slowest</td></tr></tbody></table></div>
+<p>Time Machine + Backblaze is the standard answer and costs about the same as one coffee a month. Students on a budget: Time Machine + iCloud Drive (200 GB for $2.99) for documents + GitHub for code covers the important 95%.</p>
+<h2 id="time-machine-done-right">Time Machine, done right<a class="anchor" href="#time-machine-done-right" aria-label="Permalink">#</a></h2>
+<h3 id="the-drive">The drive<a class="anchor" href="#the-drive" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>Size</strong>: at least equal to your Mac's internal storage; 2× is comfortable (Time Machine keeps hourly/daily/weekly versions until the drive fills, then prunes oldest). A <strong>2 TB USB‑C/USB4 SSD</strong> (Samsung T7/T9, SanDisk Extreme, Crucial X9/X10, or an NVMe stick in an enclosure) is the sweet spot at $130–$180; spinning disks work but are slow and fragile.</li>
+<li><strong>Format</strong>: Time Machine wants <strong>APFS</strong> (Case-sensitive is fine; encrypted is what you want). Erase in Disk Utility: <em>View → Show All Devices</em>, select the <strong>device</strong> (not the volume), <em>Erase</em>, Scheme <strong>GUID Partition Map</strong>, Format <strong>APFS (Encrypted)</strong>, choose a strong passphrase and <strong>save it in your password manager</strong> — an encrypted backup you can't unlock is a paperweight.</li>
+<li>Since Tahoe 26.6, <strong>encrypted HFS+ (CoreStorage) is deprecated and will not be supported in macOS 28</strong>. If your old Time Machine drive is HFS+, back up elsewhere, erase it as APFS Encrypted, and start fresh.</li>
+</ul>
+<h3 id="setup">Setup<a class="anchor" href="#setup" aria-label="Permalink">#</a></h3>
+<p><code>System Settings → General → Time Machine → Add Backup Disk…</code>, pick the drive, <strong>Encrypt Backup</strong> on if you didn't format it encrypted. Then <strong>Options…</strong>:</p>
+<ul>
+<li><strong>Back up frequency</strong>: <em>Automatically every hour</em> (default). Time Machine also keeps <strong>local snapshots</strong> on your internal disk when the drive isn't connected, so laptop users still get hourly point-in-time recovery (<code>tmutil listlocalsnapshots /</code>).</li>
+<li><strong>Exclude</strong> (click <strong>+</strong>): things that are large, regenerable, or already backed up elsewhere:</li>
+</ul>
+<div class="codeblock"><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code>~/Library/Developer                # Xcode DerivedData, simulators (tens of GB, regenerable)
+~/Library/Caches
+~/Library/Containers/com.docker.docker   # Docker Desktop VM disk
+~/.orbstack                        # OrbStack VM data (or ~/OrbStack)
+~/.cache
+~/.local/share/mise                # runtimes: reinstall with `mise install`
+~/.npm  ~/.pnpm-store  ~/.cargo/registry  ~/go/pkg  ~/.gradle  ~/.m2  ~/.cache/uv
+~/Library/Application Support/Google/Chrome/Default/Service Worker
+~/Library/Application Support/Code/CachedData   (and Cursor, JetBrains caches)
+~/VirtualMachines  ~/Library/Containers/com.utmapp.UTM   # VM images — back up separately if you care
+~/Downloads                        # opinion: yes, exclude; nothing that matters should live there
+node_modules directories           # can't be excluded by pattern in the UI; use tmutil (below) or keep code in Git</code></pre></div>
+<p>From the shell, <code>tmutil addexclusion -p /path</code> excludes a path permanently (the <code>-p</code> flag makes it a <em>fixed-path</em> exclusion rather than one that follows the file). For <code>node_modules</code>/<code>.venv</code>/<code>target</code> everywhere: a script that walks <code>~/Developer</code> and calls <code>tmutil addexclusion</code> (without <code>-p</code>, so it sticks to the directory) on each — or accept the bloat; APFS-to-APFS backups are fast.</p>
+<ul>
+<li><strong>Back up while on battery power</strong>: on for laptops.</li>
+<li><strong>Show Time Machine in menu bar</strong> (Control Center → Time Machine): yes — you can trigger <em>Back Up Now</em> and see status.</li>
+</ul>
+<h3 id="using-it">Using it<a class="anchor" href="#using-it" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>Restore a file</strong>: open the folder in Finder, then Time Machine menu → <em>Browse Time Machine Backups</em>; step back in time, <em>Restore</em>. Works inside Mail, Notes and other apps that support it too.</li>
+<li><strong>Restore everything</strong>: Migration Assistant on a new/wiped Mac (choose the Time Machine disk) — this is how a lost laptop becomes a Tuesday afternoon.</li>
+<li><strong>Restore macOS + everything</strong>: Recovery → <em>Restore from Time Machine</em>.</li>
+<li><code>tmutil listbackups</code>, <code>tmutil latestbackup</code>, <code>tmutil compare</code> (what changed), <code>tmutil thinlocalsnapshots / 50000000000 4</code> (free 50 GB of local snapshots if "System Data" is huge), <code>tmutil startbackup --block</code>.</li>
+<li><strong>NAS / network</strong>: Time Machine over SMB to a Synology/QNAP/TrueNAS/another Mac works well (Golden Gate improved SMB browsing speed). Set a quota on the share so it can't eat the NAS. Wireless backups are slow for the first run — do it over Ethernet.</li>
+<li><strong>Multiple drives</strong>: Time Machine rotates between them (one at home, one at the office/parents' house = an off-site copy for free).</li>
+</ul>
+<h3 id="time-machines-limits">Time Machine's limits<a class="anchor" href="#time-machines-limits" aria-label="Permalink">#</a></h3>
+<p>It's not bootable (no bootable backups on Apple silicon — see below), it doesn't back up the VM images you excluded, it can't do bare-metal restore faster than Migration Assistant, and its consistency for open databases (Postgres data dir, VM disks) is file-level, not snapshot-consistent — dump databases separately if they matter.</p>
+<h2 id="a-second-local-copy-clones">A second local copy: clones<a class="anchor" href="#a-second-local-copy-clones" aria-label="Permalink">#</a></h2>
+<p><strong>Carbon Copy Cloner</strong> ($50) or <strong>SuperDuper!</strong> ($28) make a complete, browsable copy of your Data volume to another drive on a schedule, with snapshots and a "SafetyNet" for changed files. Since Big Sur, <strong>bootable clones are effectively dead on Apple silicon</strong> — the sealed system volume can only be laid down by Apple's installer; CCC can still attempt it but the developer explicitly recommends a <em>standard</em> (data-only) backup plus reinstalling macOS from Recovery, which takes 15 minutes. Do you need CCC if you have Time Machine? Only if you want a second, independent, faster-to-browse local copy, or a scheduled sync of specific folders (e.g. your photo library to a NAS). Nice to have, not required.</p>
+<p>For raw folder syncs, <code>rsync -avh --delete --progress ~/Documents/ /Volumes/Backup/Documents/</code> (install Homebrew's <code>rsync</code>) in a <code>launchd</code> job (Chapter 21) is free and dependable.</p>
+<h2 id="off-site-cloud-backup">Off-site: cloud backup<a class="anchor" href="#off-site-cloud-backup" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Backblaze Personal Backup</strong> ($9/mo or $99/yr, unlimited, per computer): installs a small agent, backs up <em>everything</em> on the internal drive and attached externals (you exclude what you don't want), versions for 30 days (1 year for $2/mo more), restores via web download or a mailed USB drive. Exclude the same caches/VMs as Time Machine. It's the set-and-forget answer for photos, documents, and everything you'd cry over. Set a <strong>private encryption key</strong> (Backblaze can't decrypt; if you lose it, so is your backup).</li>
+<li><strong>Arq</strong> ($50 one-time + your own storage: Backblaze B2, S3, Google Drive, OneDrive, SFTP, another Mac): client-side encrypted, hourly, versioned, very configurable. The power user's choice; B2 costs ~$6/TB/month.</li>
+<li><strong>restic</strong> / <strong>Kopia</strong> (free, open source, CLI or Kopia's GUI): encrypted, deduplicated, to any cloud or an SFTP server. Great if you already have a homelab or an S3 bucket and enjoy <code>launchd</code> plists.</li>
+<li><strong>iCloud Drive</strong> with <em>Desktop &amp; Documents</em> sync is <strong>sync, not backup</strong>: deleting a file deletes it everywhere (recoverable for 30 days in <em>Recently Deleted</em>), and ransomware or a bug syncs too. It's still far better than nothing for documents and pairs well with iCloud+ 200 GB/2 TB plans and Advanced Data Protection. <strong>Do not put code repos in iCloud Drive</strong> (Chapter 2).</li>
+<li><strong>Photos</strong>: iCloud Photos is the natural place; keep <em>Download Originals to this Mac</em> on so the library exists locally and gets Time Machined/Backblazed too — otherwise your only copy is Apple's.</li>
+</ul>
+<h2 id="what-about-code-and-config">What about code and config?<a class="anchor" href="#what-about-code-and-config" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Code</strong>: every repo has a remote; <code>git status</code> clean at the end of the day; unpushed branches are the only exposure. <code>gh repo list --limit 200</code> shows what's on GitHub; a monthly <code>for d in ~/Developer/*/; do (cd "$d" &amp;&amp; git status -sb | head -1); done</code> surfaces repos with no remote or unpushed work.</li>
+<li><strong>Configuration</strong>: the dotfiles repo (Chapter 10) plus the Brewfile. A fresh Mac becomes yours in 20 minutes — that's your real disaster-recovery plan for the <em>environment</em>.</li>
+<li><strong>Secrets</strong>: the password manager (synced, encrypted) holds the FileVault key, backup drive passphrase, 2FA recovery codes, SSH key passphrases and cloud credentials. <strong>Print the emergency kit / recovery codes</strong> and put them with your passport.</li>
+<li><strong>Databases</strong>: <code>pg_dump</code>/<code>mysqldump</code> into a folder Time Machine sees, or accept that local dev data is disposable (it usually is).</li>
+</ul>
+<h2 id="test-the-restore">Test the restore<a class="anchor" href="#test-the-restore" aria-label="Permalink">#</a></h2>
+<p>A backup you've never restored from is a hypothesis. Twice a year:</p>
+<ol>
+<li>Pick a file you edited last week; restore Tuesday's version via Time Machine. Did it work? Was the drive's passphrase where you thought?</li>
+<li>Log into Backblaze/Arq and download one folder.</li>
+<li>Boot to Recovery once so you know what it looks like (hold the power button → Options).</li>
+<li>Optional but recommended once: restore your whole Time Machine backup into a <code>tart</code>/UTM macOS VM, or onto a spare Mac, to see that Migration Assistant actually brings back what you expect.</li>
+</ol>
+<h2 id="recovery-when-the-mac-wont-boot-or-you-need-to-reinstall">Recovery: when the Mac won't boot or you need to reinstall<a class="anchor" href="#recovery-when-the-mac-wont-boot-or-you-need-to-reinstall" aria-label="Permalink">#</a></h2>
+<p>Apple silicon boot options — <strong>shut down, then press and hold the power button</strong> until "Loading startup options":</p>
+<ul>
+<li><strong>Options → Recovery</strong>: <em>Restore from Time Machine</em>, <em>Reinstall macOS</em> (keeps your data; fixes a corrupted system), <em>Safari</em> (read this guide), <em>Disk Utility</em> (First Aid, erase), <em>Utilities → Terminal</em>, <em>Startup Security Utility</em> (security policy — needed for kexts/yabai), <em>Share Disk</em> (mount your Mac's drive on another Mac over USB-C to pull files off — the modern Target Disk Mode).</li>
+<li><strong>Safe Mode</strong>: hold <kbd>⇧</kbd> while selecting your startup disk in the options screen → <em>Continue in Safe Mode</em>. Loads no third-party kexts/login items; clears caches. First thing to try for boot loops or kernel panics after installing something.</li>
+<li><strong>Fallback recoveryOS</strong>: if Recovery itself is damaged, double-press-and-hold the power button.</li>
+<li><strong>DFU restore / revive</strong> (bricked Mac, failed firmware update): connect to another Mac with a USB-C cable, use <strong>Finder</strong> (Sequoia+) or <strong>Apple Configurator</strong> → <em>Revive</em> (keeps data) or <em>Restore</em> (wipes). The IPSW downloads automatically. This is the nuclear option that fixes almost anything short of hardware failure.</li>
+<li><strong>Erase All Content and Settings</strong> (from a working macOS: <code>System Settings → General → Transfer or Reset</code>) is the fast clean-slate: 5 minutes, keeps macOS installed, removes your data and Activation Lock. Then Migration Assistant from Time Machine.</li>
+</ul>
+<p>Things that look like disasters but aren't: a <strong>"System Data" category eating 100+ GB</strong> is usually Time Machine local snapshots (<code>tmutil thinlocalsnapshots</code>), Xcode caches, or container VM images; a <strong>forgotten login password</strong> is fixed with your Apple Account or the FileVault Recovery Key at the login screen (click <em>?</em> or wait for the <em>Reset</em> option after three tries); a <strong>spinning wheel at boot after an update</strong> often just needs 20 minutes.</p>
+<h2 id="the-minimum-viable-backup-if-you-do-nothing-else">The minimum viable backup (if you do nothing else)<a class="anchor" href="#the-minimum-viable-backup-if-you-do-nothing-else" aria-label="Permalink">#</a></h2>
+<ol>
+<li>Buy a 2 TB SSD, format APFS Encrypted, plug it in, click <em>Use as Backup Disk</em>, save the passphrase in your password manager. Leave it plugged in whenever you're at your desk.</li>
+<li>Turn on iCloud Photos with originals downloaded, and iCloud Drive for Documents.</li>
+<li>Push your code. Every day.</li>
+<li>Put the FileVault Recovery Key and the drive passphrase in the password manager, and print the password manager's emergency kit.</li>
+</ol>
+<p>That's an hour of work and it makes a dead laptop a shopping trip, not a tragedy.</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="16-security-and-privacy.html"><span>Previous</span><strong>Security &amp; privacy</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/17-backup-and-recovery.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/17-backup-and-recovery.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#the-plan">The plan</a></li>
+<li class="lvl2"><a href="#time-machine-done-right">Time Machine, done right</a></li>
+<li class="lvl3"><a href="#the-drive">The drive</a></li>
+<li class="lvl3"><a href="#setup">Setup</a></li>
+<li class="lvl3"><a href="#using-it">Using it</a></li>
+<li class="lvl3"><a href="#time-machines-limits">Time Machine's limits</a></li>
+<li class="lvl2"><a href="#a-second-local-copy-clones">A second local copy: clones</a></li>
+<li class="lvl2"><a href="#off-site-cloud-backup">Off-site: cloud backup</a></li>
+<li class="lvl2"><a href="#what-about-code-and-config">What about code and config?</a></li>
+<li class="lvl2"><a href="#test-the-restore">Test the restore</a></li>
+<li class="lvl2"><a href="#recovery-when-the-mac-wont-boot-or-you-need-to-reinstall">Recovery: when the Mac won't boot or you need to reinstall</a></li>
+<li class="lvl2"><a href="#the-minimum-viable-backup-if-you-do-nothing-else">The minimum viable backup (if you do nothing else)</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
