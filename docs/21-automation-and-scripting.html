@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Automation &amp; scripting — The macOS Setup Guide</title>
+<meta name="description" content="Making the Mac do things for you — Shortcuts (and running them from the shell), launchd for scheduled and event-driven jobs, Automator&#x27;s remaining uses, AppleScript and JXA for controlling apps, Hammerspoon for Lua-powered hotkeys and window/system automation, Keyboard Maestro and BetterTouchTool, Folder Actions and Hazel, and a grab-bag of macOS-specific CLI tools every script should know about.">
+<meta property="og:title" content="Automation &amp; scripting — The macOS Setup Guide">
+<meta property="og:description" content="Making the Mac do things for you — Shortcuts (and running them from the shell), launchd for scheduled and event-driven jobs, Automator&#x27;s remaining uses, AppleScript and JXA for controlling apps, Hammerspoon for Lua-powered hotkeys and window/system automation, Keyboard Maestro and BetterTouchTool, Folder Actions and Hazel, and a grab-bag of macOS-specific CLI tools every script should know about.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+<li><a href="15-databases-and-local-dev.html"><span class="nav-num">15</span>Databases &amp; local development services</a></li>
+</ul>
+<p class="nav-part">Part IV — Security, backup &amp; maintenance</p><ul>
+<li><a href="16-security-and-privacy.html"><span class="nav-num">16</span>Security &amp; privacy</a></li>
+<li><a href="17-backup-and-recovery.html"><span class="nav-num">17</span>Backup &amp; recovery</a></li>
+<li><a href="18-performance-and-maintenance.html"><span class="nav-num">18</span>Performance &amp; maintenance</a></li>
+</ul>
+<p class="nav-part">Part V — Daily driving &amp; workflows</p><ul>
+<li><a href="19-daily-driver-apps.html"><span class="nav-num">19</span>Daily-driver apps</a></li>
+<li><a href="20-cs-student-specific.html"><span class="nav-num">20</span>CS-student specific</a></li>
+<li class="active"><a href="21-automation-and-scripting.html"><span class="nav-num">21</span>Automation &amp; scripting</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="automation-scripting">Automation &amp; scripting</h1>
+<p>macOS has more automation layers than any other desktop OS, accumulated over 30 years: AppleScript (1993), Automator (2005), launchd (2005), JavaScript for Automation (2014), Shortcuts (2021), and a rich set of command-line tools that expose the GUI — <code>open</code>, <code>pbcopy</code>, <code>osascript</code>, <code>defaults</code>, <code>mdfind</code>, <code>say</code>, <code>shortcuts</code>. Third-party tools (Hammerspoon, Keyboard Maestro, BetterTouchTool, Hazel) fill the gaps. This chapter picks the right layer for each kind of job and gives working examples you can paste.</p>
+<div class="admonition tip"><p class="admonition-title">Tip</p><p><strong>Which tool?</strong> Scheduled or on-boot job → <strong>launchd</strong>. Reacting to a new file in a folder → <strong>Folder Action / Hazel / launchd WatchPaths</strong>. Global hotkey that does something → <strong>Hammerspoon</strong> (free) or <strong>Keyboard Maestro</strong> ($). Chaining GUI apps together, or anything you want on iPhone too → <strong>Shortcuts</strong>. Poking a specific app's data (Mail, Music, Finder, Notes) → <strong>AppleScript/JXA</strong> via <code>osascript</code>. Anything that's just files and text → a <strong>shell/Python script</strong>, wrapped in one of the above.</p></div>
+<h2 id="the-macos-specific-cli-toolbox">The macOS-specific CLI toolbox<a class="anchor" href="#the-macos-specific-cli-toolbox" aria-label="Permalink">#</a></h2>
+<p>Before writing automation, know the commands that make shell scripts on a Mac different from Linux. All are preinstalled.</p>
+<div class="table-wrap"><table><thead><tr><th>Command</th><th>What</th><th>Example</th></tr></thead><tbody><tr><td><code>open</code></td><td>Open files, URLs, apps; the glue for everything</td><td><code>open .</code> (Finder here), <code>open -a Safari https://…</code>, <code>open -R file</code> (reveal), <code>open -e notes.txt</code> (TextEdit), <code>open -b com.apple.Terminal</code>, <code>open 'x-apple.systempreferences:com.apple.Battery-Settings.extension'</code></td></tr><tr><td><code>pbcopy</code> / <code>pbpaste</code></td><td>Clipboard in/out</td><td><code>cat file | pbcopy</code>, <code>pbpaste | jq .</code>, <code>pbpaste &gt; out.txt</code></td></tr><tr><td><code>osascript</code></td><td>Run AppleScript or JXA from the shell</td><td><code>osascript -e 'display notification "Done" with title "Build"'</code></td></tr><tr><td><code>defaults</code></td><td>Read/write preference plists</td><td><code>defaults read com.apple.dock</code>, <code>defaults write -g ApplePressAndHoldEnabled -bool false</code></td></tr><tr><td><code>shortcuts</code></td><td>Run/list Shortcuts</td><td><code>shortcuts run "Resize Image" -i photo.png</code>, <code>shortcuts list</code></td></tr><tr><td><code>automator</code></td><td>Run a workflow</td><td><code>automator -i file.txt Workflow.workflow</code></td></tr><tr><td><code>mdfind</code> / <code>mdls</code></td><td>Spotlight queries and metadata</td><td><code>mdfind -name invoice.pdf</code>, <code>mdfind 'kMDItemContentType == "com.adobe.pdf" &amp;&amp; kMDItemFSSize &gt; 10000000'</code>, <code>mdls photo.heic</code></td></tr><tr><td><code>say</code></td><td>Text-to-speech</td><td><code>make &amp;&amp; say "build done" || say "build failed"</code></td></tr><tr><td><code>afplay</code></td><td>Play a sound</td><td><code>afplay /System/Library/Sounds/Glass.aiff</code></td></tr><tr><td><code>screencapture</code></td><td>Screenshots</td><td><code>screencapture -i -c</code> (interactive, to clipboard), <code>screencapture -T 3 shot.png</code></td></tr><tr><td><code>sips</code></td><td>Image conversion/resizing</td><td><code>sips -Z 1024 *.png</code>, <code>sips -s format jpeg in.heic --out out.jpg</code></td></tr><tr><td><code>textutil</code></td><td>Convert rtf/doc/html/txt</td><td><code>textutil -convert txt notes.rtf</code></td></tr><tr><td><code>qlmanage -p</code></td><td>Quick Look from the terminal</td><td><code>qlmanage -p file.pdf</code></td></tr><tr><td><code>caffeinate</code></td><td>Prevent sleep</td><td><code>caffeinate -dis ./long_job.sh</code> (display, idle, system)</td></tr><tr><td><code>pmset</code></td><td>Power management</td><td><code>pmset -g batt</code>, <code>sudo pmset repeat wakeorpoweron MTWRF 08:00:00</code></td></tr><tr><td><code>networksetup</code> / <code>scutil</code></td><td>Network config</td><td><code>networksetup -setairportpower en0 off</code>, <code>scutil --dns</code></td></tr><tr><td><code>airport</code> (gone) → <code>wdutil</code></td><td>Wi-Fi info</td><td><code>sudo wdutil info</code></td></tr><tr><td><code>system_profiler</code></td><td>Hardware/software inventory</td><td><code>system_profiler SPHardwareDataType</code>, <code>SPDisplaysDataType</code></td></tr><tr><td><code>sw_vers</code> / <code>uname -m</code></td><td>macOS version / arch</td><td><code>sw_vers -productVersion</code> → <code>26.6</code>; <code>uname -m</code> → <code>arm64</code></td></tr><tr><td><code>diskutil</code> / <code>hdiutil</code></td><td>Disks and disk images</td><td><code>hdiutil create -size 1g -fs APFS -volname Scratch scratch.dmg</code>, <code>hdiutil attach scratch.dmg</code></td></tr><tr><td><code>security</code></td><td>Keychain from the shell</td><td><code>security find-generic-password -s "MyAPI" -w</code> (read a secret)</td></tr><tr><td><code>codesign</code> / <code>spctl</code> / <code>xattr</code></td><td>Signature, Gatekeeper, quarantine</td><td><code>xattr -d com.apple.quarantine ./tool</code> (only if you trust it — see <a href="16-security-and-privacy.html">chapter 16</a>)</td></tr><tr><td><code>launchctl</code></td><td>Manage launchd jobs</td><td>below</td></tr><tr><td><code>log</code></td><td>Unified log</td><td><code>log show --last 10m --predicate 'process == "kernel"'</code>, <code>log stream --predicate 'eventMessage contains "USB"'</code></td></tr><tr><td><code>tmutil</code></td><td>Time Machine</td><td><code>tmutil startbackup</code>, <code>tmutil listlocalsnapshots /</code></td></tr><tr><td><code>softwareupdate</code></td><td>OS updates</td><td><code>softwareupdate -l</code>, <code>softwareupdate --install-rosetta</code></td></tr><tr><td><code>mas</code> (brew)</td><td>App Store from the shell</td><td><code>mas install 1569813296</code></td></tr><tr><td><code>duti</code> (brew)</td><td>Set default apps</td><td><code>duti -s com.microsoft.VSCode .md all</code></td></tr><tr><td><code>trash</code> (brew)</td><td>Move to Trash instead of <code>rm</code></td><td><code>trash old/</code> (or <code>mv … ~/.Trash</code>)</td></tr><tr><td><code>terminal-notifier</code> (brew)</td><td>Richer notifications with icons/actions</td><td><code>terminal-notifier -title Build -message Done -open http://localhost:3000</code></td></tr></tbody></table></div>
+<p>Two idioms worth memorizing:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># Notify when a long command finishes (add to .zshrc as a function)
+notify() { "$@"; local s=$?; osascript -e "display notification \"exit $s\" with title \"$1 finished\""; return $s; }
+notify make -j8
+
+# Secrets from Keychain instead of plaintext in .zshrc
+export OPENAI_API_KEY="$(security find-generic-password -s openai -w 2&gt;/dev/null)"
+# store once with:  security add-generic-password -s openai -a "$USER" -w 'sk-…' -U</code></pre></div>
+<h2 id="shortcuts">Shortcuts<a class="anchor" href="#shortcuts" aria-label="Permalink">#</a></h2>
+<p>Shortcuts is Apple's mainstream automation: a visual action editor with ~300 system actions plus actions donated by apps (via App Intents), synced through iCloud to iPhone/iPad/Watch, runnable from Spotlight, the menu bar, a hotkey, Finder's Quick Actions, the Services menu, and — critically for developers — the shell.</p>
+<h3 id="when-shortcuts-is-the-right-tool">When Shortcuts is the right tool<a class="anchor" href="#when-shortcuts-is-the-right-tool" aria-label="Permalink">#</a></h3>
+<ul>
+<li>The task touches <strong>apps</strong>: resize the images in the selection and AirDrop them; make a calendar event from selected text; toggle a Focus mode; run a Shortcut on an iPhone photo that ends up on the Mac.</li>
+<li>You want it <strong>on every device</strong>. A Shortcut that logs a study session to a Notes table works identically on Mac and iPhone.</li>
+<li>It should appear in <strong>Finder's right-click menu</strong> (Quick Action) or the <strong>Share sheet</strong>.</li>
+<li><strong>macOS 26 automations</strong>: Shortcuts on Mac finally has <em>triggers</em> — time of day, when an app opens/closes, when connecting to a display or Wi-Fi network, when a file is added to a folder, when a Focus turns on, on battery level, on Bluetooth connect. That was previously iOS-only and the main reason to reach for Hazel or Keyboard Maestro.</li>
+<li><strong>Apple Intelligence actions</strong> (macOS 26): "Use Model" lets a Shortcut call the on-device model, Private Cloud Compute, or ChatGPT with a prompt and structured output — summarize the clipboard, extract dates from an email, classify a screenshot — no API key.</li>
+</ul>
+<h3 id="developer-relevant-tricks">Developer-relevant tricks<a class="anchor" href="#developer-relevant-tricks" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>Run a shell script</strong> action (Mac only) — <code>zsh</code> by default, receives Shortcut input on stdin or as an argument. Pass results back as text. So any script becomes a Quick Action, a menu bar item, a hotkey, or a Siri phrase in about 30 seconds.</li>
+<li><strong>Run from the terminal</strong>: <code>shortcuts run "Name" --input-path file.png --output-path out/</code>. Scripts can call Shortcuts, Shortcuts can call scripts.</li>
+<li><strong>Keyboard shortcut</strong>: in the Shortcut's details (ⓘ) → "Add Keyboard Shortcut". Works system-wide. Also "Pin in Menu Bar" and "Use as Quick Action" checkboxes.</li>
+<li><strong>Run AppleScript / Run JavaScript for Automation</strong> actions embed the older languages when you need app scripting inside a Shortcut.</li>
+<li><strong>SSH</strong>: the "Run Script over SSH" action lets a Shortcut on your <em>iPhone</em> run a command on your Mac (or a server) — restart a dev server from the couch.</li>
+<li><strong>Web requests</strong>: "Get Contents of URL" does GET/POST with headers and JSON — enough for webhook-driven automations without any code.</li>
+<li><strong>Shortcuts as a launcher backend</strong>: Raycast and Alfred both list your Shortcuts as commands.</li>
+</ul>
+<h3 id="example-commit-and-push-current-repo-quick-action">Example: "Commit and push current repo" Quick Action<a class="anchor" href="#example-commit-and-push-current-repo-quick-action" aria-label="Permalink">#</a></h3>
+<ol>
+<li>Receive <strong>Folders</strong> in Finder → Run Shell Script with input as arguments:<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">  cd "$1" &amp;&amp; git add -A &amp;&amp; git commit -qm "wip: $(date '+%F %R')" &amp;&amp; git push -q &amp;&amp; echo "pushed $(git rev-parse --short HEAD)"</code></pre></div></li>
+<li><strong>Show Notification</strong> with the output.</li>
+<li>Tick "Use as Quick Action → Finder". Right-click any repo folder → Quick Actions → the Shortcut.</li>
+</ol>
+<h3 id="example-a-study-timer-automation-macos-26-triggers">Example: a study-timer automation (macOS 26 triggers)<a class="anchor" href="#example-a-study-timer-automation-macos-26-triggers" aria-label="Permalink">#</a></h3>
+<p>Trigger: <strong>Focus "Study" turned on</strong> → actions: Quit App (Slack, Discord, Messages), Set Appearance (Dark), Run Shell Script (<code>brew services stop --all</code>), Set Do Not Disturb until Focus ends. Trigger <strong>Focus "Study" turned off</strong> → the reverse. This used to need Keyboard Maestro.</p>
+<h3 id="limitations">Limitations<a class="anchor" href="#limitations" aria-label="Permalink">#</a></h3>
+<p>Shortcuts is slow to start (~0.5–1 s), error messages are opaque, there's no version control (export as <code>.shortcut</code> files to your dotfiles for a backup), and complex logic in a drag-and-drop editor becomes painful past ~30 actions. Push logic into a script and keep the Shortcut as a thin wrapper.</p>
+<h2 id="launchd-cron-but-better">launchd: cron, but better<a class="anchor" href="#launchd-cron-but-better" aria-label="Permalink">#</a></h2>
+<p>macOS has <code>cron</code>, but it's discouraged (no persistence across sleep, no Full Disk Access prompts, <code>crontab</code> needs Full Disk Access itself now). <strong>launchd</strong> is the native way to run something at login, on a schedule, when a path changes, or continuously as a service. Every Homebrew service (<code>brew services</code>) is a launchd agent.</p>
+<p>Two kinds: <strong>LaunchAgents</strong> run as your user, when you're logged in (<code>~/Library/LaunchAgents/</code>). <strong>LaunchDaemons</strong> run as root at boot, no user session (<code>/Library/LaunchDaemons/</code>, needs <code>sudo</code>). You'll almost always want agents.</p>
+<p>A job is a property list. Label it with reverse-DNS naming (<code>com.yourname.backup-notes</code>), which is also the filename.</p>
+<h3 id="scheduled-job-back-up-an-obsidian-vault-to-git-hourly">Scheduled job: back up an Obsidian vault to Git hourly<a class="anchor" href="#scheduled-job-back-up-an-obsidian-vault-to-git-hourly" aria-label="Permalink">#</a></h3>
+<div class="codeblock"><span class="code-lang">xml</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-xml">&lt;!-- ~/Library/LaunchAgents/com.yourname.vault-backup.plist --&gt;
+&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;
+&lt;plist version="1.0"&gt;&lt;dict&gt;
+  &lt;key&gt;Label&lt;/key&gt;            &lt;string&gt;com.yourname.vault-backup&lt;/string&gt;
+  &lt;key&gt;ProgramArguments&lt;/key&gt; &lt;array&gt;
+    &lt;string&gt;/bin/zsh&lt;/string&gt;&lt;string&gt;-lc&lt;/string&gt;
+    &lt;string&gt;cd ~/Documents/vault &amp;&amp; git add -A &amp;&amp; git diff --cached --quiet || git commit -qm "auto $(date +%F-%R)" &amp;&amp; git push -q&lt;/string&gt;
+  &lt;/array&gt;
+  &lt;key&gt;StartInterval&lt;/key&gt;    &lt;integer&gt;3600&lt;/integer&gt;
+  &lt;key&gt;RunAtLoad&lt;/key&gt;        &lt;true/&gt;
+  &lt;key&gt;StandardOutPath&lt;/key&gt;  &lt;string&gt;/tmp/vault-backup.log&lt;/string&gt;
+  &lt;key&gt;StandardErrorPath&lt;/key&gt;&lt;string&gt;/tmp/vault-backup.err&lt;/string&gt;
+  &lt;key&gt;EnvironmentVariables&lt;/key&gt;&lt;dict&gt;
+    &lt;key&gt;PATH&lt;/key&gt;&lt;string&gt;/opt/homebrew/bin:/usr/local/bin:/usr/bin:/bin&lt;/string&gt;
+  &lt;/dict&gt;
+&lt;/dict&gt;&lt;/plist&gt;</code></pre></div>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># Load (modern syntax; "launchctl load" is deprecated but still works)
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.yourname.vault-backup.plist
+# Run it now to test
+launchctl kickstart -k gui/$(id -u)/com.yourname.vault-backup
+# Status / logs
+launchctl print gui/$(id -u)/com.yourname.vault-backup | head -30
+tail /tmp/vault-backup.err
+# Unload
+launchctl bootout gui/$(id -u)/com.yourname.vault-backup</code></pre></div>
+<p>Scheduling keys:</p>
+<ul>
+<li><code>StartInterval</code> — every N seconds. If the Mac was asleep, the job runs once on wake (unlike cron, which just skips).</li>
+<li><code>StartCalendarInterval</code> — cron-like: <code>&lt;dict&gt;&lt;key&gt;Hour&lt;/key&gt;&lt;integer&gt;9&lt;/integer&gt;&lt;key&gt;Minute&lt;/key&gt;&lt;integer&gt;0&lt;/integer&gt;&lt;key&gt;Weekday&lt;/key&gt;&lt;integer&gt;1&lt;/integer&gt;&lt;/dict&gt;</code> (Monday 09:00). An array of dicts for multiple times.</li>
+<li><code>WatchPaths</code> — run when any listed path changes (file or directory). <code>QueueDirectories</code> — run when a directory is non-empty (a processing queue).</li>
+<li><code>KeepAlive</code> — restart if it exits (a service). <code>&lt;true/&gt;</code> or <code>&lt;dict&gt;&lt;key&gt;SuccessfulExit&lt;/key&gt;&lt;false/&gt;&lt;/dict&gt;</code> (restart only on failure). Pair with <code>ThrottleInterval</code> to avoid a crash loop.</li>
+<li><code>RunAtLoad</code> — run once when loaded (i.e., at login).</li>
+<li><code>StartOnMount</code> — when a volume mounts (start a backup when the drive is plugged in).</li>
+</ul>
+<p>Gotchas: launchd jobs get a minimal environment — <strong>no PATH from your shell</strong>, no <code>~/.zshrc</code> — so set <code>EnvironmentVariables</code> or use <code>zsh -lc</code> (login shell, slower) as above. Jobs that touch protected folders (Desktop, Documents, Downloads, Photos, Mail) will fail silently unless the <em>executable</em> (e.g., <code>/bin/zsh</code> or your script's interpreter) has been granted <strong>Full Disk Access</strong> in Privacy &amp; Security — prefer putting automated data under <code>~/code</code> or <code>~/.local</code> to avoid it. Use absolute paths everywhere. <code>~</code> is expanded in <code>ProgramArguments</code> strings only inside a shell.</p>
+<p>Tools: <strong>LaunchControl</strong> ($) is a GUI for writing and debugging plists; <strong><code>plutil -lint file.plist</code></strong> validates syntax; <strong><code>launchd.info</code></strong> is the community reference. For one-liners, <code>brew install --cask launchcontrol</code> or just copy the template above.</p>
+<h3 id="homebrew-services">Homebrew services<a class="anchor" href="#homebrew-services" aria-label="Permalink">#</a></h3>
+<p><code>brew services start postgresql@18</code> writes and loads a launch agent for you. <code>brew services list</code> shows all; <code>brew services run X</code> starts without registering at login. It's the easiest way to daemonize anything Homebrew installs — including your own formulae.</p>
+<h2 id="applescript-and-jxa">AppleScript and JXA<a class="anchor" href="#applescript-and-jxa" aria-label="Permalink">#</a></h2>
+<p><strong>AppleScript</strong> is the 1990s English-like language for controlling scriptable apps through Apple Events. It looks silly and it is still the only way to reach deep into Finder, Mail, Music, Notes, Calendar, Reminders, Safari tabs, Terminal windows, Keynote, OmniFocus, Things, and most long-lived Mac apps. <strong>JavaScript for Automation (JXA)</strong> exposes the same Apple Events from JavaScript; less documentation, saner language. Both run via <code>osascript</code>; both are embeddable in Shortcuts, Hammerspoon, Keyboard Maestro, and Raycast.</p>
+<p>Open <strong>Script Editor</strong> (built in) → <strong>File → Open Dictionary</strong> to browse what an app exposes. That's the API reference.</p>
+<p>Useful one-liners you'll actually use:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># Notification
+osascript -e 'display notification "Tests passed" with title "pytest" sound name "Glass"'
+
+# Dialog with input, result to stdout
+osascript -e 'text returned of (display dialog "Branch name:" default answer "feature/")'
+
+# Frontmost app name
+osascript -e 'tell application "System Events" to get name of first process whose frontmost is true'
+
+# URL of the current Safari tab (Chrome: replace app name; "active tab of front window")
+osascript -e 'tell application "Safari" to get URL of current tab of front window'
+
+# Every Safari tab URL, for saving a research session
+osascript -e 'tell application "Safari" to get URL of every tab of every window' | tr ',' '\n'
+
+# Path of the frontmost Finder window (for a "cd here" alias)
+cdf() { cd "$(osascript -e 'tell application "Finder" to POSIX path of (target of front window as alias)')"; }
+
+# Toggle dark mode
+osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
+
+# Set volume / mute
+osascript -e 'set volume output volume 30' ; osascript -e 'set volume output muted true'
+
+# Now-playing from Music
+osascript -e 'tell application "Music" to get name of current track &amp; " — " &amp; artist of current track'
+
+# Create a Reminder
+osascript -e 'tell application "Reminders" to make new reminder with properties {name:"Submit lab 3", due date:(current date) + 2 * days}'
+
+# Append to a note in Notes
+osascript -e 'tell application "Notes" to tell folder "Work" to set body of note "Log" to (body of note "Log") &amp; "&lt;div&gt;'"$(date)"': entry&lt;/div&gt;"'
+
+# Empty the Trash, quietly
+osascript -e 'tell application "Finder" to empty trash'
+
+# Open a new Terminal/Ghostty window at a path (Ghostty: use `open -na Ghostty --args --working-directory=…`)
+osascript -e 'tell application "Terminal" to do script "cd ~/code &amp;&amp; ls"'</code></pre></div>
+<p>JXA equivalent for the Safari tabs example, showing the syntax:</p>
+<div class="codeblock"><span class="code-lang">js</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-js">// save as tabs.js; run with: osascript -l JavaScript tabs.js
+const safari = Application("Safari");
+const urls = safari.windows().flatMap(w =&gt; w.tabs().map(t =&gt; t.url()));
+console.log(urls.join("\n"));   // goes to stderr; use `urls.join("\n")` as last expression for stdout</code></pre></div>
+<p>Where AppleScript beats everything else: <strong>GUI scripting</strong> via System Events — clicking menu items and buttons in apps that expose nothing else (<code>tell application "System Events" to tell process "Zoom" to click menu item "Mute Audio" of menu "Meeting" of menu bar 1</code>). It needs <strong>Accessibility</strong> permission for the calling app (Terminal, Script Editor, Hammerspoon) and it's brittle when apps update. Use it as a last resort.</p>
+<div class="admonition note"><p class="admonition-title">Note</p><p>Since macOS 10.14, the <em>first</em> time a script targets an app you'll get an "X wants access to control Y" prompt, recorded under <strong>Privacy &amp; Security → Automation</strong>. Automated scripts (launchd) can't answer prompts — run them interactively once from the same host app so the permission is recorded.</p></div>
+<h2 id="automator">Automator<a class="anchor" href="#automator" aria-label="Permalink">#</a></h2>
+<p>Automator (2005) is still installed and still does two things well: <strong>Folder Actions</strong> (run a workflow when files are added to a folder — though macOS 26 Shortcuts triggers now cover this) and <strong>Quick Actions</strong> for Finder/Services with the full list of Automator's file-processing actions (PDF manipulation, image scaling, rename with patterns, "Run Shell Script" with <code>$@</code> or stdin). Anything new should be a Shortcut; open Automator if you inherit <code>.workflow</code> files or need a PDF action Shortcuts lacks ("Combine PDF Pages", "Extract PDF Text" — actually both exist in Shortcuts now, so mostly: don't).</p>
+<h2 id="hammerspoon-lua-for-everything">Hammerspoon: Lua for everything<a class="anchor" href="#hammerspoon-lua-for-everything" aria-label="Permalink">#</a></h2>
+<p><strong>Hammerspoon</strong> (free, open source, <code>brew install --cask hammerspoon</code>) exposes macOS — windows, screens, hotkeys, Wi-Fi, USB, battery, audio devices, menu bar items, notifications, pasteboard, timers, app events, Spotlight, AppleScript — as Lua APIs. A single <code>~/.hammerspoon/init.lua</code> (put it in your dotfiles) replaces a window manager, a hotkey daemon, a clipboard tool, and half of Keyboard Maestro. It's the automation choice for people who'd rather write 20 lines than drag 20 boxes.</p>
+<p>A starter config demonstrating the common patterns:</p>
+<div class="codeblock"><span class="code-lang">lua</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-lua">-- ~/.hammerspoon/init.lua
+local hyper = {"cmd", "alt", "ctrl"}          -- with Karabiner: Caps Lock → hyper (see ch. 5)
+
+-- Reload config on save
+hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", hs.reload):start()
+hs.alert.show("Hammerspoon loaded")
+
+-- 1. App launch/focus hotkeys (the #1 productivity win)
+local apps = { t = "Ghostty", e = "Visual Studio Code", b = "Safari", n = "Obsidian", s = "Slack", f = "Finder" }
+for key, app in pairs(apps) do
+  hs.hotkey.bind(hyper, key, function() hs.application.launchOrFocus(app) end)
+end
+
+-- 2. Window management (halves/maximize/center; AeroSpace or Rectangle if you want more)
+hs.window.animationDuration = 0
+local function move(fn)
+  return function()
+    local w = hs.window.focusedWindow(); if not w then return end
+    local f = w:screen():frame(); w:setFrame(fn(f))
+  end
+end
+hs.hotkey.bind(hyper, "left",  move(function(f) return hs.geometry.rect(f.x, f.y, f.w/2, f.h) end))
+hs.hotkey.bind(hyper, "right", move(function(f) return hs.geometry.rect(f.x+f.w/2, f.y, f.w/2, f.h) end))
+hs.hotkey.bind(hyper, "return", move(function(f) return f end))
+hs.hotkey.bind(hyper, "c", move(function(f) return hs.geometry.rect(f.x+f.w*0.1, f.y+f.h*0.1, f.w*0.8, f.h*0.8) end))
+hs.hotkey.bind(hyper, "tab", function() hs.window.focusedWindow():moveToScreen(hs.screen.mainScreen():next()) end)
+
+-- 3. React to events: mute mic + quit Slack when leaving the home Wi-Fi
+local homeSSID = "MyHomeWiFi"
+hs.wifi.watcher.new(function()
+  local ssid = hs.wifi.currentNetwork()
+  if ssid ~= homeSSID then
+    hs.audiodevice.defaultInputDevice():setInputMuted(true)
+    hs.notify.new({title="Left home network", informativeText="Mic muted"}):send()
+  end
+end):start()
+
+-- 4. Do something when a display is plugged in (rearrange windows, set audio output)
+hs.screen.watcher.new(function()
+  if #hs.screen.allScreens() &gt; 1 then
+    hs.audiodevice.findOutputByName("Studio Display Speakers"):setDefaultOutputDevice()
+  end
+end):start()
+
+-- 5. Caffeine toggle in the menu bar
+local caff = hs.menubar.new()
+local function setCaff(state) hs.caffeinate.set("displayIdle", state); caff:setTitle(state and "☕" or "💤") end
+caff:setClickCallback(function() setCaff(not hs.caffeinate.get("displayIdle")) end)
+setCaff(false)
+
+-- 6. Paste as plain text (⌘⇧V) — strips formatting everywhere
+hs.hotkey.bind({"cmd","shift"}, "v", function()
+  hs.eventtap.keyStrokes(hs.pasteboard.getContents())
+end)
+
+-- 7. Run a shell command and show the result
+hs.hotkey.bind(hyper, "g", function()
+  local out = hs.execute("cd ~/code/project &amp;&amp; git status --short | wc -l", true)
+  hs.alert.show("Changed files: " .. out:gsub("%s+", ""))
+end)
+
+-- 8. Vim-style arrow keys with hyper held, in every app
+for key, arrow in pairs({h="left", j="down", k="up", l="right"}) do
+  hs.hotkey.bind(hyper, key, function() hs.eventtap.keyStroke({}, arrow, 0) end, nil,
+                            function() hs.eventtap.keyStroke({}, arrow, 0) end)
+end</code></pre></div>
+<p>The API docs are at <code>hammerspoon.org/docs</code>; the <strong>Spoons</strong> repository has drop-in plugins (window grids, clipboard history, a Pomodoro timer, Spotify controls, <code>URLDispatcher</code> to route links to different browsers by domain — great for opening work links in Chrome and everything else in Safari). Hammerspoon needs <strong>Accessibility</strong> permission (prompted on first run). Combined with Karabiner mapping Caps Lock to hyper (<a href="05-keyboard-and-input.html">chapter 5</a>), you get a whole layer of hotkeys that conflict with nothing.</p>
+<h2 id="keyboard-maestro-bettertouchtool-and-friends">Keyboard Maestro, BetterTouchTool, and friends<a class="anchor" href="#keyboard-maestro-bettertouchtool-and-friends" aria-label="Permalink">#</a></h2>
+<p>If you'd rather not write Lua:</p>
+<ul>
+<li><strong>Keyboard Maestro</strong> ($36 one-time) — macros triggered by hotkeys, typed strings, app launch/quit, USB/Wi-Fi/display changes, time, folder changes, MIDI, and more; actions for clicking, typing, menu selection, image-recognition clicks (the "find this button on screen" fallback for un-scriptable apps), AppleScript/shell/JXA/Swift, variables, loops, conditions. The most complete Mac automation tool, with a 20-year track record. The right choice for GUI-heavy automation and text expansion.</li>
+<li><strong>BetterTouchTool</strong> ($12 / $24 lifetime) — started as trackpad gesture customization (three-finger swipe → action), grew into hotkeys, window snapping, a Touch Bar replacement, and a Stream Deck controller, with a Hammerspoon-ish scripting layer. Best if gestures are what you want to customize.</li>
+<li><strong>Hazel</strong> ($42) — rule-based folder automation: "when a PDF whose contents match 'Invoice' appears in Downloads, rename it <code>YYYY-MM-invoice.pdf</code> and move to <code>~/Documents/Finance</code>", "move screenshots older than a week to an archive folder", "unzip and trash archives". Reliable, low-effort. macOS 26 Shortcuts folder triggers do the simple cases; Hazel does content matching and nested rules.</li>
+<li><strong>Raycast</strong> (<a href="19-daily-driver-apps.html">chapter 19</a>) — Script Commands (<code>#!/bin/bash</code> with metadata comments) become launcher commands; extensions in TypeScript for anything with a UI.</li>
+<li><strong>Espanso</strong> (free, open source) — text expansion from a YAML file (<code>:sig</code> → your signature, <code>:date</code> → today, <code>:shrug</code> → ¯\\\_(ツ)\_/¯), with forms and shell-command output. Cross-platform. Keyboard Maestro and Raycast Snippets do this too.</li>
+<li><strong>Alfred Workflows</strong> — the equivalent for Alfred users.</li>
+<li><strong>Shortcat</strong> / <strong>Homerow</strong> — keyboard-click any UI element by label, for the un-scriptable.</li>
+</ul>
+<h2 id="folder-driven-workflows">Folder-driven workflows<a class="anchor" href="#folder-driven-workflows" aria-label="Permalink">#</a></h2>
+<p>Three patterns for "something happens when a file appears":</p>
+<ol>
+<li><strong>Shortcuts Automation</strong> (macOS 26): Trigger "Folder" → run actions on the added files. Fine for simple moves/renames.</li>
+<li><strong>launchd <code>WatchPaths</code>/<code>QueueDirectories</code></strong>: robust, runs without any app open, scriptable in anything. Best for inbox-style processing (<code>~/Inbox</code> → script sorts to destinations).</li>
+<li><strong>Hazel</strong>: when rules get complicated (content matching, dates, nested conditions) and you don't want to maintain a script.</li>
+</ol>
+<p>A useful one: watch <code>~/Downloads</code> and unquarantine <em>nothing</em> automatically, but move <code>.dmg</code>/<code>.pkg</code> installers older than 7 days to Trash and screenshots to <code>~/Pictures/Screenshots</code>. In launchd form, <code>WatchPaths</code> on <code>~/Downloads</code> + a script with <code>find -mtime +7</code>.</p>
+<h2 id="scripting-languages-for-glue">Scripting languages for glue<a class="anchor" href="#scripting-languages-for-glue" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>zsh/bash</strong> for anything under 50 lines. macOS ships <code>bash</code> 3.2 (GPLv2 freeze) — write <code>#!/bin/zsh</code> or <code>#!/usr/bin/env bash</code> with <code>brew install bash</code> (5.x) and avoid bash-4 features in <code>/bin/bash</code> scripts. BSD <code>sed</code>/<code>awk</code>/<code>date</code>/<code>stat</code> differ from GNU (<code>brew install coreutils gnu-sed</code> adds <code>g</code>-prefixed GNU versions; see <a href="09-terminal-and-shell.html">chapter 9</a>).</li>
+<li><strong>Python</strong> for anything longer. <code>#!/usr/bin/env -S uv run --script</code> with inline dependencies (PEP 723) makes single-file scripts with packages trivial — see <a href="11-languages-and-runtimes.html">chapter 11</a>. <code>pyobjc</code> gives Python access to every macOS framework if you need it.</li>
+<li><strong>Swift scripts</strong> — <code>#!/usr/bin/env swift</code> runs a <code>.swift</code> file directly. Slow start (compiles), but full access to AppKit/Foundation. Nice for tiny native utilities; <code>swift-sh</code> or a compiled binary for anything hot.</li>
+<li><strong>JXA</strong> when you need Apple Events and hate AppleScript.</li>
+<li><strong>Node</strong> — <code>zx</code> (Google) makes shell-scripting in JavaScript pleasant if that's your language.</li>
+</ul>
+<p>Keep scripts in <code>~/.local/bin</code> (on PATH via your <code>.zshrc</code>) inside the dotfiles repo (<a href="10-dotfiles-and-git.html">chapter 10</a>), so every automation you write survives a reinstall.</p>
+<h2 id="recipes">Recipes<a class="anchor" href="#recipes" aria-label="Permalink">#</a></h2>
+<p>A few complete, copy-pasteable automations that pay for the chapter.</p>
+<p><strong>Build-done notifier as a shell wrapper</strong> (<code>~/.local/bin/nt</code>):</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">#!/bin/zsh
+# usage: nt make test   — runs the command, notifies with status, plays a sound
+start=$(date +%s); "$@"; s=$?; dur=$(( $(date +%s) - start ))
+title="${1} $([ $s -eq 0 ] &amp;&amp; echo ✅ || echo ❌) (${dur}s)"
+osascript -e "display notification \"exit $s\" with title \"$title\""
+afplay /System/Library/Sounds/$([ $s -eq 0 ] &amp;&amp; echo Glass || echo Basso).aiff &amp;
+exit $s</code></pre></div>
+<p><strong>"Morning" Shortcut / script</strong> — run at login via launchd <code>RunAtLoad</code>, or as a Shortcut with a Time trigger: open Calendar and Mail, start <code>brew services run postgresql@18</code>, pull your dotfiles and course repos (<code>for d in ~/code/uni/*/; do git -C "$d" pull -q --ff-only; done</code>), print today's agenda (<code>icalBuddy eventsToday</code> via <code>brew install ical-buddy</code>).</p>
+<p><strong>Project launcher</strong> (Hammerspoon or Raycast Script Command): <code>hyper+P</code> → chooser listing <code>~/code/*</code> → opens the pick in your editor, a terminal tab there, and the project's <code>localhost</code> URL if <code>package.json</code> has a dev script.</p>
+<p><strong>Screenshot pipeline</strong>: <code>defaults write com.apple.screencapture location ~/Pictures/Screenshots</code> + a Shortcut Quick Action "Optimize &amp; copy" (Resize to max 1600px → Convert to PNG → Run Shell Script <code>pngquant</code> or <code>oxipng</code> → Copy to Clipboard) — for pasting into issues and docs at sane sizes.</p>
+<p><strong>Toggle audio output</strong> (Hammerspoon): <code>hs.audiodevice.allOutputDevices()</code> cycle on <code>hyper+A</code> — headphones ↔ speakers ↔ display without touching Control Center.</p>
+<p><strong>Batch rename with metadata</strong>: <code>exiftool '-FileName&lt;CreateDate' -d '%Y-%m-%d_%H%M%S%%-c.%%e' ~/Pictures/import/</code> (<code>brew install exiftool</code>) — dated photo filenames; wrap in a Quick Action.</p>
+<p><strong>Clipboard transforms</strong> (Raycast Script Commands or Hammerspoon): JSON pretty-print (<code>pbpaste | jq . | pbcopy</code>), Markdown table from TSV, base64 encode/decode, URL-decode, "title case," strip tracking parameters from a URL (<code>sed -E 's/[?&amp;](utm_[a-z]+|fbclid|gclid)=[^&amp;]*//g'</code>).</p>
+<div class="admonition tip"><p class="admonition-title">Tip</p><p>Whatever you automate, put the plist, the Lua, the script, and an exported <code>.shortcut</code> in your dotfiles repo with a one-line README entry. Six months from now you won't remember why the Mac beeps at 09:00 on Mondays, and <code>git log</code> will.</p></div>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="20-cs-student-specific.html"><span>Previous</span><strong>CS-student specific</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/21-automation-and-scripting.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/21-automation-and-scripting.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#the-macos-specific-cli-toolbox">The macOS-specific CLI toolbox</a></li>
+<li class="lvl2"><a href="#shortcuts">Shortcuts</a></li>
+<li class="lvl3"><a href="#when-shortcuts-is-the-right-tool">When Shortcuts is the right tool</a></li>
+<li class="lvl3"><a href="#developer-relevant-tricks">Developer-relevant tricks</a></li>
+<li class="lvl3"><a href="#example-commit-and-push-current-repo-quick-action">Example: "Commit and push current repo" Quick Action</a></li>
+<li class="lvl3"><a href="#example-a-study-timer-automation-macos-26-triggers">Example: a study-timer automation (macOS 26 triggers)</a></li>
+<li class="lvl3"><a href="#limitations">Limitations</a></li>
+<li class="lvl2"><a href="#launchd-cron-but-better">launchd: cron, but better</a></li>
+<li class="lvl3"><a href="#scheduled-job-back-up-an-obsidian-vault-to-git-hourly">Scheduled job: back up an Obsidian vault to Git hourly</a></li>
+<li class="lvl3"><a href="#homebrew-services">Homebrew services</a></li>
+<li class="lvl2"><a href="#applescript-and-jxa">AppleScript and JXA</a></li>
+<li class="lvl2"><a href="#automator">Automator</a></li>
+<li class="lvl2"><a href="#hammerspoon-lua-for-everything">Hammerspoon: Lua for everything</a></li>
+<li class="lvl2"><a href="#keyboard-maestro-bettertouchtool-and-friends">Keyboard Maestro, BetterTouchTool, and friends</a></li>
+<li class="lvl2"><a href="#folder-driven-workflows">Folder-driven workflows</a></li>
+<li class="lvl2"><a href="#scripting-languages-for-glue">Scripting languages for glue</a></li>
+<li class="lvl2"><a href="#recipes">Recipes</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
