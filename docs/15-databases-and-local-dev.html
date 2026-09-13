@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Databases &amp; local development services — The macOS Setup Guide</title>
+<meta name="description" content="Postgres, MySQL, SQLite, Redis, MongoDB and friends on a Mac — Homebrew services vs containers vs Postgres.app, GUI clients, local HTTPS and custom domains, and a sane local-dev workflow.">
+<meta property="og:title" content="Databases &amp; local development services — The macOS Setup Guide">
+<meta property="og:description" content="Postgres, MySQL, SQLite, Redis, MongoDB and friends on a Mac — Homebrew services vs containers vs Postgres.app, GUI clients, local HTTPS and custom domains, and a sane local-dev workflow.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+<li class="active"><a href="15-databases-and-local-dev.html"><span class="nav-num">15</span>Databases &amp; local development services</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="databases-local-development-services">Databases &amp; local development services</h1>
+<p>Two philosophies for local services: <strong>install natively via Homebrew</strong> (fastest, always on, shares your filesystem) or <strong>run in containers</strong> (isolated, version-per-project, throwaway). Both are fine; the mistake is mixing them for the <em>same</em> service and then wondering which Postgres is answering on 5432.</p>
+<h2 id="which-approach">Which approach<a class="anchor" href="#which-approach" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th></th><th>Homebrew service / Postgres.app</th><th>Containers (OrbStack/Docker Compose)</th></tr></thead><tbody><tr><td>Speed</td><td>Native; no VM overhead; fastest for heavy queries and large imports</td><td>Very fast on OrbStack; a little file-share overhead for bind-mounted data</td></tr><tr><td>Versions</td><td>One major version per formula (<code>postgresql@17</code>); switching is fiddly</td><td>Any version per project, side by side, trivially</td></tr><tr><td>Isolation</td><td>Shared server, many databases</td><td>Each project its own server; <code>down -v</code> wipes it</td></tr><tr><td>Always-on cost</td><td>Runs at login if you <code>brew services start</code> — small battery/memory cost</td><td>Only when the project is up</td></tr><tr><td>Team parity</td><td>Differs from CI/production</td><td>Same image as CI/production</td></tr><tr><td>Recommendation</td><td><strong>Solo/student with one Postgres for everything; SQLite; Redis</strong></td><td><strong>Anything with a <code>compose.yaml</code>; multiple versions; team projects</strong></td></tr></tbody></table></div>
+<p>Many developers end up with: <strong>SQLite natively</strong> (it's a library, not a server), <strong>one Homebrew Postgres for scratch work</strong>, and <strong>Compose for real projects</strong>.</p>
+<h2 id="postgresql">PostgreSQL<a class="anchor" href="#postgresql" aria-label="Permalink">#</a></h2>
+<h3 id="native-homebrew">Native (Homebrew)<a class="anchor" href="#native-homebrew" aria-label="Permalink">#</a></h3>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew install postgresql@17
+brew services start postgresql@17         # runs as your user, data in /opt/homebrew/var/postgresql@17
+# keg-only: put its bin on PATH (Homebrew prints the exact line)
+echo 'export PATH="/opt/homebrew/opt/postgresql@17/bin:$PATH"' &gt;&gt; ~/.zshrc
+createdb $(whoami)                        # so plain `psql` connects
+psql -c "select version();"</code></pre></div>
+<p>Your macOS username is a superuser with no password (local trust auth) — fine for a laptop, never for anything reachable. Create per-project roles anyway to mirror production: <code>createuser -P app &amp;&amp; createdb -O app app_dev</code>. Config: <code>/opt/homebrew/var/postgresql@17/postgresql.conf</code>; logs: <code>/opt/homebrew/var/log/postgresql@17.log</code>. Upgrade majors with <code>brew postgresql-upgrade-database</code> (back up first).</p>
+<p><strong>Postgres.app</strong> (postgresapp.com, free) is the friendliest native option: a menu bar app that bundles several major versions with PostGIS, click to start/stop, no service management. Add <code>/Applications/Postgres.app/Contents/Versions/latest/bin</code> to PATH for <code>psql</code>. Great for students.</p>
+<p><strong>Postgres client only</strong> (talking to a container or cloud DB): <code>brew install libpq</code> (keg-only) and add its bin to PATH, or <code>brew link --force libpq</code>. <strong>pgcli</strong> (<code>uv tool install pgcli</code>) is a far nicer interactive client than <code>psql</code> (autocomplete, syntax highlighting).</p>
+<h3 id="in-a-container">In a container<a class="anchor" href="#in-a-container" aria-label="Permalink">#</a></h3>
+<p>The Compose snippet in Chapter 13. One-off: <code>docker run -d --name pg -e POSTGRES_PASSWORD=pg -p 5432:5432 -v pgdata:/var/lib/postgresql/data postgres:17</code>. Use a <strong>named volume</strong> (not a bind mount) for the data directory — bind-mounted Postgres data on macOS is slower and has had permission quirks. If you also run a Homebrew Postgres, map the container to another port (<code>5433:5432</code>) or stop the service.</p>
+<h3 id="extensions">Extensions<a class="anchor" href="#extensions" aria-label="Permalink">#</a></h3>
+<p>PostGIS, pgvector, TimescaleDB etc.: <code>brew install postgis pgvector</code> (built against the Homebrew formula), or use images that bundle them (<code>pgvector/pgvector:pg17</code>, <code>timescale/timescaledb</code>, <code>postgis/postgis</code>). Postgres.app bundles PostGIS and pgvector.</p>
+<h2 id="mysql-mariadb">MySQL / MariaDB<a class="anchor" href="#mysql-mariadb" aria-label="Permalink">#</a></h2>
+<p><code>brew install mysql</code> (9.x) or <code>mysql@8.4</code> (LTS), <code>brew services start mysql</code>, <code>mysql_secure_installation</code>. MariaDB is <code>brew install mariadb</code>. In containers: <code>mysql:8.4</code> / <code>mariadb:11</code> — set <code>MYSQL_ROOT_PASSWORD</code>. Client-only: <code>brew install mysql-client</code>. <strong>mycli</strong> for a better shell.</p>
+<h2 id="sqlite">SQLite<a class="anchor" href="#sqlite" aria-label="Permalink">#</a></h2>
+<p>Already on macOS (<code>/usr/bin/sqlite3</code>), but Apple's build is older and lacks some extensions; <code>brew install sqlite</code> installs a current version keg-only (<code>$(brew --prefix sqlite)/bin/sqlite3</code>). <strong>litecli</strong> (<code>uv tool install litecli</code>) for a friendlier shell; <strong>DB Browser for SQLite</strong> or <strong>TablePlus</strong> for a GUI; <strong>Datasette</strong> to explore a SQLite file in the browser. <strong>DuckDB</strong> (<code>brew install duckdb</code>) is SQLite's analytical sibling — the fastest way to query CSV/Parquet files from the shell, and it reads Postgres/MySQL too. For 90% of coursework and side projects SQLite (or Turso/libSQL) is the right database.</p>
+<h2 id="redis-valkey-friends">Redis, Valkey &amp; friends<a class="anchor" href="#redis-valkey-friends" aria-label="Permalink">#</a></h2>
+<p><code>brew install redis</code> (Redis 8, back under an OSI licence) or <code>brew install valkey</code> (the Linux Foundation fork); <code>brew services start redis</code>; <code>redis-cli ping</code>. Container: <code>redis:8-alpine</code> / <code>valkey/valkey</code>. <strong>RedisInsight</strong> or <strong>Another Redis Desktop Manager</strong> for a GUI. <strong>Dragonfly</strong> and <strong>KeyDB</strong> are drop-in alternatives if a project uses them.</p>
+<h2 id="mongodb">MongoDB<a class="anchor" href="#mongodb" aria-label="Permalink">#</a></h2>
+<p>MongoDB's server isn't in Homebrew core (licence): <code>brew tap --trust mongodb/brew &amp;&amp; brew install mongodb-community</code>, <code>brew services start mongodb-community</code>; or the <code>mongo:8</code> container — the usual choice. <strong>MongoDB Compass</strong> (GUI) and <code>mongosh</code> (<code>brew install mongosh</code>).</p>
+<h2 id="everything-else-briefly">Everything else, briefly<a class="anchor" href="#everything-else-briefly" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>Need</th><th>Native</th><th>Container image</th></tr></thead><tbody><tr><td>Elasticsearch / OpenSearch</td><td><code>brew install opensearch</code></td><td><code>opensearchproject/opensearch</code>, <code>elasticsearch:9</code> (needs <code>-e discovery.type=single-node</code>, 1–2 GB RAM)</td></tr><tr><td>Kafka</td><td><code>brew install kafka</code> (KRaft mode, no ZooKeeper)</td><td><code>apache/kafka</code>, or <strong>Redpanda</strong> (<code>redpandadata/redpanda</code>) — lighter</td></tr><tr><td>RabbitMQ</td><td><code>brew install rabbitmq</code></td><td><code>rabbitmq:4-management</code></td></tr><tr><td>NATS</td><td><code>brew install nats-server</code></td><td><code>nats</code></td></tr><tr><td>ClickHouse</td><td><code>brew install clickhouse</code></td><td><code>clickhouse/clickhouse-server</code></td></tr><tr><td>Neo4j</td><td><code>brew install neo4j</code></td><td><code>neo4j</code></td></tr><tr><td>InfluxDB / Prometheus / Grafana</td><td>brew formulae</td><td><code>prom/prometheus</code>, <code>grafana/grafana</code></td></tr><tr><td>MinIO (S3)</td><td><code>brew install minio</code></td><td><code>minio/minio</code></td></tr><tr><td>Mailpit (catch dev email)</td><td><code>brew install mailpit</code></td><td><code>axllent/mailpit</code> — point SMTP at <code>localhost:1025</code>, read at <code>:8025</code></td></tr><tr><td>Supabase (Postgres + auth + storage + realtime)</td><td>—</td><td><code>supabase start</code> (uses Docker)</td></tr><tr><td>Firebase emulators</td><td><code>npm i -g firebase-tools</code> via mise</td><td>—</td></tr><tr><td>LocalStack (AWS)</td><td><code>brew install localstack</code></td><td><code>localstack/localstack</code></td></tr></tbody></table></div>
+<p>All official images above have arm64 builds. Where a vendor image is amd64-only, see the multi-arch notes in Chapter 13.</p>
+<h2 id="gui-database-clients">GUI database clients<a class="anchor" href="#gui-database-clients" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>Client</th><th>Price</th><th>Notes</th></tr></thead><tbody><tr><td><strong>TablePlus</strong></td><td>Free (2 tabs/2 connections limit) / $89 one-time / in Setapp</td><td>Native, fast, supports Postgres/MySQL/SQLite/Redis/Mongo/MSSQL/… The Mac default.</td></tr><tr><td><strong>DBeaver Community</strong></td><td>Free, OSS</td><td>Java, heavier, supports everything incl. big-data sources; ER diagrams.</td></tr><tr><td><strong>DataGrip</strong></td><td>JetBrains; free for students</td><td>Best SQL editor/intellisense; also inside IntelliJ Ultimate/PyCharm Pro.</td></tr><tr><td><strong>Postico 2</strong></td><td>Free tier / $60</td><td>Postgres-only, lovely.</td></tr><tr><td><strong>Beekeeper Studio</strong></td><td>Free (Community) / paid</td><td>Electron, cross-platform, pleasant.</td></tr><tr><td><strong>pgAdmin 4</strong></td><td>Free</td><td>Postgres official; web UI; admin-focused.</td></tr><tr><td><strong>Sequel Ace</strong></td><td>Free, OSS</td><td>MySQL/MariaDB only; native; the successor to Sequel Pro.</td></tr><tr><td><strong>Azure Data Studio</strong> / <strong>SSMS</strong></td><td>—</td><td>Deprecated (ADS, Feb 2026) / Windows only — use the <strong>MSSQL extension for VS Code</strong> or DBeaver for SQL Server.</td></tr><tr><td><strong>Compass</strong>, <strong>RedisInsight</strong></td><td>Free</td><td>Vendor GUIs for Mongo and Redis.</td></tr><tr><td><strong>Drizzle Studio</strong>, <strong>Prisma Studio</strong></td><td>Free</td><td>ORM-aware browsers for JS/TS projects.</td></tr></tbody></table></div>
+<h2 id="local-https-and-custom-domains">Local HTTPS and custom domains<a class="anchor" href="#local-https-and-custom-domains" aria-label="Permalink">#</a></h2>
+<p>Browsers treat <code>localhost</code> as a secure context, so plain <code>http://localhost:3000</code> works for most features (service workers, camera, WebCrypto). You need HTTPS locally when: testing OAuth callbacks that require <code>https://</code>, Secure cookies with <code>SameSite=None</code>, HTTP/2 or HTTP/3, or multiple subdomains (<code>app.myproject.test</code>, <code>api.myproject.test</code>).</p>
+<ul>
+<li><strong>mkcert</strong> (<code>brew install mkcert nss &amp;&amp; mkcert -install</code>) creates a local CA trusted by Safari/Chrome/Firefox, then <code>mkcert myproject.test "*.myproject.test" localhost 127.0.0.1 ::1</code> gives you cert files for your dev server or reverse proxy.</li>
+<li><strong>Caddy</strong> (<code>brew install caddy</code>) as a local reverse proxy: a 3-line <code>Caddyfile</code> (<code>myproject.test { reverse_proxy localhost:3000 }</code>) with automatic local TLS via its internal CA (<code>caddy trust</code> once). <strong>nginx</strong> or <strong>Traefik</strong> if you prefer.</li>
+<li><strong>Custom domains</strong>: <code>.test</code> is reserved for exactly this (never <code>.dev</code> — it's a real TLD with HSTS preloaded, so <code>http://foo.dev</code> breaks). Add entries to <code>/etc/hosts</code> (<code>sudo nvim /etc/hosts</code>; <code>127.0.0.1 myproject.test api.myproject.test</code>), or run <code>dnsmasq</code> (<code>brew install dnsmasq</code>) with <code>address=/.test/127.0.0.1</code> and a resolver file in <code>/etc/resolver/test</code> for wildcard resolution. <strong>OrbStack</strong> gives every container <code>name.orb.local</code> with HTTPS for free, which covers the common case.</li>
+<li>Tools that do all of this for you: <strong>Laravel Herd</strong> (PHP), <strong>Laravel Valet</strong>, <strong>DDEV</strong> (Docker-based, any stack, automatic <code>*.ddev.site</code> + HTTPS), <strong>Lando</strong>.</li>
+</ul>
+<h2 id="environment-variables-and-secrets-for-local-services">Environment variables and secrets for local services<a class="anchor" href="#environment-variables-and-secrets-for-local-services" aria-label="Permalink">#</a></h2>
+<ul>
+<li>Each project gets a <code>.env</code> (gitignored) with <code>DATABASE_URL</code>, <code>REDIS_URL</code>, etc., loaded by <code>mise</code> (<code>_.file = ".env"</code>), <code>direnv</code>, or the framework's dotenv loader. Commit <code>.env.example</code>.</li>
+<li>Local passwords can be trivial (<code>postgres</code>/<code>postgres</code>) — they're bound to <code>localhost</code> — but <strong>never reuse a real password</strong> for a local service; it ends up in a screenshot or a repo eventually.</li>
+<li>Bind services to <code>127.0.0.1</code>, not <code>0.0.0.0</code>, unless you need LAN access (mobile device testing); OrbStack/Docker publish on localhost by default, Homebrew Postgres listens on localhost by default.</li>
+<li>Check what's listening occasionally: <code>lsof -iTCP -sTCP:LISTEN -n -P | grep -v 127.0.0.1</code> shows anything exposed to the network.</li>
+</ul>
+<h2 id="a-sane-local-dev-workflow">A sane local-dev workflow<a class="anchor" href="#a-sane-local-dev-workflow" aria-label="Permalink">#</a></h2>
+<ol>
+<li><code>mise.toml</code> pins runtimes and loads <code>.env</code>; <code>mise run dev</code> starts the app.</li>
+<li><code>compose.yaml</code> runs <em>only</em> stateful services (db, cache, queue, mail catcher); <code>docker compose up -d</code> once per session, <code>down</code> when done.</li>
+<li>The app runs natively for hot reload and the debugger; it talks to services on <code>localhost:&lt;port&gt;</code>.</li>
+<li>Migrations and seeds are scripts (<code>mise run db:reset</code>), so a broken database is a 10-second fix, not a support ticket.</li>
+<li>A <code>README</code> "Local setup" section is three commands. If it's longer, automate the rest.</li>
+</ol>
+<h2 id="data-and-disk-hygiene">Data and disk hygiene<a class="anchor" href="#data-and-disk-hygiene" aria-label="Permalink">#</a></h2>
+<ul>
+<li>Postgres/MySQL data under <code>/opt/homebrew/var</code> is in your Time Machine backup (fine — it's usually small); Docker named volumes live inside the VM image (excluded, see Chapter 17) — <strong>dump anything you'd miss</strong> (<code>pg_dump</code>, <code>mysqldump</code>) before <code>docker system prune --volumes</code>.</li>
+<li>Large datasets for coursework (CSV dumps, ML corpora): keep them outside the repo and outside iCloud Drive (<code>~/Developer/data</code>), and consider an external SSD; Spotlight-exclude the folder (Chapter 4).</li>
+<li><code>brew services list</code> — stop what you're not using this term; every running service costs memory and battery.</li>
+</ul>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="14-cloud-and-devops-tooling.html"><span>Previous</span><strong>Cloud, network &amp; DevOps tooling</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/15-databases-and-local-dev.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/15-databases-and-local-dev.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#which-approach">Which approach</a></li>
+<li class="lvl2"><a href="#postgresql">PostgreSQL</a></li>
+<li class="lvl3"><a href="#native-homebrew">Native (Homebrew)</a></li>
+<li class="lvl3"><a href="#in-a-container">In a container</a></li>
+<li class="lvl3"><a href="#extensions">Extensions</a></li>
+<li class="lvl2"><a href="#mysql-mariadb">MySQL / MariaDB</a></li>
+<li class="lvl2"><a href="#sqlite">SQLite</a></li>
+<li class="lvl2"><a href="#redis-valkey-friends">Redis, Valkey &amp; friends</a></li>
+<li class="lvl2"><a href="#mongodb">MongoDB</a></li>
+<li class="lvl2"><a href="#everything-else-briefly">Everything else, briefly</a></li>
+<li class="lvl2"><a href="#gui-database-clients">GUI database clients</a></li>
+<li class="lvl2"><a href="#local-https-and-custom-domains">Local HTTPS and custom domains</a></li>
+<li class="lvl2"><a href="#environment-variables-and-secrets-for-local-services">Environment variables and secrets for local services</a></li>
+<li class="lvl2"><a href="#a-sane-local-dev-workflow">A sane local-dev workflow</a></li>
+<li class="lvl2"><a href="#data-and-disk-hygiene">Data and disk hygiene</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
