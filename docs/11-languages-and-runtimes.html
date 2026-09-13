@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Languages &amp; runtimes — The macOS Setup Guide</title>
+<meta name="description" content="One version manager (mise) for everything, uv for Python, Node/Bun/Deno, Java, Go, Rust, C/C++, Swift, Ruby, .NET, and the ML stack (PyTorch MPS, MLX, Ollama) — with the 2026 release calendar.">
+<meta property="og:title" content="Languages &amp; runtimes — The macOS Setup Guide">
+<meta property="og:description" content="One version manager (mise) for everything, uv for Python, Node/Bun/Deno, Java, Go, Rust, C/C++, Swift, Ruby, .NET, and the ML stack (PyTorch MPS, MLX, Ollama) — with the 2026 release calendar.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li class="active"><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="languages-runtimes">Languages &amp; runtimes</h1>
+<p>The rule that prevents 90% of "it works on my machine": <strong>never use the system interpreter, never install runtimes globally with Homebrew when the project pins a version, and manage every language with one tool.</strong> In 2026 that tool is <strong>mise</strong>, with <strong>uv</strong> handling Python's packaging on top. This chapter sets up each major language the way a CS curriculum or a modern job will need it.</p>
+<h2 id="mise-one-version-manager-to-rule-them-all">mise: one version manager to rule them all<a class="anchor" href="#mise-one-version-manager-to-rule-them-all" aria-label="Permalink">#</a></h2>
+<p><strong>mise</strong> (<code>brew install mise</code>, "mise-en-place") is a Rust binary that replaces nvm, fnm, pyenv, rbenv, goenv, jenv, sdkman and asdf. It reads <code>.tool-versions</code> (asdf-compatible) and <code>mise.toml</code>, installs the exact version each project needs, and switches when you <code>cd</code>. It also manages <strong>environment variables</strong> and <strong>tasks</strong> per project, which is why it can replace direnv and a Makefile too.</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew install mise
+echo 'eval "$(mise activate zsh)"' &gt;&gt; ~/.zshrc     # already in the Chapter 9 .zshrc
+mise doctor</code></pre></div>
+<p>Global defaults (used when a project doesn't pin):</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">mise use --global node@lts python@3.13 go@latest java@temurin-25 rust@stable bun@latest
+mise ls                # what's installed &amp; active
+mise outdated
+mise upgrade</code></pre></div>
+<p>That writes <code>~/.config/mise/config.toml</code>:</p>
+<div class="codeblock"><span class="code-lang">toml</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-toml">[tools]
+node = "lts"
+python = "3.13"
+go = "latest"
+java = "temurin-25"
+rust = "stable"
+bun = "latest"
+uv = "latest"
+# CLI tools from GitHub releases / npm / cargo / pipx — mise handles these "backends" too
+"npm:typescript" = "latest"
+"cargo:cargo-watch" = "latest"
+"pipx:ruff" = "latest"
+"github:jdx/usage" = "latest"
+
+[settings]
+experimental = true
+idiomatic_version_file_enable_tools = ["node", "python", "ruby"]   # honour .nvmrc / .python-version / .ruby-version
+python.uv_venv_auto = true          # auto-create/activate a uv venv when a project has pyproject.toml</code></pre></div>
+<p>Per project, in the repo root:</p>
+<div class="codeblock"><span class="code-lang">toml</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-toml"># mise.toml
+[tools]
+node = "24"
+python = "3.13"
+"npm:pnpm" = "10"
+
+[env]
+DATABASE_URL = "postgres://localhost/myapp_dev"
+_.file = ".env"                     # load .env (gitignored)
+_.python.venv = { path = ".venv", create = true }
+
+[tasks.dev]
+run = "pnpm dev"
+[tasks.test]
+run = ["uv run pytest", "pnpm test"]
+[tasks.lint]
+run = "ruff check . &amp;&amp; pnpm lint"</code></pre></div>
+<p>Then <code>mise install</code> installs exactly those versions, <code>mise run dev</code> runs the task, <code>mise trust</code> approves a new project's config the first time (untrusted <code>mise.toml</code> files don't execute — a good security default). Commit <code>mise.toml</code> (or <code>.tool-versions</code> for asdf users) so teammates and CI get the same versions; <code>mise.local.toml</code> is for personal overrides and goes in the global gitignore.</p>
+<p>Why mise over the alternatives in 2026: it's a single fast binary (no shell-function overhead like nvm's 200 ms), covers every language plus arbitrary GitHub-release binaries, is asdf-compatible so existing <code>.tool-versions</code> files just work, and the <code>env</code>/<code>tasks</code> features remove two more tools from your setup. <strong>asdf</strong> (rewritten in Go in 2025) still works but is slower and needs plugins; <strong>nvm</strong> is the slowest thing you can put in a <code>.zshrc</code>; <strong>fnm</strong>/<strong>volta</strong> are good but Node-only; <strong>pyenv</strong> is fine but redundant next to uv.</p>
+<h2 id="python">Python<a class="anchor" href="#python" aria-label="Permalink">#</a></h2>
+<p>Python is the language most likely to be a mess on a Mac. There are at least four interpreters on a typical machine (Apple's CLT shim, Homebrew's, one from the python.org installer, a Conda one) and a dozen packaging tools. The 2026 answer is <strong>uv</strong>.</p>
+<h3 id="uv-does-everything">uv does everything<a class="anchor" href="#uv-does-everything" aria-label="Permalink">#</a></h3>
+<p><strong>uv</strong> (Astral, Rust; <code>brew install uv</code> or via mise) replaces <code>pip</code>, <code>pip-tools</code>, <code>pipx</code>, <code>pyenv</code>, <code>virtualenv</code>, <code>poetry</code> and <code>twine</code>, and is 10–100× faster than pip:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">uv python install 3.13 3.12        # managed interpreters, no Homebrew python needed
+uv python list
+uv init myproject &amp;&amp; cd myproject   # pyproject.toml + .python-version + hello.py
+uv add requests numpy               # adds to pyproject, resolves, installs into .venv (created automatically)
+uv add --dev pytest ruff mypy
+uv run python main.py               # runs in the project venv — no `source .venv/bin/activate` needed
+uv run pytest
+uv lock                             # uv.lock — commit it
+uv sync                             # reproduce the env from the lock (what CI and teammates run)
+uv tool install ruff                # global CLI tools, isolated (was pipx)
+uvx ruff check .                    # run a tool without installing (was pipx run)
+uv pip install -r requirements.txt  # drop-in pip for legacy projects
+uv venv                             # plain venv if you want one</code></pre></div>
+<p>For a course that hands you a <code>requirements.txt</code>: <code>uv venv &amp;&amp; uv pip install -r requirements.txt &amp;&amp; source .venv/bin/activate</code> — done in two seconds. If a lecturer's instructions say <code>python -m venv venv; pip install …</code>, they still work inside <code>uv run</code>/an activated venv; uv is a superset.</p>
+<p><strong>Do not</strong> <code>pip install</code> anything into <code>/usr/bin/python3</code> (Apple's) or <code>/opt/homebrew/bin/python3</code> — modern pip refuses anyway ("externally-managed-environment"). Homebrew's Python exists for Homebrew's own formulae; leave it alone.</p>
+<p><strong>Ruff</strong> (linter + formatter, replaces flake8/isort/black), <strong>mypy</strong> or <strong>pyright</strong>/<strong>ty</strong> (type checking), <strong>pytest</strong>, <strong>ipython</strong>/<strong>Jupyter</strong>: install per project with <code>uv add --dev</code>, or globally as tools with <code>uv tool install</code>.</p>
+<h3 id="python-314-and-315">Python 3.14 and 3.15<a class="anchor" href="#python-314-and-315" aria-label="Permalink">#</a></h3>
+<p>3.14 (Oct 2025) is current; <strong>3.15 lands ~October 1, 2026</strong>. 3.13+ offers an optional <strong>free-threaded</strong> build (<code>uv python install 3.14t</code>) with the GIL disabled and an experimental JIT — useful for a concurrency course, not for default use. Some scientific packages lag a new release by 1–3 months; if <code>uv add numpy</code> fails on 3.15 in October, pin <code>python = "3.14"</code> in <code>mise.toml</code>.</p>
+<h3 id="conda-jupyter-data-science">Conda, Jupyter, data science<a class="anchor" href="#conda-jupyter-data-science" aria-label="Permalink">#</a></h3>
+<p>If your course requires <strong>Anaconda/Miniconda</strong> (common in data-science and stats departments), install <strong>Miniforge</strong> (<code>brew install --cask miniforge</code>, conda-forge defaults, arm64-native, no Anaconda licence issues) and run <code>conda config --set auto_activate_base false</code> so it doesn't hijack every shell. Prefer <code>mamba</code>/<code>micromamba</code> for speed. Mixing conda and uv in one project is asking for trouble — pick per project. For Jupyter: <code>uv add --dev jupyterlab</code> then <code>uv run jupyter lab</code>, or use VS Code's notebook UI (<code>ms-toolsai.jupyter</code>), or <strong>JupyterLab Desktop</strong>. <strong>Positron</strong> (Posit's VS Code-based data science IDE) is the R + Python IDE of choice; <strong>RStudio</strong> if you prefer.</p>
+<p>Apple silicon notes: NumPy/SciPy use Apple's <strong>Accelerate</strong> BLAS by default (fast); PyTorch supports the <strong>MPS</strong> backend (<code>torch.device("mps")</code>) for GPU training on the Mac; TensorFlow via <code>tensorflow-metal</code>; JAX via <code>jax-metal</code> (experimental). See <a href="#machine-learning-on-apple-silicon">ML</a> below.</p>
+<h2 id="javascript-typescript">JavaScript / TypeScript<a class="anchor" href="#javascript-typescript" aria-label="Permalink">#</a></h2>
+<h3 id="nodejs">Node.js<a class="anchor" href="#nodejs" aria-label="Permalink">#</a></h3>
+<p>Install through mise, never through the Node installer or Homebrew's <code>node</code> (which can't switch versions):</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">mise use --global node@lts     # Node 24 LTS today; Node 26 becomes LTS in October 2026
+mise use node@26               # per project
+corepack enable                # lets `pnpm`/`yarn` commands install themselves at the version in package.json</code></pre></div>
+<p><strong>Release schedule change</strong>: Node 26 (April 2026) is the last release under the odd/even model; it enters LTS October 2026 and is supported to April 2029. From October 2026 Node moves to <strong>one major per year (April), every release LTS, an Alpha channel October–March</strong>, with versions matching the year (27.0.0 in April 2027). Practically: pin the current LTS in <code>mise.toml</code> and bump once a year.</p>
+<h3 id="package-managers">Package managers<a class="anchor" href="#package-managers" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>pnpm</strong> (<code>mise use -g "npm:pnpm"</code> or <code>corepack</code>) — fast, disk-efficient (content-addressed store), strict; the 2026 default for new projects.</li>
+<li><strong>npm</strong> — ships with Node; fine; slower; <code>npm ci</code> in CI.</li>
+<li><strong>Bun</strong> (<code>mise use -g bun@latest</code>) — a runtime <em>and</em> package manager <em>and</em> bundler <em>and</em> test runner. <code>bun install</code> is the fastest installer; <code>bun run</code> executes TypeScript directly. Increasingly used as the package manager even for Node projects.</li>
+<li><strong>Yarn</strong> — Berry (v4) is fine if a project already uses it; don't start new projects on Yarn Classic.</li>
+<li><strong>Deno</strong> 2.x — Node-compatible, secure-by-default, great for scripts and Fresh apps.</li>
+</ul>
+<p>Set <code>pnpm config set store-dir ~/.local/share/pnpm/store</code> once. Global CLI tools: <code>pnpm add -g</code> or via mise's <code>npm:</code> backend so they're in your <code>config.toml</code>.</p>
+<h3 id="tooling">Tooling<a class="anchor" href="#tooling" aria-label="Permalink">#</a></h3>
+<p>TypeScript (<code>pnpm add -D typescript</code>), <strong>Biome</strong> (linter+formatter, replaces ESLint+Prettier for many stacks) or ESLint 9 + Prettier, <strong>Vite</strong> for front-end, <strong>Vitest</strong>/<strong>Bun test</strong>/<strong>Playwright</strong> for tests. Browser devtools: Safari's Web Inspector (<code>Settings → Advanced → Show features for web developers</code>), Chrome DevTools, Firefox Developer Edition. <strong>Node version in VS Code terminals</strong> follows mise automatically because the integrated terminal runs your zsh.</p>
+<h2 id="java-kotlin-and-the-jvm">Java, Kotlin, and the JVM<a class="anchor" href="#java-kotlin-and-the-jvm" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">mise use --global java@temurin-25     # JDK 25 is the current LTS (Sept 2025)
+mise use java@temurin-21              # per project, e.g. a course pinned to 21
+mise ls-remote java | grep -E "temurin|zulu|graalvm|corretto" | tail
+java -version</code></pre></div>
+<p>mise installs from Adoptium (Temurin), Azul (Zulu), Amazon (Corretto), GraalVM, Liberica etc. and sets <code>JAVA_HOME</code> automatically. Do <strong>not</strong> use Oracle's <code>.dmg</code> installer or Apple's <code>/usr/bin/java</code> stub (it just tells you to install a JDK). If a GUI app (IntelliJ, Android Studio, jEnv-style scripts) needs a system-visible JDK, install one as a Homebrew cask too (<code>brew install --cask temurin@21</code>), which registers under <code>/Library/Java/JavaVirtualMachines</code> and shows in <code>/usr/libexec/java_home -V</code>.</p>
+<p>Build tools: <strong>Gradle</strong> and <strong>Maven</strong> via mise (<code>mise use gradle@latest maven@latest</code>) or Homebrew; <strong>Kotlin</strong> compiler via mise if you need <code>kotlinc</code> outside IntelliJ. IDE: <strong>IntelliJ IDEA Community</strong> (free) or <strong>Ultimate</strong> (free for students — Chapter 20). <strong>Android Studio</strong> (<code>brew install --cask android-studio</code>) bundles its own JDK and SDK; set <code>ANDROID_HOME=~/Library/Android/sdk</code> and add <code>$ANDROID_HOME/platform-tools</code> to PATH for <code>adb</code>. The Android emulator runs arm64 system images natively and fast on Apple silicon — pick <em>arm64-v8a</em> images, never x86.</p>
+<h2 id="go">Go<a class="anchor" href="#go" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">mise use --global go@latest      # Go 1.27 (Aug 2026); mise sets GOROOT, and GOPATH defaults to ~/go
+go env GOPATH GOMODCACHE</code></pre></div>
+<p>Add <code>$HOME/go/bin</code> to PATH for <code>go install</code>-ed tools (mise does this if you enable <code>go.set_gobin</code>). Go's toolchain directive in <code>go.mod</code> can auto-download the right version anyway (<code>GOTOOLCHAIN=auto</code>), so <code>brew install go</code> is <em>acceptable</em> for Go specifically — it's the one language whose own tooling handles versions well. Tooling: <code>gopls</code> (installed by VS Code's Go extension / Zed automatically), <code>golangci-lint</code> (<code>brew install golangci-lint</code>), <code>air</code> for live reload, <code>delve</code> for debugging (<code>go install github.com/go-delve/delve/cmd/dlv@latest</code> — needs codesigning on macOS; the VS Code extension handles it).</p>
+<h2 id="rust">Rust<a class="anchor" href="#rust" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">mise use --global rust@stable    # or: brew install rustup &amp;&amp; rustup-init
+rustup component add rust-analyzer clippy rustfmt
+cargo install cargo-watch cargo-edit cargo-nextest   # or via mise "cargo:" backend</code></pre></div>
+<p>Rust's own <code>rustup</code> is excellent and mise wraps it. The 2024 edition is current; <code>rustup update</code> twice a year. Apple silicon is a Tier 1 target. Linkers: the default Apple <code>ld</code> is fine; <code>lld</code> via <code>brew install llvm</code> speeds up big builds. Rust-analyzer in VS Code/Zed/RustRover (JetBrains, free for non-commercial) works out of the box.</p>
+<h2 id="c-and-c">C and C++<a class="anchor" href="#c-and-c" aria-label="Permalink">#</a></h2>
+<p>Apple's <strong>clang</strong> from the CLT is the compiler (<code>gcc</code> is a symlink to clang; <code>g++</code> too). For a systems or compilers course that assumes GNU GCC specifically (<code>__attribute__</code> quirks, <code>-fanalyzer</code>, gcc-only sanitisers): <code>brew install gcc</code> gives <code>gcc-15</code>/<code>g++-15</code>. For a newer LLVM than Apple ships: <code>brew install llvm</code> (keg-only; add <code>$(brew --prefix llvm)/bin</code> to PATH when you want it) — it includes <code>clangd</code>, <code>clang-format</code>, <code>clang-tidy</code>, <code>lldb</code>, <code>lld</code>, and libc++ with the latest C++26 features.</p>
+<p>Build systems: <code>cmake</code> and <code>ninja</code> (Homebrew), <code>meson</code>, <code>bazel</code>/<code>bazelisk</code>, <code>just</code> (a modern Make). Package managers: <strong>vcpkg</strong> or <strong>Conan</strong>; or Homebrew for system libs (<code>brew install boost fmt eigen sdl2</code>). Debugging: <code>lldb</code> (Apple), or <code>gdb</code> via Homebrew (<strong>gdb needs codesigning on macOS</strong> to attach — search "gdb codesign macOS"; most people use lldb or the IDE debugger). Sanitisers: <code>-fsanitize=address,undefined</code> works with Apple clang; ThreadSanitizer too. <strong>Valgrind does not run on Apple silicon</strong> — use ASan/LeakSanitizer or Instruments (Leaks/Allocations) instead; if a course <em>requires</em> Valgrind, run it in a Linux container (Chapter 13).</p>
+<p>Headers: <code>xcrun --show-sdk-path</code> for the SDK; Homebrew packages install headers under <code>/opt/homebrew/include</code>, which clang doesn't search by default — pass <code>-I$(brew --prefix)/include -L$(brew --prefix)/lib</code> or set <code>CPATH</code>/<code>LIBRARY_PATH</code> in <code>.zshrc</code>.</p>
+<p>IDE: VS Code + clangd extension (<strong>not</strong> Microsoft's C/C++ IntelliSense — clangd is faster and more accurate), CLion (free for non-commercial), Xcode for Apple-platform C/C++/Objective-C.</p>
+<h2 id="swift">Swift<a class="anchor" href="#swift" aria-label="Permalink">#</a></h2>
+<p>Comes with Xcode/CLT (Swift 6.3 with Xcode 27). <code>swift package init</code>, <code>swift build</code>, <code>swift test</code>; Swift Package Manager is the build system. Server-side Swift (Vapor, Hummingbird) works on macOS and Linux. <strong>swiftly</strong> is Apple's official toolchain manager for switching Swift versions outside Xcode (<code>brew install swiftly</code>). Editors beyond Xcode: VS Code with the Swift extension (SourceKit-LSP), Zed, Neovim.</p>
+<h2 id="ruby">Ruby<a class="anchor" href="#ruby" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">mise use --global ruby@3.4       # Ruby 4.0 shipped Dec 2025; 3.4 remains widely used
+gem install bundler rails</code></pre></div>
+<p>Never use <code>/usr/bin/ruby</code> (Apple's, 2.6, for legacy scripts). mise compiles Ruby via ruby-build; <code>brew install openssl@3 libyaml gmp</code> first avoids build errors. Rails needs a database (Chapter 15) and <code>libvips</code> or <code>imagemagick</code> for Active Storage.</p>
+<h2 id="php-net-others">PHP, .NET, others<a class="anchor" href="#php-net-others" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>PHP</strong>: <code>brew install php</code> (8.5) or <code>mise use php@8.5</code>; <strong>Laravel Herd</strong> (free) bundles PHP/nginx/DNS for a zero-config local Laravel setup. Composer via Homebrew.</li>
+<li><strong>.NET</strong>: <code>brew install --cask dotnet-sdk</code> (.NET 10 LTS; .NET 11 in November 2026) or <code>mise use dotnet@10</code>. VS Code + C# Dev Kit, or <strong>Rider</strong> (free for non-commercial).</li>
+<li><strong>Elixir/Erlang</strong>: mise (<code>erlang@27 elixir@1.18</code>); <code>brew install wxwidgets</code> first for the observer.</li>
+<li><strong>Haskell</strong>: <code>ghcup</code> (official) — <code>brew install ghcup</code> then <code>ghcup tui</code>; HLS via ghcup.</li>
+<li><strong>OCaml</strong>: <code>brew install opam &amp;&amp; opam init</code>.</li>
+<li><strong>Zig</strong>: <code>mise use zig@latest</code> or <code>brew install zig</code> (Ghostty is written in it).</li>
+<li><strong>Lua</strong>: <code>brew install lua luarocks</code>; <strong>R</strong>: <code>brew install --cask r</code> + Positron/RStudio; <strong>Julia</strong>: <code>brew install --cask julia</code> or <code>juliaup</code>.</li>
+<li><strong>Assembly / low-level courses</strong>: Apple silicon is <strong>AArch64</strong>, not x86. If a course teaches x86-64 assembly, run an x86 Linux VM (UTM, Chapter 13) or use the department's servers; <code>nasm</code> and <code>gcc -m32</code> don't target this hardware. For ARM assembly, <code>clang -arch arm64</code> and <code>lldb</code> work natively — a genuine advantage.</li>
+</ul>
+<h2 id="machine-learning-on-apple-silicon">Machine learning on Apple silicon<a class="anchor" href="#machine-learning-on-apple-silicon" aria-label="Permalink">#</a></h2>
+<p>Unified memory makes Macs unusually good for <em>running</em> models locally and adequate for <em>training</em> small ones; they are not a substitute for NVIDIA GPUs (CUDA) for serious training, so expect to use the university cluster or cloud for that.</p>
+<ul>
+<li><strong>PyTorch</strong>: <code>uv add torch torchvision</code> — arm64 wheels with the <strong>MPS</strong> backend. <code>device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")</code>. Most ops are supported; set <code>PYTORCH_ENABLE_MPS_FALLBACK=1</code> for the rest.</li>
+<li><strong>MLX</strong>: Apple's open-source array framework designed for unified memory (<code>uv add mlx mlx-lm</code>). Fastest way to run/fine-tune LLMs locally: <code>mlx_lm.generate --model mlx-community/Llama-3.3-8B-Instruct-4bit --prompt "…"</code>. macOS 26.2+ gives M5 chips full MLX access to the Neural Accelerators.</li>
+<li><strong>Core AI</strong> (macOS 27) and the <strong>Foundation Models framework</strong> (macOS 26) are the Swift APIs for building apps on Apple's on-device models — relevant if you write Swift apps.</li>
+<li><strong>Local LLM runners</strong>: <strong>Ollama</strong> (<code>brew install ollama</code>; <code>ollama run gemma3</code>), <strong>LM Studio</strong> (GUI, MLX + llama.cpp backends), <strong>llama.cpp</strong> (<code>brew install llama.cpp</code>). Rule of thumb: a Q4-quantised model needs roughly <em>parameters × 0.6 GB</em> of memory — 8B ≈ 5 GB, 32B ≈ 20 GB, 70B ≈ 40 GB. Keep 8 GB free for the OS.</li>
+<li><strong>Coding agents locally</strong>: Ollama + Continue/Zed/Cursor can point at a local model; quality trails the hosted frontier models substantially in 2026, but it's free and offline.</li>
+<li><strong>Jupyter + GPU</strong>: everything above works from a notebook. <strong>TensorFlow</strong> needs <code>tensorflow-metal</code>; <strong>JAX</strong> has <code>jax-metal</code> (experimental). <strong>scikit-learn</strong>, <strong>pandas</strong>, <strong>polars</strong> are all native and fast.</li>
+<li>Watch <strong>Activity Monitor → GPU</strong> and the memory pressure graph; when a model doesn't fit, macOS swaps and everything crawls.</li>
+</ul>
+<h2 id="the-2026-release-calendar-for-pinning-decisions">The 2026 release calendar (for pinning decisions)<a class="anchor" href="#the-2026-release-calendar-for-pinning-decisions" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>Language</th><th>Current stable (Sept 2026)</th><th>Next</th><th>Long-term pick for a new project</th></tr></thead><tbody><tr><td>Python</td><td>3.14</td><td>3.15 — Oct 2026</td><td>3.13 or 3.14 (3.15 after the ecosystem catches up ~Dec)</td></tr><tr><td>Node.js</td><td>24 LTS (Current: 26)</td><td>26 → LTS Oct 2026; 27 Alpha Oct 2026, 27.0 Apr 2027</td><td>24 now, move to 26 in October</td></tr><tr><td>Java</td><td>JDK 25 LTS (JDK 27 feature release Sept 2026)</td><td>next LTS per Oracle's 2-year cadence: JDK 29 (Sept 2027)</td><td>Temurin 25</td></tr><tr><td>Go</td><td>1.27</td><td>1.28 — Feb 2027</td><td>latest (Go's compatibility promise makes this safe)</td></tr><tr><td>Rust</td><td>1.9x stable, 2024 edition</td><td>6-weekly</td><td>stable</td></tr><tr><td>Swift</td><td>6.3 (Xcode 27)</td><td>6.4 — spring 2027</td><td>whatever your Xcode ships</td></tr><tr><td>Ruby</td><td>4.0</td><td>4.1 — Dec 2026</td><td>3.4 or 4.0</td></tr><tr><td>.NET</td><td>10 LTS</td><td>11 — Nov 2026</td><td>10</td></tr><tr><td>PHP</td><td>8.5</td><td>8.6 — Nov 2026</td><td>8.5</td></tr><tr><td>TypeScript</td><td>6.x (TS 7 Go-native compiler rolling out)</td><td></td><td>latest</td></tr><tr><td>Bun</td><td>1.3+</td><td></td><td>latest</td></tr></tbody></table></div>
+<p>Pin <strong>exact</strong> versions in <code>mise.toml</code> for anything you deploy; pin <code>lts</code>/<code>latest</code> for coursework and throwaway scripts.</p>
+<h2 id="editors-know-about-mise">Editors know about mise<a class="anchor" href="#editors-know-about-mise" aria-label="Permalink">#</a></h2>
+<p>VS Code, Zed, Cursor and JetBrains detect the interpreter/runtime from the shell environment mise sets up — as long as you launch them <em>from a terminal</em> (<code>code .</code>) or have <code>mise activate</code> in <code>.zprofile</code> so GUI-launched apps inherit it. If VS Code picks the wrong Python, <code>⌘⇧P → Python: Select Interpreter</code> and choose <code>.venv/bin/python</code>. For JetBrains, add the mise-installed SDK path once (<code>mise where python@3.13</code>).</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="10-dotfiles-and-git.html"><span>Previous</span><strong>Dotfiles &amp; Git</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/11-languages-and-runtimes.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/11-languages-and-runtimes.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#mise-one-version-manager-to-rule-them-all">mise: one version manager to rule them all</a></li>
+<li class="lvl2"><a href="#python">Python</a></li>
+<li class="lvl3"><a href="#uv-does-everything">uv does everything</a></li>
+<li class="lvl3"><a href="#python-314-and-315">Python 3.14 and 3.15</a></li>
+<li class="lvl3"><a href="#conda-jupyter-data-science">Conda, Jupyter, data science</a></li>
+<li class="lvl2"><a href="#javascript-typescript">JavaScript / TypeScript</a></li>
+<li class="lvl3"><a href="#nodejs">Node.js</a></li>
+<li class="lvl3"><a href="#package-managers">Package managers</a></li>
+<li class="lvl3"><a href="#tooling">Tooling</a></li>
+<li class="lvl2"><a href="#java-kotlin-and-the-jvm">Java, Kotlin, and the JVM</a></li>
+<li class="lvl2"><a href="#go">Go</a></li>
+<li class="lvl2"><a href="#rust">Rust</a></li>
+<li class="lvl2"><a href="#c-and-c">C and C++</a></li>
+<li class="lvl2"><a href="#swift">Swift</a></li>
+<li class="lvl2"><a href="#ruby">Ruby</a></li>
+<li class="lvl2"><a href="#php-net-others">PHP, .NET, others</a></li>
+<li class="lvl2"><a href="#machine-learning-on-apple-silicon">Machine learning on Apple silicon</a></li>
+<li class="lvl2"><a href="#the-2026-release-calendar-for-pinning-decisions">The 2026 release calendar (for pinning decisions)</a></li>
+<li class="lvl2"><a href="#editors-know-about-mise">Editors know about mise</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
