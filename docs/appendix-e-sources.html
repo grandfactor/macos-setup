@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appendix E — Sources &amp; further reading — The macOS Setup Guide</title>
+<meta name="description" content="Where the facts in this guide come from and where to check them when they drift — Apple&#x27;s own documentation and release notes, project changelogs, the community references worth trusting, release calendars for every runtime, and a note on how the guide was researched and how to report an error.">
+<meta property="og:title" content="Appendix E — Sources &amp; further reading — The macOS Setup Guide">
+<meta property="og:description" content="Where the facts in this guide come from and where to check them when they drift — Apple&#x27;s own documentation and release notes, project changelogs, the community references worth trusting, release calendars for every runtime, and a note on how the guide was researched and how to report an error.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+<li><a href="15-databases-and-local-dev.html"><span class="nav-num">15</span>Databases &amp; local development services</a></li>
+</ul>
+<p class="nav-part">Part IV — Security, backup &amp; maintenance</p><ul>
+<li><a href="16-security-and-privacy.html"><span class="nav-num">16</span>Security &amp; privacy</a></li>
+<li><a href="17-backup-and-recovery.html"><span class="nav-num">17</span>Backup &amp; recovery</a></li>
+<li><a href="18-performance-and-maintenance.html"><span class="nav-num">18</span>Performance &amp; maintenance</a></li>
+</ul>
+<p class="nav-part">Part V — Daily driving &amp; workflows</p><ul>
+<li><a href="19-daily-driver-apps.html"><span class="nav-num">19</span>Daily-driver apps</a></li>
+<li><a href="20-cs-student-specific.html"><span class="nav-num">20</span>CS-student specific</a></li>
+<li><a href="21-automation-and-scripting.html"><span class="nav-num">21</span>Automation &amp; scripting</a></li>
+<li><a href="22-troubleshooting.html"><span class="nav-num">22</span>Troubleshooting</a></li>
+</ul>
+<p class="nav-part">Part VI — Reference</p><ul>
+<li><a href="23-checklists-and-cheat-sheets.html"><span class="nav-num">23</span>Checklists &amp; cheat sheets</a></li>
+<li><a href="appendix-a-bootstrap-script.html"><span class="nav-num">A</span>Appendix A — Bootstrap script</a></li>
+<li><a href="appendix-b-brewfile.html"><span class="nav-num">B</span>Appendix B — Brewfile</a></li>
+<li><a href="appendix-c-keyboard-shortcuts.html"><span class="nav-num">C</span>Appendix C — Keyboard shortcuts</a></li>
+<li><a href="appendix-d-glossary.html"><span class="nav-num">D</span>Appendix D — Glossary</a></li>
+<li class="active"><a href="appendix-e-sources.html"><span class="nav-num">E</span>Appendix E — Sources &amp; further reading</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="appendix-e-sources-further-reading">Appendix E — Sources &amp; further reading</h1>
+<p>This guide was researched in September 2026 against primary sources wherever one existed: Apple's documentation and release notes, project changelogs and docs, vendor pricing pages, and official release schedules. Community sources are listed where they add practical knowledge Apple doesn't publish. Prices, version numbers, and dates <em>will</em> drift; the point of this appendix is to give you the places to re-check rather than to trust the guide forever.</p>
+<p>Working notes from the research pass live in the repo's <a href="https://github.com/grandfactor/macos-setup/tree/main/research" target="_blank" rel="noopener"><code>research/</code></a> directory, dated, if you want to see what was checked and when.</p>
+<h2 id="apple-primary-documentation">Apple — primary documentation<a class="anchor" href="#apple-primary-documentation" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>Topic</th><th>Where</th></tr></thead><tbody><tr><td>macOS release notes (developer)</td><td>developer.apple.com/documentation/macos-release-notes — every 26.x / 27 build, with known issues</td></tr><tr><td>macOS user guide</td><td>support.apple.com/guide/mac-help — System Settings panes, Spotlight, Finder, Time Machine, Shortcuts</td></tr><tr><td>Security releases and CVE lists</td><td>support.apple.com/100100 (Apple security releases) — what each update fixed; the 26.6 entry lists 155 CVEs</td></tr><tr><td>Apple Platform Security Guide</td><td>support.apple.com/guide/security — FileVault, Secure Enclave, Gatekeeper, SIP, sealed system volume, Activation Lock; the authoritative reference behind <a href="16-security-and-privacy.html">ch. 16</a></td></tr><tr><td>Apple Platform Deployment</td><td>support.apple.com/guide/deployment — MDM-era detail on <code>defaults</code>, profiles, startup security, DFU revive</td></tr><tr><td>Rosetta 2</td><td>support.apple.com/102527 — install instructions and the macOS 27/28 removal notice</td></tr><tr><td>Spotlight keyboard shortcuts</td><td>support.apple.com/guide/mac-help/mh26783 — the <code>⌘1</code>–<code>⌘4</code> views and quick keys</td></tr><tr><td>Mac keyboard shortcuts</td><td>support.apple.com/102650 — the canonical list behind <a href="appendix-c-keyboard-shortcuts.html">Appendix C</a></td></tr><tr><td>Startup key combinations (Apple silicon)</td><td>support.apple.com/102603 — hold-power options, Safe Mode, Diagnostics</td></tr><tr><td>Revive or restore with Apple Configurator</td><td>support.apple.com/108900 — DFU procedure per model</td></tr><tr><td>Apple Diagnostics reference codes</td><td>support.apple.com/102550</td></tr><tr><td>Battery health and charge limit</td><td>support.apple.com/102888 (Optimized Battery Charging), 26.4 release notes for the 80% limit</td></tr><tr><td>Time Machine</td><td>support.apple.com/guide/mac-help/mh35860; <code>man tmutil</code></td></tr><tr><td>Shortcuts user guide (Mac)</td><td>support.apple.com/guide/shortcuts-mac — actions, automations/triggers, Run Shell Script</td></tr><tr><td>Mac Automation Scripting Guide (AppleScript/JXA)</td><td>developer.apple.com/library/archive/documentation/LanguagesUtilities/Conceptual/MacAutomationScriptingGuide — archived but still the reference</td></tr><tr><td>launchd</td><td>developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup; <code>man launchd.plist</code>; launchd.info (community reference)</td></tr><tr><td>Xcode, Command Line Tools, SDKs</td><td>developer.apple.com/xcode/resources; developer.apple.com/download/all (older Xcode/CLT builds)</td></tr><tr><td>Apple <code>container</code></td><td>github.com/apple/container — README, docs, release notes (1.0: no Compose)</td></tr><tr><td>MLX</td><td>github.com/ml-explore/mlx; ml-explore.github.io/mlx</td></tr><tr><td>Virtualization framework</td><td>developer.apple.com/documentation/virtualization</td></tr><tr><td>Hardware tech specs and pricing</td><td>apple.com/mac/compare; apple.com/us-edu/store (education pricing); apple.com/newsroom (launch dates: Mar 3 2026 MacBook Air M5 / MBP M5 Pro–Max / Studio Displays; Aug 25 2026 Mac mini M6 &amp; M5 Pro, Mac Studio M5 Max/Ultra)</td></tr><tr><td>macOS 27 Golden Gate</td><td>apple.com/newsroom (WWDC June 8 2026 announcement; September 14 2026 release); developer.apple.com/macos</td></tr><tr><td>Apple Intelligence availability</td><td>apple.com/apple-intelligence — supported devices and languages</td></tr><tr><td>Feedback Assistant</td><td>feedbackassistant.apple.com — where real bug reports go</td></tr></tbody></table></div>
+<h2 id="developer-tooling-official-docs-and-changelogs">Developer tooling — official docs and changelogs<a class="anchor" href="#developer-tooling-official-docs-and-changelogs" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>Tool</th><th>Where</th></tr></thead><tbody><tr><td>Homebrew</td><td>docs.brew.sh (Installation, FAQ, Homebrew on Apple silicon, Brew Bundle, Services); brew.sh/blog — 6.0 release post (tap trust, <code>brew exec</code>, parallel bundle, Intel Tier 3); github.com/Homebrew/brew/releases</td></tr><tr><td>Ghostty</td><td>ghostty.org/docs (config reference, keybinds, macOS specifics); github.com/ghostty-org/ghostty/releases — 1.3.0 (Mar 2026) notes</td></tr><tr><td>iTerm2 / WezTerm / Kitty / Warp</td><td>iterm2.com/documentation; wezterm.org; sw.kovidgoyal.net/kitty; docs.warp.dev</td></tr><tr><td>zsh</td><td>zsh.sourceforge.io/Doc; the Arch wiki zsh page (excellent, distro-agnostic)</td></tr><tr><td>Starship</td><td>starship.rs/config</td></tr><tr><td>fzf / zoxide / eza / bat / fd / ripgrep / delta</td><td>each project's GitHub README (junegunn/fzf, ajeetdsouza/zoxide, eza-community/eza, sharkdp/bat, sharkdp/fd, BurntSushi/ripgrep, dandavison/delta)</td></tr><tr><td>tmux</td><td>github.com/tmux/tmux/wiki</td></tr><tr><td>Git</td><td>git-scm.com/docs; GitHub Docs — SSH keys, SSH commit signing (docs.github.com/authentication)</td></tr><tr><td>GitHub CLI</td><td>cli.github.com/manual</td></tr><tr><td>chezmoi / GNU Stow</td><td>chezmoi.io; gnu.org/software/stow</td></tr><tr><td>mise</td><td>mise.jdx.dev — getting started, configuration, idiomatic version files, tasks</td></tr><tr><td>uv</td><td>docs.astral.sh/uv — projects, scripts (PEP 723), tools, Python versions</td></tr><tr><td>Node.js</td><td>nodejs.org/en/about/previous-releases and the release blog — Node 26 LTS (Oct 2026) and the new yearly release model</td></tr><tr><td>Python</td><td>peps.python.org/pep-0790 (3.15 schedule, Oct 2026); devguide.python.org/versions</td></tr><tr><td>Java</td><td>openjdk.org/projects/jdk (25 LTS; 27 LTS Sept 2027); adoptium.net</td></tr><tr><td>Go / Rust</td><td>go.dev/doc/devel/release; releases.rs / forge.rust-lang.org</td></tr><tr><td>PostgreSQL</td><td>postgresql.org/support/versioning (18 current; 19 due autumn 2026)</td></tr><tr><td>VS Code</td><td>code.visualstudio.com/docs; code.visualstudio.com/updates (monthly); keyboard reference PDF (macOS)</td></tr><tr><td>Cursor / Zed / JetBrains</td><td>docs.cursor.com; zed.dev/docs; jetbrains.com/help; jetbrains.com/community/education (free student licenses)</td></tr><tr><td>GitHub Copilot</td><td>docs.github.com/copilot; education.github.com/pack (Student Developer Pack terms)</td></tr><tr><td>Stack Overflow Developer Survey</td><td>survey.stackoverflow.co — the 2026 edition is the source for editor share figures quoted in <a href="12-editors-and-ides.html">ch. 12</a></td></tr><tr><td>OrbStack</td><td>docs.orbstack.dev — Docker, Linux machines, Rosetta, pricing/licensing</td></tr><tr><td>Docker Desktop</td><td>docs.docker.com/desktop/setup/install/mac-install; docker.com/pricing (subscription tiers)</td></tr><tr><td>Podman / Colima / Lima</td><td>podman.io/docs; github.com/abiosoft/colima; lima-vm.io</td></tr><tr><td>UTM / VMware Fusion / Parallels</td><td>docs.getutm.app; vmware.com (Fusion free for all since Nov 2024); parallels.com</td></tr><tr><td>Kubernetes tooling</td><td>kubernetes.io/docs/tasks/tools; kind.sigs.k8s.io; k9scli.io</td></tr><tr><td>Cloud CLIs</td><td>docs.aws.amazon.com/cli; cloud.google.com/sdk/docs; learn.microsoft.com/cli/azure</td></tr><tr><td>Tailscale</td><td>tailscale.com/kb</td></tr><tr><td>Hammerspoon</td><td>hammerspoon.org/docs; hammerspoon.org/Spoons</td></tr><tr><td>Karabiner-Elements</td><td>karabiner-elements.pqrs.org/docs; ke-complex-modifications.pqrs.org</td></tr><tr><td>AeroSpace / Rectangle / yabai</td><td>nikitabobko.github.io/AeroSpace/guide; rectangleapp.com; github.com/koekeishiya/yabai/wiki</td></tr><tr><td>Raycast / Alfred</td><td>manual.raycast.com; alfredapp.com/help</td></tr><tr><td>Keyboard Maestro / BetterTouchTool / Hazel</td><td>wiki.keyboardmaestro.com; docs.folivora.ai; noodlesoft.com/manual</td></tr><tr><td>Objective-See tools (LuLu, KnockKnock, BlockBlock)</td><td>objective-see.org/tools.html</td></tr><tr><td>Little Snitch</td><td>obdev.at/products/littlesnitch</td></tr><tr><td>1Password / Bitwarden</td><td>developer.1password.com (CLI, SSH agent); bitwarden.com/help</td></tr><tr><td>Zotero / Obsidian / Anki</td><td>zotero.org/support; help.obsidian.md; docs.ankiweb.net</td></tr><tr><td>LaTeX / Typst</td><td>tug.org/mactex; typst.app/docs</td></tr></tbody></table></div>
+<h2 id="community-references-worth-trusting">Community references worth trusting<a class="anchor" href="#community-references-worth-trusting" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Mr. Macintosh</strong> (mrmacintosh.com) — meticulous tracking of every macOS build, installer download links, and update quirks; the first place to look when an update misbehaves.</li>
+<li><strong>Howard Oakley, The Eclectic Light Company</strong> (eclecticlight.co) — deep, tested explanations of APFS, Time Machine, XProtect, the unified log, Apple silicon boot and security; Oakley's free utilities (Mints, Silent Knight, T2M2) are referenced in <a href="17-backup-and-recovery.html">ch. 17</a> and <a href="22-troubleshooting.html">ch. 22</a>.</li>
+<li><strong>Six Colors</strong> (sixcolors.com) and <strong>Daring Fireball</strong> (daringfireball.net) — informed commentary on Apple releases; the Six Colors FileVault/recovery-key write-up informed <a href="16-security-and-privacy.html">ch. 16</a>.</li>
+<li><strong>MacRumors</strong> (macrumors.com) and <strong>9to5Mac</strong> (9to5mac.com) — release roundups and hardware buyer's guides (macrumors.com/roundup); good for "what changed in 26.x" summaries and the MacBook Neo/M5/M6 launch coverage.</li>
+<li><strong>Michael Tsai's blog</strong> (mjtsai.com) — link roundups on macOS developer and security issues, with the discussion that follows each change (Gatekeeper's right-click removal, TCC changes, Rosetta's retirement).</li>
+<li><strong>ERNW macOS hardening guide</strong> (github.com/ernw/hardening) and the <strong>macOS Security and Privacy Guide</strong> (github.com/drduh/macOS-Security-and-Privacy-Guide) — the two community hardening references <a href="16-security-and-privacy.html">ch. 16</a> draws from and deliberately trims for a daily-driver machine.</li>
+<li><strong>Apple Stack Exchange</strong> (apple.stackexchange.com) and <strong>Ask Different</strong> — the searchable Q&amp;A corpus for "why does macOS do X"; look for answers with <code>man</code> page citations.</li>
+<li><strong>awesome-mac</strong> (github.com/jaywcjlove/awesome-mac) and <strong>Awesome macOS Command Line</strong> (github.com/herrbischoff/awesome-macos-command-line) — exhaustive app and <code>defaults</code> lists; the latter is the best index of <code>defaults write</code> keys.</li>
+<li><strong>macos-defaults.com</strong> — visual, per-key documentation of <code>defaults write</code> settings with screenshots of the effect.</li>
+<li><strong>Mathias Bynens's <code>.macos</code></strong> (github.com/mathiasbynens/dotfiles) — the ancestor of every macOS defaults script, including <a href="appendix-a-bootstrap-script.html">Appendix A</a>'s; many keys are now obsolete, so treat it as history.</li>
+<li><strong>launchd.info</strong> — the friendliest reference for <code>launchd.plist</code> keys.</li>
+<li><strong>The Arch Wiki</strong> (wiki.archlinux.org) — for anything that's really about zsh, tmux, Git, SSH, or Neovim, it's the clearest documentation on the internet regardless of OS.</li>
+<li><strong>Julia Evans's zines</strong> (wizardzines.com) — Git, the shell, DNS, and networking explained better than anywhere else; recommended reading in <a href="20-cs-student-specific.html">ch. 20</a>.</li>
+<li><strong>The Missing Semester of Your CS Education</strong> (missing.csail.mit.edu) — MIT's course on the shell, editors, Git, debugging, and metaprogramming; the natural companion to Part III of this guide.</li>
+<li><strong>r/macapps</strong>, <strong>r/MacOS</strong>, <strong>r/macsysadmin</strong>, <strong>MacAdmins Slack</strong> (macadmins.org) — where practical fixes surface first, especially for enterprise/university-managed Macs.</li>
+</ul>
+<h2 id="release-calendars-to-bookmark">Release calendars to bookmark<a class="anchor" href="#release-calendars-to-bookmark" aria-label="Permalink">#</a></h2>
+<p>Check these each September (macOS/Xcode/Java), October (Node LTS, Python), and when a course pins a version.</p>
+<div class="table-wrap"><table><thead><tr><th>What</th><th>Calendar</th></tr></thead><tbody><tr><td>macOS point releases and security updates</td><td>support.apple.com/100100</td></tr><tr><td>macOS major releases</td><td>WWDC in June (announce), mid-September (ship) — every year since 2020</td></tr><tr><td>Xcode</td><td>with each macOS/iOS release; betas from June</td></tr><tr><td>Homebrew</td><td>github.com/Homebrew/brew/releases (monthly-ish minor, yearly major)</td></tr><tr><td>Ghostty</td><td>~6-month cadence (1.4 expected ~September 2026)</td></tr><tr><td>Node.js</td><td>April (even major, becomes LTS in October); the 2026 policy moves to one release per year</td></tr><tr><td>Python</td><td>October annually (3.15 in 2026); peps.python.org release PEPs</td></tr><tr><td>Java</td><td>March and September; LTS every two years (25 → 27 in Sept 2027)</td></tr><tr><td>Go</td><td>February and August</td></tr><tr><td>Rust</td><td>every 6 weeks</td></tr><tr><td>PostgreSQL</td><td>September/October annually</td></tr><tr><td>VS Code</td><td>monthly, first week</td></tr><tr><td>Docker Desktop / OrbStack</td><td>monthly-ish</td></tr><tr><td>Ubuntu (for containers/VMs)</td><td>April (LTS in even years: 26.04 is current LTS) and October</td></tr></tbody></table></div>
+<h2 id="how-this-guide-was-researched">How this guide was researched<a class="anchor" href="#how-this-guide-was-researched" aria-label="Permalink">#</a></h2>
+<p>Each chapter started from Apple's documentation for the feature in question, then the tool's own docs, then release notes for the current version, then community sources for practical behaviour Apple doesn't document (e.g., which <code>defaults</code> keys still work, how Gatekeeper's "Open Anyway" flow behaves in 26.x, real-world OrbStack vs Docker Desktop performance). Prices were taken from vendor pages in September 2026 in USD, with education pricing from Apple's US education store. Where a claim couldn't be verified against a primary source it was either dropped or marked with hedging language ("check current terms").</p>
+<p>Things that were <em>not</em> done: no synthetic benchmarks were run; no affiliate links exist anywhere in the guide; no vendor was consulted or paid. Recommendations reflect the author's judgment of the best default for a CS student or working engineer in 2026, and are explicitly opinions where the guide says so.</p>
+<h2 id="reporting-errors">Reporting errors<a class="anchor" href="#reporting-errors" aria-label="Permalink">#</a></h2>
+<p>If something is wrong, out of date, or missing: open an issue or pull request at <a href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener">github.com/grandfactor/macos-setup</a>. Every page on the site has an <strong>Edit on GitHub</strong> link in its footer. Corrections that cite a primary source get merged fastest. The single-file <a href="https://github.com/grandfactor/macos-setup/blob/main/GUIDE.md" target="_blank" rel="noopener"><code>GUIDE.md</code></a> is generated from the per-chapter sources in <code>guide/</code> by <code>build.py</code>; edit the chapter file, not the generated output.</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="appendix-d-glossary.html"><span>Previous</span><strong>Appendix D — Glossary</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/appendix-e-sources.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/appendix-e-sources.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#apple-primary-documentation">Apple — primary documentation</a></li>
+<li class="lvl2"><a href="#developer-tooling-official-docs-and-changelogs">Developer tooling — official docs and changelogs</a></li>
+<li class="lvl2"><a href="#community-references-worth-trusting">Community references worth trusting</a></li>
+<li class="lvl2"><a href="#release-calendars-to-bookmark">Release calendars to bookmark</a></li>
+<li class="lvl2"><a href="#how-this-guide-was-researched">How this guide was researched</a></li>
+<li class="lvl2"><a href="#reporting-errors">Reporting errors</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
