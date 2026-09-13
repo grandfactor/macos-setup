@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Security &amp; privacy — The macOS Setup Guide</title>
+<meta name="description" content="A realistic threat model, FileVault and its new recovery-key rules, Gatekeeper and notarisation, the firewall, passwords and passkeys, secrets on disk, permissions hygiene, browser privacy, Lockdown Mode, and what to do when a laptop is lost.">
+<meta property="og:title" content="Security &amp; privacy — The macOS Setup Guide">
+<meta property="og:description" content="A realistic threat model, FileVault and its new recovery-key rules, Gatekeeper and notarisation, the firewall, passwords and passkeys, secrets on disk, permissions hygiene, browser privacy, Lockdown Mode, and what to do when a laptop is lost.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+<li><a href="15-databases-and-local-dev.html"><span class="nav-num">15</span>Databases &amp; local development services</a></li>
+</ul>
+<p class="nav-part">Part IV — Security, backup &amp; maintenance</p><ul>
+<li class="active"><a href="16-security-and-privacy.html"><span class="nav-num">16</span>Security &amp; privacy</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="security-privacy">Security &amp; privacy</h1>
+<p>macOS is secure by default in ways Linux and Windows are not: a sealed, signed system volume; hardware-backed encryption keys in the Secure Enclave; app sandboxing and per-resource permission prompts; notarised software. The job is to <em>not undo</em> those defaults, then add the handful of things Apple leaves to you: a password manager, backups, a firewall toggle, and habits around secrets. This chapter is written for a student or engineer, not a nation-state target; the <a href="#lockdown-mode-and-high-risk-users">Lockdown Mode</a> section covers the latter.</p>
+<h2 id="threat-model-in-one-paragraph">Threat model in one paragraph<a class="anchor" href="#threat-model-in-one-paragraph" aria-label="Permalink">#</a></h2>
+<p>Realistic risks for a developer's Mac, in rough order of likelihood: <strong>losing or having the laptop stolen</strong> (FileVault + Find My + backups make this an inconvenience instead of a disaster); <strong>phishing and credential stuffing</strong> on your accounts (password manager + passkeys + 2FA); <strong>malicious packages</strong> pulled in by <code>npm install</code>/<code>pip install</code>/<code>brew install</code> from a compromised tap (supply chain — trust decisions, lockfiles, scanning); <strong>leaking secrets</strong> via a committed <code>.env</code> or a screenshot; <strong>info-stealer malware</strong> disguised as a cracked app or a fake "update" (Gatekeeper + not pirating software); and, far down the list, targeted exploits. Configure for the top five; don't cosplay for the sixth.</p>
+<h2 id="filevault">FileVault<a class="anchor" href="#filevault" aria-label="Permalink">#</a></h2>
+<p>Full-disk encryption of your Data volume, keyed to your login password and the Secure Enclave. On Apple silicon the drive is <em>always</em> encrypted at the hardware level; FileVault is what ties that key to your password so a stolen SSD (or a stolen Mac booted to Recovery) is unreadable.</p>
+<ul>
+<li><strong>Since Tahoe it's on by default</strong> when you sign into an Apple Account during setup. Verify: <code>System Settings → Privacy &amp; Security → FileVault</code> shows <strong>On</strong>, or <code>fdesetup status</code> in a terminal.</li>
+<li><strong>The Recovery Key changed in Tahoe</strong>: the old "store in iCloud" escrow (protected only by your Apple Account password) is gone. The key now lives in <strong>iCloud Keychain (end-to-end encrypted)</strong>, shows up in the <strong>Passwords app</strong>, and can be displayed any time from the FileVault pane via <strong>Show</strong> (Touch ID). Macs upgraded to 26.4+ are migrated to this model.</li>
+<li><strong>Do this now</strong>: click <em>Show</em>, copy the 24-character key into your password manager too, and — if you don't use iCloud Keychain — write it on paper and put it somewhere physically safe. If your login password is ever lost <em>and</em> the account can't be reset via Apple Account, the Recovery Key is the <strong>only</strong> way to get your data.</li>
+<li>Verify the stored key works without wiping anything: <code>sudo fdesetup validaterecovery</code> → paste key → <code>true</code>.</li>
+<li><strong>Allow my Apple Account to reset this password</strong> (set during setup; changeable in <code>Users &amp; Groups → ⓘ</code>) is your other safety net. Keep it on unless you have a specific reason.</li>
+<li>Time Machine and other external drives are <strong>separate</strong>: encrypt them at format time (APFS Encrypted) — Chapter 17. Note that <strong>encrypted HFS+ is deprecated</strong> and unsupported from macOS 28; reformat old backup drives as APFS.</li>
+<li>Sleeping vs shutting down: with FileVault, a <em>sleeping</em> Mac holds the key in memory. For maximum safety when travelling, shut down (or at least lock — the Secure Enclave rate-limits guesses). <code>sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25</code> destroys the key on standby at the cost of slower wake; most people don't need this.</li>
+</ul>
+<h2 id="gatekeeper-notarisation-and-running-unsigned-software">Gatekeeper, notarisation and running unsigned software<a class="anchor" href="#gatekeeper-notarisation-and-running-unsigned-software" aria-label="Permalink">#</a></h2>
+<p>Gatekeeper checks that downloaded apps are signed by a registered developer and notarised by Apple (scanned for malware). The rules tightened in Sequoia and stay tight in Tahoe/Golden Gate:</p>
+<ul>
+<li>The right-click → <em>Open</em> bypass <strong>no longer exists</strong>, and <code>spctl --master-disable</code> (the old "Anywhere" option) <strong>is gone</strong>.</li>
+<li>To run an unsigned or un-notarised app: double-click it (get refused), then <code>System Settings → Privacy &amp; Security</code> → scroll to <em>Security</em> → click <strong>Open Anyway</strong> (within about an hour). Once.</li>
+<li>From the terminal: <code>xattr -d com.apple.quarantine /Applications/App.app</code> removes the quarantine flag so Gatekeeper isn't consulted. Homebrew: <code>brew install --cask --no-quarantine app</code>.</li>
+<li>Binaries you compile yourself aren't quarantined and run fine. Binaries you <code>curl</code> are quarantined by Safari/Chrome but <em>not</em> by <code>curl</code> itself.</li>
+<li>Check a signature: <code>codesign -dv --verbose=4 App.app</code>; check Gatekeeper's verdict: <code>spctl -a -vv App.app</code>. <strong>Notarised</strong> + <strong>Developer ID</strong> = normal commercial software. Ad-hoc signed = built locally.</li>
+<li><strong>XProtect</strong> (Apple's built-in malware scanner) and <strong>XProtect Remediator</strong> update silently in the background (<code>Software Update → Install Security Responses and system files</code>). There is no need for third-party antivirus on a personal Mac; if you want a second opinion, <strong>Malwarebytes</strong> free scans on demand, and Objective-See's free tools (<strong>KnockKnock</strong> — what's persistent, <strong>BlockBlock</strong> — alerts on new persistence, <strong>LuLu</strong> — outbound firewall, <strong>OverSight</strong> — mic/camera use) are excellent and made by a respected researcher.</li>
+<li><strong>Don't install pirated apps or "activators".</strong> In 2025–2026 the dominant Mac malware (Atomic/AMOS, Poseidon, Cuckoo, Banshee info-stealers) arrives almost exclusively via cracked software, fake app sites in search ads, and fake "update your browser/Zoom" pages, and steals Keychain, browser cookies, crypto wallets and SSH keys. It also increasingly comes as a <strong>terminal command</strong> the page tells you to paste ("ClickFix"). Never paste a command from a website you don't understand into Terminal.</li>
+</ul>
+<h2 id="firewall-and-network">Firewall and network<a class="anchor" href="#firewall-and-network" aria-label="Permalink">#</a></h2>
+<ul>
+<li><code>System Settings → Network → Firewall</code>: <strong>On</strong>, <em>Stealth mode</em> on. It's an application firewall (allows/denies per app) and is off by default on new Macs.</li>
+<li>Outbound firewall (know what phones home): <strong>LuLu</strong> (free) or <strong>Little Snitch</strong> ($59; Little Snitch Mini is free). Useful on a dev machine to notice a package or IDE plugin making unexpected connections.</li>
+<li><code>pf</code> is the packet filter underneath (<code>/etc/pf.conf</code>); rarely needed on a laptop.</li>
+<li><strong>Sharing</strong>: everything off except what you use (Chapter 3). If SSH is on, key-only auth.</li>
+<li><strong>Public Wi‑Fi</strong>: use a VPN you control (Tailscale exit node at home, or a reputable provider — Mullvad, Proton), or iCloud Private Relay for Safari. Turn off <em>Auto-Join</em> for open networks; forget the ones you won't reuse.</li>
+<li><strong>DNS</strong>: consider encrypted DNS via a configuration profile (Cloudflare/Quad9/NextDNS provide <code>.mobileconfig</code> files); NextDNS also blocks trackers and malware domains network-wide.</li>
+<li><strong>Local network permission</strong> prompts (<code>Privacy &amp; Security → Local Network</code>) exist since Sequoia — deny for apps with no business scanning your LAN.</li>
+</ul>
+<h2 id="passwords-passkeys-and-2fa">Passwords, passkeys and 2FA<a class="anchor" href="#passwords-passkeys-and-2fa" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Pick one password manager and set it up before creating accounts</strong>: Apple <strong>Passwords</strong> (free, built in, syncs via iCloud Keychain, passkeys, verification codes, shared groups, Windows/Chrome extension; Golden Gate adds automatic password changing for compromised logins), <strong>1Password</strong> ($3/mo; students 50% off; best for developers: SSH agent, CLI <code>op</code>, Git signing, Secrets Automation), <strong>Bitwarden</strong> (free tier is genuinely complete; open source; self-hostable via Vaultwarden), <strong>Proton Pass</strong>. Turn off the browser's built-in saving so you don't get duplicates. The Passwords app is the right default for a student fully in Apple's ecosystem; 1Password if you're a developer who wants the CLI/SSH integration.</li>
+<li><strong>Passkeys</strong> replace passwords with a device-bound cryptographic credential that can't be phished. Enable them on every account that supports them — Apple Account, Google, GitHub, Microsoft, Amazon, PayPal, most banks, Cloudflare, Vercel — and keep passwords only as fallback. They sync via iCloud Keychain or your manager.</li>
+<li><strong>2FA</strong>: TOTP codes in the Passwords app or 1Password (both fill them). <strong>Hardware keys</strong> (YubiKey 5C NFC, ~$55; get two) for GitHub, Google, Apple Account (Security Keys for Apple Account), your password manager, and cloud consoles — the strongest protection you can buy for the accounts that unlock everything else. Avoid SMS 2FA when anything else is available.</li>
+<li><strong>Apple Account</strong>: 2FA on (mandatory), a <strong>recovery contact</strong> and a <strong>recovery key</strong> set (<code>Sign-In &amp; Security → Account Recovery</code>), <strong>Advanced Data Protection on</strong>, and review <em>Devices</em> twice a year — remove Macs you sold.</li>
+<li><strong>Stolen Device Protection</strong> (<code>Touch ID &amp; Password</code>, MacBooks on 26.4+): requires biometrics — not the password — for sensitive changes when the Mac is away from familiar locations, with a security delay. Turn it on.</li>
+</ul>
+<h2 id="secrets-on-disk-the-developer-part">Secrets on disk (the developer part)<a class="anchor" href="#secrets-on-disk-the-developer-part" aria-label="Permalink">#</a></h2>
+<p>Where things live and how to keep them from leaking:</p>
+<div class="table-wrap"><table><thead><tr><th>Secret</th><th>Where it should be</th><th>Where it should <em>not</em> be</th></tr></thead><tbody><tr><td>SSH private keys</td><td><code>~/.ssh/</code> with a passphrase in the Keychain (<code>UseKeychain</code>), or a hardware key, or 1Password's agent</td><td>Copied between machines; in Dropbox/iCloud Drive; in a repo</td></tr><tr><td>Git signing key</td><td>Same SSH key (Chapter 10)</td><td>A GPG keyring you'll lose the passphrase to</td></tr><tr><td>API tokens, cloud keys</td><td>1Password (<code>op run</code>, <code>op read</code>), macOS Keychain (<code>security add-generic-password</code>), <code>aws-vault</code>, <code>mise</code>/<code>direnv</code> loading a <strong>gitignored</strong> <code>.env</code></td><td><code>~/.zshrc</code>, <code>~/.npmrc</code>, <code>~/.netrc</code>, committed <code>.env</code>, a Slack message</td></tr><tr><td>Database passwords (prod)</td><td>Your cloud's secret manager / 1Password</td><td>Local <code>.env</code>, a GUI client's saved connection without Keychain</td></tr><tr><td>Browser cookies/sessions</td><td>The browser (they're the #1 target of info-stealers)</td><td>Exported HAR files in Downloads</td></tr><tr><td>Backups of any of the above</td><td>Encrypted Time Machine / encrypted disk image</td><td>Unencrypted USB sticks</td></tr></tbody></table></div>
+<p>Tools: <code>gitleaks</code> pre-commit hook (Chapter 10); <code>op</code> CLI with biometric unlock; <strong>sops</strong>/<strong>age</strong> (<code>brew install sops age</code>) for encrypted config files in repos; the Keychain from scripts:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">security add-generic-password -a "$USER" -s openai_api_key -w      # prompts for the value
+export OPENAI_API_KEY="$(security find-generic-password -a "$USER" -s openai_api_key -w)"</code></pre></div>
+<p><code>~/Library/Keychains/login.keychain-db</code> is encrypted with your login password and included in FileVault and Time Machine — fine. iCloud Keychain syncs it end-to-end encrypted.</p>
+<h2 id="permissions-tcc-hygiene">Permissions (TCC) hygiene<a class="anchor" href="#permissions-tcc-hygiene" aria-label="Permalink">#</a></h2>
+<p>Every "X would like to access Y" dialog writes to the TCC database. Review quarterly in <code>Privacy &amp; Security</code>:</p>
+<ul>
+<li><strong>Full Disk Access</strong>: terminals, backup tools, maybe your editor. Anything else — why?</li>
+<li><strong>Accessibility</strong>: window managers, Karabiner, Raycast/Alfred, text expanders, AltTab. This permission is powerful (it can read and synthesise all input); grant it only to well-known apps.</li>
+<li><strong>Screen &amp; System Audio Recording</strong>: screenshot tools, video calls, DisplayLink. macOS periodically re-asks for less-used apps.</li>
+<li><strong>Input Monitoring</strong>: Karabiner, keyboard utilities.</li>
+<li><strong>Automation</strong> (AppleScript control between apps), <strong>Camera/Microphone</strong>, <strong>Files and Folders</strong>, <strong>Local Network</strong>, <strong>Developer Tools</strong>.</li>
+<li><code>tccutil reset All com.example.app</code> clears an app's grants if a dialog got stuck.</li>
+<li>macOS 26.2+ shows which permissions were granted by an MDM profile (relevant on work Macs); macOS 27 denies apps access to other teams' app containers by default.</li>
+</ul>
+<h2 id="browser-privacy">Browser privacy<a class="anchor" href="#browser-privacy" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Safari</strong> has the strongest default anti-tracking (ITP, fingerprinting protection strengthened in 26.4, Private Relay, Hide My Email) and the best battery life. Enable <em>Advanced Tracking and Fingerprinting Protection: in all browsing</em>, <em>Prevent cross-site tracking</em>, <em>Hide IP address from trackers</em>. Extensions from the App Store only: <strong>AdGuard</strong> or <strong>Wipr 2</strong> (content blockers), your password manager, <strong>Kagi</strong>. Golden Gate's Safari adds AI tab grouping and page-change alerts; the <em>Create an Extension</em> AI feature is fun for small tweaks.</li>
+<li><strong>Chrome</strong> if you need it (DevTools, Google Workspace, Chrome-only sites): sign out of sync unless you want Google to have your history, turn off <em>Privacy Sandbox</em> ad topics, install <strong>uBlock Origin Lite</strong> (MV3) — uBlock Origin proper is Firefox-only now. <strong>Brave</strong> is Chromium with a built-in blocker and no Google account hooks. <strong>Firefox</strong> for uBlock Origin and container tabs; <strong>Zen</strong> is Firefox with Arc's vertical-tab workflow (Arc itself is frozen since 2025 — security patches only). <strong>Orion</strong> (Kagi) is a WebKit browser that runs Chrome <em>and</em> Firefox extensions.</li>
+<li><strong>Two browsers, two identities</strong>: personal in Safari, work/Google in Chrome or a dedicated profile. Browser profiles keep cookies, extensions and history separate — and limit what a malicious extension in one can see.</li>
+<li><strong>Extensions are the biggest browser risk</strong>: each one you install can read every page. Keep them to a handful from reputable authors.</li>
+</ul>
+<h2 id="updates">Updates<a class="anchor" href="#updates" aria-label="Permalink">#</a></h2>
+<p><code>Software Update</code>: everything automatic, including <strong>Security Responses and system files</strong> and <strong>Background Security Improvements</strong>. Rapid Security Responses ship within days of an exploited zero-day. App updates: Homebrew (<code>brew upgrade</code>) weekly, App Store automatic, and let apps that self-update (browsers, editors, Slack) do so. An out-of-date browser is the most likely way in.</p>
+<h2 id="lockdown-mode-and-high-risk-users">Lockdown Mode and high-risk users<a class="anchor" href="#lockdown-mode-and-high-risk-users" aria-label="Permalink">#</a></h2>
+<p><code>Privacy &amp; Security → Lockdown Mode</code> disables JIT and many web technologies in Safari, blocks most message attachments and link previews, refuses wired accessories while locked, and prevents configuration-profile installs. It's for journalists, activists, dissidents, executives, and security researchers who have reason to believe a well-resourced adversary is targeting them personally. It breaks enough normal developer web tooling that it's the wrong default for everyone else. If that's you: enable it, use a hardware security key on your Apple Account, consider a separate device for sensitive work, and read Apple's Platform Security Guide and the ERNW macOS 26 hardening guide (Appendix E) — they cover MDM-level restrictions this guide skips.</p>
+<h2 id="the-admin-vs-standard-account-question">The admin vs standard account question<a class="anchor" href="#the-admin-vs-standard-account-question" aria-label="Permalink">#</a></h2>
+<p>Running day-to-day as a <strong>standard user</strong> and keeping a separate admin account means anything that runs as you cannot silently install system-wide persistence or change security settings without an admin password prompt. It's the single most effective <em>free</em> hardening step and what enterprise baselines require. The friction on a personal Mac is small — occasional extra prompts for installers, <code>sudo</code> requires the admin's credentials — and Homebrew works fine once <code>/opt/homebrew</code> is owned by your standard account. Reasonable people skip it on a personal laptop; do it on a machine that has access to production systems.</p>
+<h2 id="when-the-mac-is-lost-or-stolen">When the Mac is lost or stolen<a class="anchor" href="#when-the-mac-is-lost-or-stolen" aria-label="Permalink">#</a></h2>
+<p>Before it happens: FileVault on, Find My on, Stolen Device Protection on, a lock-screen message with contact details, backups current, and your Apple Account recovery set up.</p>
+<p>When it happens: <strong>icloud.com/find</strong> (or Find My on another device) → the Mac → <strong>Mark As Lost</strong> (locks it and shows your message; Activation Lock means it can't be erased and reused) → if it's clearly gone, <strong>Erase This Mac</strong>. Then: change your Apple Account password, revoke the machine's SSH keys on GitHub/servers, rotate any tokens that lived in plaintext on disk (there should be none — see above), sign out sessions in Google/GitHub/Slack (each has a "sign out everywhere"), and notify your employer's IT if it had work data. Your data is unreadable without your password; your Time Machine backup restores everything onto the replacement.</p>
+<h2 id="quick-audit-script">Quick audit script<a class="anchor" href="#quick-audit-script" aria-label="Permalink">#</a></h2>
+<p>Paste into a terminal for a snapshot of the security posture (read-only):</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">echo "FileVault:      $(fdesetup status)"
+echo "Firewall:       $(/usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate)"
+echo "Stealth:        $(/usr/libexec/ApplicationFirewall/socketfilterfw --getstealthmode)"
+echo "Gatekeeper:     $(spctl --status)"
+echo "SIP:            $(csrutil status)"
+echo "Auto login:     $(defaults read /Library/Preferences/com.apple.loginwindow autoLoginUser 2&gt;/dev/null || echo off)"
+echo "Remote login:   $(systemsetup -getremotelogin 2&gt;/dev/null)"
+echo "Auto updates:   $(defaults read /Library/Preferences/com.apple.SoftwareUpdate AutomaticallyInstallMacOSUpdates 2&gt;/dev/null) (1=on)"
+echo "Listening TCP:"; lsof -iTCP -sTCP:LISTEN -n -P | awk 'NR&gt;1{print "   "$1, $9}' | sort -u
+echo "Login items:"; osascript -e 'tell application "System Events" to get the name of every login item' 2&gt;/dev/null
+echo "LaunchAgents:"; ls ~/Library/LaunchAgents /Library/LaunchAgents 2&gt;/dev/null</code></pre></div>
+<p>Expected on a well-set-up Mac: FileVault On, Firewall enabled, stealth on, assessments enabled, SIP enabled, no autologin, remote login off (unless you need it), only local (<code>127.0.0.1</code>) listeners, and login items you recognise.</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="15-databases-and-local-dev.html"><span>Previous</span><strong>Databases &amp; local development services</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/16-security-and-privacy.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/16-security-and-privacy.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#threat-model-in-one-paragraph">Threat model in one paragraph</a></li>
+<li class="lvl2"><a href="#filevault">FileVault</a></li>
+<li class="lvl2"><a href="#gatekeeper-notarisation-and-running-unsigned-software">Gatekeeper, notarisation and running unsigned software</a></li>
+<li class="lvl2"><a href="#firewall-and-network">Firewall and network</a></li>
+<li class="lvl2"><a href="#passwords-passkeys-and-2fa">Passwords, passkeys and 2FA</a></li>
+<li class="lvl2"><a href="#secrets-on-disk-the-developer-part">Secrets on disk (the developer part)</a></li>
+<li class="lvl2"><a href="#permissions-tcc-hygiene">Permissions (TCC) hygiene</a></li>
+<li class="lvl2"><a href="#browser-privacy">Browser privacy</a></li>
+<li class="lvl2"><a href="#updates">Updates</a></li>
+<li class="lvl2"><a href="#lockdown-mode-and-high-risk-users">Lockdown Mode and high-risk users</a></li>
+<li class="lvl2"><a href="#the-admin-vs-standard-account-question">The admin vs standard account question</a></li>
+<li class="lvl2"><a href="#when-the-mac-is-lost-or-stolen">When the Mac is lost or stolen</a></li>
+<li class="lvl2"><a href="#quick-audit-script">Quick audit script</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
