@@ -51,7 +51,10 @@ def inline(md: str) -> str:
     codes: list[str] = []
 
     def stash(m):
-        codes.append(m.group(2))
+        c = m.group(2)
+        if len(m.group(1)) > 1 and c.startswith(" ") and c.endswith(" ") and c.strip():
+            c = c[1:-1]  # CommonMark: strip one space of padding in ``  `` spans
+        codes.append(c)
         return f"\x00{len(codes) - 1}\x00"
 
     md = re.sub(r"(`+)(.+?)\1", stash, md)
