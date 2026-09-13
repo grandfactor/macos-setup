@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terminal &amp; shell — The macOS Setup Guide</title>
+<meta name="description" content="Choosing a terminal (Ghostty, iTerm2, WezTerm, Kitty, Warp), zsh configured properly without a framework, Starship, fzf, zoxide, the modern Rust CLI toolkit, tmux, SSH keys, and Touch ID for sudo.">
+<meta property="og:title" content="Terminal &amp; shell — The macOS Setup Guide">
+<meta property="og:description" content="Choosing a terminal (Ghostty, iTerm2, WezTerm, Kitty, Warp), zsh configured properly without a framework, Starship, fzf, zoxide, the modern Rust CLI toolkit, tmux, SSH keys, and Touch ID for sudo.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li class="active"><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="terminal-shell">Terminal &amp; shell</h1>
+<p>You'll spend more hours in the terminal than in any other window. The 2026 recipe: a <strong>GPU-accelerated terminal</strong> (Ghostty), <strong>zsh</strong> with a small hand-written config instead of a heavyweight framework, <strong>Starship</strong> for the prompt, <strong>fzf</strong> and <strong>zoxide</strong> for navigation, and a set of modern Rust replacements for the classic Unix tools. Everything here is in the Brewfile from Chapter 8.</p>
+<h2 id="choosing-a-terminal-emulator">Choosing a terminal emulator<a class="anchor" href="#choosing-a-terminal-emulator" aria-label="Permalink">#</a></h2>
+<p>Terminal.app got 24-bit colour, Powerline glyph support and a new default theme in Tahoe; it's genuinely fine now. Most developers still switch for splits, better keybindings, and speed.</p>
+<div class="table-wrap"><table><thead><tr><th>Terminal</th><th>Best for</th><th>Config</th><th>Notes</th></tr></thead><tbody><tr><td><strong>Ghostty</strong> (free, OSS, Zig)</td><td><strong>Default recommendation.</strong> Native macOS UI (real tabs, windows, Liquid Glass), fastest renderer, sensible defaults</td><td><code>~/.config/ghostty/config</code> — plain <code>key = value</code></td><td>1.3 (Mar 2026) added scrollback search (<kbd>⌘</kbd><kbd>F</kbd>), native scrollbars, click-to-move-cursor, command-finished notifications, key tables, drag-to-reorder splits, "Set as default terminal". 6-month release cadence.</td></tr><tr><td><strong>iTerm2</strong> (free, OSS)</td><td>Deepest feature set: shell integration, triggers, tmux <code>-CC</code> native integration, per-profile everything, password manager</td><td>GUI prefs (exportable JSON)</td><td>15 years of polish; slower rendering than the GPU terminals; still the choice for tmux-CC users.</td></tr><tr><td><strong>WezTerm</strong> (free, OSS, Rust)</td><td>Cross-platform (identical on Linux/Windows), Lua config, built-in multiplexer, SSH domains</td><td><code>~/.wezterm.lua</code></td><td>The pick if you live on more than one OS and want one config.</td></tr><tr><td><strong>Kitty</strong> (free, OSS)</td><td>Speed, keyboard-driven, kittens (icat, diff, ssh), graphics protocol</td><td><code>~/.config/kitty/kitty.conf</code></td><td>Opinionated maintainer, non-native window chrome. Great with Neovim.</td></tr><tr><td><strong>Warp</strong> (freemium, closed)</td><td>AI-native: blocks, command palette, natural-language → command, agent mode</td><td>GUI</td><td>Account optional since 2025; a different paradigm; polarising. Try it if you're new to the CLI.</td></tr><tr><td><strong>Alacritty</strong> (free, OSS)</td><td>Minimal, fast, no tabs/splits (use tmux)</td><td>TOML</td><td>Purists only.</td></tr><tr><td><strong>Terminal.app</strong></td><td>Zero install</td><td>GUI</td><td>Fine for occasional use; no splits.</td></tr></tbody></table></div>
+<p>Install Ghostty and make it default (Ghostty → <em>Set Ghostty as Default Terminal App</em>):</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew install --cask ghostty</code></pre></div>
+<p>A starter <code>~/.config/ghostty/config</code>:</p>
+<div class="codeblock"><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code># Font (install a Nerd Font via Homebrew cask; icons in prompts need it)
+font-family = JetBrainsMono Nerd Font
+font-size = 13
+font-thicken = true
+adjust-cell-height = 10%
+
+# Theme: light/dark follows the system
+theme = light:GitHub-Light-Default,dark:GitHub-Dark-Default
+background-opacity = 0.97
+background-blur = 20
+macos-titlebar-style = tabs
+macos-option-as-alt = true            # so ⌥ works as Meta in the shell (Emacs bindings, ⌥← word jumps)
+cursor-style = bar
+cursor-style-blink = false
+mouse-hide-while-typing = true
+copy-on-select = clipboard
+window-save-state = always
+window-inherit-working-directory = true
+split-inherit-working-directory = true
+scrollback-limit = 100000000
+shell-integration-features = cursor,sudo,title
+notify-on-command-finish = unfocused
+notify-on-command-finish-after = 30s
+
+# Keybinds (defaults are good; a few additions)
+keybind = super+d=new_split:right
+keybind = super+shift+d=new_split:down
+keybind = super+alt+left=goto_split:left
+keybind = super+alt+right=goto_split:right
+keybind = super+alt+up=goto_split:up
+keybind = super+alt+down=goto_split:down
+keybind = super+shift+enter=toggle_split_zoom
+keybind = global:super+grave=toggle_quick_terminal    # drop-down terminal from anywhere</code></pre></div>
+<p>Ghostty ships shell integration for zsh/bash/fish that enables: jump between prompts (<kbd>⌘</kbd><kbd>↑</kbd>/<kbd>↓</kbd>), copy last command's output, click to move the cursor in the prompt, <code>sudo</code> with Touch ID passthrough, and the working directory in new tabs. <code>ghostty +list-themes</code> previews 400+ themes; <code>ghostty +show-config --default --docs</code> lists every option.</p>
+<p><strong>iTerm2 users</strong>: turn on <em>Shell Integration</em> (iTerm2 → Install Shell Integration), set <em>Option key = Esc+</em> in the profile's Keys tab, enable <em>GPU rendering</em>, and consider <em>Triggers</em> (highlight or notify on regex in output). <strong>tmux -CC</strong> turns tmux windows into native tabs — unique to iTerm2.</p>
+<h2 id="shell-zsh-configured-by-hand">Shell: zsh, configured by hand<a class="anchor" href="#shell-zsh-configured-by-hand" aria-label="Permalink">#</a></h2>
+<p>macOS's default shell has been <strong>zsh</strong> since Catalina. Keep it. (Fish is lovely but not POSIX; Bash 3.2 is ancient; Nushell is interesting but niche.) If you want the newest zsh, <code>brew install zsh</code>, add <code>/opt/homebrew/bin/zsh</code> to <code>/etc/shells</code>, then <code>chsh -s /opt/homebrew/bin/zsh</code> — but Apple's <code>/bin/zsh</code> is fine.</p>
+<h3 id="skip-oh-my-zsh-or-use-it-knowingly">Skip Oh My Zsh (or use it knowingly)<a class="anchor" href="#skip-oh-my-zsh-or-use-it-knowingly" aria-label="Permalink">#</a></h3>
+<p>Oh My Zsh, Prezto and Zim add hundreds of aliases and a plugin manager with a measurable startup cost, and hide <em>how</em> things work — exactly what a CS student should be learning. The modern approach is ~60 lines of your own <code>.zshrc</code> plus three plugins loaded directly. If you already love OMZ, keep it, trim to 3–5 plugins, and use a fast prompt. Either way, measure: <code>time zsh -i -c exit</code> should be under 100 ms.</p>
+<h3 id="where-zsh-reads-config">Where zsh reads config<a class="anchor" href="#where-zsh-reads-config" aria-label="Permalink">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th>File</th><th>Read when</th><th>Put here</th></tr></thead><tbody><tr><td><code>~/.zshenv</code></td><td>Every zsh (including scripts)</td><td><code>PATH</code>-independent environment variables, <code>XDG_*</code>, <code>EDITOR</code>. Keep tiny.</td></tr><tr><td><code>~/.zprofile</code></td><td>Login shells (each new terminal tab on macOS is a login shell)</td><td><code>eval "$(brew shellenv)"</code>, <code>PATH</code> additions.</td></tr><tr><td><code>~/.zshrc</code></td><td>Interactive shells</td><td>Aliases, functions, completion, prompt, plugins, key bindings.</td></tr><tr><td><code>~/.zlogout</code></td><td>On exit</td><td>Rarely used.</td></tr><tr><td><code>/etc/zshrc</code>, <code>/etc/zprofile</code></td><td>System-wide, before yours</td><td>Apple's; <code>/etc/zprofile</code> runs <code>path_helper</code>, which rebuilds <code>PATH</code> from <code>/etc/paths</code> and <code>/etc/paths.d/*</code> and <strong>reorders</strong> it — which is why <code>PATH</code> set in <code>.zshenv</code> gets clobbered. Set PATH in <code>.zprofile</code> or <code>.zshrc</code>.</td></tr></tbody></table></div>
+<h3 id="a-complete-fast-zshrc">A complete, fast <code>.zshrc</code><a class="anchor" href="#a-complete-fast-zshrc" aria-label="Permalink">#</a></h3>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># ~/.zshrc — no framework, ~50ms startup
+# --- Homebrew (also in .zprofile for login shells; harmless twice) ---
+eval "$(/opt/homebrew/bin/brew shellenv)"
+
+# --- history: big, shared, deduplicated ---
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=200000
+SAVEHIST=200000
+setopt SHARE_HISTORY INC_APPEND_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE HIST_REDUCE_BLANKS HIST_VERIFY EXTENDED_HISTORY
+
+# --- behaviour ---
+setopt AUTO_CD            # `..` and `dirname` without cd
+setopt AUTO_PUSHD PUSHD_IGNORE_DUPS PUSHD_SILENT
+setopt EXTENDED_GLOB GLOB_DOTS NO_CASE_GLOB
+setopt INTERACTIVE_COMMENTS
+setopt CORRECT            # suggest corrections for mistyped commands
+unsetopt BEEP
+bindkey -e                # emacs keybindings (⌃A ⌃E ⌃K ⌃R …); `bindkey -v` for vi mode
+WORDCHARS='*?_-.[]~=&amp;;!#$%^(){}&lt;&gt;'   # ⌥⌫ stops at / and .
+
+# --- completion ---
+autoload -Uz compinit
+# cache compdump; rebuild at most once a day
+if [[ -n ~/.zcompdump(#qN.mh+24) ]]; then compinit; else compinit -C; fi
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}' 'r:|[._-]=* r:|=*' 'l:|=* r:|=*'
+zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
+zstyle ':completion:*:descriptions' format '%F{yellow}-- %d --%f'
+zstyle ':completion:*' group-name ''
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$HOME/.cache/zsh/zcompcache"
+# Homebrew site-functions are on fpath via brew shellenv (gh, docker, kubectl completions land there)
+
+# --- plugins (installed via brew; sourced directly, no plugin manager) ---
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$(brew --prefix)/share/zsh-history-substring-search/zsh-history-substring-search.zsh"
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+ZSH_AUTOSUGGEST_BUFFER_MAX_SIZE=40
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"   # must be last plugin
+
+# --- tools ---
+eval "$(starship init zsh)"                # prompt
+eval "$(zoxide init zsh --cmd cd)"         # `cd` learns your dirs; `cdi` interactive
+eval "$(fzf --zsh)"                        # ⌃R history, ⌃T files, ⌥C cd
+eval "$(mise activate zsh)"                # per-project runtimes (Chapter 11)
+eval "$(direnv hook zsh)"                  # per-directory env (Chapter 10)
+export FZF_DEFAULT_COMMAND='fd --type f --hidden --exclude .git'
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND='fd --type d --hidden --exclude .git'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --border --info=inline'
+export FZF_CTRL_T_OPTS="--preview 'bat --color=always --style=numbers --line-range=:200 {}'"
+
+# --- environment ---
+export EDITOR="nvim"         # or "code --wait" / "zed --wait"
+export VISUAL="$EDITOR"
+export PAGER="less -RFX"
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"   # coloured man pages
+export BAT_THEME="ansi"
+export HOMEBREW_NO_ENV_HINTS=1
+export HOMEBREW_BUNDLE_FILE="$HOME/.config/homebrew/Brewfile"
+export GPG_TTY=$(tty)
+
+# --- aliases ---
+alias ls='eza --group-directories-first --icons=auto'
+alias ll='eza -lah --git --group-directories-first --icons=auto'
+alias lt='eza --tree --level=2 --icons=auto'
+alias cat='bat --paging=never'
+alias du='dust'
+alias df='duf'
+alias top='btop'
+alias vim='nvim'
+alias g='git'
+alias gs='git status -sb'
+alias gl='git log --oneline --graph --decorate -20'
+alias gd='git diff'
+alias gp='git push'
+alias gc='git commit'
+alias gco='git switch'
+alias ..='cd ..'
+alias ...='cd ../..'
+alias rm='trash'                     # brew install trash; `command rm` for the real thing
+alias mkd='mkdir -p'
+alias path='echo -e ${PATH//:/\\n}'
+alias reload='exec zsh'
+alias brewup='brew update &amp;&amp; brew upgrade &amp;&amp; brew autoremove &amp;&amp; brew cleanup --prune=all'
+alias ip='curl -s https://ifconfig.me &amp;&amp; echo'
+alias localip="ipconfig getifaddr en0"
+alias flushdns='sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder'
+
+# --- functions ---
+mkcd() { mkdir -p "$1" &amp;&amp; cd "$1"; }
+# fuzzy kill
+fkill() { ps -ef | sed 1d | fzf -m --header='[kill:process]' | awk '{print $2}' | xargs -r kill -${1:-9}; }
+# fuzzy git branch switch
+gb() { git branch --all | grep -v HEAD | fzf --preview 'git log --oneline --graph -20 {1}' | sed 's/.* //' | sed 's#remotes/origin/##' | xargs -r git switch; }
+# extract anything
+extract() {
+  case "$1" in
+    *.tar.bz2|*.tbz2) tar xjf "$1" ;;  *.tar.gz|*.tgz) tar xzf "$1" ;;  *.tar.xz) tar xJf "$1" ;;
+    *.tar) tar xf "$1" ;;  *.bz2) bunzip2 "$1" ;;  *.gz) gunzip "$1" ;;  *.zip) unzip "$1" ;;
+    *.7z) 7z x "$1" ;;  *.rar) unrar x "$1" ;;  *) echo "don't know how to extract '$1'" ;;
+  esac
+}
+cheat() { curl -s "cheat.sh/$1"; }
+
+# --- local overrides (not in dotfiles repo) ---
+[[ -f ~/.zshrc.local ]] &amp;&amp; source ~/.zshrc.local</code></pre></div>
+<p>Install the pieces:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew install starship zoxide fzf zsh-autosuggestions zsh-syntax-highlighting zsh-history-substring-search \
+             eza bat ripgrep fd dust duf btop trash tlrc</code></pre></div>
+<p>Don't alias <code>grep</code> to <code>rg</code> or <code>find</code> to <code>fd</code> — scripts and tutorials that call <code>grep</code> expect BSD grep flags; use the new names directly and let muscle memory follow.</p>
+<h3 id="starship-prompt">Starship prompt<a class="anchor" href="#starship-prompt" aria-label="Permalink">#</a></h3>
+<p>A single binary, fast, works in every shell, configured in <code>~/.config/starship.toml</code>. The default shows directory, git branch/status, language versions when relevant, command duration, and exit status. A compact two-line variant:</p>
+<div class="codeblock"><span class="code-lang">toml</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-toml"># ~/.config/starship.toml
+add_newline = true
+format = """
+$directory$git_branch$git_status$git_state$python$nodejs$rust$golang$java$cmd_duration
+$character"""
+[character]
+success_symbol = "[❯](bold green)"
+error_symbol = "[❯](bold red)"
+vimcmd_symbol = "[❮](bold yellow)"
+[directory]
+truncation_length = 4
+truncate_to_repo = true
+style = "bold cyan"
+[git_branch]
+symbol = " "
+style = "bold purple"
+[git_status]
+style = "yellow"
+ahead = "⇡${count}"
+behind = "⇣${count}"
+diverged = "⇕⇡${ahead_count}⇣${behind_count}"
+[cmd_duration]
+min_time = 2000
+format = "took [$duration]($style) "
+[python]
+symbol = " "
+format = '[${symbol}(${version} )(\($virtualenv\) )]($style)'
+[nodejs]
+symbol = " "</code></pre></div>
+<p>Presets: <code>starship preset nerd-font-symbols -o ~/.config/starship.toml</code> (needs a Nerd Font); <code>starship preset plain-text-symbols</code> if you don't want icons. Alternatives: <strong>Powerlevel10k</strong> (zsh-only, extremely fast with its instant prompt, more ornate), <strong>Pure</strong> (minimal), <strong>Oh My Posh</strong> (cross-shell, Windows heritage).</p>
+<h2 id="the-modern-cli-toolkit">The modern CLI toolkit<a class="anchor" href="#the-modern-cli-toolkit" aria-label="Permalink">#</a></h2>
+<p>Rust/Go rewrites of the classics: faster, saner defaults, colour, and — importantly — identical on macOS and Linux, so your muscle memory ports to servers.</p>
+<div class="table-wrap"><table><thead><tr><th>Instead of</th><th>Use</th><th>Why</th></tr></thead><tbody><tr><td><code>ls</code></td><td><strong>eza</strong></td><td>Colours, icons, git status column, tree mode</td></tr><tr><td><code>cat</code></td><td><strong>bat</strong></td><td>Syntax highlighting, line numbers, git diff gutter; <code>bat -p</code> for plain</td></tr><tr><td><code>grep -r</code></td><td><strong>ripgrep (rg)</strong></td><td>10× faster, respects <code>.gitignore</code>, sane defaults</td></tr><tr><td><code>find</code></td><td><strong>fd</strong></td><td>Intuitive syntax (<code>fd pattern</code>), ignores <code>.git</code>, parallel</td></tr><tr><td><code>cd</code></td><td><strong>zoxide</strong></td><td><code>cd proj</code> jumps to the most-used matching directory from anywhere</td></tr><tr><td><code>history</code> / <kbd>⌃</kbd><kbd>R</kbd></td><td><strong>fzf</strong> (+ <strong>atuin</strong> optional)</td><td>Fuzzy everything; atuin syncs shell history across machines with a SQLite DB</td></tr><tr><td><code>du</code></td><td><strong>dust</strong></td><td>Visual tree of what's big</td></tr><tr><td><code>df</code></td><td><strong>duf</strong></td><td>Readable table</td></tr><tr><td><code>top</code></td><td><strong>btop</strong> (or <code>htop</code>)</td><td>Pretty, mouse-driven, shows per-core and GPU on Apple silicon</td></tr><tr><td><code>sed</code> (simple substitutions)</td><td><strong>sd</strong></td><td><code>sd 'foo' 'bar' file</code> — no regex-escaping hell</td></tr><tr><td><code>diff</code></td><td><strong>difftastic</strong> / <strong>delta</strong></td><td>Syntax-aware diffs (<code>git difftool</code>) / beautiful <code>git diff</code> pager</td></tr><tr><td><code>man</code></td><td><strong>tlrc (tldr)</strong></td><td>Practical examples first: <code>tldr tar</code></td></tr><tr><td><code>curl</code> for APIs</td><td><strong>xh</strong> or <strong>httpie</strong></td><td><code>xh :8080/api name=alex</code></td></tr><tr><td><code>jq</code></td><td><strong>jq</strong> (still) + <strong>yq</strong> for YAML, <strong>fx</strong> interactive</td><td></td></tr><tr><td><code>time</code></td><td><strong>hyperfine</strong></td><td>Statistical benchmarking with warmup</td></tr><tr><td><code>watch</code></td><td><strong>watchexec</strong> / <code>entr</code></td><td>Re-run on file change: <code>watchexec -e py pytest</code></td></tr><tr><td><code>ps aux | grep</code></td><td><strong>procs</strong></td><td>Coloured, searchable process list</td></tr><tr><td><code>nano</code>/<code>vim</code> for quick edits</td><td><strong>micro</strong> or <strong>helix</strong></td><td>Modern modal (helix) or non-modal (micro) editors</td></tr><tr><td>File manager</td><td><strong>yazi</strong></td><td>Blazing TUI file manager with previews; <code>y</code> shell wrapper cds on exit</td></tr><tr><td>Git TUI</td><td><strong>lazygit</strong></td><td>Stage hunks, rebase interactively, without memorising flags</td></tr><tr><td>Docker TUI</td><td><strong>lazydocker</strong></td><td></td></tr><tr><td>Kubernetes TUI</td><td><strong>k9s</strong></td><td></td></tr><tr><td>Markdown in terminal</td><td><strong>glow</strong></td><td><code>glow README.md</code></td></tr><tr><td>JSON/CSV data</td><td><strong>miller (mlr)</strong>, <strong>qsv</strong>, <strong>visidata</strong></td><td>Spreadsheets in the terminal</td></tr><tr><td>Misc</td><td><strong>ncdu</strong>, <strong>tokei</strong> (LOC counter), <strong>gping</strong>, <strong>dog</strong> (DNS), <strong>bandwhich</strong>, <strong>ouch</strong> (archives), <strong>presenterm</strong></td><td></td></tr></tbody></table></div>
+<p>Don't install all of these on day one. Start with <code>eza bat rg fd zoxide fzf</code>, add the rest as you notice the need.</p>
+<h2 id="tmux-or-not">tmux (or not)<a class="anchor" href="#tmux-or-not" aria-label="Permalink">#</a></h2>
+<p>With Ghostty/iTerm2/WezTerm splits, <strong>you don't need tmux locally</strong>. You need it for <strong>remote work</strong> (sessions survive SSH disconnects) and if you want one layout that works identically over SSH. <code>brew install tmux</code>, then:</p>
+<div class="codeblock"><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code># ~/.config/tmux/tmux.conf
+set -g prefix C-a            # ⌃A instead of ⌃B (Caps Lock → ⌃ makes this trivial)
+unbind C-b
+bind C-a send-prefix
+set -g mouse on
+set -g base-index 1
+setw -g pane-base-index 1
+set -g renumber-windows on
+set -g history-limit 100000
+set -g default-terminal "tmux-256color"
+set -as terminal-features ",xterm-ghostty:RGB"
+set -g escape-time 0
+set -g focus-events on
+bind | split-window -h -c "#{pane_current_path}"
+bind - split-window -v -c "#{pane_current_path}"
+bind h select-pane -L
+bind j select-pane -D
+bind k select-pane -U
+bind l select-pane -R
+bind r source-file ~/.config/tmux/tmux.conf \; display "reloaded"
+set -g status-position top
+# plugins via tpm: `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+set -g @plugin 'tmux-plugins/tpm'
+set -g @plugin 'tmux-plugins/tmux-sensible'
+set -g @plugin 'tmux-plugins/tmux-yank'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
+set -g @plugin 'catppuccin/tmux'
+run '~/.tmux/plugins/tpm/tpm'</code></pre></div>
+<p><strong>Zellij</strong> is the modern alternative (Rust, discoverable keybindings shown on screen, layouts in KDL, floating panes). Good for beginners who find tmux's prefix-key model opaque.</p>
+<h2 id="ssh">SSH<a class="anchor" href="#ssh" aria-label="Permalink">#</a></h2>
+<p>Generate a modern key (one per machine, never copied between machines):</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">ssh-keygen -t ed25519 -C "alex@mbp-2026"
+# passphrase: yes. Store it in the keychain so you type it once per login:
+ssh-add --apple-use-keychain ~/.ssh/id_ed25519</code></pre></div>
+<p><code>~/.ssh/config</code>:</p>
+<div class="codeblock"><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code>Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519
+  ServerAliveInterval 60
+  ServerAliveCountMax 3
+  IdentitiesOnly yes
+
+Host github.com
+  User git
+
+Host uni
+  HostName login.cs.university.edu
+  User alex42
+  ForwardAgent no
+  # ProxyJump bastion.university.edu
+
+Host homelab
+  HostName 100.101.102.103      # Tailscale IP
+  User alex
+  LocalForward 5432 localhost:5432</code></pre></div>
+<p>Notes:</p>
+<ul>
+<li><code>UseKeychain yes</code> is a macOS-only option: the passphrase is stored in the login keychain and the key auto-loads.</li>
+<li>Upload the public key with <code>gh ssh-key add ~/.ssh/id_ed25519.pub --title mbp-2026</code> (GitHub CLI), or <code>cat ~/.ssh/id_ed25519.pub | pbcopy</code> and paste it into the web UI.</li>
+<li>Prefer a <strong>hardware key</strong> (YubiKey, <code>ssh-keygen -t ed25519-sk</code>) or <strong>1Password's SSH agent</strong> (keys never sit unencrypted on disk; Touch ID approves each use) for your main identity. 1Password: enable <em>Developer → SSH Agent</em> and add <code>IdentityAgent "~/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"</code> to the <code>Host *</code> block.</li>
+<li>Turn <strong>on</strong> <em>Remote Login</em> in Sharing only if you SSH <em>into</em> this Mac. If you do, disable password auth (<code>PasswordAuthentication no</code> in a file under <code>/etc/ssh/sshd_config.d/</code>) and keep the firewall on.</li>
+<li><strong>mosh</strong> (<code>brew install mosh</code>) for flaky Wi‑Fi; <strong>Tailscale</strong> (Chapter 14) to reach your Mac from anywhere without port forwarding.</li>
+<li>Copy files with <code>rsync -avz --progress src/ user@host:dst/</code> — install Homebrew's <code>rsync</code>; Apple replaced it with the less capable <code>openrsync</code> in Sequoia.</li>
+</ul>
+<h2 id="touch-id-for-sudo">Touch ID for sudo<a class="anchor" href="#touch-id-for-sudo" aria-label="Permalink">#</a></h2>
+<p>Apple made this survive OS updates by adding <code>/etc/pam.d/sudo_local</code>. Enable it once:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">sudo sh -c 'sed "s/^#auth/auth/" /etc/pam.d/sudo_local.template &gt; /etc/pam.d/sudo_local'
+cat /etc/pam.d/sudo_local   # → auth sufficient pam_tid.so</code></pre></div>
+<p>Now <code>sudo</code> prompts with Touch ID (or your Apple Watch). Inside <strong>tmux</strong>, Touch ID needs <code>pam_reattach</code>: <code>brew install pam-reattach</code> and add <code>auth optional /opt/homebrew/lib/pam/pam_reattach.so</code> as the <em>first</em> line of <code>sudo_local</code>. Ghostty's <code>sudo</code> shell-integration feature forwards the terminal correctly so it works in splits.</p>
+<h2 id="fonts-and-rendering">Fonts and rendering<a class="anchor" href="#fonts-and-rendering" aria-label="Permalink">#</a></h2>
+<p>Install a <strong>Nerd Font</strong> (a programming font patched with 3,000+ icons) — <code>brew install --cask font-jetbrains-mono-nerd-font</code> (or Fira Code, Iosevka, Monaspace, Cascadia Code, Geist Mono; Berkeley Mono if you pay for fonts). Use it in the terminal <em>and</em> your editor so icons in prompts, <code>eza</code>, Neovim and Starship render. Apple's <strong>SF Mono</strong> is excellent but has no icon glyphs; Ghostty falls back to a symbols font if installed (<code>brew install --cask font-symbols-only-nerd-font</code>).</p>
+<p>Ligatures (<code>-&gt;</code> becoming an arrow) are a taste thing; JetBrains Mono and Fira Code have them, and Ghostty and most editors let you toggle them.</p>
+<h2 id="common-terminal-problems">Common terminal problems<a class="anchor" href="#common-terminal-problems" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong><code>⌥←</code> inserts weird characters instead of jumping words</strong>: set Option as Meta/Esc+ (Ghostty <code>macos-option-as-alt = true</code>; iTerm2 Profiles → Keys → Left Option = Esc+).</li>
+<li><strong>Slow new tab</strong>: <code>time zsh -i -c exit</code>. Culprits: nvm (use mise), <code>compinit</code> without cache, Oh My Zsh with many plugins, Conda's init block. Use <code>zmodload zsh/zprof</code> at the top of <code>.zshrc</code> and <code>zprof</code> at the bottom to find it.</li>
+<li><strong><code>PATH</code> order wrong / Homebrew tools shadowed by system ones</strong>: <code>/etc/zprofile</code>'s <code>path_helper</code> reorders PATH; make sure <code>brew shellenv</code> runs <em>after</em> it (in <code>.zprofile</code> or <code>.zshrc</code>), and check with <code>which -a git</code>.</li>
+<li><strong>Colours look wrong over SSH</strong>: the remote lacks <code>xterm-ghostty</code> terminfo — <code>infocmp -x xterm-ghostty | ssh host tic -x -</code> installs it, or set <code>SetEnv TERM=xterm-256color</code> for that host in <code>~/.ssh/config</code>.</li>
+<li><strong>Locale warnings on servers</strong>: add <code>export LANG=en_US.UTF-8</code> to <code>.zshenv</code>.</li>
+<li><strong>Terminal asks for Full Disk Access / Files &amp; Folders</strong>: normal the first time you touch <code>~/Desktop</code>, <code>~/Documents</code>, <code>~/Downloads</code> or <code>~/Library/Mail</code>; grant it in Privacy &amp; Security.</li>
+<li><strong>"Operation not permitted" writing to <code>/usr/bin</code></strong>: that's SIP; use Homebrew's prefix.</li>
+</ul>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="08-homebrew.html"><span>Previous</span><strong>Homebrew</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/09-terminal-and-shell.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/09-terminal-and-shell.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#choosing-a-terminal-emulator">Choosing a terminal emulator</a></li>
+<li class="lvl2"><a href="#shell-zsh-configured-by-hand">Shell: zsh, configured by hand</a></li>
+<li class="lvl3"><a href="#skip-oh-my-zsh-or-use-it-knowingly">Skip Oh My Zsh (or use it knowingly)</a></li>
+<li class="lvl3"><a href="#where-zsh-reads-config">Where zsh reads config</a></li>
+<li class="lvl3"><a href="#a-complete-fast-zshrc">A complete, fast <code>.zshrc</code></a></li>
+<li class="lvl3"><a href="#starship-prompt">Starship prompt</a></li>
+<li class="lvl2"><a href="#the-modern-cli-toolkit">The modern CLI toolkit</a></li>
+<li class="lvl2"><a href="#tmux-or-not">tmux (or not)</a></li>
+<li class="lvl2"><a href="#ssh">SSH</a></li>
+<li class="lvl2"><a href="#touch-id-for-sudo">Touch ID for sudo</a></li>
+<li class="lvl2"><a href="#fonts-and-rendering">Fonts and rendering</a></li>
+<li class="lvl2"><a href="#common-terminal-problems">Common terminal problems</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
