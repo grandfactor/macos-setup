@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Troubleshooting — The macOS Setup Guide</title>
+<meta name="description" content="A diagnostic playbook for when the Mac misbehaves — the escalation ladder, reading the unified log and crash reports, fixing the classic developer breakages (Homebrew after an OS update, PATH problems, Xcode license, code-signing and Gatekeeper, permissions prompts, DNS, ports in use, Docker), Wi-Fi/Bluetooth/display/audio problems, Recovery mode, Safe Mode, DFU revive, and when a reinstall is actually the answer.">
+<meta property="og:title" content="Troubleshooting — The macOS Setup Guide">
+<meta property="og:description" content="A diagnostic playbook for when the Mac misbehaves — the escalation ladder, reading the unified log and crash reports, fixing the classic developer breakages (Homebrew after an OS update, PATH problems, Xcode license, code-signing and Gatekeeper, permissions prompts, DNS, ports in use, Docker), Wi-Fi/Bluetooth/display/audio problems, Recovery mode, Safe Mode, DFU revive, and when a reinstall is actually the answer.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+<li><a href="15-databases-and-local-dev.html"><span class="nav-num">15</span>Databases &amp; local development services</a></li>
+</ul>
+<p class="nav-part">Part IV — Security, backup &amp; maintenance</p><ul>
+<li><a href="16-security-and-privacy.html"><span class="nav-num">16</span>Security &amp; privacy</a></li>
+<li><a href="17-backup-and-recovery.html"><span class="nav-num">17</span>Backup &amp; recovery</a></li>
+<li><a href="18-performance-and-maintenance.html"><span class="nav-num">18</span>Performance &amp; maintenance</a></li>
+</ul>
+<p class="nav-part">Part V — Daily driving &amp; workflows</p><ul>
+<li><a href="19-daily-driver-apps.html"><span class="nav-num">19</span>Daily-driver apps</a></li>
+<li><a href="20-cs-student-specific.html"><span class="nav-num">20</span>CS-student specific</a></li>
+<li><a href="21-automation-and-scripting.html"><span class="nav-num">21</span>Automation &amp; scripting</a></li>
+<li class="active"><a href="22-troubleshooting.html"><span class="nav-num">22</span>Troubleshooting</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="troubleshooting">Troubleshooting</h1>
+<p>Most Mac problems fall into a dozen buckets, and each bucket has a fast fix. This chapter is organized by <em>symptom</em>, with the diagnostic tools first so you can figure out which bucket you're in. It assumes Apple silicon and macOS 26; Intel-specific advice (SMC reset, NVRAM reset, <code>csrutil</code> fights) is omitted deliberately because it either doesn't apply or does more harm than good.</p>
+<div class="admonition tip"><p class="admonition-title">Tip</p><p><strong>The escalation ladder</strong> — try these in order, stop when fixed: (1) quit and reopen the app, (2) log out and back in, (3) restart, (4) restart in Safe Mode, (5) check for and install updates, (6) create a fresh user account and test there, (7) reinstall macOS <em>over</em> the existing installation (keeps data), (8) erase and restore from backup. Steps 1–3 fix 80% of everything; steps 6–7 tell you whether it's your account/config or the OS.</p></div>
+<h2 id="diagnostic-tools">Diagnostic tools<a class="anchor" href="#diagnostic-tools" aria-label="Permalink">#</a></h2>
+<h3 id="force-quitting-and-hung-apps">Force-quitting and hung apps<a class="anchor" href="#force-quitting-and-hung-apps" aria-label="Permalink">#</a></h3>
+<ul>
+<li><code>⌥⌘⎋</code> — Force Quit dialog. The Finder can be relaunched from here too.</li>
+<li><strong>Activity Monitor</strong> → select the process → ✕ → Force Quit. Red text = "Not Responding." See <a href="18-performance-and-maintenance.html">chapter 18</a>.</li>
+<li>From the terminal: <code>pkill -x Slack</code>, <code>killall Dock</code> (restarts the Dock, harmless), <code>killall Finder</code>, <code>killall SystemUIServer</code>/<code>ControlCenter</code> (menu bar glitches), <code>sudo killall coreaudiod</code> (audio dropouts), <code>sudo killall bluetoothd</code> (Bluetooth), <code>killall WindowServer</code> (<strong>logs you out</strong>; fixes graphical corruption).</li>
+</ul>
+<h3 id="the-unified-log">The unified log<a class="anchor" href="#the-unified-log" aria-label="Permalink">#</a></h3>
+<p>Everything macOS and most apps do is logged. The <strong>Console</strong> app shows it live (filter by process in the search field, or "Errors and Faults" in the sidebar), but the terminal is faster:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># Last 5 minutes, errors only
+log show --last 5m --predicate 'messageType == error' --style compact
+
+# Everything a specific process said recently
+log show --last 30m --predicate 'process == "Finder"' --style compact
+
+# Watch live while you reproduce the problem
+log stream --predicate 'process == "Safari" || process CONTAINS "Wi-Fi"' --level info
+
+# Why did the Mac wake / sleep / reboot?
+log show --last 24h --predicate 'eventMessage CONTAINS "Wake reason" || eventMessage CONTAINS "Previous shutdown cause"' --style compact
+pmset -g log | grep -E "Wake from|Sleep  " | tail -20</code></pre></div>
+<p>Shutdown cause codes (in the log after an unexpected restart): <code>-60</code> bad filesystem, <code>-62</code> watchdog timeout (kernel hang), <code>-128</code> unknown, <code>3</code> hard power-button shutdown, <code>5</code> normal, <code>-20</code>/<code>-30</code>/<code>-40</code> power/thermal. A recurring <code>-62</code> or a panic points at a driver/system extension or hardware.</p>
+<h3 id="crash-reports-and-panics">Crash reports and panics<a class="anchor" href="#crash-reports-and-panics" aria-label="Permalink">#</a></h3>
+<p>Crash logs live in <code>~/Library/Logs/DiagnosticReports/</code> (your apps) and <code>/Library/Logs/DiagnosticReports/</code> (system, panics). Console → <strong>Crash Reports</strong> lists them. Open the newest <code>.ips</code>; the first ~40 lines give the process, the exception type, and the thread that crashed — enough to search on or paste into a bug report.</p>
+<p>A <strong>kernel panic</strong> ("your computer restarted because of a problem") writes a <code>Kernel-*.panic</code> file. The <code>panicString</code> names the faulting kext or "watchdog". On Apple silicon, panics are almost always: a third-party system extension (VPN, antivirus, virtualization, audio drivers — check <code>systemextensionsctl list</code>), a bad USB/Thunderbolt device or hub, or failing hardware. Unplug everything, uninstall the extension, test.</p>
+<p><strong>Apple Diagnostics</strong> (hardware test): shut down, press and hold the power button until "Loading startup options," then hold <code>⌘D</code>. Reference codes: <code>ADP000</code> = no issues; <code>PPT</code> codes = battery; <code>VDH</code> = storage; <code>NDR</code>/<code>NDK</code> = sensors; <code>PFR</code> = firmware. Run this before any Apple Store visit.</p>
+<h3 id="system-information-and-quick-checks">System Information and quick checks<a class="anchor" href="#system-information-and-quick-checks" aria-label="Permalink">#</a></h3>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">sw_vers                                   # macOS version/build
+system_profiler SPHardwareDataType        # model, chip, memory, serial
+system_profiler SPSoftwareDataType        # uptime, boot mode (Safe?), SIP
+csrutil status                            # System Integrity Protection: should be enabled
+spctl --status                            # Gatekeeper: assessments enabled
+fdesetup status                           # FileVault: On
+sudo diskutil verifyVolume /              # quick APFS check (full repair from Recovery)
+df -h / ; memory_pressure | tail -1      # space, memory</code></pre></div>
+<h2 id="startup-problems">Startup problems<a class="anchor" href="#startup-problems" aria-label="Permalink">#</a></h2>
+<p>Apple-silicon Macs have one entry point to everything: <strong>shut down, then press and hold the power button</strong> until "Loading startup options" appears. From there:</p>
+<ul>
+<li><strong>Options → Continue</strong> — <strong>macOS Recovery</strong>: Disk Utility, Reinstall macOS, Restore from Time Machine, Safari, Terminal (Utilities menu), Startup Security Utility, and <code>resetpassword</code> from the Terminal. Recovery on Apple silicon is a separate hidden volume; if it's damaged, holding power still gets you to <strong>Fallback Recovery</strong> (<code>recoveryOS</code> on a second partition). If <em>that</em> fails, the Mac needs DFU revive (below).</li>
+<li><strong>Your startup disk → hold ⇧ → Continue in Safe Mode</strong> — boots with only Apple kexts/extensions, no login items, caches cleared. If the problem disappears, a third-party login item, extension, or font is the cause. Safe Mode is also the fix for "stuck on the progress bar after an update" (boot Safe once, then restart normally).</li>
+<li><strong>Startup Security Utility</strong> (in Recovery → Utilities) — Full Security is the default; <strong>Reduced Security</strong> is only needed for legacy kexts or unsigned kernel extensions; leave it at Full unless something you rely on explicitly asks.</li>
+<li><strong>Boot from an external installer</strong> — create with <code>sudo /Applications/Install\ macOS\ Tahoe.app/Contents/Resources/createinstallmedia --volume /Volumes/USB</code> (macOS 26 or 27 as appropriate) and choose it in startup options. Rarely needed on Apple silicon; internet Recovery downloads the current installer.</li>
+</ul>
+<p><strong>Stuck at the Apple logo/progress bar</strong> for more than ~30 minutes: hold power to shut down; boot Safe Mode; if that fails, Recovery → Disk Utility → First Aid on the container and volume; then Reinstall macOS (keeps your data). <strong>Flashing question mark/globe with a prohibition sign</strong>: startup disk not found — Recovery → Disk Utility to check whether the volume exists, then set it via Startup Disk or reinstall.</p>
+<p><strong>Password/login issues</strong>: wrong password on FileVault boot screen after a change — use the <em>old</em> password once (the pre-boot cache updates after a successful login). Forgot it: click "?" → reset with Apple Account or the FileVault recovery key (which macOS 26 can now store in iCloud Keychain / the Passwords app — <a href="16-security-and-privacy.html">chapter 16</a>). Or Recovery → Terminal → <code>resetpassword</code>. <strong>Activation Lock</strong> asks for the Apple Account that enabled Find My; there's no bypass — if you bought a used Mac locked to someone else, that's a return.</p>
+<h3 id="dfu-revive-and-restore">DFU revive and restore<a class="anchor" href="#dfu-revive-and-restore" aria-label="Permalink">#</a></h3>
+<p>If the Mac shows nothing, is stuck in a boot loop, or an update failed at the firmware stage, <strong>Apple Configurator</strong> (Mac App Store) or the <strong>Finder</strong> on macOS 26 can <strong>revive</strong> (reinstall firmware + recoveryOS, keeps data) or <strong>restore</strong> (erases everything) it over a USB-C cable from a second Mac. Cable goes into a specific port (on MacBooks, the port nearest the hinge on the left; on desktops, the Thunderbolt port marked in Apple's support article). Put the Mac in DFU mode with the documented key sequence, connect, and choose Revive first. This replaces the Intel-era Boot Camp/SMC/Internet Recovery rituals; it's the last resort before Apple.</p>
+<h2 id="developer-environment-breakages">Developer-environment breakages<a class="anchor" href="#developer-environment-breakages" aria-label="Permalink">#</a></h2>
+<h3 id="homebrew-after-a-macos-update">Homebrew after a macOS update<a class="anchor" href="#homebrew-after-a-macos-update" aria-label="Permalink">#</a></h3>
+<p>Symptoms: <code>brew doctor</code> warnings, "Xcode alert: The Xcode license must be accepted," <code>Error: Your Command Line Tools are too outdated</code>, formulae failing to compile with <code>clang</code> errors, <code>git</code> prompting for CLT installation.</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">xcode-select --install                       # reinstall CLT for the new OS (or:)
+sudo rm -rf /Library/Developer/CommandLineTools &amp;&amp; xcode-select --install
+sudo xcodebuild -license accept              # if full Xcode is installed
+brew update-reset &amp;&amp; brew update &amp;&amp; brew doctor
+brew upgrade &amp;&amp; brew reinstall $(brew list --formula | tr '\n' ' ')   # nuclear, if native libs broke</code></pre></div>
+<p><code>brew doctor</code> will complain about "unbrewed" files in <code>/opt/homebrew</code>; that's usually harmless. <strong>"Warning: Your Xcode is outdated"</strong> after a major OS update: install the Xcode that matches from the App Store (or <code>xcodes</code>). If <code>brew</code> itself is missing after an upgrade to macOS 27: the Homebrew prefix <code>/opt/homebrew</code> is intact; your shell just lost <code>eval "$(/opt/homebrew/bin/brew shellenv)"</code> from a reset <code>.zprofile</code> — re-add it (<a href="08-homebrew.html">chapter 8</a>).</p>
+<p><strong>Rosetta gone after upgrading to macOS 27</strong>: Intel-only apps crash on launch with "You need to install Rosetta" or nothing. <code>softwareupdate --install-rosetta --agree-to-license</code>. Then audit: <code>find /Applications -name "*.app" -maxdepth 2 -exec sh -c 'file "$1/Contents/MacOS/"* 2&gt;/dev/null | grep -q arm64 || echo "$1"' _ {} \;</code> lists apps with no arm64 slice — replace them before macOS 28, which drops Rosetta for good (<a href="02-first-boot-and-migration.html">chapter 2</a>).</p>
+<h3 id="command-not-found-and-path">"command not found" and PATH<a class="anchor" href="#command-not-found-and-path" aria-label="Permalink">#</a></h3>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">echo $PATH | tr ':' '\n'      # is /opt/homebrew/bin there, and before /usr/bin?
+which -a python3 node git     # every match, in PATH order
+type ls                       # alias/function/builtin/file?</code></pre></div>
+<p>Common causes: a fresh Terminal profile that runs <code>bash</code> instead of <code>zsh</code> (<code>chsh -s /bin/zsh</code>); <code>.zshrc</code> vs <code>.zprofile</code> confusion (Homebrew's <code>shellenv</code> belongs in <code>.zprofile</code>; interactive config in <code>.zshrc</code> — <a href="09-terminal-and-shell.html">chapter 9</a>); <code>mise</code> not activated (<code>eval "$(mise activate zsh)"</code>); a GUI app (VS Code, Cursor) launched from the Dock inherits the <em>login</em> environment, not your shell's — launch from the terminal (<code>code .</code>) or set PATH in <code>.zprofile</code>/<code>.zshenv</code>. <code>path_helper</code> (<code>/etc/zprofile</code>) reorders PATH on login shells; if your order keeps getting scrambled, prepend in <code>.zshrc</code> instead.</p>
+<h3 id="xcode-simulators-and-clt">Xcode, simulators, and CLT<a class="anchor" href="#xcode-simulators-and-clt" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>"xcrun: error: invalid active developer path"</strong> after an update: <code>xcode-select --install</code>, or point at Xcode: <code>sudo xcode-select -s /Applications/Xcode.app</code>.</li>
+<li>Xcode won't launch/"damaged" after a download: <code>xattr -dr com.apple.quarantine /Applications/Xcode.app</code> and let it "verify" (5–10 min on first launch).</li>
+<li>Simulator won't boot: <code>xcrun simctl shutdown all &amp;&amp; xcrun simctl erase all</code> (wipes simulators), or delete <code>~/Library/Developer/CoreSimulator/Caches</code>.</li>
+<li>Disk full: <code>~/Library/Developer/Xcode/DerivedData</code> and old runtimes — <a href="18-performance-and-maintenance.html">chapter 18</a>.</li>
+<li><code>git</code> suddenly asks to install CLT even though Xcode exists: <code>xcode-select -p</code> shows the path; if it's wrong, <code>-s</code> as above.</li>
+</ul>
+<h3 id="gatekeeper-code-signing-and-damaged-apps">Gatekeeper, code signing, and "damaged" apps<a class="anchor" href="#gatekeeper-code-signing-and-damaged-apps" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>"App is damaged and can't be opened. You should move it to the Trash"</strong> — nearly always a <em>quarantine flag on an unsigned/ad-hoc-signed app</em>, not damage. If you trust the source: <code>xattr -d com.apple.quarantine /Applications/App.app</code> (or <code>-dr</code> for a folder). Homebrew casks do this automatically when the cask declares it.</li>
+<li><strong>"Apple could not verify X is free of malware"</strong> — Gatekeeper blocked an unnotarized app. There is no right-click-Open bypass anymore on macOS 26; open <strong>System Settings → Privacy &amp; Security</strong>, scroll to the "was blocked" message, click <strong>Open Anyway</strong> within the hour, authenticate. Or <code>spctl</code> doesn't help — the <code>--add</code>/<code>--master-disable</code> options were removed. See <a href="16-security-and-privacy.html">chapter 16</a> before doing this for random downloads.</li>
+<li><strong>Your own compiled binaries are "killed"/"Killed: 9"</strong> — on Apple silicon, all executables must be signed, at least ad-hoc. Compilers do this automatically; if you copy a binary, or <code>strip</code>/<code>lipo</code>/patch it, re-sign: <code>codesign -s - -f ./binary</code>. Same fix for "code signature invalid" on downloaded CLI tools: <code>codesign -s - -f</code>, then <code>xattr -d com.apple.quarantine</code>.</li>
+<li><strong><code>dyld: Library not loaded</code></strong> — a Homebrew dependency was upgraded and the binary links to an old version: <code>brew reinstall &lt;formula&gt;</code> (or the tool that broke). For Python packages with native extensions, rebuild the venv.</li>
+<li><strong>Tools compiled for the wrong architecture</strong>: <code>file $(which tool)</code> shows <code>x86_64</code> vs <code>arm64</code>. An <code>x86_64</code> binary needs Rosetta; a Homebrew installed under Rosetta lives in <code>/usr/local</code> — you may have two Homebrews. Keep <code>/opt/homebrew</code> (arm64) and delete <code>/usr/local</code>'s unless you specifically need x86 packages (<a href="08-homebrew.html">chapter 8</a>).</li>
+</ul>
+<h3 id="permissions-and-privacy-prompts">Permissions and privacy prompts<a class="anchor" href="#permissions-and-privacy-prompts" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>A CLI tool can't read <code>~/Documents</code>, <code>~/Desktop</code>, <code>~/Downloads</code> and gives <code>Operation not permitted</code></strong> even as root — TCC. Grant the <em>terminal app</em> (Ghostty/iTerm/Terminal) <strong>Full Disk Access</strong> in Privacy &amp; Security, or move the data out of protected folders. Scripts run by launchd or cron inherit nothing; the interpreter needs the grant (<a href="21-automation-and-scripting.html">chapter 21</a>).</li>
+<li><strong>An app keeps asking for Accessibility/Screen Recording after every update</strong> — apps with changed signatures reset their TCC grant. Remove the app from the list and re-add it. Nuclear: <code>tccutil reset Accessibility com.example.app</code> (or <code>tccutil reset All</code> for everything — you'll re-approve each prompt).</li>
+<li><strong>Camera/microphone not working in a browser or Zoom</strong> — Privacy &amp; Security → Camera/Microphone; toggle the app off and on. If the camera is "in use" with no app open: <code>sudo killall VDCAssistant</code> (and <code>AppleCameraAssistant</code>).</li>
+<li><strong>"Operation not permitted" writing to <code>/usr/bin</code>, <code>/System</code>, <code>/bin</code></strong> — SIP + the sealed system volume. You don't. Install to <code>/usr/local/bin</code>, <code>/opt/homebrew/bin</code>, or <code>~/.local/bin</code>.</li>
+</ul>
+<h3 id="ports-networking-dns">Ports, networking, DNS<a class="anchor" href="#ports-networking-dns" aria-label="Permalink">#</a></h3>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># What's listening on port 3000 / who owns it?
+lsof -nP -iTCP:3000 -sTCP:LISTEN
+sudo lsof -nP -iTCP -sTCP:LISTEN | sort -k9    # everything listening
+
+# Kill whatever holds a port
+kill $(lsof -t -iTCP:3000 -sTCP:LISTEN)
+
+# Port 5000 / 7000 taken by "ControlCenter"? That's AirPlay Receiver.
+#   System Settings → General → AirDrop &amp; Handoff → AirPlay Receiver → off
+
+# DNS cache flush after editing /etc/hosts or changing resolvers
+sudo dscacheutil -flushcache; sudo killall -HUP mDNSResponder
+
+# Which DNS servers am I actually using?
+scutil --dns | grep nameserver | sort -u
+# Test resolution the way apps do (not just dig)
+dscacheutil -q host -a name example.com
+
+# Network interfaces/routes
+ifconfig en0 ; netstat -rn | head ; networksetup -listallhardwareports</code></pre></div>
+<p>Notes: <code>localhost</code> resolves to both <code>127.0.0.1</code> and <code>::1</code> — a server bound to IPv4 only will fail from tools that try IPv6 first; bind to <code>::</code> or <code>0.0.0.0</code> or use <code>127.0.0.1</code> explicitly. <strong><code>.local</code> hostnames are mDNS</strong> on macOS; resolving <code>myserver.local</code> over unicast DNS won't work (rename the domain or add <code>/etc/hosts</code> entries). <code>*.localhost</code> subdomains resolve to loopback automatically. <strong>VPN clients</strong> frequently break local DNS and Docker networks; disconnect to test. <strong>Little Snitch/LuLu</strong> silently blocking a new tool looks exactly like "the network is down" for that one process.</p>
+<h3 id="docker-orbstack-containers">Docker / OrbStack / containers<a class="anchor" href="#docker-orbstack-containers" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong><code>Cannot connect to the Docker daemon</code></strong> — the runtime isn't running (open OrbStack/Docker Desktop) or <code>docker context ls</code> points at the wrong one: <code>docker context use orbstack</code> (or <code>desktop-linux</code>).</li>
+<li><strong>Images run painfully slowly / "exec format error"</strong> — you pulled an <code>amd64</code> image on arm64. Look for an arm64 tag or run with <code>--platform linux/amd64</code> (Rosetta-translated; works until macOS 28). Build multi-arch with <code>docker buildx</code>.</li>
+<li><strong>Bind-mounted <code>node_modules</code>/file watching slow</strong> — put dependencies in a named volume; OrbStack's VirtioFS is fast, Docker Desktop's is improved but still slower than native. Use <code>CHOKIDAR_USEPOLLING</code> only as a last resort.</li>
+<li><strong>Ports "already allocated"</strong> — an old container: <code>docker ps -a</code>, <code>docker rm -f</code>. Or AirPlay Receiver (above).</li>
+<li><strong>Disk full</strong> — <code>docker system df</code>, then <code>docker system prune -a --volumes</code> (<a href="18-performance-and-maintenance.html">chapter 18</a>). Docker Desktop's <code>Docker.raw</code> doesn't shrink automatically; OrbStack's does.</li>
+<li>Full guidance in <a href="13-containers-and-vms.html">chapter 13</a>.</li>
+</ul>
+<h3 id="git-and-ssh">Git and SSH<a class="anchor" href="#git-and-ssh" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong><code>Permission denied (publickey)</code></strong> — <code>ssh -T git@github.com -v</code> shows which keys were offered. <code>ssh-add -l</code> (agent empty after reboot? <code>AddKeysToAgent yes</code> + <code>UseKeychain yes</code> in <code>~/.ssh/config</code>). Wrong key for a second account? <code>Host github-work</code> alias with <code>IdentityFile</code> + <code>IdentitiesOnly yes</code>.</li>
+<li><strong>Git keeps asking for a password over HTTPS</strong> — <code>git config --global credential.helper osxkeychain</code>, or <code>gh auth login</code>. A <em>stale</em> token: delete the <code>github.com</code> entry in <strong>Keychain Access</strong> and retry.</li>
+<li><strong><code>fatal: detected dubious ownership</code></strong> — repo on an external drive or copied from another user: <code>git config --global --add safe.directory /path</code>.</li>
+<li><strong>Case-insensitive filesystem surprises</strong> (<code>Readme.md</code> vs <code>README.md</code> both "exist") — APFS is case-insensitive by default; <code>git config core.ignorecase false</code> and fix the names. Or make a case-sensitive APFS volume for code (Disk Utility → + Volume → APFS (Case-sensitive)) — useful for Android/Linux kernel work, otherwise unnecessary.</li>
+<li><strong><code>.DS_Store</code> committed</strong> — global gitignore (<a href="10-dotfiles-and-git.html">chapter 10</a>).</li>
+<li><strong>Commit signing fails after reboot</strong> — <code>gpg-agent</code> needs <code>pinentry-mac</code> (<code>brew install pinentry-mac</code> and <code>pinentry-program /opt/homebrew/bin/pinentry-mac</code> in <code>~/.gnupg/gpg-agent.conf</code>); or switch to SSH signing (<code>gpg.format ssh</code>), which just works with the Keychain.</li>
+</ul>
+<h3 id="python-node-and-friends">Python, Node, and friends<a class="anchor" href="#python-node-and-friends" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong><code>python</code> not found</strong> — macOS ships <code>python3</code> only; make <code>python</code> via <code>mise</code> or an alias. Never symlink system <code>python3</code>.</li>
+<li><strong>Homebrew Python "externally-managed-environment"</strong> — you tried <code>pip install</code> into Homebrew's Python. Use <code>uv</code> / venvs (<a href="11-languages-and-runtimes.html">chapter 11</a>); don't <code>--break-system-packages</code>.</li>
+<li><strong><code>EACCES</code> on <code>npm install -g</code></strong> — Node installed via mise/nvm doesn't need <code>sudo</code>; if you see this, your Node is from a system installer. Remove it and use mise.</li>
+<li><strong>Native module fails to build (<code>node-gyp</code>, <code>psycopg2</code>, <code>cryptography</code>)</strong> — CLT missing or outdated (<code>xcode-select --install</code>), or a missing brew library (<code>brew install postgresql@18 openssl@3</code> and set <code>LDFLAGS</code>/<code>CPPFLAGS</code> as <code>brew info</code> prints). After an OS update, <code>rm -rf node_modules &amp;&amp; npm ci</code> / rebuild the venv.</li>
+<li><strong>Slow shell startup</strong> — <code>time zsh -i -c exit</code>; anything over ~300 ms is a plugin manager or <code>nvm</code>/<code>conda</code> init. Replace <code>nvm</code> with <code>mise</code>, lazy-load conda, use <code>zsh-defer</code> or <code>zinit</code>'s turbo mode (<a href="09-terminal-and-shell.html">chapter 9</a>).</li>
+</ul>
+<h2 id="hardware-and-peripherals">Hardware and peripherals<a class="anchor" href="#hardware-and-peripherals" aria-label="Permalink">#</a></h2>
+<h3 id="wi-fi">Wi-Fi<a class="anchor" href="#wi-fi" aria-label="Permalink">#</a></h3>
+<ol>
+<li>Toggle Wi-Fi off/on; forget and rejoin the network (System Settings → Wi-Fi → ⓘ → Forget). </li>
+<li><code>sudo wdutil info</code> — check RSSI (below −70 dBm is poor), channel, and PHY mode; <code>wdutil</code> replaced the removed <code>airport</code> tool. Hold ⌥ and click the Wi-Fi menu bar icon for the same info.</li>
+<li><strong>Wireless Diagnostics</strong> (⌥-click Wi-Fi icon → Open Wireless Diagnostics → Window → Scan) shows channel congestion; move your router to a clear 5 GHz/6 GHz channel.</li>
+<li>Change DNS to something not your ISP's (<code>1.1.1.1</code>, <code>9.9.9.9</code>) in Wi-Fi → Details → DNS; slow page loads with fine speed tests are usually DNS.</li>
+<li>New Location: System Settings → Network → ⋯ → Locations → Edit → + "Clean" — a fresh network config without deleting anything.</li>
+<li>Nuclear: with Wi-Fi off, move <code>/Library/Preferences/SystemConfiguration/{com.apple.airport.preferences.plist,com.apple.network.identification.plist,NetworkInterfaces.plist,preferences.plist}</code> to the Desktop and reboot. All network settings reset.</li>
+<li><strong>Private Wi-Fi Address</strong> ("Rotating") can break MAC-filtered or captive networks (universities) — set to Fixed or Off per network in Wi-Fi → ⓘ.</li>
+<li>Captive portal not appearing: open <code>http://captive.apple.com</code> in a browser.</li>
+</ol>
+<h3 id="bluetooth">Bluetooth<a class="anchor" href="#bluetooth" aria-label="Permalink">#</a></h3>
+<p>Turn off/on; remove and re-pair the device; <code>sudo pkill bluetoothd</code>. Keyboard/mouse lag in a crowded 2.4 GHz area: use a 5 GHz Wi-Fi network (Bluetooth shares the 2.4 GHz band), unplug USB 3 hubs near the Mac (they emit 2.4 GHz interference — a documented Apple issue), or use the vendor's dongle. If Bluetooth is entirely missing from Settings after an update: shut down fully (not restart), wait 30 seconds, boot.</p>
+<h3 id="external-displays">External displays<a class="anchor" href="#external-displays" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>Blurry text on a 1080p/1440p monitor</strong> — macOS drops sub-pixel AA; low-DPI panels look soft. Use a "Retina-class" (≥ 4K at 27") monitor for a crisp experience, or <strong>BetterDisplay</strong> to enable HiDPI scaled resolutions on lower-res panels (<a href="19-daily-driver-apps.html">chapter 19</a>).</li>
+<li><strong>Not detected</strong> — check the cable (HDMI 2.1 or DP 1.4 capable; many cheap USB-C cables are USB 2.0 only with no video), the port (base M-series Macs support a limited number of external displays — check your model's spec), and try <strong>System Settings → Displays → Detect Displays</strong> (hold ⌥ to reveal). DisplayLink docks need their driver (Screen Recording permission) and have lag; prefer Thunderbolt docks with native DP alt-mode.</li>
+<li><strong>Wrong refresh rate / HDR / color</strong> — Displays → Advanced; set 60 Hz+ explicitly; disable HDR on monitors with poor HDR (most). "Flashing"/black-outs on a hub usually mean bandwidth — plug the display directly.</li>
+<li><strong>Windows rearrange every time you dock</strong> — macOS remembers arrangements by display identity; use a window manager restore (Rectangle "restore," AeroSpace, or a Hammerspoon <code>hs.screen.watcher</code> — <a href="21-automation-and-scripting.html">chapter 21</a>).</li>
+<li><strong>Brightness keys don't work on external</strong> — <code>MonitorControl</code> (DDC/CI). Not possible over some DisplayLink docks.</li>
+</ul>
+<h3 id="audio">Audio<a class="anchor" href="#audio" aria-label="Permalink">#</a></h3>
+<p>No sound / wrong device after unplugging headphones: <strong>Control Center → Sound</strong> to pick the output; <code>sudo killall coreaudiod</code> to restart the audio daemon. Crackling on USB DACs/interfaces: <strong>Audio MIDI Setup</strong> → set the sample rate to match (48 kHz), disable "Hog mode" apps. Bluetooth headphones' mic drops quality to phone-call codec — that's the Bluetooth standard, not a bug; use the Mac's mic for calls and headphones for output (pick separately in Sound settings, or via <strong>Audio MIDI Setup → Create Aggregate Device</strong>).</p>
+<h3 id="keyboard-trackpad-touch-id">Keyboard, trackpad, Touch ID<a class="anchor" href="#keyboard-trackpad-touch-id" aria-label="Permalink">#</a></h3>
+<p>Repeated keys or missed keys: <strong>Keyboard → Key repeat / Delay</strong>; <code>defaults write -g ApplePressAndHoldEnabled -bool false</code> if holding a key shows accents instead of repeating (<a href="05-keyboard-and-input.html">chapter 5</a>). Karabiner stopped working after an update: re-approve its driver extension in Privacy &amp; Security → Login Items &amp; Extensions → Driver Extensions, and Input Monitoring. Touch ID not offered for <code>sudo</code>: the PAM line was reset by the update — use <code>/etc/pam.d/sudo_local</code> which survives updates (<a href="09-terminal-and-shell.html">chapter 9</a>). Trackpad erratic: dirt/moisture; or a swelling battery underneath (a hardware issue — stop and get it checked if the trackpad clicks poorly or the case bulges).</p>
+<h3 id="usb-thunderbolt-and-storage">USB, Thunderbolt, and storage<a class="anchor" href="#usb-thunderbolt-and-storage" aria-label="Permalink">#</a></h3>
+<p>Drives not mounting: <code>diskutil list</code> (is it there?), <code>diskutil mount diskNsM</code>, Disk Utility → First Aid. NTFS drives are read-only on macOS by default — copy off, or reformat as exFAT for cross-platform. "Disk not ejected properly" on sleep: turn off "Put hard disks to sleep" in Battery/Energy settings, or use a powered hub. A device that kernel-panics the Mac when plugged in is a bad device or cable — replace it, don't debug it.</p>
+<h3 id="battery-and-charging">Battery and charging<a class="anchor" href="#battery-and-charging" aria-label="Permalink">#</a></h3>
+<p>Not charging on a USB-C hub: the hub passes less wattage than the Mac wants; plug the charger directly. "Not charging" at 80% with the charge limit or Optimized Charging on is by design (<a href="18-performance-and-maintenance.html">chapter 18</a>). Sudden battery drain: Activity Monitor → Energy → 12 hr Power; Wi-Fi/Bluetooth scanning in sleep (turn off "Wake for network access"); a stuck <code>mds</code> index; a browser tab with a video. <code>pmset -g assertions</code> while it should be asleep.</p>
+<h2 id="macos-itself">macOS itself<a class="anchor" href="#macos-itself" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Settings won't stick / apps reset preferences</strong> — <code>cfprefsd</code> cache: <code>killall cfprefsd</code>, or the app's plist is corrupt: <code>defaults delete com.vendor.app</code> (loses prefs) after backing up with <code>defaults export</code>.</li>
+<li><strong>Finder slow / "The application Finder is not open"</strong> — <code>killall Finder</code>; if persistent, delete <code>~/Library/Preferences/com.apple.finder.plist</code> and relaunch. Slow opening of a folder with thousands of items: switch to List view, disable icon previews and "Calculate all sizes."</li>
+<li><strong>Spotlight not finding things</strong> — <code>sudo mdutil -E /</code> (<a href="18-performance-and-maintenance.html">chapter 18</a>).</li>
+<li><strong>Notification Center/Dock/menu bar glitching</strong> — <code>killall Dock</code>, <code>killall NotificationCenter</code>, <code>killall ControlCenter</code>.</li>
+<li><strong>Font problems, garbled text in one app</strong> — Font Book → File → Validate Fonts; remove duplicates. Safe Mode clears font caches.</li>
+<li><strong>Time Machine "preparing backup" forever</strong> — <a href="17-backup-and-recovery.html">chapter 17</a>: <code>tmutil stopbackup</code>, remove the <code>.inProgress</code> bundle on the destination, restart.</li>
+<li><strong>"Your system has run out of application memory"</strong> — a leaking app; Activity Monitor → Memory sorted by Memory; Force Quit the top one. Chronic → more RAM or fewer Electron apps (<a href="18-performance-and-maintenance.html">chapter 18</a>).</li>
+<li><strong>Liquid Glass makes text hard to read</strong> — Accessibility → Display → Reduce Transparency, or the Liquid Glass intensity slider in Appearance on macOS 27 (<a href="03-system-settings.html">chapter 3</a>).</li>
+<li><strong>Software Update fails / "unable to check for updates"</strong> — free space ≥ 20 GB? <code>sudo softwareupdate -l --verbose</code>; try from Recovery (Reinstall macOS keeps data and applies the update); check <code>/var/log/install.log</code>.</li>
+<li><strong>iCloud sync stuck</strong> — <code>brctl log --wait --shorten</code> shows the sync daemon live; often a single file with an illegal name or a huge one. <code>killall bird</code> (iCloud Drive daemon) restarts sync.</li>
+</ul>
+<h2 id="when-to-reinstall-when-to-go-to-apple">When to reinstall, when to go to Apple<a class="anchor" href="#when-to-reinstall-when-to-go-to-apple" aria-label="Permalink">#</a></h2>
+<p><strong>Reinstall macOS (keep data)</strong> — Recovery → Reinstall macOS. It replaces the system volume only; apps, files, and settings stay. Do this when: Safe Mode fixes things but you can't find the culprit, system daemons crash-loop, updates fail repeatedly. Takes 30–60 minutes. It's not the ritual it was on Intel; it's a reasonable step 7.</p>
+<p><strong>Erase and set up fresh</strong> — Recovery → Disk Utility → erase the container (or System Settings → General → Transfer or Reset → <strong>Erase All Content and Settings</strong>, which is much faster and keeps the OS). Restore <em>selectively</em> from Time Machine or your dotfiles/Brewfile rather than Migration Assistant if you're doing this to escape accumulated cruft (<a href="02-first-boot-and-migration.html">chapter 2</a>, <a href="appendix-a-bootstrap-script.html">Appendix A</a>).</p>
+<p><strong>Apple / authorized service</strong> — Apple Diagnostics reports a code; the Mac panics with all peripherals unplugged and no third-party extensions; battery "Service Recommended"; liquid damage; the trackpad bulges; the display flickers in Recovery too (which rules out software). Book a Genius Bar or mail-in via the <strong>Apple Support</strong> app. Have a current backup and your Apple Account password; they will ask you to disable Find My / Activation Lock. AppleCare+ covers accidental damage with a deductible; the standard warranty is one year (two in the EU, plus consumer law).</p>
+<h2 id="getting-help">Getting help<a class="anchor" href="#getting-help" aria-label="Permalink">#</a></h2>
+<p>When you ask a question, include: <code>sw_vers -productVersion</code>, the Mac model and chip (<code>system_profiler SPHardwareDataType | grep -E "Model Name|Chip|Memory"</code>), the exact error text (copy from the terminal or Console, not a photo), what changed recently (updates, new apps, new hardware), and whether Safe Mode / a fresh user account reproduces it. Good places: the app's own GitHub issues, <code>discussions.apple.com</code> for OS bugs, <code>apple.stackexchange.com</code>, r/MacOS and r/macsysadmin, the Homebrew discussions for anything brew-related, and Apple's Feedback Assistant (<code>applefeedback://</code>) for genuine OS bugs — they do read it, and it's the only channel that reaches engineering.</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="21-automation-and-scripting.html"><span>Previous</span><strong>Automation &amp; scripting</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/22-troubleshooting.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/22-troubleshooting.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#diagnostic-tools">Diagnostic tools</a></li>
+<li class="lvl3"><a href="#force-quitting-and-hung-apps">Force-quitting and hung apps</a></li>
+<li class="lvl3"><a href="#the-unified-log">The unified log</a></li>
+<li class="lvl3"><a href="#crash-reports-and-panics">Crash reports and panics</a></li>
+<li class="lvl3"><a href="#system-information-and-quick-checks">System Information and quick checks</a></li>
+<li class="lvl2"><a href="#startup-problems">Startup problems</a></li>
+<li class="lvl3"><a href="#dfu-revive-and-restore">DFU revive and restore</a></li>
+<li class="lvl2"><a href="#developer-environment-breakages">Developer-environment breakages</a></li>
+<li class="lvl3"><a href="#homebrew-after-a-macos-update">Homebrew after a macOS update</a></li>
+<li class="lvl3"><a href="#command-not-found-and-path">"command not found" and PATH</a></li>
+<li class="lvl3"><a href="#xcode-simulators-and-clt">Xcode, simulators, and CLT</a></li>
+<li class="lvl3"><a href="#gatekeeper-code-signing-and-damaged-apps">Gatekeeper, code signing, and "damaged" apps</a></li>
+<li class="lvl3"><a href="#permissions-and-privacy-prompts">Permissions and privacy prompts</a></li>
+<li class="lvl3"><a href="#ports-networking-dns">Ports, networking, DNS</a></li>
+<li class="lvl3"><a href="#docker-orbstack-containers">Docker / OrbStack / containers</a></li>
+<li class="lvl3"><a href="#git-and-ssh">Git and SSH</a></li>
+<li class="lvl3"><a href="#python-node-and-friends">Python, Node, and friends</a></li>
+<li class="lvl2"><a href="#hardware-and-peripherals">Hardware and peripherals</a></li>
+<li class="lvl3"><a href="#wi-fi">Wi-Fi</a></li>
+<li class="lvl3"><a href="#bluetooth">Bluetooth</a></li>
+<li class="lvl3"><a href="#external-displays">External displays</a></li>
+<li class="lvl3"><a href="#audio">Audio</a></li>
+<li class="lvl3"><a href="#keyboard-trackpad-touch-id">Keyboard, trackpad, Touch ID</a></li>
+<li class="lvl3"><a href="#usb-thunderbolt-and-storage">USB, Thunderbolt, and storage</a></li>
+<li class="lvl3"><a href="#battery-and-charging">Battery and charging</a></li>
+<li class="lvl2"><a href="#macos-itself">macOS itself</a></li>
+<li class="lvl2"><a href="#when-to-reinstall-when-to-go-to-apple">When to reinstall, when to go to Apple</a></li>
+<li class="lvl2"><a href="#getting-help">Getting help</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
