@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Command Line Tools, Xcode &amp; the toolchain — The macOS Setup Guide</title>
+<meta name="description" content="Command Line Tools vs full Xcode, xcode-select, SDKs and simulators, Rosetta 2 and the arm64-only future, and keeping Xcode from eating your disk.">
+<meta property="og:title" content="Command Line Tools, Xcode &amp; the toolchain — The macOS Setup Guide">
+<meta property="og:description" content="Command Line Tools vs full Xcode, xcode-select, SDKs and simulators, Rosetta 2 and the arm64-only future, and keeping Xcode from eating your disk.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li class="active"><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="command-line-tools-xcode-the-toolchain">Command Line Tools, Xcode &amp; the toolchain</h1>
+<p>Every compiler, <code>git</code>, <code>make</code>, and the system SDK on macOS come from Apple's developer tools. You have two ways to get them, and the right choice depends on whether you will ever build an iOS/macOS app.</p>
+<h2 id="command-line-tools-clt-what-almost-everyone-needs">Command Line Tools (CLT) — what almost everyone needs<a class="anchor" href="#command-line-tools-clt-what-almost-everyone-needs" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">xcode-select --install</code></pre></div>
+<p>A dialog appears; click <em>Install</em>. This downloads ~2 GB into <code>/Library/Developer/CommandLineTools</code> and gives you:</p>
+<ul>
+<li><code>clang</code>/<code>clang++</code> (Apple's LLVM), <code>swift</code>, <code>swiftc</code>, <code>ld</code>, <code>lldb</code></li>
+<li><code>git</code> (Apple's build, usually a few months behind upstream — Homebrew's <code>git</code> will shadow it later)</li>
+<li><code>make</code>, <code>python3</code> (a shim that points to the CLT's Python — do <strong>not</strong> use it for projects; Chapter 11), <code>perl</code>, <code>ruby</code> (system versions, also not for projects)</li>
+<li>headers and the macOS SDK under <code>…/CommandLineTools/SDKs/MacOSX.sdk</code></li>
+<li><code>otool</code>, <code>nm</code>, <code>codesign</code>, <code>xcrun</code>, <code>dsymutil</code>, <code>strip</code>, <code>install_name_tool</code>, <code>lipo</code>, <code>file</code></li>
+</ul>
+<p>Homebrew requires the CLT and will offer to install them if missing. Verify:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">xcode-select -p          # → /Library/Developer/CommandLineTools
+clang --version          # Apple clang version 17.x (Xcode 27 era)
+git --version</code></pre></div>
+<p><strong>Updating</strong>: CLT updates arrive via <code>System Settings → Software Update</code> (they're listed as "Command Line Tools for Xcode"). If Homebrew complains that the CLT are outdated or "not installed" after a macOS upgrade, the fix is always:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">sudo rm -rf /Library/Developer/CommandLineTools
+xcode-select --install</code></pre></div>
+<h2 id="full-xcode-when-you-need-it">Full Xcode — when you need it<a class="anchor" href="#full-xcode-when-you-need-it" aria-label="Permalink">#</a></h2>
+<p>Install Xcode if you will:</p>
+<ul>
+<li>build apps for iOS, iPadOS, macOS, watchOS, tvOS or visionOS (Swift/SwiftUI/UIKit);</li>
+<li>use the <strong>iOS Simulator</strong> (also needed by React Native, Flutter, Expo, Tauri-mobile, Capacitor);</li>
+<li>need <strong>Instruments</strong> (profiling), <strong>Reality Composer</strong>, <strong>Create ML</strong>, or Interface Builder;</li>
+<li>take a mobile-development or graphics/Metal course;</li>
+<li>run certain Homebrew formulae that need the full SDK or <code>xcodebuild</code> (rare; Homebrew tells you).</li>
+</ul>
+<p>Otherwise skip it: Xcode 27 is ~4 GB to download and <strong>~15 GB installed</strong>, plus 8–10 GB per simulator runtime, and it makes every macOS update also an Xcode update.</p>
+<p><strong>Install</strong>: from the <strong>Mac App Store</strong> (simplest; auto-updates) or download the <code>.xip</code> from developer.apple.com/download (faster on slow connections; lets you keep multiple versions). Power users install via <strong><code>xcodes</code></strong> (<code>brew install xcodesorg/made/xcodes</code>) or the <strong>Xcodes.app</strong> GUI, which downloads, unxips and switches versions with <code>xcodes install 27.0</code> / <code>xcodes select 27.0</code>.</p>
+<p>After installing, run it once to accept the licence and install components, or from the shell:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">sudo xcodebuild -license accept
+sudo xcode-select -s /Applications/Xcode.app/Contents/Developer   # make the CLT inside Xcode the active toolchain
+xcodebuild -runFirstLaunch</code></pre></div>
+<p><strong>Which toolchain is active?</strong> <code>xcode-select -p</code> prints either the standalone CLT path or <code>…/Xcode.app/Contents/Developer</code>. With Xcode installed, point it at Xcode (as above) so <code>xcrun</code>, <code>swift</code>, and Homebrew all agree. You still keep the standalone CLT installed — that's normal.</p>
+<h3 id="xcode-27-in-one-paragraph">Xcode 27 in one paragraph<a class="anchor" href="#xcode-27-in-one-paragraph" aria-label="Permalink">#</a></h3>
+<p>Xcode 27 (WWDC 2026, ships with macOS 27) is <strong>Apple-silicon-only</strong>, noticeably faster, and adds <strong>coding agents</strong> (agentic workflows that can plan, edit across files, generate SwiftUI views and localisations, with Apple's models or your own provider such as Claude/ChatGPT), a <strong>Device Hub</strong> for managing test devices, untitled projects and standalone Swift files with live previews, improved Instruments/Time Profiler, and Swift 6.3. Simulators for iOS 27 ship with it. If your course or job uses an older Xcode, keep both via <code>xcodes</code>.</p>
+<h3 id="simulators-and-disk-space">Simulators and disk space<a class="anchor" href="#simulators-and-disk-space" aria-label="Permalink">#</a></h3>
+<p>Runtimes are the disk hog. Manage them from <code>Xcode → Settings → Components</code> or the CLI:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">xcrun simctl runtime list                      # installed runtimes (each 8–10 GB)
+xcrun simctl runtime delete &lt;runtime-id&gt;       # remove one
+xcrun simctl list devices                      # simulator devices
+xcrun simctl delete unavailable                # remove devices whose runtime is gone
+xcrun simctl erase all                         # reset all simulators (frees data, keeps runtimes)</code></pre></div>
+<p>Other Xcode caches you can nuke safely (Xcode rebuilds them):</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">rm -rf ~/Library/Developer/Xcode/DerivedData/*          # build products, often 10–50 GB
+rm -rf ~/Library/Developer/Xcode/Archives/*             # old archives (keep if you need to re-symbolicate crashes)
+rm -rf ~/Library/Developer/Xcode/iOS\ DeviceSupport/*   # symbols for devices you no longer own
+rm -rf ~/Library/Developer/CoreSimulator/Caches/*
+rm -rf ~/Library/Caches/com.apple.dt.Xcode/*</code></pre></div>
+<p><code>System Settings → General → Storage → Developer</code> exposes most of these with a delete button. <strong>Xcode shouldn't be in your Time Machine backup</strong> — exclude <code>~/Library/Developer</code> (Chapter 17); it's all regenerable.</p>
+<h3 id="command-line-builds-without-opening-xcode">Command-line builds without opening Xcode<a class="anchor" href="#command-line-builds-without-opening-xcode" aria-label="Permalink">#</a></h3>
+<ul>
+<li><code>xcodebuild -list -project Foo.xcodeproj</code>, <code>xcodebuild -scheme Foo -destination 'platform=iOS Simulator,name=iPhone 17' build test</code>.</li>
+<li><code>swift build</code>, <code>swift test</code>, <code>swift run</code> for Swift packages (no Xcode project needed — the standalone CLT suffice).</li>
+<li><code>xcrun simctl boot "iPhone 17" &amp;&amp; open -a Simulator</code> to launch a simulator from a script.</li>
+<li><strong>Fastlane</strong> (<code>brew install fastlane</code>) for signing/TestFlight automation; <strong>xcbeautify</strong> for readable build logs; <strong>SwiftLint</strong>/<strong>SwiftFormat</strong>; <strong>Tuist</strong> or <strong>XcodeGen</strong> to generate projects from a manifest so <code>.xcodeproj</code> merge conflicts stop happening.</li>
+</ul>
+<h2 id="rosetta-2-and-the-arm64-only-future">Rosetta 2 and the arm64-only future<a class="anchor" href="#rosetta-2-and-the-arm64-only-future" aria-label="Permalink">#</a></h2>
+<p><strong>Rosetta 2</strong> translates Intel (x86_64) binaries so they run on Apple silicon. It isn't installed by default; the first time you launch an Intel app, macOS offers to install it, or you can do it yourself:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">softwareupdate --install-rosetta --agree-to-license</code></pre></div>
+<p>The timeline you need to plan around:</p>
+<div class="table-wrap"><table><thead><tr><th>When</th><th>What happens</th></tr></thead><tbody><tr><td>macOS 26.4 (Mar 2026)</td><td>Every launch of an Intel-only app shows a deprecation warning.</td></tr><tr><td><strong>macOS 27 (Sept 14, 2026)</strong></td><td>The installer <strong>removes Rosetta</strong> if present. You can reinstall it with the command above; it works fully through the 27.x cycle. Homebrew's Intel bottles stop being built this month.</td></tr><tr><td><strong>macOS 28 (fall 2027)</strong></td><td>Rosetta is <strong>removed for general apps</strong>; it survives only as a compatibility shim for a short list of old, unmaintained games that depend on Intel-only frameworks. Intel binaries — including anything under <code>/usr/local</code> from an x86 Homebrew — will not run.</td></tr></tbody></table></div>
+<p>What this means for your setup:</p>
+<ol>
+<li><strong>Everything you install should be arm64.</strong> Homebrew under <code>/opt/homebrew</code> is. Download the "Apple silicon" or "Universal" build of every app; avoid "Intel" builds even when offered. Check any binary with <code>file /path/to/bin</code> (look for <code>arm64</code>) or in Activity Monitor → add the <em>Kind</em> column (Apple vs Intel).</li>
+<li><strong>Audit now</strong>: <code>find /Applications -name "*.app" -maxdepth 2 -exec sh -c 'lipo -archs "{}/Contents/MacOS/$(defaults read "{}/Contents/Info.plist" CFBundleExecutable 2&gt;/dev/null)" 2&gt;/dev/null | grep -q arm64 || echo "{}"' \;</code> lists apps without an arm64 slice. Or simply sort Activity Monitor by Kind while your usual apps are open.</li>
+<li><strong>Delete an Intel Homebrew</strong> if migration brought one over: <code>arch -x86_64 /usr/local/bin/brew bundle dump --file=~/intel-brewfile</code> to record what was there, then run Homebrew's official uninstall script with <code>arch -x86_64</code> and remove <code>/usr/local/Homebrew</code>. Reinstall what you need natively.</li>
+<li><strong>Docker images</strong>: <code>linux/amd64</code> containers run under QEMU or Rosetta <em>inside the Linux VM</em> (Docker Desktop/OrbStack use Rosetta for Linux, which is a <em>different</em> mechanism that stays supported for virtualisation). Prefer <code>linux/arm64</code> images anyway — they're faster and most official images are multi-arch (Chapter 13).</li>
+<li><strong>Node/Python native modules</strong>: rebuild (<code>npm rebuild</code>, <code>pip install --force-reinstall</code>) after moving from an Intel machine; <code>node_modules</code> with x86 <code>.node</code> files is the classic "works on my old Mac" bug.</li>
+<li><strong>If you truly need x86 macOS software</strong> (an old EDA tool, a legacy game), keep a macOS 27 partition/VM or an old Intel machine around; Golden Gate is the last stop.</li>
+</ol>
+<p>Check whether you're currently under Rosetta in a terminal: <code>uname -m</code> (should print <code>arm64</code>; <code>x86_64</code> means the terminal itself is running translated — a common state after copying an Intel terminal's settings). <code>sysctl -n sysctl.proc_translated</code> prints <code>1</code> if the current process is translated.</p>
+<h2 id="system-languages-you-should-not-use-for-projects">System languages you should <em>not</em> use for projects<a class="anchor" href="#system-languages-you-should-not-use-for-projects" aria-label="Permalink">#</a></h2>
+<p>macOS ships <code>python3</code> (via CLT), <code>perl</code>, <code>ruby</code>, <code>php</code> (removed in Monterey), <code>java</code> (a stub that prompts to install a JDK), <code>git</code>, <code>zsh</code>, <code>bash</code> 3.2 (2007, GPLv2-frozen), <code>curl</code>, <code>openssl</code> (actually LibreSSL), <code>sqlite3</code>, <code>tclsh</code>, <code>vim</code>, <code>nano</code>, <code>rsync</code> (Apple switched to openrsync in Sequoia). These are for the OS and for Apple's scripts. Never <code>pip install</code> into the system Python, never <code>gem install</code> into system Ruby, don't write scripts that assume bash 4+ features unless you shebang Homebrew's bash. Chapter 11 sets up proper, versioned runtimes.</p>
+<h2 id="useful-apple-cli-tools-you-already-have">Useful Apple CLI tools you already have<a class="anchor" href="#useful-apple-cli-tools-you-already-have" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>Tool</th><th>Use</th></tr></thead><tbody><tr><td><code>open</code></td><td><code>open .</code> (Finder here), <code>open -a "Visual Studio Code" file</code>, <code>open https://…</code>, <code>open -R file</code> (reveal), <code>open -e file</code> (TextEdit)</td></tr><tr><td><code>pbcopy</code> / <code>pbpaste</code></td><td>Pipe to/from the clipboard: <code>cat key.pub | pbcopy</code>, <code>pbpaste &gt; notes.txt</code></td></tr><tr><td><code>say</code></td><td>Text-to-speech: <code>make &amp;&amp; say done</code></td></tr><tr><td><code>defaults</code></td><td>Read/write preferences (Chapter 3)</td></tr><tr><td><code>mdfind</code> / <code>mdls</code></td><td>Spotlight search from the shell</td></tr><tr><td><code>screencapture</code></td><td><code>screencapture -i ~/Desktop/shot.png</code> (interactive), <code>-c</code> to clipboard</td></tr><tr><td><code>sips</code></td><td>Image resize/convert: <code>sips -Z 1024 *.png</code>, <code>sips -s format jpeg in.png --out out.jpg</code></td></tr><tr><td><code>textutil</code></td><td>Convert docx/rtf/html/txt: <code>textutil -convert txt notes.docx</code></td></tr><tr><td><code>qlmanage -p file</code></td><td>Quick Look from the shell</td></tr><tr><td><code>caffeinate -d</code> / <code>caffeinate -i cmd</code></td><td>Keep awake / while a command runs</td></tr><tr><td><code>pmset -g</code> / <code>pmset -g log</code></td><td>Power settings and sleep/wake history</td></tr><tr><td><code>networksetup</code>, <code>airport</code> (gone in Sonoma — use <code>wdutil info</code>), <code>scutil --dns</code></td><td>Network config from the shell</td></tr><tr><td><code>diskutil list</code>, <code>diskutil apfs list</code></td><td>Disks and APFS containers</td></tr><tr><td><code>tmutil</code></td><td>Time Machine (<code>tmutil listbackups</code>, <code>tmutil addexclusion</code>)</td></tr><tr><td><code>system_profiler SPHardwareDataType</code></td><td>Hardware info (or <code>sysctl -a | grep machdep.cpu</code>)</td></tr><tr><td><code>log show --predicate 'process == "kernel"' --last 1h</code></td><td>Unified logging (Console.app's engine)</td></tr><tr><td><code>launchctl</code></td><td>Manage launch agents/daemons (Chapter 21)</td></tr><tr><td><code>security</code></td><td>Keychain from the shell: <code>security find-generic-password -s "svc" -w</code></td></tr><tr><td><code>codesign -dv --verbose=4 App.app</code>, <code>spctl -a -vv App.app</code></td><td>Inspect signatures / Gatekeeper verdict</td></tr><tr><td><code>xattr -l file</code>, <code>xattr -d com.apple.quarantine file</code></td><td>Extended attributes; remove quarantine</td></tr><tr><td><code>plutil -p file.plist</code></td><td>Pretty-print property lists (<code>-convert xml1</code> to edit)</td></tr><tr><td><code>osascript -e 'display notification "done"'</code></td><td>AppleScript/JXA from the shell</td></tr><tr><td><code>shortcuts run "Name"</code></td><td>Run a Shortcut from the shell</td></tr><tr><td><code>container</code> (Tahoe+)</td><td>Apple's Linux container CLI (Chapter 13)</td></tr></tbody></table></div>
+<h2 id="gnu-tools-vs-bsd-tools">GNU tools vs BSD tools<a class="anchor" href="#gnu-tools-vs-bsd-tools" aria-label="Permalink">#</a></h2>
+<p>macOS userland is <strong>BSD</strong>: <code>sed</code>, <code>awk</code>, <code>grep</code>, <code>find</code>, <code>ls</code>, <code>date</code>, <code>stat</code>, <code>tar</code>, <code>xargs</code> have BSD flags, not GNU ones. <code>sed -i</code> needs an argument (<code>sed -i '' 's/a/b/' f</code>), <code>date -d</code> doesn't exist (<code>date -v+1d</code>), <code>ls --color</code> fails (<code>ls -G</code>), <code>readlink -f</code> only appeared in macOS 12.3. Scripts copied from Linux tutorials break here.</p>
+<p>Two fixes, pick one:</p>
+<ul>
+<li><strong>Install GNU versions via Homebrew</strong> (<code>brew install coreutils findutils gnu-sed gawk grep gnu-tar</code>) — they install with a <code>g</code> prefix (<code>gsed</code>, <code>gls</code>, <code>gdate</code>). To use them <em>unprefixed</em>, add the <code>gnubin</code> dirs to <code>PATH</code> in your shell config (<code>$(brew --prefix coreutils)/libexec/gnubin</code> etc.). Be aware this changes behaviour for every script on the machine, including some Homebrew formulae; many people prefer prefixed use only.</li>
+<li><strong>Write portable scripts</strong>: use <code>#!/usr/bin/env bash</code>, avoid GNU-only flags, or use the modern Rust replacements from Chapter 9 (<code>fd</code>, <code>rg</code>, <code>sd</code>, <code>eza</code>, <code>bat</code>) that behave identically on macOS and Linux.</li>
+</ul>
+<p>Homebrew's <code>bash</code> (5.x) and <code>zsh</code> are current; Apple's <code>/bin/bash</code> is stuck at 3.2 for licensing reasons and Apple's <code>zsh</code> is fine as a login shell but lags a version or two.</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="06-window-management.html"><span>Previous</span><strong>Window management, Spaces &amp; displays</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/07-command-line-tools-and-xcode.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/07-command-line-tools-and-xcode.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#command-line-tools-clt-what-almost-everyone-needs">Command Line Tools (CLT) — what almost everyone needs</a></li>
+<li class="lvl2"><a href="#full-xcode-when-you-need-it">Full Xcode — when you need it</a></li>
+<li class="lvl3"><a href="#xcode-27-in-one-paragraph">Xcode 27 in one paragraph</a></li>
+<li class="lvl3"><a href="#simulators-and-disk-space">Simulators and disk space</a></li>
+<li class="lvl3"><a href="#command-line-builds-without-opening-xcode">Command-line builds without opening Xcode</a></li>
+<li class="lvl2"><a href="#rosetta-2-and-the-arm64-only-future">Rosetta 2 and the arm64-only future</a></li>
+<li class="lvl2"><a href="#system-languages-you-should-not-use-for-projects">System languages you should <em>not</em> use for projects</a></li>
+<li class="lvl2"><a href="#useful-apple-cli-tools-you-already-have">Useful Apple CLI tools you already have</a></li>
+<li class="lvl2"><a href="#gnu-tools-vs-bsd-tools">GNU tools vs BSD tools</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
