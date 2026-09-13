@@ -26,3 +26,7 @@ Branch policy (from CLAUDE.md): push straight to main.
   Parts: "Part I — Before you start" (01-02), "Part II — System & interface" (03-06), "Part III — Developer environment" (07-15),
   "Part IV — Security, backup, maintenance" (16-18), "Part V — Daily driving & workflows" (19-22), "Part VI — Reference" (23 + appendices).
   NEXT: write ch02..23 + appendices A-E one file at a time; run `python3 build.py` and commit after each.
+- 2026-09-13 (cont.): chapters 02–15 written, built, pushed (~35k words). NEXT: 16 security, 17 backup, 18 performance,
+  19 daily-driver apps, 20 CS-student, 21 automation, 22 troubleshooting, 23 checklists, appendices A (bootstrap.sh in
+  scripts/ + {{include}}), B (Brewfile), C shortcuts, D glossary, E sources. Then README.md, .github/workflows/pages.yml
+  (optional), final QA pass (links, build), PROGRESS update.
