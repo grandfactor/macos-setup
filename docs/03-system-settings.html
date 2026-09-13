@@ -34,6 +34,7 @@
 </ul>
 <p class="nav-part">Part II — System &amp; interface</p><ul>
 <li class="active"><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
 </ul>
     </nav>
   </aside>
@@ -265,7 +266,7 @@ killall Dock Finder SystemUIServer 2&gt;/dev/null</code></pre></div>
 <p>Two cautions: (1) Apple silently renames or removes keys between releases — verify with <code>defaults read &lt;domain&gt;</code> after a major upgrade; a key that no longer exists is harmless but does nothing. (2) A handful of settings (Accessibility permissions, FileVault, Firewall state, Gatekeeper) <em>cannot</em> be set with <code>defaults</code> for security reasons; they need <code>sudo</code> tooling (<code>fdesetup</code>, <code>/usr/libexec/ApplicationFirewall/socketfilterfw</code>, <code>spctl</code>) or an MDM profile. Appendix A handles those separately.</p>
 <p>To discover the key for any checkbox: run <code>defaults read &gt; /tmp/before.txt</code>, flip the setting, <code>defaults read &gt; /tmp/after.txt</code>, and <code>diff</code> them.</p>
     </article>
-    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="02-first-boot-and-migration.html"><span>Previous</span><strong>First boot, Setup Assistant &amp; migration</strong></a><span></span></nav>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="02-first-boot-and-migration.html"><span>Previous</span><strong>First boot, Setup Assistant &amp; migration</strong></a><a class="pager-link next" href="04-finder-dock-spotlight.html"><span>Next</span><strong>Finder, Dock &amp; Spotlight</strong></a></nav>
     <footer class="page-footer">
       <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/03-system-settings.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/03-system-settings.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
       <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>

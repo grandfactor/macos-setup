@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Finder, Dock &amp; Spotlight — The macOS Setup Guide</title>
+<meta name="description" content="Finder as a power tool, Quick Look, the Dock, and the new Spotlight (apps, files, actions, clipboard, Quick Keys) — plus when Raycast or Alfred still earn their place.">
+<meta property="og:title" content="Finder, Dock &amp; Spotlight — The macOS Setup Guide">
+<meta property="og:description" content="Finder as a power tool, Quick Look, the Dock, and the new Spotlight (apps, files, actions, clipboard, Quick Keys) — plus when Raycast or Alfred still earn their place.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li class="active"><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="finder-dock-spotlight">Finder, Dock &amp; Spotlight</h1>
+<p>Three built-in tools you'll touch hundreds of times a day. Finder is more capable than its reputation; the Dock is best minimised; and Spotlight, since macOS 26, is a genuine launcher that changes the calculus on Raycast and Alfred.</p>
+<h2 id="finder">Finder<a class="anchor" href="#finder" aria-label="Permalink">#</a></h2>
+<h3 id="views-and-navigation">Views and navigation<a class="anchor" href="#views-and-navigation" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>List view</strong> (<kbd>⌘</kbd><kbd>2</kbd>) is the developer default: sortable columns, expandable folders (<kbd>→</kbd>/<kbd>←</kbd> expand/collapse; <kbd>⌥</kbd><kbd>→</kbd> expands recursively). Set it as the default in <code>View → Show View Options → Use as Defaults</code> after enabling <em>Calculate all sizes</em> and adding the <em>Date Modified</em> and <em>Kind</em> columns.</li>
+<li><strong>Column view</strong> (<kbd>⌘</kbd><kbd>3</kbd>) is fastest for drilling into deep trees; the resize bug from 26.0 was fixed in 26.3.</li>
+<li><strong>Gallery view</strong> (<kbd>⌘</kbd><kbd>4</kbd>) for photos/PDFs with the Preview pane (<kbd>⌘</kbd><kbd>⇧</kbd><kbd>P</kbd>) showing metadata.</li>
+<li><strong>Go to folder</strong>: <kbd>⌘</kbd><kbd>⇧</kbd><kbd>G</kbd>, type a path (<code>~/Library/Application Support</code>, <code>/opt/homebrew/etc</code>). Tab completes. It accepts <code>~</code> and <code>..</code>.</li>
+<li><strong>Go menu</strong> shortcuts: <kbd>⌘</kbd><kbd>⇧</kbd><kbd>H</kbd> Home, <kbd>⌘</kbd><kbd>⇧</kbd><kbd>D</kbd> Desktop, <kbd>⌘</kbd><kbd>⇧</kbd><kbd>O</kbd> Documents, <kbd>⌘</kbd><kbd>⌥</kbd><kbd>L</kbd> Downloads, <kbd>⌘</kbd><kbd>⇧</kbd><kbd>A</kbd> Applications, <kbd>⌘</kbd><kbd>⇧</kbd><kbd>U</kbd> Utilities, <kbd>⌘</kbd><kbd>↑</kbd> enclosing folder, <kbd>⌘</kbd><kbd>↓</kbd> or <kbd>⌘</kbd><kbd>O</kbd> open.</li>
+<li><strong>Path bar</strong> (<code>View → Show Path Bar</code>): right-click any segment → <em>Copy "…" as Pathname</em> or drag a folder from it into a Terminal window to paste its path. <kbd>⌘</kbd>-click the window title for the same hierarchy.</li>
+<li><strong>Copy a path</strong>: select an item, <kbd>⌘</kbd><kbd>⌥</kbd><kbd>C</kbd>. Or right-click while holding <kbd>⌥</kbd> → <em>Copy … as Pathname</em>.</li>
+<li><strong>Hidden files</strong>: <kbd>⌘</kbd><kbd>⇧</kbd><kbd>.</kbd> toggles.</li>
+<li><strong>Rename</strong>: select, press <kbd>Return</kbd>. <strong>Batch rename</strong>: select several → right-click → <em>Rename…</em> (replace text, add sequence, add date).</li>
+<li><strong>Tabs</strong>: <kbd>⌘</kbd><kbd>T</kbd>; merge windows with <code>Window → Merge All Windows</code>. Drag files onto a tab to move them there.</li>
+<li><strong>Move instead of copy</strong> between volumes: <kbd>⌘</kbd>-drag. <strong>Duplicate</strong>: <kbd>⌘</kbd><kbd>D</kbd>. <strong>Make alias</strong>: <kbd>⌘</kbd><kbd>⌃</kbd><kbd>A</kbd>. <strong>Cut and paste</strong> files: copy with <kbd>⌘</kbd><kbd>C</kbd>, then <strong><kbd>⌘</kbd><kbd>⌥</kbd><kbd>V</kbd></strong> to move.</li>
+<li><strong>Delete immediately</strong> (skip Trash): <kbd>⌘</kbd><kbd>⌥</kbd><kbd>⌫</kbd>. <strong>Empty Trash without confirmation</strong>: <kbd>⌘</kbd><kbd>⌥</kbd><kbd>⇧</kbd><kbd>⌫</kbd>.</li>
+<li><strong>New folder with selection</strong>: select files → right-click → <em>New Folder with Selection (N items)</em>.</li>
+<li><strong>Open in Terminal</strong>: right-click a folder → <em>Services → New Terminal at Folder</em> (enable in <code>System Settings → Keyboard → Keyboard Shortcuts → Services → Files and Folders</code>). Ghostty/iTerm2 install their own equivalents. Reverse direction: <code>open .</code> in a terminal opens Finder there.</li>
+<li><strong>Get Info</strong> (<kbd>⌘</kbd><kbd>I</kbd>) for permissions, <em>Open with</em> default app (click <em>Change All…</em>), lock, and the hidden <strong>Comments</strong> field that Spotlight indexes. <kbd>⌘</kbd><kbd>⌥</kbd><kbd>I</kbd> is the <em>Inspector</em> that updates as you change selection.</li>
+<li><strong>Tags</strong>: right-click → Tags. Useful for <code>urgent</code>/<code>todo</code>/<code>course-xyz</code>. Search <code>tag:urgent</code> in Spotlight.</li>
+<li><strong>Folder customisation</strong> (Tahoe+): right-click → <em>Customize Folder…</em> — colour, emoji, or SF Symbol. Cheap visual structure for <code>~/Developer/school/*</code>.</li>
+</ul>
+<h3 id="sidebar-toolbar-and-favourites">Sidebar, toolbar and favourites<a class="anchor" href="#sidebar-toolbar-and-favourites" aria-label="Permalink">#</a></h3>
+<ul>
+<li>Drag your project folders, <code>~/Developer</code>, and <code>~/Library</code> (after <code>chflags nohidden ~/Library</code>) into the sidebar's <em>Favorites</em>. Remove <em>Recents</em> and <em>AirDrop</em>.</li>
+<li>Right-click the toolbar → <em>Customize Toolbar…</em>: add <em>Path</em>, <em>New Folder</em>, <em>Get Info</em>, <em>Delete</em>, <em>Connect</em>, and a <strong>Quick Actions</strong> button. Drag any app or script onto the toolbar while holding <kbd>⌘</kbd> to get a one-click launcher (e.g. your terminal or editor: drop VS Code there and drag folders onto it).</li>
+<li><strong>Connect to Server</strong> (<kbd>⌘</kbd><kbd>K</kbd>): <code>smb://nas.local/share</code>, <code>nfs://</code>, <code>ftp://</code>, <code>vnc://</code>. Tick <em>Remember</em> and add to Favorites. Golden Gate speeds up SMB browsing noticeably.</li>
+</ul>
+<h3 id="quick-look">Quick Look<a class="anchor" href="#quick-look" aria-label="Permalink">#</a></h3>
+<p>Select a file and press <kbd>Space</kbd>. It previews images, PDFs, video, Office docs, and — with plugins — code, Markdown, JSON, archives and more. <kbd>⌘</kbd><kbd>Y</kbd> also works. Arrow keys move through the selection; <kbd>⌥</kbd><kbd>Space</kbd> opens full screen. Quick Look supports <em>Markup</em> (annotate PDFs/images) and <em>Trim</em> (video) directly.</p>
+<p>Essential Quick Look extensions for developers (all via Homebrew, all free):</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew install --cask qlmarkdown syntax-highlight   # Markdown preview; syntax-highlighted source for 100+ languages
+brew install --cask quicklook-json qlstephen      # pretty JSON; plain-text files without extensions (README, Makefile, LICENSE)
+brew install --cask quicklook-csv qlvideo         # CSV as table; thumbnails for more video codecs
+brew install --cask betterzip                     # peek inside zip/tar without extracting (paid, but the QL plugin works in trial)</code></pre></div>
+<p>After installing, run <code>qlmanage -r</code> to reload, and approve each extension in <code>System Settings → General → Login Items &amp; Extensions → Quick Look</code>.</p>
+<h3 id="smart-folders-and-spotlight-queries">Smart Folders and Spotlight queries<a class="anchor" href="#smart-folders-and-spotlight-queries" aria-label="Permalink">#</a></h3>
+<p><code>File → New Smart Folder</code> builds a saved search. Examples worth saving to the sidebar:</p>
+<ul>
+<li><em>Kind is Source Code, Modified within last 7 days</em> → "This week's code".</li>
+<li><em>Name contains <code>.env</code></em> in <code>~/Developer</code> → occasional audit of secrets on disk.</li>
+<li><em>Size &gt; 500 MB</em> → what's eating the disk (also see <code>ncdu</code>, Chapter 18).</li>
+</ul>
+<p>Raw query syntax works in the Finder search field and Spotlight: <code>kind:pdf date:this week</code>, <code>name:report kind:document</code>, <code>tag:urgent</code>, <code>modified:&gt;2026-09-01</code>. In the search field, click the <strong>+</strong> to add criteria and <em>Other…</em> to pick from hundreds of metadata attributes (e.g. <em>Pixel width</em>, <em>Codec</em>).</p>
+<h3 id="archive-and-disk-images">Archive and disk images<a class="anchor" href="#archive-and-disk-images" aria-label="Permalink">#</a></h3>
+<ul>
+<li>Right-click → <em>Compress</em> makes a <code>.zip</code> (Archive Utility handles zip, tar.gz, bz2, xz; <strong>not</strong> rar or 7z — use <code>brew install --cask keka</code> or <code>brew install sevenzip</code>).</li>
+<li>Disk images: double-click a <code>.dmg</code> to mount; drag the app to <code>/Applications</code>; <strong>eject</strong> the image from the sidebar afterwards. Since Tahoe, new images default to <strong>ASIF</strong> (Apple Sparse Image Format), which is dramatically faster and near-native SSD speed — the right format for VM disks and encrypted vaults: <code>Disk Utility → File → New Image → Blank Image → Format: APFS, Encryption: 256-bit AES, Image Format: sparse</code> gives you an encrypted folder that mounts with a password.</li>
+</ul>
+<h3 id="things-finder-still-doesnt-do-well-and-fixes">Things Finder still doesn't do well (and fixes)<a class="anchor" href="#things-finder-still-doesnt-do-well-and-fixes" aria-label="Permalink">#</a></h3>
+<div class="table-wrap"><table><thead><tr><th>Gap</th><th>Fix</th></tr></thead><tbody><tr><td>Two-pane file management (Norton Commander style)</td><td><strong>Marta</strong> (free), <strong>ForkLift 4</strong>, <strong>Commander One</strong>; or <code>yazi</code> in the terminal (Chapter 9)</td></tr><tr><td>Bulk operations on thousands of files</td><td>Terminal: <code>fd</code>, <code>rg</code>, <code>rsync</code> — Chapter 9</td></tr><tr><td>Show folder sizes instantly</td><td><code>View → Show View Options → Calculate all sizes</code> (List view), or <strong>OmniDiskSweeper</strong> / <code>ncdu</code></td></tr><tr><td>Cut (⌘X) files</td><td>Use <kbd>⌘</kbd><kbd>C</kbd> then <kbd>⌘</kbd><kbd>⌥</kbd><kbd>V</kbd> — Finder's "Move here"</td></tr><tr><td>Open a folder as a <em>project</em></td><td>Drag it onto your editor's Dock icon, or <code>code .</code>, <code>zed .</code>, <code>cursor .</code> from Terminal</td></tr><tr><td>Automatic Downloads cleanup</td><td><strong>Hazel</strong> (paid) rules, or a Shortcuts folder automation — Chapter 21</td></tr><tr><td><code>.DS_Store</code> files on network shares / repos</td><td><code>defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true; defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true</code> and add <code>.DS_Store</code> to your global gitignore (Chapter 10)</td></tr></tbody></table></div>
+<h2 id="the-dock">The Dock<a class="anchor" href="#the-dock" aria-label="Permalink">#</a></h2>
+<p>The Dock is a launcher and a window switcher; with Spotlight and <kbd>⌘</kbd><kbd>Tab</kbd> doing both jobs, most developers shrink it and hide it (Chapter 3 has the settings). What's left to know:</p>
+<ul>
+<li><strong>Keep only the apps you run daily.</strong> Drag everything else out (drop it on the desktop until it says <em>Remove</em>). A tidy Dock is a faster <kbd>⌘</kbd><kbd>Tab</kbd>.</li>
+<li><strong>Stacks</strong>: drag <code>~/Downloads</code>, <code>~/Pictures/Screenshots</code> and your current project folder to the right side (next to Trash). Right-click → <em>Display as Folder</em>, <em>View content as Grid</em> or <em>Fan</em>. <code>Sort by Date Added</code> makes Downloads a reverse-chronological list.</li>
+<li><strong>Option-click</strong> the Dock icon of an app for <em>Force Quit</em>. <strong>Option-⌘-drag</strong> a file onto a Dock icon that refuses it to force that app to open it.</li>
+<li><strong>Spacers</strong>: <code>defaults write com.apple.dock persistent-apps -array-add '{tile-type="spacer-tile";}'; killall Dock</code> adds a blank separator; drag it where you want it. Use <code>small-spacer-tile</code> for a half-width one.</li>
+<li><strong>Show only running apps</strong> (turn the Dock into a pure task switcher): <code>defaults write com.apple.dock static-only -bool true; killall Dock</code>.</li>
+<li><strong>Scroll on a Dock icon to show its windows</strong>: <code>defaults write com.apple.dock scroll-to-open -bool true; killall Dock</code>.</li>
+<li><strong>Hidden apps translucent</strong>: <code>defaults write com.apple.dock showhidden -bool true; killall Dock</code>.</li>
+<li><strong>Reset the Dock</strong>: <code>defaults delete com.apple.dock; killall Dock</code>.</li>
+</ul>
+<p>And the switcher: <kbd>⌘</kbd><kbd>Tab</kbd> cycles apps (hold <kbd>⌘</kbd>, tap <kbd>Tab</kbd> repeatedly; <kbd>⌘</kbd><kbd>`</kbd> cycles windows <em>within</em> an app; while the switcher is up, press <kbd>Q</kbd> to quit or <kbd>H</kbd> to hide the highlighted app, <kbd>↓</kbd> to see its windows). If you want windows rather than apps in the switcher (Windows-style <kbd>Alt</kbd><kbd>Tab</kbd>), install <strong>AltTab</strong> (free, open source).</p>
+<h2 id="spotlight-macos-26">Spotlight (macOS 26+)<a class="anchor" href="#spotlight-macos-26" aria-label="Permalink">#</a></h2>
+<p>Spotlight was rebuilt in Tahoe and became a real launcher, then got Siri AI inside it in Golden Gate. If you last used it in Sonoma, relearn it.</p>
+<h3 id="the-four-views">The four views<a class="anchor" href="#the-four-views" aria-label="Permalink">#</a></h3>
+<p>Press <kbd>⌘</kbd><kbd>Space</kbd>, then:</p>
+<div class="table-wrap"><table><thead><tr><th>Key</th><th>View</th><th>What it does</th></tr></thead><tbody><tr><td><kbd>⌘</kbd><kbd>1</kbd></td><td><strong>Apps</strong></td><td>A grid of every installed app (this replaced Launchpad, which is gone), including iPhone apps via iPhone Mirroring. Type to filter.</td></tr><tr><td><kbd>⌘</kbd><kbd>2</kbd></td><td><strong>Files</strong></td><td>Recent files with type filters at the top; supports <strong>slash filters</strong> <code>/pdf</code>, <code>/word</code>, <code>/image</code>, <code>/text</code> then <kbd>Return</kbd>.</td></tr><tr><td><kbd>⌘</kbd><kbd>3</kbd></td><td><strong>Actions</strong></td><td>Hundreds of system and app commands: <em>Send Message</em>, <em>Create Event</em>, <em>Set Timer</em>, <em>Convert to PDF</em>, <em>Resize Image</em>, run any <strong>Shortcut</strong>. Apps expose their own via App Intents (e.g. Ghostty can focus a terminal).</td></tr><tr><td><kbd>⌘</kbd><kbd>4</kbd></td><td><strong>Clipboard</strong></td><td>Clipboard history (see below).</td></tr></tbody></table></div>
+<p>Other shortcuts inside Spotlight: <kbd>↑</kbd> recalls previous <em>searches</em> (like shell history); <kbd>⌘</kbd><kbd>Return</kbd> reveals the selected file in Finder; <kbd>⌘</kbd><kbd>C</kbd> copies the result's path; <kbd>Tab</kbd> or <kbd>⌘</kbd><kbd>I</kbd> shows a preview/info pane; <kbd>⌘</kbd><kbd>L</kbd> jumps to the dictionary definition; <kbd>⌘</kbd><kbd>B</kbd> searches the web. Type maths (<code>2^32-1</code>, <code>15% of 84</code>, <code>120 usd in eur</code>, <code>3pm PST in London</code>) and get answers inline.</p>
+<h3 id="quick-keys">Quick Keys<a class="anchor" href="#quick-keys" aria-label="Permalink">#</a></h3>
+<p>Spotlight assigns short abbreviations to your most-used <em>actions</em>: type <code>sm</code> → <em>Send Message</em>, <code>cr</code> → <em>Create Reminder</em>, <code>nn</code> → <em>New Note</em>, then <kbd>Return</kbd> and fill in the parameters inline without opening the app. They're auto-assigned by usage; see and reset them in <code>System Settings → Spotlight</code>. Any Shortcut you build (Chapter 21) becomes an action and can get a Quick Key — this is how you run "Start Deep Work Focus + open project + start timer" from four keystrokes.</p>
+<h3 id="clipboard-history">Clipboard history<a class="anchor" href="#clipboard-history" aria-label="Permalink">#</a></h3>
+<p>Enable it once (Spotlight → <kbd>⌘</kbd><kbd>4</kbd> → <em>Turn On</em>, or <code>System Settings → Spotlight → Clipboard History</code>). It records text, images, files and URLs with source app and timestamp. <kbd>Return</kbd> pastes as <strong>plain text</strong> at the cursor (so it also replaces the old <kbd>⌘</kbd><kbd>⌥</kbd><kbd>⇧</kbd><kbd>V</kbd> paste-and-match-style habit); the small button to the right of an item makes it the <em>current</em> clipboard instead.</p>
+<p>Limits you should know: <strong>items expire after 8 hours</strong>, nothing can be pinned, and there's no single-key shortcut to open the clipboard view — it's <kbd>⌘</kbd><kbd>Space</kbd> then <kbd>⌘</kbd><kbd>4</kbd>. Passwords copied from Apple's Passwords app are excluded, but third-party managers' copies may appear — copy something else right after pasting a secret. For persistent, pinnable history, add <strong>Maccy</strong> (free, open source, <code>brew install --cask maccy</code>) or use Raycast's clipboard manager.</p>
+<h3 id="search-settings">Search settings<a class="anchor" href="#search-settings" aria-label="Permalink">#</a></h3>
+<p><code>System Settings → Spotlight</code>: turn off categories you never want in results (<em>Siri Suggestions</em>, <em>Websites</em>, <em>Movies</em>, <em>Fonts</em>), and <strong>Search Privacy…</strong> to exclude folders — add your <code>node_modules</code>-heavy monorepo, VM disk folders, and Time Machine drives if indexing them slows things. Golden Gate rebuilt the search index (26.6 pre-optimised it); if search is wrong or slow, rebuild with <code>sudo mdutil -E /</code> and give it an hour.</p>
+<p>For developers, note that Spotlight indexes file <em>contents</em> for text, code, PDFs and Office docs; <code>mdfind "kind:source 'TODO'"</code> uses the same index from the CLI, and <code>mdls file</code> shows the metadata it extracted.</p>
+<h3 id="siri-ai-in-spotlight-golden-gate">Siri AI in Spotlight (Golden Gate)<a class="anchor" href="#siri-ai-in-spotlight-golden-gate" aria-label="Permalink">#</a></h3>
+<p>In macOS 27, <kbd>⌘</kbd><kbd>Space</kbd> is labelled <strong>Search or Ask</strong>. Plain queries search as before; questions ("what's the door code Sarah texted me", "summarise this PDF", "convert this table to CSV") are routed to Siri AI, which can read your local index (Mail, Messages, Notes, Files) and take actions in apps. Attach files with the <strong>+</strong>. <strong>Visual Intelligence</strong> is <kbd>⌘</kbd><kbd>⇧</kbd><kbd>Space</kbd>: drag a rectangle on screen and ask about it (great for "what does this compiler error mean" without copying text). Siri AI is opt-in (<code>System Settings → Apple Intelligence &amp; Siri</code>) and English-only at launch; requests that leave the device go to Private Cloud Compute. If you'd rather Spotlight <em>only</em> searched, turn Siri AI off there.</p>
+<h2 id="raycast-alfred-launchbar-do-you-still-need-one">Raycast, Alfred, LaunchBar: do you still need one?<a class="anchor" href="#raycast-alfred-launchbar-do-you-still-need-one" aria-label="Permalink">#</a></h2>
+<p>Honest 2026 answer: <strong>Spotlight is enough for launching, files, actions and light clipboard use.</strong> A third-party launcher is worth it if you want any of:</p>
+<div class="table-wrap"><table><thead><tr><th>Want</th><th>Spotlight (26/27)</th><th><strong>Raycast</strong></th><th><strong>Alfred 5</strong> (Powerpack)</th></tr></thead><tbody><tr><td>Launch apps, open files</td><td>✅</td><td>✅</td><td>✅ (fastest raw search)</td></tr><tr><td>Persistent, pinned, searchable clipboard</td><td>❌ (8 h, no pins)</td><td>✅ free</td><td>✅</td></tr><tr><td>Snippets / text expansion</td><td>❌ (Text Replacements only)</td><td>✅ free</td><td>✅</td></tr><tr><td>Window management (halves, thirds, move to display)</td><td>❌ (only native tiling)</td><td>✅ free, excellent</td><td>via workflows</td></tr><tr><td>Calculator, unit/currency conversion</td><td>✅ basic</td><td>✅ rich</td><td>✅</td></tr><tr><td>Extensions store (GitHub, Jira, Linear, Homebrew, Docker, 1Password, VS Code projects…)</td><td>❌</td><td>✅ ~2,000+ free</td><td>✅ workflows (community)</td></tr><tr><td>Emoji picker, colour picker, system commands (sleep, empty trash, toggle dark mode)</td><td>partial</td><td>✅</td><td>✅</td></tr><tr><td>Scripting your own commands</td><td>Shortcuts</td><td>TypeScript/React extensions or script commands</td><td>Bash/Python/AppleScript workflows</td></tr><tr><td>Built-in AI chat / model routing</td><td>Siri AI (GG)</td><td>Pro ($8–10/mo)</td><td>via workflows</td></tr><tr><td>Price</td><td>free</td><td><strong>free</strong> core; Pro for AI, sync, custom themes</td><td>~£34 one-time Powerpack</td></tr><tr><td>Notes</td><td>Keeps improving each release</td><td>Cloud account optional; closed source; owns the "everything app" niche</td><td>Fast, local-first, one-time price; the automation nerd's pick</td></tr></tbody></table></div>
+<p><strong>Recommendation</strong>: install <strong>Raycast</strong> (<code>brew install --cask raycast</code>), bind it to <kbd>⌥</kbd><kbd>Space</kbd> (leave <kbd>⌘</kbd><kbd>Space</kbd> for Spotlight — the two coexist well), and use it for clipboard history, snippets, window management and the extensions you actually adopt (Homebrew search, GitHub, "Open project in editor"). Skip Raycast Pro unless the AI features replace a subscription you'd otherwise pay for. Choose <strong>Alfred</strong> if you dislike accounts and Electron-ish apps, or already own the Powerpack. Choose <strong>LaunchBar</strong> if you've used it for 15 years. Skip all three if Spotlight plus Maccy covers you — many people are surprised that it does now.</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="03-system-settings.html"><span>Previous</span><strong>System Settings, pane by pane</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/04-finder-dock-spotlight.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/04-finder-dock-spotlight.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#finder">Finder</a></li>
+<li class="lvl3"><a href="#views-and-navigation">Views and navigation</a></li>
+<li class="lvl3"><a href="#sidebar-toolbar-and-favourites">Sidebar, toolbar and favourites</a></li>
+<li class="lvl3"><a href="#quick-look">Quick Look</a></li>
+<li class="lvl3"><a href="#smart-folders-and-spotlight-queries">Smart Folders and Spotlight queries</a></li>
+<li class="lvl3"><a href="#archive-and-disk-images">Archive and disk images</a></li>
+<li class="lvl3"><a href="#things-finder-still-doesnt-do-well-and-fixes">Things Finder still doesn't do well (and fixes)</a></li>
+<li class="lvl2"><a href="#the-dock">The Dock</a></li>
+<li class="lvl2"><a href="#spotlight-macos-26">Spotlight (macOS 26+)</a></li>
+<li class="lvl3"><a href="#the-four-views">The four views</a></li>
+<li class="lvl3"><a href="#quick-keys">Quick Keys</a></li>
+<li class="lvl3"><a href="#clipboard-history">Clipboard history</a></li>
+<li class="lvl3"><a href="#search-settings">Search settings</a></li>
+<li class="lvl3"><a href="#siri-ai-in-spotlight-golden-gate">Siri AI in Spotlight (Golden Gate)</a></li>
+<li class="lvl2"><a href="#raycast-alfred-launchbar-do-you-still-need-one">Raycast, Alfred, LaunchBar: do you still need one?</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
