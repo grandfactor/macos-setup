@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appendix D — Glossary — The macOS Setup Guide</title>
+<meta name="description" content="Plain-English definitions of the macOS, Apple-silicon, and developer-tooling terms used throughout the guide — from APFS and Activation Lock to XProtect and zsh — with pointers to the chapter that goes deeper.">
+<meta property="og:title" content="Appendix D — Glossary — The macOS Setup Guide">
+<meta property="og:description" content="Plain-English definitions of the macOS, Apple-silicon, and developer-tooling terms used throughout the guide — from APFS and Activation Lock to XProtect and zsh — with pointers to the chapter that goes deeper.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+<li><a href="15-databases-and-local-dev.html"><span class="nav-num">15</span>Databases &amp; local development services</a></li>
+</ul>
+<p class="nav-part">Part IV — Security, backup &amp; maintenance</p><ul>
+<li><a href="16-security-and-privacy.html"><span class="nav-num">16</span>Security &amp; privacy</a></li>
+<li><a href="17-backup-and-recovery.html"><span class="nav-num">17</span>Backup &amp; recovery</a></li>
+<li><a href="18-performance-and-maintenance.html"><span class="nav-num">18</span>Performance &amp; maintenance</a></li>
+</ul>
+<p class="nav-part">Part V — Daily driving &amp; workflows</p><ul>
+<li><a href="19-daily-driver-apps.html"><span class="nav-num">19</span>Daily-driver apps</a></li>
+<li><a href="20-cs-student-specific.html"><span class="nav-num">20</span>CS-student specific</a></li>
+<li><a href="21-automation-and-scripting.html"><span class="nav-num">21</span>Automation &amp; scripting</a></li>
+<li><a href="22-troubleshooting.html"><span class="nav-num">22</span>Troubleshooting</a></li>
+</ul>
+<p class="nav-part">Part VI — Reference</p><ul>
+<li><a href="23-checklists-and-cheat-sheets.html"><span class="nav-num">23</span>Checklists &amp; cheat sheets</a></li>
+<li><a href="appendix-a-bootstrap-script.html"><span class="nav-num">A</span>Appendix A — Bootstrap script</a></li>
+<li><a href="appendix-b-brewfile.html"><span class="nav-num">B</span>Appendix B — Brewfile</a></li>
+<li><a href="appendix-c-keyboard-shortcuts.html"><span class="nav-num">C</span>Appendix C — Keyboard shortcuts</a></li>
+<li class="active"><a href="appendix-d-glossary.html"><span class="nav-num">D</span>Appendix D — Glossary</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="appendix-d-glossary">Appendix D — Glossary</h1>
+<p>Alphabetical. Bold terms are defined elsewhere in this list. Chapter references point to where the concept matters in practice.</p>
+<p><strong>Activation Lock</strong> — Anti-theft tie between a Mac and the Apple Account that enabled Find My. A locked Mac can't be erased and reactivated without that account's credentials. Automatic when Find My is on. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>ad-hoc signing</strong> — A code signature with no developer identity (<code>codesign -s -</code>). Apple silicon requires <em>every</em> executable to be signed at least ad-hoc; compilers do it automatically. Ad-hoc-signed apps trip <strong>Gatekeeper</strong> when downloaded. → <a href="22-troubleshooting.html">ch. 22</a></p>
+<p><strong>AeroSpace</strong> — Open-source i3-style tiling window manager for macOS that doesn't need Accessibility hacks or SIP changes. → <a href="06-window-management.html">ch. 6</a></p>
+<p><strong>agent (launch agent)</strong> — A <strong>launchd</strong> job that runs as your user when you're logged in (<code>~/Library/LaunchAgents</code>). Compare <strong>daemon</strong>. → <a href="21-automation-and-scripting.html">ch. 21</a></p>
+<p><strong>AirPlay Receiver</strong> — macOS feature that listens on ports 5000 and 7000 and collides with dev servers. Turn off in AirDrop &amp; Handoff settings. → <a href="22-troubleshooting.html">ch. 22</a></p>
+<p><strong>APFS</strong> — Apple File System (2017). Copy-on-write, snapshots, clones, native encryption, space-sharing volumes inside a <strong>container</strong>. Case-insensitive by default. → <a href="17-backup-and-recovery.html">ch. 17</a>, <a href="18-performance-and-maintenance.html">ch. 18</a></p>
+<p><strong>Apple Account</strong> — Formerly Apple ID. Your identity for iCloud, App Store, Find My, Activation Lock, and the FileVault recovery-key escrow option.</p>
+<p><strong>Apple Intelligence</strong> — Apple's on-device + <strong>Private Cloud Compute</strong> AI features: Writing Tools, Siri answers in Spotlight, Shortcuts "Use Model" action, Visual Intelligence. Requires M1+ and 8 GB.</p>
+<p><strong>Apple silicon</strong> — Apple's ARM64 system-on-chip family (M1–M6, A18 Pro in the MacBook Neo). <strong>Unified memory</strong>, integrated GPU/Neural Engine, no upgradeable RAM. macOS 27 runs <em>only</em> on Apple silicon. → <a href="01-hardware-and-buying.html">ch. 1</a></p>
+<p><strong>arm64 / aarch64</strong> — The 64-bit ARM instruction set Apple silicon executes natively. Contrast <strong>x86_64</strong>. Also the Docker platform string <code>linux/arm64</code>.</p>
+<p><strong>Automator</strong> — 2005-era visual automation app; mostly superseded by <strong>Shortcuts</strong>, still useful for Quick Actions and legacy <code>.workflow</code> files. → <a href="21-automation-and-scripting.html">ch. 21</a></p>
+<p><strong>Brewfile</strong> — A <code>brew bundle</code> manifest listing formulae, casks, <code>mas</code> apps, and VS Code extensions. → <a href="08-homebrew.html">ch. 8</a>, <a href="appendix-b-brewfile.html">Appendix B</a></p>
+<p><strong>cask</strong> — A Homebrew package that installs a GUI app (or font, or driver) rather than a CLI tool: <code>brew install --cask ghostty</code>. → <a href="08-homebrew.html">ch. 8</a></p>
+<p><strong>Cellar</strong> — Where Homebrew keeps installed formula versions (<code>/opt/homebrew/Cellar/&lt;name&gt;/&lt;version&gt;</code>), symlinked into <code>/opt/homebrew/bin</code>.</p>
+<p><strong>chezmoi / stow</strong> — Dotfile managers. GNU Stow symlinks a repo's tree into <code>~</code>; chezmoi templates and encrypts per-machine. → <a href="10-dotfiles-and-git.html">ch. 10</a></p>
+<p><strong>CLT (Command Line Tools)</strong> — Apple's ~1 GB package with <code>clang</code>, <code>git</code>, <code>make</code>, <code>lldb</code>, SDK headers; installed by <code>xcode-select --install</code>. Enough for most development without the 12 GB Xcode. → <a href="07-command-line-tools-and-xcode.html">ch. 7</a></p>
+<p><strong>Compose</strong> — Docker's multi-container spec (<code>compose.yaml</code>). Apple's <code>container</code> tool doesn't support it; OrbStack and Docker Desktop do. → <a href="13-containers-and-vms.html">ch. 13</a></p>
+<p><strong>container (Apple)</strong> — Apple's open-source <code>container</code> CLI (1.0 in 2025) that runs each Linux container in its own lightweight VM using the <strong>Virtualization framework</strong>. Fast and secure; no Compose, smaller ecosystem than Docker. → <a href="13-containers-and-vms.html">ch. 13</a></p>
+<p><strong>container (APFS)</strong> — The partition-level object inside which APFS volumes share space. <code>diskutil apfs list</code>.</p>
+<p><strong>Continuity / Handoff / Universal Control / Sidecar</strong> — Apple's cross-device features: pick up tasks across devices, use one keyboard/mouse across a Mac and iPad, use an iPad as a display.</p>
+<p><strong>daemon (launch daemon)</strong> — A <strong>launchd</strong> job that runs as root at boot, before any login (<code>/Library/LaunchDaemons</code>). → <a href="21-automation-and-scripting.html">ch. 21</a></p>
+<p><strong><code>defaults</code></strong> — CLI for reading/writing preference <strong>plists</strong>: <code>defaults write com.apple.dock autohide -bool true</code>. → <a href="03-system-settings.html">ch. 3</a>, <a href="appendix-a-bootstrap-script.html">Appendix A</a></p>
+<p><strong>DFU mode</strong> — Device Firmware Update mode; lets a second Mac revive or restore an Apple-silicon Mac's firmware and recoveryOS over USB-C via Apple Configurator/Finder. → <a href="22-troubleshooting.html">ch. 22</a></p>
+<p><strong>Dock</strong> — The app launcher/switcher strip. Auto-hide it. → <a href="04-finder-dock-spotlight.html">ch. 4</a></p>
+<p><strong>dotfiles</strong> — Your configuration files (<code>.zshrc</code>, <code>.gitconfig</code>, editor settings…), ideally in a Git repo with an idempotent installer. → <a href="10-dotfiles-and-git.html">ch. 10</a></p>
+<p><strong>Electron</strong> — Framework for building desktop apps from web tech; Slack, Discord, VS Code, Spotify, Notion. Memory-hungry (300–800 MB each). → <a href="18-performance-and-maintenance.html">ch. 18</a></p>
+<p><strong>Erase All Content and Settings</strong> — One-click factory reset (System Settings → General → Transfer or Reset) that keeps macOS installed; much faster than reinstalling. → <a href="22-troubleshooting.html">ch. 22</a></p>
+<p><strong>FileVault</strong> — Full-disk encryption for the startup volume, keyed to your login password plus a recovery key (which macOS 26 can store in iCloud Keychain/Passwords). On Apple silicon it's nearly free in performance. Turn it on. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>File Provider</strong> — The API cloud-storage apps (iCloud Drive, Dropbox, OneDrive, Google Drive) use for files-on-demand. Files can be "evicted" (cloud-only placeholders) — dangerous for Git repos. → <a href="19-daily-driver-apps.html">ch. 19</a></p>
+<p><strong>Finder</strong> — The file manager. → <a href="04-finder-dock-spotlight.html">ch. 4</a></p>
+<p><strong>Focus</strong> — Per-context notification filtering modes (Do Not Disturb, Work, Study…), syncable across devices and usable as Shortcuts triggers. → <a href="21-automation-and-scripting.html">ch. 21</a></p>
+<p><strong>formula</strong> — A Homebrew package definition for a CLI tool or library, built from source or installed as a prebuilt <strong>bottle</strong>. → <a href="08-homebrew.html">ch. 8</a></p>
+<p><strong>Full Disk Access</strong> — The <strong>TCC</strong> permission that lets an app (e.g., your terminal) read protected folders (Mail, Messages, Time Machine backups, other users). Granted per app in Privacy &amp; Security. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>Gatekeeper</strong> — The launch-time check that downloaded apps are signed by a known developer and <strong>notarized</strong>. macOS 26 removed the right-click-Open bypass; use Privacy &amp; Security → Open Anyway. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>Ghostty</strong> — Fast, native (Swift/Zig) GPU terminal emulator with a plain-text config; this guide's default terminal. 1.3 as of September 2026. → <a href="09-terminal-and-shell.html">ch. 9</a></p>
+<p><strong>Golden Gate</strong> — macOS 27 (ships 14 September 2026). Apple-silicon only; Liquid Glass intensity slider; Siri/AI in Spotlight; Rosetta removed from the default install. → <a href="02-first-boot-and-migration.html">ch. 2</a></p>
+<p><strong>Hammerspoon</strong> — Lua scripting bridge to macOS APIs for hotkeys, windows, and system events. → <a href="21-automation-and-scripting.html">ch. 21</a></p>
+<p><strong>Homebrew</strong> — The de facto macOS package manager (<code>brew</code>), installed under <code>/opt/homebrew</code> on Apple silicon. Version 6.0 (2026) added tap trust prompts, <code>brew exec</code>, parallel bundle installs; Intel support is Tier 3. → <a href="08-homebrew.html">ch. 8</a></p>
+<p><strong>hyper key</strong> — A single key (usually Caps Lock via Karabiner) that sends <code>⌃⌥⇧⌘</code> together, giving you a conflict-free modifier layer for your own shortcuts. → <a href="05-keyboard-and-input.html">ch. 5</a></p>
+<p><strong>iCloud Drive</strong> — Apple's file sync. "Desktop &amp; Documents Folders" sync is convenient and risky for developers. → <a href="02-first-boot-and-migration.html">ch. 2</a></p>
+<p><strong>iCloud Keychain</strong> — Encrypted sync of passwords, passkeys, Wi-Fi passwords, and (since macOS 26) the FileVault recovery key; surfaced in the <strong>Passwords</strong> app.</p>
+<p><strong>idempotent</strong> — A script you can run repeatedly with the same end result — the property every bootstrap and dotfiles installer should have. → <a href="appendix-a-bootstrap-script.html">Appendix A</a></p>
+<p><strong>JXA</strong> — JavaScript for Automation; the JavaScript face of Apple Events, alternative to AppleScript. Run via <code>osascript -l JavaScript</code>. → <a href="21-automation-and-scripting.html">ch. 21</a></p>
+<p><strong>Karabiner-Elements</strong> — Low-level keyboard remapper (driver extension). Caps Lock → Escape/Control, hyper key, per-device profiles. → <a href="05-keyboard-and-input.html">ch. 5</a></p>
+<p><strong>kernel extension (kext)</strong> — Legacy third-party kernel code. Effectively dead on Apple silicon (needs Reduced Security); modern software uses <strong>system extensions</strong>. A kext requirement is a red flag. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>Keychain</strong> — macOS's encrypted credential store (<code>security</code> CLI, Keychain Access app). Where SSH passphrases, Git tokens, and API keys should live. → <a href="21-automation-and-scripting.html">ch. 21</a></p>
+<p><strong>launchd</strong> — macOS's init system and job scheduler; replaces cron/systemd. Jobs are <strong>plists</strong> in LaunchAgents/LaunchDaemons folders, managed with <code>launchctl</code>. → <a href="21-automation-and-scripting.html">ch. 21</a></p>
+<p><strong>Liquid Glass</strong> — The translucent design language introduced in macOS 26 Tahoe; macOS 27 adds an intensity slider. Reduce Transparency in Accessibility if it hurts readability. → <a href="03-system-settings.html">ch. 3</a></p>
+<p><strong>LLDB</strong> — Apple's debugger (LLVM). Use it instead of GDB on macOS. → <a href="20-cs-student-specific.html">ch. 20</a></p>
+<p><strong>Lockdown Mode</strong> — Extreme security mode for people at risk of targeted attack; disables many features. Not for general use. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>Login Items &amp; Extensions</strong> — System Settings pane listing apps that open at login and background agents you can toggle. Audit it. → <a href="18-performance-and-maintenance.html">ch. 18</a></p>
+<p><strong><code>mas</code></strong> — CLI for the Mac App Store; used in Brewfiles for App Store apps. → <a href="appendix-b-brewfile.html">Appendix B</a></p>
+<p><strong>Memory Pressure</strong> — Activity Monitor's graph of how hard macOS is working to keep memory available. Green fine; sustained yellow/red = you need more RAM or fewer apps. More meaningful than "Memory Used". → <a href="18-performance-and-maintenance.html">ch. 18</a></p>
+<p><strong>Migration Assistant</strong> — Apple's tool for moving accounts, apps, and data from an old Mac/backup/PC. Convenient, brings cruft. → <a href="02-first-boot-and-migration.html">ch. 2</a></p>
+<p><strong>mise</strong> — Polyglot runtime version manager (Node, Python, Java, Go, Rust, Ruby…) replacing nvm/pyenv/rbenv/asdf; also tasks and env vars. → <a href="11-languages-and-runtimes.html">ch. 11</a></p>
+<p><strong>Mission Control</strong> — Overview of all windows and <strong>Spaces</strong>. <code>⌃↑</code>. → <a href="06-window-management.html">ch. 6</a></p>
+<p><strong>MLX</strong> — Apple's array/ML framework optimized for Apple silicon's unified memory; the fastest way to run LLMs locally on a Mac. → <a href="20-cs-student-specific.html">ch. 20</a></p>
+<p><strong>MPS</strong> — Metal Performance Shaders; PyTorch's GPU backend on Apple silicon (<code>device="mps"</code>). Not CUDA. → <a href="20-cs-student-specific.html">ch. 20</a></p>
+<p><strong>Nerd Font</strong> — A monospace font patched with thousands of icons (Powerline, devicons) that prompts like Starship and tools like eza use. → <a href="09-terminal-and-shell.html">ch. 9</a></p>
+<p><strong>notarization</strong> — Apple's automated malware scan of developer-signed apps; required for <strong>Gatekeeper</strong> to allow a download without warnings. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>OrbStack</strong> — Fast, light Docker-compatible container runtime and Linux VM manager for macOS; this guide's default. Free for personal use. → <a href="13-containers-and-vms.html">ch. 13</a></p>
+<p><strong>Optimized Battery Charging / Charge Limit</strong> — Battery-health features: the first learns your schedule and holds at 80%; the second (macOS 26.4+) caps at 80% always. → <a href="18-performance-and-maintenance.html">ch. 18</a></p>
+<p><strong>passkey</strong> — Phishing-resistant public-key login credential synced via iCloud Keychain (or a password manager), replacing passwords on supporting sites. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>Passwords app</strong> — Apple's built-in password manager (macOS 15+) with passkeys, TOTP, shared groups, and a Windows/Chrome extension. → <a href="19-daily-driver-apps.html">ch. 19</a></p>
+<p><strong>PATH</strong> — The ordered list of directories the shell searches for commands. <code>/opt/homebrew/bin</code> must come before <code>/usr/bin</code>. Set in <code>~/.zprofile</code>. → <a href="09-terminal-and-shell.html">ch. 9</a>, <a href="22-troubleshooting.html">ch. 22</a></p>
+<p><strong>plist</strong> — Property list; XML or binary key–value file used for preferences and launchd jobs. Inspect with <code>plutil -p</code>, edit with <code>defaults</code>. → <a href="03-system-settings.html">ch. 3</a></p>
+<p><strong>Private Cloud Compute</strong> — Apple's server-side AI processing with verifiable privacy guarantees, used when a request is too large for on-device models.</p>
+<p><strong>Private Relay</strong> — iCloud+ feature that proxies Safari traffic through two hops to hide IP and DNS from sites and your ISP.</p>
+<p><strong>purgeable space</strong> — Storage macOS can reclaim on demand (caches, local snapshots, evicted cloud files); counted as "available" by Finder but not by <code>df</code>. → <a href="18-performance-and-maintenance.html">ch. 18</a></p>
+<p><strong>Quick Action</strong> — A Shortcut or Automator workflow exposed in Finder's right-click menu and the Touch Bar/Services menu. → <a href="21-automation-and-scripting.html">ch. 21</a></p>
+<p><strong>Quick Look</strong> — Space-bar file preview in Finder; extensible with plugins (Markdown, source code, JSON). → <a href="04-finder-dock-spotlight.html">ch. 4</a></p>
+<p><strong>Raycast</strong> — Extensible launcher with clipboard history, window management, snippets, and an extension store; the common Spotlight replacement. → <a href="19-daily-driver-apps.html">ch. 19</a></p>
+<p><strong>Recovery (macOS Recovery / recoveryOS)</strong> — The hidden boot environment (hold power → Options) with Disk Utility, Reinstall macOS, Time Machine restore, Terminal, Startup Security Utility. → <a href="22-troubleshooting.html">ch. 22</a></p>
+<p><strong>Rosetta 2</strong> — Apple's translation layer that runs <strong>x86_64</strong> Mac binaries (and, via OrbStack/Docker, x86 Linux containers) on Apple silicon. Not installed by default on macOS 27 (<code>softwareupdate --install-rosetta</code>); removed entirely in macOS 28. → <a href="02-first-boot-and-migration.html">ch. 2</a></p>
+<p><strong>Safe Mode</strong> — Boot with only Apple extensions and no login items (hold ⇧ when choosing the startup disk). The fastest "is it my software or the OS?" test. → <a href="22-troubleshooting.html">ch. 22</a></p>
+<p><strong>sealed system volume (SSV)</strong> — The read-only, cryptographically signed volume holding macOS itself (<code>/System</code>, <code>/usr/bin</code>). You can't modify it; install into <code>/opt</code>, <code>/usr/local</code>, or <code>~</code>. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>Shortcuts</strong> — Apple's cross-device visual automation app; on macOS 26 gained triggers (time, app, folder, Wi-Fi, Focus) and an AI "Use Model" action. Runnable from the shell with <code>shortcuts run</code>. → <a href="21-automation-and-scripting.html">ch. 21</a></p>
+<p><strong>SIP (System Integrity Protection)</strong> — Kernel-enforced protection of system files and processes even from root. Leave it enabled. <code>csrutil status</code>. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>Spaces</strong> — Virtual desktops; swipe or <code>⌃←→</code>. Assign apps per Space; turn off automatic reordering. → <a href="06-window-management.html">ch. 6</a></p>
+<p><strong>Spotlight</strong> — System search and launcher (<code>⌘Space</code>). macOS 26 added <code>⌘1–4</code> filtered views, clipboard history, Actions, and AI answers. Index managed by <code>mds</code>; rebuild with <code>mdutil -E /</code>. → <a href="04-finder-dock-spotlight.html">ch. 4</a></p>
+<p><strong>Stage Manager</strong> — Optional window-grouping mode with recent apps in a side strip. Off by default in this guide. → <a href="06-window-management.html">ch. 6</a></p>
+<p><strong>Starship</strong> — Fast, cross-shell prompt configured in <code>starship.toml</code>. → <a href="09-terminal-and-shell.html">ch. 9</a></p>
+<p><strong>Stolen Device Protection</strong> — macOS 26.4+ feature requiring biometrics (no password fallback) and a security delay for sensitive changes when the Mac is away from familiar locations. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>system extension</strong> — Modern, user-space replacement for <strong>kexts</strong>: network extensions (VPNs, LuLu), endpoint security (antivirus), driver extensions (Karabiner). Listed by <code>systemextensionsctl list</code>. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>System Data</strong> — The Storage pane's catch-all category (caches, snapshots, container images, simulators). Legitimately 30–100 GB on a dev Mac. → <a href="18-performance-and-maintenance.html">ch. 18</a></p>
+<p><strong>Tahoe</strong> — macOS 26 (2025–26). Liquid Glass, new Spotlight, Shortcuts triggers, the last release supporting a few Intel Macs. 26.6 is current as of September 2026. → <a href="02-first-boot-and-migration.html">ch. 2</a></p>
+<p><strong>tap</strong> — A third-party Homebrew repository (<code>brew tap owner/repo</code>). Homebrew 6 asks you to trust a tap before installing from it. → <a href="08-homebrew.html">ch. 8</a></p>
+<p><strong>TCC (Transparency, Consent, and Control)</strong> — The permissions system behind Privacy &amp; Security prompts (Camera, Full Disk Access, Accessibility, Automation, Screen Recording…). <code>tccutil reset</code> clears grants. → <a href="16-security-and-privacy.html">ch. 16</a>, <a href="22-troubleshooting.html">ch. 22</a></p>
+<p><strong>Thunderbolt / USB4 / USB-C</strong> — The Mac's ports. Same connector, different capabilities: TB4/5 = 40–80 Gbps, displays, PCIe; USB-C cables may be USB 2.0 only with no video. → <a href="01-hardware-and-buying.html">ch. 1</a>, <a href="22-troubleshooting.html">ch. 22</a></p>
+<p><strong>Time Machine</strong> — Apple's versioned backup to an external disk or network share; hourly local <strong>snapshots</strong> when the disk is away. → <a href="17-backup-and-recovery.html">ch. 17</a></p>
+<p><strong>Touch ID for sudo</strong> — Configured via <code>/etc/pam.d/sudo_local</code> so terminal <code>sudo</code> accepts a fingerprint. → <a href="09-terminal-and-shell.html">ch. 9</a></p>
+<p><strong>unified log</strong> — The system-wide structured log (<code>log show</code>, <code>log stream</code>, Console app) replacing text log files. → <a href="22-troubleshooting.html">ch. 22</a></p>
+<p><strong>unified memory</strong> — Apple silicon's single memory pool shared by CPU, GPU, and Neural Engine. Why "Memory Used" looks high and why RAM size matters for local ML. → <a href="01-hardware-and-buying.html">ch. 1</a>, <a href="18-performance-and-maintenance.html">ch. 18</a></p>
+<p><strong>uv</strong> — Astral's fast Python package/project/interpreter manager replacing pip, venv, pipx, pyenv, and poetry for most uses. → <a href="11-languages-and-runtimes.html">ch. 11</a></p>
+<p><strong>Virtualization framework</strong> — Apple's built-in hypervisor API used by OrbStack, UTM (Apple mode), Docker Desktop, <code>container</code>, Parallels, and VMware Fusion for fast arm64 VMs. → <a href="13-containers-and-vms.html">ch. 13</a></p>
+<p><strong>Visual Intelligence</strong> — macOS 27 screen-understanding feature (<code>⌘⇧Space</code>) that identifies and acts on what's on screen.</p>
+<p><strong>x86_64 / amd64</strong> — The Intel/AMD 64-bit instruction set. Needs <strong>Rosetta 2</strong> on a Mac; <code>linux/amd64</code> containers are translated. Gone entirely with macOS 28. → <a href="02-first-boot-and-migration.html">ch. 2</a>, <a href="13-containers-and-vms.html">ch. 13</a></p>
+<p><strong>Xcode</strong> — Apple's IDE and SDKs (12+ GB); required for iOS/macOS app development, optional otherwise. Manage versions with <code>xcodes</code>. → <a href="07-command-line-tools-and-xcode.html">ch. 7</a></p>
+<p><strong>XProtect</strong> — Apple's built-in, silently updated malware scanner and remediation (XProtect Remediator). One reason third-party antivirus is unnecessary for most people. → <a href="16-security-and-privacy.html">ch. 16</a></p>
+<p><strong>zsh</strong> — The default shell since Catalina. Config order: <code>.zshenv</code> → <code>.zprofile</code> (login) → <code>.zshrc</code> (interactive). → <a href="09-terminal-and-shell.html">ch. 9</a></p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="appendix-c-keyboard-shortcuts.html"><span>Previous</span><strong>Appendix C — Keyboard shortcuts</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/appendix-d-glossary.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/appendix-d-glossary.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
