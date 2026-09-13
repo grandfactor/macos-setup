@@ -41,6 +41,8 @@ _For CS students, software engineers and everyone who lives on a Mac — 2026 ed
 **Part VI — Reference**
 
 - [23. Checklists & cheat sheets](#23-checklists-cheat-sheets) — The whole guide compressed into printable checklists — the day-one setup order, the 30-minute security pass, the developer-environment checklist, weekly/monthly maintenance, a new-project checklist, a pre-travel checklist, and one-page cheat sheets for the terminal, Homebrew, mise/uv, Git, containers, and macOS CLI tools.
+- [A. Appendix A — Bootstrap script](#a-appendix-a-bootstrap-script) — The complete, idempotent bootstrap script that turns a fresh Apple-silicon Mac into the setup this guide describes — Command Line Tools, Homebrew, Brewfile, mise/uv, Git and SSH, shell, Touch ID sudo, dotfiles — plus the macOS defaults script, the monthly cleanup script, and the security audit script. Read before running.
+- [B. Appendix B — Brewfile](#b-appendix-b-brewfile) — The complete Brewfile behind this guide — 100+ CLI tools, runtimes, container/cloud tooling, fonts, and every GUI app recommended in chapters 9–19, with the optional ones commented out. Plus how Brewfile syntax works, how to keep yours in sync, and how to split it per machine.
 
 ---
 
@@ -5061,5 +5063,1018 @@ container run --rm -it alpine sh                  # Apple's container CLI
 | VS Code | monthly | — | — |
 
 Exact numbers will drift — [Appendix E](appendix-e-sources.html) lists where to check.
+
+[↑ Back to top](#table-of-contents)
+
+---
+
+## A. Appendix A — Bootstrap script
+
+Everything in [Part II](03-system-settings.html) and [Part III](07-command-line-tools-and-xcode.html) that can be automated, in four scripts that live in the repo's `scripts/` directory. They're written for **zsh on macOS 26/27, Apple silicon**, and every step is idempotent — run them again after a partial failure or on a Mac you set up by hand and they'll only do what's missing.
+
+> [!WARNING]
+> **Read scripts before you run them.** Piping `curl` into a shell from a stranger's repo is exactly the habit [chapter 16](16-security-and-privacy.html) warns about. Clone the repo, open the files, delete the lines you disagree with (there will be some — these are opinions), then run. The scripts never touch `/System`, never disable Gatekeeper/SIP/FileVault, and ask before installing Rosetta or logging in to GitHub.
+
+### Quick start
+
+```sh
+# Option 1: clone first (recommended — you can read and edit)
+git clone https://github.com/grandfactor/macos-setup.git ~/code/macos-setup
+cd ~/code/macos-setup
+less scripts/bootstrap.sh            # read it
+zsh scripts/bootstrap.sh             # full setup, ~20–40 min depending on the Brewfile
+
+# Option 2: one line on a brand-new Mac (Terminal.app → paste)
+/bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/grandfactor/macos-setup/main/scripts/bootstrap.sh)"
+```
+
+Flags:
+
+| Flag | Effect |
+|---|---|
+| `--minimal` | Core CLI tools + mise/uv + a dozen Tier-1 apps (Ghostty, VS Code, Raycast, Rectangle, Firefox, OrbStack…). ~10 minutes. |
+| `--no-defaults` | Skip `macos-defaults.sh` (keep Apple's UI defaults). |
+| `--no-apps` | Skip the Brewfile entirely; install only `git gh mise uv starship fzf zoxide eza bat fd ripgrep jq`. |
+| `--dotfiles <git-url>` | Clone your dotfiles to `~/.dotfiles` and run its `install.sh` (or `install`, `bootstrap.sh`, `setup.sh`) at the end. |
+| `GIT_NAME=… GIT_EMAIL=…` (env) | Skip the Git identity prompts. |
+
+What it deliberately leaves to you: **FileVault** (needs your password and a recovery-key decision in the GUI), **Find My / Stolen Device Protection**, **Time Machine** destination, **Xcode.app** (12 GB; `mas install 497799835`), granting **Accessibility/Full Disk Access** prompts, and signing in to apps. The script ends with a checklist of those.
+
+### `scripts/bootstrap.sh`
+
+```sh
+#!/bin/zsh
+# bootstrap.sh — set up a fresh Apple-silicon Mac (macOS 26/27) for development in one go.
+#
+#   Fresh Mac:   /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/grandfactor/macos-setup/main/scripts/bootstrap.sh)"
+#   From clone:  zsh scripts/bootstrap.sh [--minimal] [--no-defaults] [--no-apps] [--dotfiles <git-url>]
+#
+# What it does (each step is idempotent and skipped if already done):
+#   1. Xcode Command Line Tools        5. Brewfile (full or --minimal)      9. Touch ID for sudo
+#   2. Homebrew (+ shellenv)           6. mise + uv, default runtimes      10. Dotfiles (optional)
+#   3. Rosetta (only if you say yes)   7. Git identity + SSH key           11. Summary & next steps
+#   4. macOS defaults (optional)       8. Shell plugins / starship
+#
+# It does NOT: turn on FileVault (do it in System Settings — needs your password and a recovery-key choice),
+# install Xcode.app (12 GB; `mas install 497799835` or the App Store), or touch anything under /System.
+# Read the whole file before running it on your machine. Every step is a function; comment out what you don't want.
+#
+# Companion to The macOS Setup Guide — https://grandfactor.github.io/macos-setup/appendix-a-bootstrap-script.html
+
+set -euo pipefail
+
+# ─── Options ──────────────────────────────────────────────────────────────────
+MINIMAL=0; DO_DEFAULTS=1; DO_APPS=1; DOTFILES_URL="${DOTFILES_URL:-}"
+GIT_NAME="${GIT_NAME:-}"; GIT_EMAIL="${GIT_EMAIL:-}"
+REPO_RAW="https://raw.githubusercontent.com/grandfactor/macos-setup/main"
+while (( $# )); do
+  case "$1" in
+    --minimal)      MINIMAL=1 ;;
+    --no-defaults)  DO_DEFAULTS=0 ;;
+    --no-apps)      DO_APPS=0 ;;
+    --dotfiles)     DOTFILES_URL="$2"; shift ;;
+    -h|--help)      sed -n '2,20p' "$0"; exit 0 ;;
+    *) echo "unknown option: $1" >&2; exit 2 ;;
+  esac; shift
+done
+
+# ─── Helpers ──────────────────────────────────────────────────────────────────
+autoload -Uz colors && colors
+step() { print -P "\n%F{blue}%B▶ $1%b%f"; }
+ok()   { print -P "%F{green}  ✔ $1%f"; }
+skip() { print -P "%F{yellow}  ↷ $1 (already done)%f"; }
+die()  { print -P "%F{red}  ✖ $1%f" >&2; exit 1; }
+ask()  { local a; read -q "a?$1 [y/N] "; echo; [[ $a == [yY] ]]; }
+have() { command -v "$1" >/dev/null 2>&1; }
+SCRIPT_DIR="${0:A:h}"
+fetch() { # fetch <relative-path> → stdout, from local clone if present else from GitHub
+  if [[ -f "$SCRIPT_DIR/$1" ]]; then cat "$SCRIPT_DIR/$1"; else curl -fsSL "$REPO_RAW/scripts/$1"; fi
+}
+
+# ─── Preflight ────────────────────────────────────────────────────────────────
+step "Preflight"
+[[ "$(uname -s)" == Darwin ]] || die "This is for macOS."
+[[ "$(uname -m)" == arm64 ]]  || die "Apple silicon only (Intel Macs can't run macOS 27; see chapter 1)."
+osver=$(sw_vers -productVersion); (( ${osver%%.*} >= 26 )) || echo "  ⚠ macOS $osver — this guide targets 26+; most steps still work."
+[[ $EUID -ne 0 ]] || die "Don't run as root; it will ask for sudo when needed."
+ok "macOS $osver on $(sysctl -n machdep.cpu.brand_string)"
+# Keep sudo alive for the duration (needed for CLT, defaults, pam)
+sudo -v; ( while true; do sudo -n true; sleep 50; kill -0 "$$" 2>/dev/null || exit; done ) 2>/dev/null &
+caffeinate -dimsu -w $$ &   # don't sleep mid-install
+
+# ─── 1. Command Line Tools ────────────────────────────────────────────────────
+step "Xcode Command Line Tools"
+if xcode-select -p >/dev/null 2>&1 && [[ -e "$(xcode-select -p)/usr/bin/git" ]]; then
+  skip "CLT at $(xcode-select -p)"
+else
+  # Headless install: create the trigger file, find the label, install via softwareupdate
+  touch /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  label=$(softwareupdate -l 2>/dev/null | grep -o 'Label: Command Line Tools.*' | sed 's/^Label: //' | tail -1)
+  if [[ -n "$label" ]]; then
+    softwareupdate -i "$label" --verbose
+  else
+    xcode-select --install 2>/dev/null || true
+    echo "  A dialog opened — install the Command Line Tools, then press Enter."; read -r
+  fi
+  rm -f /tmp/.com.apple.dt.CommandLineTools.installondemand.in-progress
+  xcode-select -p >/dev/null 2>&1 || die "CLT still missing"
+  ok "installed"
+fi
+sudo xcodebuild -license accept 2>/dev/null || true
+
+# ─── 2. Homebrew ──────────────────────────────────────────────────────────────
+step "Homebrew"
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  skip "/opt/homebrew"
+else
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  ok "installed"
+fi
+eval "$(/opt/homebrew/bin/brew shellenv)"
+if ! grep -qs 'brew shellenv' ~/.zprofile; then
+  printf '\n# Homebrew\neval "$(/opt/homebrew/bin/brew shellenv)"\n' >> ~/.zprofile
+  ok "added shellenv to ~/.zprofile"
+fi
+brew analytics off >/dev/null 2>&1 || true
+brew update --quiet
+[[ -d /usr/local/Homebrew ]] && echo "  ⚠ Intel Homebrew found in /usr/local — you probably want to remove it (chapter 8)."
+
+# ─── 3. Rosetta (opt-in) ──────────────────────────────────────────────────────
+step "Rosetta 2"
+if [[ -f /Library/Apple/usr/share/rosetta/rosetta ]]; then
+  skip "installed"
+elif ask "  Install Rosetta 2? (needed only for Intel-only apps / x86 containers; removed in macOS 28)"; then
+  softwareupdate --install-rosetta --agree-to-license && ok "installed"
+else
+  ok "skipped"
+fi
+
+# ─── 4. macOS defaults ────────────────────────────────────────────────────────
+step "macOS defaults"
+if (( DO_DEFAULTS )); then
+  fetch macos-defaults.sh > /tmp/macos-defaults.sh && zsh /tmp/macos-defaults.sh && ok "applied (scripts/macos-defaults.sh)"
+else
+  ok "skipped (--no-defaults)"
+fi
+
+# ─── 5. Brewfile ──────────────────────────────────────────────────────────────
+step "Brewfile"
+if (( DO_APPS )); then
+  fetch Brewfile > /tmp/Brewfile
+  if (( MINIMAL )); then
+    # Minimal: core CLI + mise/uv + terminal/editor/launcher only (everything up to the "Fonts" section, plus Tier 1 casks)
+    awk '/^# ─── Fonts/{exit} {print}' /tmp/Brewfile > /tmp/Brewfile.min
+    grep -E '^cask "(ghostty|visual-studio-code|raycast|rectangle|maccy|jordanbaird-ice|stats|itsycal|shottr|appcleaner|the-unarchiver|bitwarden|karabiner-elements|font-jetbrains-mono-nerd-font|orbstack|firefox)"' /tmp/Brewfile >> /tmp/Brewfile.min
+    mv /tmp/Brewfile.min /tmp/Brewfile
+    ok "minimal set"
+  fi
+  # mas needs an App Store login; skip mas lines if not signed in
+  if ! mas account >/dev/null 2>&1; then sed -i '' '/^mas /d' /tmp/Brewfile; echo "  ℹ not signed into the App Store — skipping mas entries"; fi
+  # vscode lines need `code` on PATH; brew bundle handles the ordering, but skip if VS Code isn't in this Brewfile
+  grep -q '^cask "visual-studio-code"' /tmp/Brewfile || sed -i '' '/^vscode /d' /tmp/Brewfile
+  HOMEBREW_BUNDLE_NO_LOCK=1 brew bundle --file=/tmp/Brewfile --no-upgrade || echo "  ⚠ some formulae failed; run 'brew bundle --file=/tmp/Brewfile' again later"
+  ok "brew bundle done"
+else
+  ok "skipped (--no-apps)"
+  brew install --quiet git gh mise uv starship fzf zoxide eza bat fd ripgrep jq
+fi
+
+# ─── 6. Runtimes ──────────────────────────────────────────────────────────────
+step "Runtimes (mise + uv)"
+have mise || brew install --quiet mise
+have uv   || brew install --quiet uv
+eval "$(mise activate zsh)"
+mise settings set experimental true >/dev/null 2>&1 || true
+mise use -g -y node@lts python@3.13 >/dev/null && ok "node@lts, python@3.13 via mise"
+if ask "  Also install java@21 and go@latest?"; then mise use -g -y java@21 go@latest && ok "java, go"; fi
+uv python install 3.13 >/dev/null 2>&1 || true
+ok "uv $(uv --version | awk '{print $2}')"
+
+# ─── 7. Git + SSH ─────────────────────────────────────────────────────────────
+step "Git identity and SSH key"
+if [[ -z "$(git config --global user.name 2>/dev/null)" ]]; then
+  [[ -n "$GIT_NAME" ]]  || read -r "GIT_NAME?  Git user.name: "
+  [[ -n "$GIT_EMAIL" ]] || read -r "GIT_EMAIL?  Git user.email: "
+  git config --global user.name "$GIT_NAME"; git config --global user.email "$GIT_EMAIL"
+fi
+git config --global init.defaultBranch main
+git config --global pull.rebase true
+git config --global push.autoSetupRemote true
+git config --global rerere.enabled true
+git config --global core.excludesfile ~/.gitignore_global
+grep -qs '^\.DS_Store$' ~/.gitignore_global 2>/dev/null || printf '.DS_Store\n._*\n.Spotlight-V100\n.Trashes\n.env\n.venv/\nnode_modules/\n.idea/\n.vscode/*\n!.vscode/settings.json\n!.vscode/extensions.json\n' >> ~/.gitignore_global
+have delta && git config --global core.pager "delta" && git config --global interactive.diffFilter "delta --color-only"
+ok "git configured for $(git config --global user.name)"
+
+if [[ ! -f ~/.ssh/id_ed25519 ]]; then
+  mkdir -p ~/.ssh && chmod 700 ~/.ssh
+  ssh-keygen -t ed25519 -C "$(git config --global user.email)" -f ~/.ssh/id_ed25519
+  ssh-add --apple-use-keychain ~/.ssh/id_ed25519
+  ok "ed25519 key created"
+else
+  skip "~/.ssh/id_ed25519"
+fi
+if ! grep -qs 'UseKeychain' ~/.ssh/config; then
+  cat >> ~/.ssh/config <<'CFG'
+Host *
+  AddKeysToAgent yes
+  UseKeychain yes
+  IdentityFile ~/.ssh/id_ed25519
+  ServerAliveInterval 60
+CFG
+  chmod 600 ~/.ssh/config; ok "~/.ssh/config"
+fi
+# SSH commit signing (no GPG needed)
+git config --global gpg.format ssh
+git config --global user.signingkey ~/.ssh/id_ed25519.pub
+git config --global commit.gpgsign true
+if have gh && ! gh auth status >/dev/null 2>&1; then
+  if ask "  Log in to GitHub now (uploads the SSH key as auth + signing key)?"; then
+    gh auth login -p ssh -h github.com -w
+    gh ssh-key add ~/.ssh/id_ed25519.pub --type signing --title "$(scutil --get ComputerName) signing" 2>/dev/null || true
+  fi
+fi
+
+# ─── 8. Shell ─────────────────────────────────────────────────────────────────
+step "Shell"
+[[ "$SHELL" == */zsh ]] || chsh -s /bin/zsh
+if [[ ! -f ~/.zshrc ]] || ! grep -qs 'starship init' ~/.zshrc; then
+  cat >> ~/.zshrc <<'ZRC'
+
+# ── added by macos-setup bootstrap (replace with your dotfiles) ──
+export EDITOR="code --wait"; export VISUAL="$EDITOR"
+export PATH="$HOME/.local/bin:$PATH"
+HISTSIZE=100000; SAVEHIST=100000; setopt SHARE_HISTORY HIST_IGNORE_ALL_DUPS HIST_IGNORE_SPACE
+setopt AUTO_CD CORRECT INTERACTIVE_COMMENTS
+autoload -Uz compinit && compinit -C
+zstyle ':completion:*' menu select
+eval "$(mise activate zsh)"
+eval "$(zoxide init zsh)"
+eval "$(fzf --zsh)"
+eval "$(starship init zsh)"
+source "$(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+source "$(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"   # must be last
+alias ls='eza --icons --group-directories-first' ll='eza -la --icons --git' cat='bat -p' g=git
+alias brewup='brew update && brew upgrade && brew cleanup'
+ZRC
+  ok "~/.zshrc starter written"
+else
+  skip "~/.zshrc"
+fi
+mkdir -p ~/.local/bin ~/code
+if [[ ! -f ~/.config/starship.toml ]]; then
+  mkdir -p ~/.config; starship preset nerd-font-symbols -o ~/.config/starship.toml 2>/dev/null || true
+fi
+
+# ─── 9. Touch ID for sudo ─────────────────────────────────────────────────────
+step "Touch ID for sudo"
+if grep -qs pam_tid /etc/pam.d/sudo_local; then
+  skip "/etc/pam.d/sudo_local"
+elif [[ -f /etc/pam.d/sudo_local.template ]]; then
+  sed 's/^#auth/auth/' /etc/pam.d/sudo_local.template | sudo tee /etc/pam.d/sudo_local >/dev/null && ok "enabled"
+else
+  echo "auth       sufficient     pam_tid.so" | sudo tee /etc/pam.d/sudo_local >/dev/null && ok "enabled"
+fi
+
+# ─── 10. Dotfiles ─────────────────────────────────────────────────────────────
+step "Dotfiles"
+if [[ -n "$DOTFILES_URL" ]]; then
+  if [[ -d ~/.dotfiles ]]; then skip "~/.dotfiles"; else git clone "$DOTFILES_URL" ~/.dotfiles && ok "cloned"; fi
+  for inst in install.sh install bootstrap.sh setup.sh; do
+    [[ -x ~/.dotfiles/$inst ]] && { (cd ~/.dotfiles && ./$inst); ok "ran $inst"; break; }
+  done
+else
+  ok "none given (--dotfiles <url> to clone and run its install.sh)"
+fi
+
+# ─── 11. Summary ──────────────────────────────────────────────────────────────
+step "Done"
+cat <<SUMMARY
+
+  Next, by hand (chapter 2, 16, 17):
+    • System Settings → Privacy & Security → FileVault → ON  (store the recovery key in Passwords)
+    • System Settings → Privacy & Security → Stolen Device Protection → ON;  Find My → ON
+    • Grant Accessibility to Rectangle/Raycast/Hammerspoon/Karabiner when they ask
+    • Plug in a drive → Time Machine → encrypt → start the first backup
+    • Open a NEW terminal window (Ghostty is installed) — the prompt, mise, fzf, etc. activate there
+    • Sign into: password manager, browser sync, Raycast, VS Code Settings Sync, App Store (then: mas install 497799835 for Xcode)
+    • Run  zsh scripts/audit.sh  to check the security posture; add scripts/cleanup.sh to your monthly routine
+
+  Log: brew list --formula | wc -l  formulae, $(brew list --cask 2>/dev/null | wc -l | tr -d ' ') casks. Enjoy the Mac.
+SUMMARY
+```
+#### Notes on specific steps
+
+- **Command Line Tools headless install** uses the `softwareupdate` trick (touch the `.installondemand.in-progress` file so the CLT package shows up in `softwareupdate -l`). If Apple's catalog doesn't list it — happens for a few days around a new macOS release — the script falls back to the GUI prompt and waits for Enter.
+- **Homebrew** is installed with `NONINTERACTIVE=1`; analytics are turned off. The `shellenv` line goes in `~/.zprofile` (login shells) so GUI apps launched from the Dock also see `/opt/homebrew/bin` — see [chapter 8](08-homebrew.html) and [chapter 22](22-troubleshooting.html) on PATH.
+- **Rosetta** is opt-in because macOS 27 removes it by default and macOS 28 removes it entirely; installing it hides the Intel-only apps you should be replacing ([chapter 2](02-first-boot-and-migration.html)).
+- **Brewfile filtering**: `mas` lines are dropped if you're not signed in to the App Store (the install would fail); `vscode` extension lines are dropped if VS Code isn't in the selected set. `--no-upgrade` keeps an already-installed formula at its version rather than upgrading mid-bootstrap.
+- **SSH signing** for Git commits is configured instead of GPG: no agent to babysit, the same key you use for GitHub auth, verified badge on GitHub once uploaded as a *signing* key (the script does this via `gh ssh-key add --type signing` if you log in) — [chapter 10](10-dotfiles-and-git.html).
+- **Touch ID for sudo** is written to `/etc/pam.d/sudo_local`, which macOS 14+ preserves across updates (`/etc/pam.d/sudo` is reset by every update) — [chapter 9](09-terminal-and-shell.html).
+- **The `.zshrc` starter** is appended only if there's no `starship init` line already; it's meant to be replaced by your dotfiles. Order matters: `zsh-syntax-highlighting` must be sourced last.
+- **`sudo` keep-alive + `caffeinate`** prevent the two classic bootstrap failures: the sudo timestamp expiring during a long `brew bundle`, and the Mac sleeping halfway through.
+
+### `scripts/macos-defaults.sh`
+
+The `defaults write` collection from [chapter 3](03-system-settings.html), expanded. Every line is a preference you could set by clicking; nothing here needs a reboot except keyboard repeat rate, trackpad settings, and Stage Manager (log out/in). Run it standalone with `zsh scripts/macos-defaults.sh`; re-running is harmless.
+
+```sh
+#!/bin/zsh
+# macos-defaults.sh — opinionated macOS preferences for developers (macOS 26/27, Apple silicon)
+# Idempotent: safe to re-run. Review before running; every line is optional.
+# Usage:  zsh scripts/macos-defaults.sh
+# Companion to The macOS Setup Guide, chapter 3 (System settings) and Appendix A.
+
+set -u
+osascript -e 'tell application "System Settings" to quit' 2>/dev/null
+
+echo "▶ General / appearance"
+defaults write NSGlobalDomain AppleInterfaceStyleSwitchesAutomatically -bool true   # Auto light/dark
+defaults write NSGlobalDomain AppleShowScrollBars -string "Always"
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode -bool true          # expanded save dialog
+defaults write NSGlobalDomain NSNavPanelExpandedStateForSaveMode2 -bool true
+defaults write NSGlobalDomain PMPrintingExpandedStateForPrint -bool true             # expanded print dialog
+defaults write NSGlobalDomain NSDocumentSaveNewDocumentsToCloud -bool false          # save to disk, not iCloud, by default
+defaults write NSGlobalDomain NSWindowShouldDragOnGesture -bool true                 # ctrl+cmd drag windows anywhere
+defaults write NSGlobalDomain NSAutomaticWindowAnimationsEnabled -bool false
+defaults write NSGlobalDomain AppleICUForce24HourTime -bool true
+defaults write com.apple.menuextra.clock Show24Hour -bool true
+defaults write com.apple.menuextra.clock ShowSeconds -bool false
+defaults write com.apple.LaunchServices LSQuarantine -bool true                      # keep the "downloaded from" dialog (security)
+
+echo "▶ Keyboard & text"
+defaults write NSGlobalDomain KeyRepeat -int 1                     # fastest (2 = slightly saner)
+defaults write NSGlobalDomain InitialKeyRepeat -int 10             # shortest delay
+defaults write NSGlobalDomain ApplePressAndHoldEnabled -bool false # hold = repeat, not accents
+defaults write NSGlobalDomain AppleKeyboardUIMode -int 2           # full keyboard access (Tab through controls)
+defaults write NSGlobalDomain NSAutomaticSpellingCorrectionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticCapitalizationEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticDashSubstitutionEnabled -bool false
+defaults write NSGlobalDomain NSAutomaticInlinePredictionEnabled -bool false
+defaults write com.apple.HIToolbox AppleFnUsageType -int 0         # fn key does nothing (no emoji/dictation popup)
+
+echo "▶ Trackpad & mouse"
+defaults write com.apple.AppleMultitouchTrackpad Clicking -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
+defaults write com.apple.AppleMultitouchTrackpad TrackpadThreeFingerDrag -bool true
+defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad TrackpadThreeFingerDrag -bool true
+defaults write NSGlobalDomain com.apple.trackpad.scaling -float 2.0
+defaults write NSGlobalDomain com.apple.swipescrolldirection -bool true   # "natural" scrolling; false to invert
+
+echo "▶ Finder"
+defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+defaults write com.apple.finder AppleShowAllFiles -bool false           # ⌘⇧. toggles anyway
+defaults write com.apple.finder ShowPathbar -bool true
+defaults write com.apple.finder ShowStatusBar -bool true
+defaults write com.apple.finder _FXShowPosixPathInTitle -bool false
+defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"     # list view
+defaults write com.apple.finder FXDefaultSearchScope -string "SCcf"     # search current folder
+defaults write com.apple.finder FXEnableExtensionChangeWarning -bool false
+defaults write com.apple.finder _FXSortFoldersFirst -bool true
+defaults write com.apple.finder NewWindowTarget -string "PfHm"          # new windows open Home
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+defaults write com.apple.finder ShowExternalHardDrivesOnDesktop -bool true
+defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
+defaults write com.apple.finder WarnOnEmptyTrash -bool false
+defaults write com.apple.finder QLEnableTextSelection -bool true
+defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
+defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
+defaults write com.apple.frameworks.diskimages skip-verify -bool true
+chflags nohidden ~/Library
+sudo chflags nohidden /Volumes 2>/dev/null
+
+echo "▶ Dock, Mission Control, Stage Manager"
+defaults write com.apple.dock autohide -bool true
+defaults write com.apple.dock autohide-delay -float 0
+defaults write com.apple.dock autohide-time-modifier -float 0.15
+defaults write com.apple.dock show-recents -bool false
+defaults write com.apple.dock tilesize -int 40
+defaults write com.apple.dock magnification -bool false
+defaults write com.apple.dock minimize-to-application -bool true
+defaults write com.apple.dock mineffect -string "scale"
+defaults write com.apple.dock show-process-indicators -bool true
+defaults write com.apple.dock mru-spaces -bool false                    # don't reorder Spaces by use
+defaults write com.apple.dock expose-group-apps -bool true             # group windows in Mission Control
+defaults write com.apple.dock enterMissionControlByTopWindowDrag -bool false
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false  # click wallpaper: don't hide windows
+defaults write com.apple.WindowManager GloballyEnabled -bool false     # Stage Manager off
+defaults write com.apple.WindowManager EnableTilingByEdgeDrag -bool true
+defaults write com.apple.WindowManager EnableTopTilingByEdgeDrag -bool true
+defaults write com.apple.WindowManager EnableTiledWindowMargins -bool false
+# Hot corners: bottom-right = lock screen (13), top-right = desktop (4); 0 = none. Modifier 0.
+defaults write com.apple.dock wvous-br-corner -int 13
+defaults write com.apple.dock wvous-br-modifier -int 0
+defaults write com.apple.dock wvous-tr-corner -int 4
+defaults write com.apple.dock wvous-tr-modifier -int 0
+# Uncomment to wipe default Dock apps (then pin your own):
+# defaults write com.apple.dock persistent-apps -array
+
+echo "▶ Screenshots"
+mkdir -p "$HOME/Pictures/Screenshots"
+defaults write com.apple.screencapture location -string "$HOME/Pictures/Screenshots"
+defaults write com.apple.screencapture type -string "png"
+defaults write com.apple.screencapture disable-shadow -bool true
+defaults write com.apple.screencapture include-date -bool true
+defaults write com.apple.screencapture show-thumbnail -bool true
+
+echo "▶ Safari (developer)"
+defaults write com.apple.Safari IncludeDevelopMenu -bool true 2>/dev/null
+defaults write com.apple.Safari WebKitDeveloperExtrasEnabledPreferenceKey -bool true 2>/dev/null
+defaults write com.apple.Safari ShowFullURLInSmartSearchField -bool true 2>/dev/null
+defaults write com.apple.Safari AutoOpenSafeDownloads -bool false 2>/dev/null
+defaults write com.apple.Safari AutoFillPasswords -bool false 2>/dev/null   # if you use a password manager
+defaults write NSGlobalDomain WebKitDeveloperExtras -bool true
+
+echo "▶ Terminal / TextEdit / Activity Monitor"
+defaults write com.apple.terminal SecureKeyboardEntry -bool true
+defaults write com.apple.terminal StringEncodings -array 4                # UTF-8
+defaults write com.apple.TextEdit RichText -int 0                         # plain text by default
+defaults write com.apple.TextEdit PlainTextEncoding -int 4
+defaults write com.apple.TextEdit PlainTextEncodingForWrite -int 4
+defaults write com.apple.ActivityMonitor ShowCategory -int 0              # all processes
+defaults write com.apple.ActivityMonitor IconType -int 5                  # CPU history in Dock icon
+defaults write com.apple.ActivityMonitor SortColumn -string "CPUUsage"
+defaults write com.apple.ActivityMonitor SortDirection -int 0
+
+echo "▶ Software update"
+defaults write com.apple.SoftwareUpdate AutomaticCheckEnabled -bool true
+defaults write com.apple.SoftwareUpdate ScheduleFrequency -int 1
+defaults write com.apple.SoftwareUpdate AutomaticDownload -int 1
+defaults write com.apple.SoftwareUpdate CriticalUpdateInstall -int 1
+defaults write com.apple.commerce AutoUpdate -bool true                   # App Store auto-update
+
+echo "▶ Time Machine / misc"
+defaults write com.apple.TimeMachine DoNotOfferNewDisksForBackup -bool true
+defaults write com.apple.CrashReporter DialogType -string "none"          # don't show crash dialogs; use Console
+defaults write com.apple.print.PrintingPrefs "Quit When Finished" -bool true
+defaults write com.apple.ImageCapture disableHotPlug -bool true           # Photos doesn't open on iPhone plug-in
+defaults write com.apple.Music userWantsPlaybackNotifications -bool false 2>/dev/null
+
+echo "▶ Security (needs sudo; safe defaults — see chapter 16)"
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on >/dev/null
+sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on >/dev/null
+sudo defaults write /Library/Preferences/com.apple.loginwindow GuestEnabled -bool false
+sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWFULLNAME -bool true   # name+password fields, not user list
+sudo defaults write /Library/Preferences/com.apple.loginwindow LoginwindowText -string "Property of $(id -F). If found: <your email>"
+defaults write com.apple.screensaver askForPassword -int 1
+defaults write com.apple.screensaver askForPasswordDelay -int 0
+sudo pmset -a destroyfvkeyonstandby 1 hibernatemode 25 2>/dev/null       # FileVault key wiped on sleep (stricter; comment out if wake is slow)
+
+echo "▶ Applying"
+for app in Dock Finder SystemUIServer cfprefsd; do killall "$app" 2>/dev/null; done
+echo "Done. Some changes (keyboard repeat, trackpad, Stage Manager) need logout/login."
+```
+Things to reconsider before running: `KeyRepeat 1` is *very* fast (use `2` if characters double up); `hibernatemode 25` + `destroyfvkeyonstandby 1` is the paranoid sleep setting (slower wake, but RAM is wiped) — comment it out on a desktop or if wake-from-sleep feels slow; `com.apple.swipescrolldirection` is "natural" scrolling — set `false` if you're coming from Windows/Linux and hate it; the hot corners (lock screen bottom-right, desktop top-right) are one person's habit.
+
+To find the key for any setting not covered: `defaults read > /tmp/a; (change it in System Settings); defaults read > /tmp/b; diff /tmp/a /tmp/b`.
+
+### `scripts/cleanup.sh`
+
+The monthly disk cleanup from [chapter 18](18-performance-and-maintenance.html). Removes only things that regenerate: Homebrew caches and orphaned dependencies, Xcode DerivedData and unavailable simulators, stopped containers and dangling images, package-manager caches, old logs, Trash, and Time Machine local snapshots. Prints how much it freed.
+
+```sh
+#!/bin/sh
+# cleanup.sh — monthly disk cleanup for a developer Mac. Safe: only removes caches/artifacts that regenerate.
+# Usage: sh scripts/cleanup.sh        (see chapter 18)
+set -u
+before=$(df -k / | awk 'NR==2{print $4}')
+
+echo "→ Homebrew";     brew cleanup --prune=all -s 2>/dev/null; brew autoremove 2>/dev/null
+echo "→ Xcode";        rm -rf ~/Library/Developer/Xcode/DerivedData/* 2>/dev/null
+                       xcrun simctl delete unavailable 2>/dev/null || true
+echo "→ Containers";   command -v docker >/dev/null 2>&1 && docker system prune -f >/dev/null 2>&1 || true
+echo "→ Packages";     command -v npm  >/dev/null 2>&1 && npm cache clean --force >/dev/null 2>&1 || true
+                       command -v pnpm >/dev/null 2>&1 && pnpm store prune >/dev/null 2>&1 || true
+                       command -v uv   >/dev/null 2>&1 && uv cache clean >/dev/null 2>&1 || true
+                       command -v go   >/dev/null 2>&1 && go clean -modcache 2>/dev/null || true
+                       command -v mise >/dev/null 2>&1 && mise prune -y >/dev/null 2>&1 || true
+echo "→ Caches";       rm -rf ~/Library/Caches/Homebrew/* ~/Library/Caches/pip ~/Library/Caches/Yarn 2>/dev/null
+echo "→ Logs";         find ~/Library/Logs -type f -mtime +30 -delete 2>/dev/null
+echo "→ Trash";        rm -rf ~/.Trash/* 2>/dev/null
+echo "→ Snapshots";    tmutil listlocalsnapshots / 2>/dev/null | sed 's/.*\.//' | while read -r d; do tmutil deletelocalsnapshots "$d" >/dev/null 2>&1; done
+
+after=$(df -k / | awk 'NR==2{print $4}')
+echo "Freed ~$(( (after - before) / 1024 )) MB. Free now: $(df -h / | awk 'NR==2{print $4}')"
+```
+Schedule it with launchd (monthly on the 1st at 12:00) — see [chapter 21](21-automation-and-scripting.html) for the plist pattern:
+
+```sh
+mkdir -p ~/Library/LaunchAgents
+cat > ~/Library/LaunchAgents/com.macos-setup.cleanup.plist <<EOT
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.macos-setup.cleanup</string>
+  <key>ProgramArguments</key><array><string>/bin/sh</string><string>$HOME/code/macos-setup/scripts/cleanup.sh</string></array>
+  <key>StartCalendarInterval</key><dict><key>Day</key><integer>1</integer><key>Hour</key><integer>12</integer></dict>
+  <key>EnvironmentVariables</key><dict><key>PATH</key><string>/opt/homebrew/bin:/usr/bin:/bin</string></dict>
+  <key>StandardOutPath</key><string>/tmp/cleanup.log</string>
+</dict></plist>
+EOT
+launchctl bootstrap gui/$(id -u) ~/Library/LaunchAgents/com.macos-setup.cleanup.plist
+```
+
+### `scripts/audit.sh`
+
+A read-only security and health check from [chapter 16](16-security-and-privacy.html): FileVault, firewall, Gatekeeper, SIP, screensaver password, guest account, automatic updates, sharing services, SSH server, launch agents and system extensions counts, disk space, last Time Machine backup, uptime, Rosetta presence, SSH key, Touch ID sudo. Run it after bootstrap and each semester.
+
+```sh
+#!/bin/zsh
+# audit.sh — quick security & health check (chapter 16, 18). Read-only; prints ✅/⚠️ per item.
+ok()   { print -P "%F{green}✅%f $1"; }
+warn() { print -P "%F{yellow}⚠️ %f $1"; }
+
+[[ $(fdesetup status) == *"On"* ]]                          && ok "FileVault on"          || warn "FileVault OFF — System Settings → Privacy & Security"
+[[ $(/usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate) == *enabled* ]] && ok "Firewall on" || warn "Firewall off"
+[[ $(spctl --status 2>&1) == *enabled* ]]                   && ok "Gatekeeper enabled"    || warn "Gatekeeper disabled"
+[[ $(csrutil status) == *enabled* ]]                        && ok "SIP enabled"           || warn "SIP disabled"
+[[ $(defaults read com.apple.screensaver askForPassword 2>/dev/null) == 1 ]] && ok "Password after screensaver" || warn "No password after screensaver"
+[[ $(sudo -n defaults read /Library/Preferences/com.apple.loginwindow GuestEnabled 2>/dev/null) == 0 ]] && ok "Guest account off" || warn "Guest account may be on (or sudo needed)"
+[[ $(softwareupdate --schedule 2>/dev/null) == *on* ]]      && ok "Automatic updates on"  || warn "Automatic updates off"
+sharing=$(sudo -n launchctl print system 2>/dev/null | grep -cE 'com.apple.(screensharing|smbd|RemoteDesktop.agent)'); [[ ${sharing:-0} -eq 0 ]] && ok "No sharing services running" || warn "$sharing sharing service(s) running — check Sharing settings"
+ssh_on=$(systemsetup -getremotelogin 2>/dev/null); [[ $ssh_on == *Off* ]] && ok "Remote Login (SSH) off" || warn "Remote Login: ${ssh_on:-unknown}"
+agents=$(ls ~/Library/LaunchAgents 2>/dev/null | wc -l | tr -d ' '); echo "ℹ️  $agents user launch agents — review: ls ~/Library/LaunchAgents"
+exts=$(systemextensionsctl list 2>/dev/null | grep -c activated); echo "ℹ️  $exts system extensions active — systemextensionsctl list"
+free=$(df -h / | awk 'NR==2{print $4}'); pct=$(df / | awk 'NR==2{gsub("%","",$5); print 100-$5}'); [[ $pct -ge 15 ]] && ok "Disk: $free free ($pct%)" || warn "Disk low: $free free ($pct%) — run scripts/cleanup.sh"
+tm=$(tmutil latestbackup 2>/dev/null); [[ -n $tm ]] && ok "Time Machine latest: ${tm:t}" || warn "No Time Machine backup found"
+up=$(uptime | sed -E 's/.*up ([^,]+),.*/\1/'); echo "ℹ️  Uptime: $up"
+sw=$(sw_vers -productVersion); echo "ℹ️  macOS $sw ($(uname -m)); Rosetta: $([[ -f /Library/Apple/usr/share/rosetta/rosetta ]] && echo installed || echo absent)"
+[[ -f ~/.ssh/id_ed25519 ]] && ok "ed25519 SSH key present" || warn "No ~/.ssh/id_ed25519 — ssh-keygen -t ed25519"
+grep -qs 'pam_tid.so' /etc/pam.d/sudo_local && ok "Touch ID for sudo" || warn "Touch ID for sudo not configured (/etc/pam.d/sudo_local)"
+```
+### Adapting these for your own dotfiles
+
+The intended end state is that **your dotfiles repo** owns the configuration and these scripts are just the bootstrap that gets you to `git clone`. A common layout:
+
+```
+~/.dotfiles/
+├── install.sh          # stow/symlink + brew bundle + mise install; idempotent
+├── Brewfile            # brew bundle dump --describe, pruned
+├── macos-defaults.sh   # your fork of the script above
+├── zsh/ .zshrc .zprofile .zshenv
+├── git/ .gitconfig .gitignore_global
+├── ghostty/ config
+├── starship.toml
+├── mise/ config.toml
+├── vscode/ settings.json keybindings.json extensions.txt
+├── hammerspoon/ init.lua
+├── karabiner/ karabiner.json
+└── ssh/ config           # no keys!
+```
+
+Then bootstrap becomes: `zsh bootstrap.sh --no-apps --no-defaults --dotfiles git@github.com:you/dotfiles.git` and your `install.sh` does the rest. [Chapter 10](10-dotfiles-and-git.html) covers stow vs chezmoi vs a bare repo, secrets handling, and per-machine branches.
+
+[↑ Back to top](#table-of-contents)
+
+---
+
+## B. Appendix B — Brewfile
+
+`brew bundle` reads a Ruby-flavoured manifest and installs everything in it — formulae, casks, Mac App Store apps (via `mas`), and VS Code extensions. It is the single most useful file in a dotfiles repo: the whole software side of a Mac in 300 lines, reproducible with one command. [Chapter 8](08-homebrew.html) explains Homebrew itself; this appendix is the manifest.
+
+```sh
+brew bundle --file=scripts/Brewfile          # install what's listed (skips what's already there)
+brew bundle check --file=scripts/Brewfile    # what's missing?
+brew bundle cleanup --file=scripts/Brewfile  # what's installed but NOT listed? (add --force to uninstall)
+brew bundle dump --force --describe          # regenerate from what's installed → ./Brewfile
+```
+
+### Conventions in this file
+
+- Lines starting with `#cask`, `#brew`, `#mas`, `#vscode` (no space) are **opt-in alternatives** — remove the `#` to enable. Lines starting with `# ` are commentary.
+- The **uncommented** set is the guide's default recommendation: a full developer CLI, `mise` + `uv`, container/cloud tooling, Nerd Fonts, Ghostty, VS Code, OrbStack, Firefox, and the Tier-1 daily-driver apps from [chapter 19](19-daily-driver-apps.html). On a fast connection it's ~15–25 minutes and ~8 GB (Xcode excluded).
+- `restart_service: false` on `postgresql@18` and `redis` means they're installed but **not** started at login — `brew services run postgresql@18` when you need them ([chapter 15](15-databases-and-local-dev.html)).
+- `mas` entries need you to be signed in to the App Store; the bootstrap script drops them otherwise. Find IDs with `mas search "name"`.
+- `vscode` entries run `code --install-extension`; they're skipped if VS Code isn't installed.
+- Third-party taps (`supabase/tap`, `nikitabobko/tap`) will prompt for trust on first use under Homebrew 6 — that's the new tap-trust feature working as intended.
+
+### `scripts/Brewfile`
+
+```ruby
+# Brewfile — The macOS Setup Guide (Appendix B). September 2026.
+# Install everything:   brew bundle --file=scripts/Brewfile
+# Only the essentials:  comment out the "Optional" sections, or copy the lines you want into ~/.Brewfile.
+# Keep it current:      brew bundle dump --force --describe --file=~/.Brewfile
+# Lines starting with "# " are commentary; lines starting with "#brew"/"#cask" are opt-in — delete the "#" to enable.
+
+tap "homebrew/services"          # brew services (launchd wrappers)
+# tap "oven-sh/bun"              # example third-party tap — Homebrew 6 will prompt to trust it
+
+# ─── Core CLI ─────────────────────────────────────────────────────────────────
+brew "git"                        # newer than Apple's
+brew "gh"                         # GitHub CLI
+brew "git-delta"                  # better diffs
+brew "git-lfs"
+brew "lazygit"                    # TUI for git
+brew "coreutils"                  # GNU utils as g-prefixed (gls, gdate…)
+brew "gnu-sed"
+brew "findutils"
+brew "grep"
+brew "bash"                       # bash 5 (macOS ships 3.2)
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+brew "zsh-completions"
+brew "starship"                   # prompt
+brew "fzf"                        # fuzzy finder (ctrl-r, ctrl-t)
+brew "zoxide"                     # smarter cd
+brew "eza"                        # ls replacement
+brew "bat"                        # cat with syntax highlighting
+brew "fd"                         # find replacement
+brew "ripgrep"                    # grep replacement
+brew "sd"                         # sed replacement for simple cases
+brew "jq"                         # JSON
+brew "yq"                         # YAML
+brew "fx"                         # interactive JSON viewer
+brew "tree"
+brew "dust"                       # du replacement
+brew "duf"                        # df replacement
+brew "ncdu"
+brew "procs"                      # ps replacement
+brew "bottom"                     # top replacement (btm)
+brew "htop"
+brew "hyperfine"                  # benchmarking
+brew "tldr"                       # simplified man pages (tlrc)
+brew "tmux"
+brew "zellij"                     # tmux alternative
+brew "neovim"
+brew "watch"
+brew "wget"
+brew "curl"
+brew "httpie"
+brew "xh"                         # httpie in Rust
+brew "openssh"
+brew "mosh"
+brew "rsync"
+brew "rclone"
+brew "p7zip"
+brew "unar"
+brew "trash"                      # rm → Trash
+brew "mas"                        # Mac App Store CLI
+brew "duti"                       # set default apps
+brew "terminal-notifier"
+brew "ical-buddy"
+brew "switchaudio-osx"            # switch audio devices from CLI
+brew "pandoc"
+brew "shellcheck"
+brew "shfmt"
+brew "direnv"
+brew "age"                        # modern file encryption
+brew "sops"
+brew "gnupg"
+brew "pinentry-mac"
+brew "ykman"                      # YubiKey manager
+brew "nmap"
+brew "mtr"
+brew "iperf3"
+brew "dog"                        # dig replacement (or: brew "doggo")
+brew "wireguard-tools"
+brew "ffmpeg"
+brew "imagemagick"
+brew "exiftool"
+brew "pngquant"
+brew "oxipng"
+brew "graphviz"
+brew "poppler"                    # pdftotext etc.
+brew "qpdf"
+brew "sqlite"
+brew "whisper-cpp"
+
+# ─── Runtimes & language tooling ──────────────────────────────────────────────
+brew "mise"                       # runtime versions (node, python, java, go, rust, ruby…)
+brew "uv"                         # Python packaging
+brew "ruff"
+brew "pipx"                       # optional if you use uv tool
+brew "pnpm"                       # or via corepack/mise
+brew "cmake"
+brew "ninja"
+brew "llvm"                       # newer clang/clangd/lldb than CLT (optional; big)
+brew "gcc"                        # real GCC for coursework (gcc-15)
+brew "make"                       # GNU make 4 as gmake
+brew "bear"                       # compile_commands.json for clangd
+brew "ccache"
+brew "typst"
+brew "tectonic"                   # self-contained LaTeX (or cask mactex-no-gui)
+brew "protobuf"
+brew "grpcurl"
+brew "sqlfluff"
+brew "postgresql@18", restart_service: false
+brew "redis", restart_service: false
+brew "pgcli"
+brew "mycli"
+brew "usql"                       # universal SQL CLI
+brew "duckdb"
+
+# ─── Containers, cloud, DevOps ────────────────────────────────────────────────
+brew "docker"                     # CLI only; runtime = OrbStack (cask below) or Docker Desktop
+brew "docker-compose"
+brew "docker-buildx"
+brew "dive"                       # explore image layers
+brew "lazydocker"
+brew "kubectl"
+brew "kubectx"
+brew "k9s"
+brew "helm"
+brew "kind"
+brew "stern"
+brew "awscli"
+brew "aws-vault"
+brew "azure-cli"
+brew "opentofu"                   # or "terraform"
+brew "ansible"
+brew "cloudflared"
+brew "wrangler"
+brew "flyctl"
+brew "vercel-cli"
+brew "supabase/tap/supabase"
+brew "ngrok"
+brew "tailscale"                  # CLI (cask "tailscale-app" for the menu bar app)
+brew "act"                        # run GitHub Actions locally
+brew "actionlint"
+brew "pre-commit"
+brew "lefthook"
+brew "just"                       # command runner
+brew "watchman"
+brew "mkcert"                     # local HTTPS certs
+brew "caddy"
+brew "step"
+brew "trivy"                      # vuln scanner
+brew "gitleaks"
+brew "cosign"
+
+# ─── Fonts ────────────────────────────────────────────────────────────────────
+cask "font-jetbrains-mono-nerd-font"
+cask "font-fira-code-nerd-font"
+cask "font-meslo-lg-nerd-font"
+cask "font-inter"
+cask "font-ibm-plex"
+cask "font-monaspace"
+#cask "font-cascadia-code-nf"
+#cask "font-iosevka-nerd-font"
+
+# ─── Terminal, editors, dev apps ──────────────────────────────────────────────
+cask "ghostty"
+#cask "iterm2"
+#cask "wezterm"
+#cask "warp"
+cask "visual-studio-code"
+#cask "cursor"
+#cask "zed"
+#cask "jetbrains-toolbox"
+#cask "sublime-text"
+cask "orbstack"                   # containers + Linux VMs; replaces Docker Desktop
+#cask "docker-desktop"
+#cask "podman-desktop"
+cask "utm"                        # VMs (QEMU); free
+#cask "vmware-fusion"
+#cask "parallels"
+cask "tableplus"
+#cask "postico"
+#cask "dbeaver-community"
+#cask "pgadmin4"
+#cask "mongodb-compass"
+cask "bruno"                      # API client (Postman alternative)
+#cask "postman"
+#cask "insomnia"
+#cask "proxyman"
+#cask "charles"
+cask "fork"                       # Git GUI (free tier)
+#cask "sublime-merge"
+#cask "tower"
+#cask "github"
+#cask "kaleidoscope"
+cask "dash"                       # offline docs (paid)
+#cask "devdocs"
+#cask "xcodes"                    # manage Xcode versions
+#cask "android-studio"
+#cask "figma"
+#cask "sf-symbols"
+#cask "lm-studio"
+#cask "ollama-app"
+#cask "wireshark-app"
+#cask "gpg-suite"
+#cask "yubico-authenticator"
+#cask "launchcontrol"
+#cask "suspicious-package"
+#cask "macfuse"
+
+# ─── Browsers ─────────────────────────────────────────────────────────────────
+cask "firefox"
+#cask "google-chrome"
+#cask "brave-browser"
+#cask "zen"
+#cask "vivaldi"
+#cask "orion"
+#cask "chromium"
+
+# ─── Daily-driver essentials (Tier 1, all free) ──────────────────────────────
+cask "raycast"                    # launcher; or "alfred"
+cask "rectangle"                  # window snapping; or "aerospace" below
+#cask "nikitabobko/tap/aerospace"
+cask "maccy"                      # clipboard history (skip if using Raycast's)
+cask "jordanbaird-ice"            # menu bar icon manager
+cask "stats"                      # system stats in menu bar
+cask "itsycal"                    # menu bar calendar
+cask "iina"                       # video player
+cask "shottr"                     # screenshots + OCR
+cask "appcleaner"                 # or "pearcleaner"
+cask "the-unarchiver"
+cask "karabiner-elements"         # key remapping
+cask "hammerspoon"                # Lua automation
+cask "bitwarden"                  # or "1password" + "1password-cli"
+cask "obsidian"
+cask "zotero"
+cask "keka"
+cask "monitorcontrol"
+cask "linearmouse"
+cask "latest"                     # app update checker
+cask "qlmarkdown"                 # Quick Look plugins ↓
+cask "syntax-highlight"
+cask "quicklook-json"
+cask "qlvideo"
+
+# ─── Optional daily-driver apps ───────────────────────────────────────────────
+#cask "1password"
+#cask "1password-cli"
+#cask "keepassxc"
+#cask "alfred"
+#cask "aldente"
+#cask "betterdisplay"
+#cask "lulu"
+#cask "notion"
+#cask "logseq"
+#cask "anytype"
+#cask "typora"
+#cask "skim"
+#cask "sioyek"
+#cask "anki"
+#cask "netnewswire"
+#cask "syncthing-app"
+#cask "maestral"
+#cask "google-drive"
+#cask "dropbox"
+#cask "onedrive"
+#cask "tailscale-app"
+#cask "cyberduck"
+#cask "transmit"
+#cask "handbrake-app"
+#cask "kap"
+#cask "obs"
+#cask "audacity"
+#cask "imageoptim"
+#cask "pixelmator-pro"           # via App Store (mas) instead
+#cask "affinity"
+#cask "drawio"
+#cask "excalidraw"
+#cask "libreoffice"
+#cask "microsoft-office"
+#cask "mactex-no-gui"
+#cask "texshop"
+#cask "miniforge"
+#cask "r"
+#cask "rstudio"
+#cask "positron"
+#cask "racket"
+#cask "logisim-evolution"
+#cask "mathpix-snipping-tool"
+#cask "steam"
+#cask "whisky"
+#cask "crossover"
+#cask "espanso"
+#cask "keyboard-maestro"
+#cask "bettertouchtool"
+#cask "hazel"
+#cask "numi"
+#cask "rocket"
+#cask "keyboardcleantool"
+#cask "coconutbattery"
+#cask "grandperspective"
+#cask "daisydisk"
+#cask "omnidisksweeper"
+#cask "macs-fan-control"
+#cask "istat-menus"
+#cask "cleanshot"
+#cask "screen-studio"
+#cask "fantastical"
+#cask "busycal"
+#cask "mimestream"
+#cask "thunderbird"
+#cask "spotify"
+#cask "slack"
+#cask "discord"
+#cask "zoom"
+#cask "microsoft-teams"
+#cask "signal"
+#cask "telegram"
+#cask "whatsapp"
+#cask "backblaze"
+#cask "arq"
+#cask "carbon-copy-cloner"
+#cask "little-snitch"
+#cask "malwarebytes"
+
+# ─── Mac App Store (needs: mas + signed into the App Store) ──────────────────
+# Find IDs with: mas search "name"
+mas "Xcode", id: 497799835                   # 12+ GB; only if doing Apple-platform dev
+#mas "Amphetamine", id: 937984704
+#mas "Things 3", id: 904280696
+#mas "Pixelmator Pro", id: 1289583905
+#mas "Bear", id: 1091189122
+#mas "Wipr 2", id: 1662217862               # Safari content blocker
+#mas "AdGuard for Safari", id: 1440147259
+#mas "Refined GitHub", id: 1519867270       # Safari extension
+#mas "Keynote", id: 409183694
+#mas "Pages", id: 409201541
+#mas "Numbers", id: 409203825
+#mas "Apple Configurator", id: 1037126344   # DFU revive
+#mas "TestFlight", id: 899247664
+#mas "Kindle", id: 302584613
+#mas "WhatsApp Messenger", id: 310633997
+#mas "Slack for Desktop", id: 803453959
+
+# ─── VS Code extensions (brew bundle installs these via `code --install-extension`) ──
+vscode "editorconfig.editorconfig"
+vscode "esbenp.prettier-vscode"
+vscode "biomejs.biome"
+vscode "dbaeumer.vscode-eslint"
+vscode "charliermarsh.ruff"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-toolsai.jupyter"
+vscode "golang.go"
+vscode "rust-lang.rust-analyzer"
+vscode "vadimcn.vscode-lldb"
+vscode "llvm-vs-code-extensions.vscode-clangd"
+vscode "redhat.java"
+vscode "vscjava.vscode-java-pack"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-containers"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "github.vscode-pull-request-github"
+vscode "github.vscode-github-actions"
+vscode "eamodio.gitlens"
+vscode "mhutchie.git-graph"
+vscode "usernamehw.errorlens"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "yzhang.markdown-all-in-one"
+vscode "bierner.markdown-mermaid"
+vscode "james-yu.latex-workshop"
+vscode "myriad-dreamin.tinymist"
+vscode "tamasfe.even-better-toml"
+vscode "redhat.vscode-yaml"
+vscode "timonwong.shellcheck"
+vscode "foxundermoon.shell-format"
+vscode "mkhl.direnv"
+vscode "hashicorp.terraform"
+vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
+vscode "pkief.material-icon-theme"
+vscode "github.github-vscode-theme"
+#vscode "vscodevim.vim"
+#vscode "asvetliakov.vscode-neovim"
+#vscode "anthropic.claude-code"
+#vscode "continue.continue"
+```
+### Per-machine Brewfiles
+
+One file rarely fits a laptop, a desktop, and a work machine. Two patterns:
+
+**Includes** — a base file plus a per-host file, concatenated at install time:
+
+```sh
+# ~/.dotfiles/install.sh
+cat Brewfile.base "Brewfile.$(scutil --get ComputerName | tr ' ' '-')" 2>/dev/null > /tmp/Brewfile
+brew bundle --file=/tmp/Brewfile
+```
+
+**Ruby conditionals** — the Brewfile is Ruby, so this works:
+
+```ruby
+host = `scutil --get ComputerName`.strip
+cask "docker-desktop"  if host == "work-mbp"       # company mandates Docker Desktop
+cask "orbstack"        unless host == "work-mbp"
+cask "steam"           if host == "studio"
+brew "postgresql@18", restart_service: (host == "studio")
+```
+
+### Keeping it honest
+
+Every month (the routine in [chapter 18](18-performance-and-maintenance.html)):
+
+```sh
+brew bundle cleanup --file=~/.dotfiles/Brewfile    # lists things you installed ad hoc
+# → either add them to the Brewfile (you use them) or `brew uninstall --zap` them (you don't)
+brew bundle dump --force --describe --file=/tmp/Brewfile.now && diff ~/.dotfiles/Brewfile /tmp/Brewfile.now
+```
+
+`brew bundle dump` sorts alphabetically and loses your comments, so don't overwrite a hand-curated file with it — diff and copy the new lines across. `--describe` adds each formula's description as a comment, which makes a dumped file readable enough to start from.
+
+### Formula and cask name changes
+
+Homebrew renames casks when upstream renames apps (`docker` → `docker-desktop`, `tailscale` → `tailscale-app`, `handbrake` → `handbrake-app`, `wireshark` → `wireshark-app` all happened in 2025–26). `brew bundle` prints a deprecation warning with the new name; update the file. `brew search --cask name` finds the current one.
 
 [↑ Back to top](#table-of-contents)

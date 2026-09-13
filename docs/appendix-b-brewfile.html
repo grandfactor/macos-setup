@@ -1,0 +1,515 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Appendix B — Brewfile — The macOS Setup Guide</title>
+<meta name="description" content="The complete Brewfile behind this guide — 100+ CLI tools, runtimes, container/cloud tooling, fonts, and every GUI app recommended in chapters 9–19, with the optional ones commented out. Plus how Brewfile syntax works, how to keep yours in sync, and how to split it per machine.">
+<meta property="og:title" content="Appendix B — Brewfile — The macOS Setup Guide">
+<meta property="og:description" content="The complete Brewfile behind this guide — 100+ CLI tools, runtimes, container/cloud tooling, fonts, and every GUI app recommended in chapters 9–19, with the optional ones commented out. Plus how Brewfile syntax works, how to keep yours in sync, and how to split it per machine.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+<li><a href="15-databases-and-local-dev.html"><span class="nav-num">15</span>Databases &amp; local development services</a></li>
+</ul>
+<p class="nav-part">Part IV — Security, backup &amp; maintenance</p><ul>
+<li><a href="16-security-and-privacy.html"><span class="nav-num">16</span>Security &amp; privacy</a></li>
+<li><a href="17-backup-and-recovery.html"><span class="nav-num">17</span>Backup &amp; recovery</a></li>
+<li><a href="18-performance-and-maintenance.html"><span class="nav-num">18</span>Performance &amp; maintenance</a></li>
+</ul>
+<p class="nav-part">Part V — Daily driving &amp; workflows</p><ul>
+<li><a href="19-daily-driver-apps.html"><span class="nav-num">19</span>Daily-driver apps</a></li>
+<li><a href="20-cs-student-specific.html"><span class="nav-num">20</span>CS-student specific</a></li>
+<li><a href="21-automation-and-scripting.html"><span class="nav-num">21</span>Automation &amp; scripting</a></li>
+<li><a href="22-troubleshooting.html"><span class="nav-num">22</span>Troubleshooting</a></li>
+</ul>
+<p class="nav-part">Part VI — Reference</p><ul>
+<li><a href="23-checklists-and-cheat-sheets.html"><span class="nav-num">23</span>Checklists &amp; cheat sheets</a></li>
+<li><a href="appendix-a-bootstrap-script.html"><span class="nav-num">A</span>Appendix A — Bootstrap script</a></li>
+<li class="active"><a href="appendix-b-brewfile.html"><span class="nav-num">B</span>Appendix B — Brewfile</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="appendix-b-brewfile">Appendix B — Brewfile</h1>
+<p><code>brew bundle</code> reads a Ruby-flavoured manifest and installs everything in it — formulae, casks, Mac App Store apps (via <code>mas</code>), and VS Code extensions. It is the single most useful file in a dotfiles repo: the whole software side of a Mac in 300 lines, reproducible with one command. <a href="08-homebrew.html">Chapter 8</a> explains Homebrew itself; this appendix is the manifest.</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew bundle --file=scripts/Brewfile          # install what's listed (skips what's already there)
+brew bundle check --file=scripts/Brewfile    # what's missing?
+brew bundle cleanup --file=scripts/Brewfile  # what's installed but NOT listed? (add --force to uninstall)
+brew bundle dump --force --describe          # regenerate from what's installed → ./Brewfile</code></pre></div>
+<h2 id="conventions-in-this-file">Conventions in this file<a class="anchor" href="#conventions-in-this-file" aria-label="Permalink">#</a></h2>
+<ul>
+<li>Lines starting with <code>#cask</code>, <code>#brew</code>, <code>#mas</code>, <code>#vscode</code> (no space) are <strong>opt-in alternatives</strong> — remove the <code>#</code> to enable. Lines starting with <code># </code> are commentary.</li>
+<li>The <strong>uncommented</strong> set is the guide's default recommendation: a full developer CLI, <code>mise</code> + <code>uv</code>, container/cloud tooling, Nerd Fonts, Ghostty, VS Code, OrbStack, Firefox, and the Tier-1 daily-driver apps from <a href="19-daily-driver-apps.html">chapter 19</a>. On a fast connection it's ~15–25 minutes and ~8 GB (Xcode excluded).</li>
+<li><code>restart_service: false</code> on <code>postgresql@18</code> and <code>redis</code> means they're installed but <strong>not</strong> started at login — <code>brew services run postgresql@18</code> when you need them (<a href="15-databases-and-local-dev.html">chapter 15</a>).</li>
+<li><code>mas</code> entries need you to be signed in to the App Store; the bootstrap script drops them otherwise. Find IDs with <code>mas search "name"</code>.</li>
+<li><code>vscode</code> entries run <code>code --install-extension</code>; they're skipped if VS Code isn't installed.</li>
+<li>Third-party taps (<code>supabase/tap</code>, <code>nikitabobko/tap</code>) will prompt for trust on first use under Homebrew 6 — that's the new tap-trust feature working as intended.</li>
+</ul>
+<h2 id="scriptsbrewfile"><code>scripts/Brewfile</code><a class="anchor" href="#scriptsbrewfile" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">ruby</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-ruby"># Brewfile — The macOS Setup Guide (Appendix B). September 2026.
+# Install everything:   brew bundle --file=scripts/Brewfile
+# Only the essentials:  comment out the "Optional" sections, or copy the lines you want into ~/.Brewfile.
+# Keep it current:      brew bundle dump --force --describe --file=~/.Brewfile
+# Lines starting with "# " are commentary; lines starting with "#brew"/"#cask" are opt-in — delete the "#" to enable.
+
+tap "homebrew/services"          # brew services (launchd wrappers)
+# tap "oven-sh/bun"              # example third-party tap — Homebrew 6 will prompt to trust it
+
+# ─── Core CLI ─────────────────────────────────────────────────────────────────
+brew "git"                        # newer than Apple's
+brew "gh"                         # GitHub CLI
+brew "git-delta"                  # better diffs
+brew "git-lfs"
+brew "lazygit"                    # TUI for git
+brew "coreutils"                  # GNU utils as g-prefixed (gls, gdate…)
+brew "gnu-sed"
+brew "findutils"
+brew "grep"
+brew "bash"                       # bash 5 (macOS ships 3.2)
+brew "zsh-autosuggestions"
+brew "zsh-syntax-highlighting"
+brew "zsh-completions"
+brew "starship"                   # prompt
+brew "fzf"                        # fuzzy finder (ctrl-r, ctrl-t)
+brew "zoxide"                     # smarter cd
+brew "eza"                        # ls replacement
+brew "bat"                        # cat with syntax highlighting
+brew "fd"                         # find replacement
+brew "ripgrep"                    # grep replacement
+brew "sd"                         # sed replacement for simple cases
+brew "jq"                         # JSON
+brew "yq"                         # YAML
+brew "fx"                         # interactive JSON viewer
+brew "tree"
+brew "dust"                       # du replacement
+brew "duf"                        # df replacement
+brew "ncdu"
+brew "procs"                      # ps replacement
+brew "bottom"                     # top replacement (btm)
+brew "htop"
+brew "hyperfine"                  # benchmarking
+brew "tldr"                       # simplified man pages (tlrc)
+brew "tmux"
+brew "zellij"                     # tmux alternative
+brew "neovim"
+brew "watch"
+brew "wget"
+brew "curl"
+brew "httpie"
+brew "xh"                         # httpie in Rust
+brew "openssh"
+brew "mosh"
+brew "rsync"
+brew "rclone"
+brew "p7zip"
+brew "unar"
+brew "trash"                      # rm → Trash
+brew "mas"                        # Mac App Store CLI
+brew "duti"                       # set default apps
+brew "terminal-notifier"
+brew "ical-buddy"
+brew "switchaudio-osx"            # switch audio devices from CLI
+brew "pandoc"
+brew "shellcheck"
+brew "shfmt"
+brew "direnv"
+brew "age"                        # modern file encryption
+brew "sops"
+brew "gnupg"
+brew "pinentry-mac"
+brew "ykman"                      # YubiKey manager
+brew "nmap"
+brew "mtr"
+brew "iperf3"
+brew "dog"                        # dig replacement (or: brew "doggo")
+brew "wireguard-tools"
+brew "ffmpeg"
+brew "imagemagick"
+brew "exiftool"
+brew "pngquant"
+brew "oxipng"
+brew "graphviz"
+brew "poppler"                    # pdftotext etc.
+brew "qpdf"
+brew "sqlite"
+brew "whisper-cpp"
+
+# ─── Runtimes &amp; language tooling ──────────────────────────────────────────────
+brew "mise"                       # runtime versions (node, python, java, go, rust, ruby…)
+brew "uv"                         # Python packaging
+brew "ruff"
+brew "pipx"                       # optional if you use uv tool
+brew "pnpm"                       # or via corepack/mise
+brew "cmake"
+brew "ninja"
+brew "llvm"                       # newer clang/clangd/lldb than CLT (optional; big)
+brew "gcc"                        # real GCC for coursework (gcc-15)
+brew "make"                       # GNU make 4 as gmake
+brew "bear"                       # compile_commands.json for clangd
+brew "ccache"
+brew "typst"
+brew "tectonic"                   # self-contained LaTeX (or cask mactex-no-gui)
+brew "protobuf"
+brew "grpcurl"
+brew "sqlfluff"
+brew "postgresql@18", restart_service: false
+brew "redis", restart_service: false
+brew "pgcli"
+brew "mycli"
+brew "usql"                       # universal SQL CLI
+brew "duckdb"
+
+# ─── Containers, cloud, DevOps ────────────────────────────────────────────────
+brew "docker"                     # CLI only; runtime = OrbStack (cask below) or Docker Desktop
+brew "docker-compose"
+brew "docker-buildx"
+brew "dive"                       # explore image layers
+brew "lazydocker"
+brew "kubectl"
+brew "kubectx"
+brew "k9s"
+brew "helm"
+brew "kind"
+brew "stern"
+brew "awscli"
+brew "aws-vault"
+brew "azure-cli"
+brew "opentofu"                   # or "terraform"
+brew "ansible"
+brew "cloudflared"
+brew "wrangler"
+brew "flyctl"
+brew "vercel-cli"
+brew "supabase/tap/supabase"
+brew "ngrok"
+brew "tailscale"                  # CLI (cask "tailscale-app" for the menu bar app)
+brew "act"                        # run GitHub Actions locally
+brew "actionlint"
+brew "pre-commit"
+brew "lefthook"
+brew "just"                       # command runner
+brew "watchman"
+brew "mkcert"                     # local HTTPS certs
+brew "caddy"
+brew "step"
+brew "trivy"                      # vuln scanner
+brew "gitleaks"
+brew "cosign"
+
+# ─── Fonts ────────────────────────────────────────────────────────────────────
+cask "font-jetbrains-mono-nerd-font"
+cask "font-fira-code-nerd-font"
+cask "font-meslo-lg-nerd-font"
+cask "font-inter"
+cask "font-ibm-plex"
+cask "font-monaspace"
+#cask "font-cascadia-code-nf"
+#cask "font-iosevka-nerd-font"
+
+# ─── Terminal, editors, dev apps ──────────────────────────────────────────────
+cask "ghostty"
+#cask "iterm2"
+#cask "wezterm"
+#cask "warp"
+cask "visual-studio-code"
+#cask "cursor"
+#cask "zed"
+#cask "jetbrains-toolbox"
+#cask "sublime-text"
+cask "orbstack"                   # containers + Linux VMs; replaces Docker Desktop
+#cask "docker-desktop"
+#cask "podman-desktop"
+cask "utm"                        # VMs (QEMU); free
+#cask "vmware-fusion"
+#cask "parallels"
+cask "tableplus"
+#cask "postico"
+#cask "dbeaver-community"
+#cask "pgadmin4"
+#cask "mongodb-compass"
+cask "bruno"                      # API client (Postman alternative)
+#cask "postman"
+#cask "insomnia"
+#cask "proxyman"
+#cask "charles"
+cask "fork"                       # Git GUI (free tier)
+#cask "sublime-merge"
+#cask "tower"
+#cask "github"
+#cask "kaleidoscope"
+cask "dash"                       # offline docs (paid)
+#cask "devdocs"
+#cask "xcodes"                    # manage Xcode versions
+#cask "android-studio"
+#cask "figma"
+#cask "sf-symbols"
+#cask "lm-studio"
+#cask "ollama-app"
+#cask "wireshark-app"
+#cask "gpg-suite"
+#cask "yubico-authenticator"
+#cask "launchcontrol"
+#cask "suspicious-package"
+#cask "macfuse"
+
+# ─── Browsers ─────────────────────────────────────────────────────────────────
+cask "firefox"
+#cask "google-chrome"
+#cask "brave-browser"
+#cask "zen"
+#cask "vivaldi"
+#cask "orion"
+#cask "chromium"
+
+# ─── Daily-driver essentials (Tier 1, all free) ──────────────────────────────
+cask "raycast"                    # launcher; or "alfred"
+cask "rectangle"                  # window snapping; or "aerospace" below
+#cask "nikitabobko/tap/aerospace"
+cask "maccy"                      # clipboard history (skip if using Raycast's)
+cask "jordanbaird-ice"            # menu bar icon manager
+cask "stats"                      # system stats in menu bar
+cask "itsycal"                    # menu bar calendar
+cask "iina"                       # video player
+cask "shottr"                     # screenshots + OCR
+cask "appcleaner"                 # or "pearcleaner"
+cask "the-unarchiver"
+cask "karabiner-elements"         # key remapping
+cask "hammerspoon"                # Lua automation
+cask "bitwarden"                  # or "1password" + "1password-cli"
+cask "obsidian"
+cask "zotero"
+cask "keka"
+cask "monitorcontrol"
+cask "linearmouse"
+cask "latest"                     # app update checker
+cask "qlmarkdown"                 # Quick Look plugins ↓
+cask "syntax-highlight"
+cask "quicklook-json"
+cask "qlvideo"
+
+# ─── Optional daily-driver apps ───────────────────────────────────────────────
+#cask "1password"
+#cask "1password-cli"
+#cask "keepassxc"
+#cask "alfred"
+#cask "aldente"
+#cask "betterdisplay"
+#cask "lulu"
+#cask "notion"
+#cask "logseq"
+#cask "anytype"
+#cask "typora"
+#cask "skim"
+#cask "sioyek"
+#cask "anki"
+#cask "netnewswire"
+#cask "syncthing-app"
+#cask "maestral"
+#cask "google-drive"
+#cask "dropbox"
+#cask "onedrive"
+#cask "tailscale-app"
+#cask "cyberduck"
+#cask "transmit"
+#cask "handbrake-app"
+#cask "kap"
+#cask "obs"
+#cask "audacity"
+#cask "imageoptim"
+#cask "pixelmator-pro"           # via App Store (mas) instead
+#cask "affinity"
+#cask "drawio"
+#cask "excalidraw"
+#cask "libreoffice"
+#cask "microsoft-office"
+#cask "mactex-no-gui"
+#cask "texshop"
+#cask "miniforge"
+#cask "r"
+#cask "rstudio"
+#cask "positron"
+#cask "racket"
+#cask "logisim-evolution"
+#cask "mathpix-snipping-tool"
+#cask "steam"
+#cask "whisky"
+#cask "crossover"
+#cask "espanso"
+#cask "keyboard-maestro"
+#cask "bettertouchtool"
+#cask "hazel"
+#cask "numi"
+#cask "rocket"
+#cask "keyboardcleantool"
+#cask "coconutbattery"
+#cask "grandperspective"
+#cask "daisydisk"
+#cask "omnidisksweeper"
+#cask "macs-fan-control"
+#cask "istat-menus"
+#cask "cleanshot"
+#cask "screen-studio"
+#cask "fantastical"
+#cask "busycal"
+#cask "mimestream"
+#cask "thunderbird"
+#cask "spotify"
+#cask "slack"
+#cask "discord"
+#cask "zoom"
+#cask "microsoft-teams"
+#cask "signal"
+#cask "telegram"
+#cask "whatsapp"
+#cask "backblaze"
+#cask "arq"
+#cask "carbon-copy-cloner"
+#cask "little-snitch"
+#cask "malwarebytes"
+
+# ─── Mac App Store (needs: mas + signed into the App Store) ──────────────────
+# Find IDs with: mas search "name"
+mas "Xcode", id: 497799835                   # 12+ GB; only if doing Apple-platform dev
+#mas "Amphetamine", id: 937984704
+#mas "Things 3", id: 904280696
+#mas "Pixelmator Pro", id: 1289583905
+#mas "Bear", id: 1091189122
+#mas "Wipr 2", id: 1662217862               # Safari content blocker
+#mas "AdGuard for Safari", id: 1440147259
+#mas "Refined GitHub", id: 1519867270       # Safari extension
+#mas "Keynote", id: 409183694
+#mas "Pages", id: 409201541
+#mas "Numbers", id: 409203825
+#mas "Apple Configurator", id: 1037126344   # DFU revive
+#mas "TestFlight", id: 899247664
+#mas "Kindle", id: 302584613
+#mas "WhatsApp Messenger", id: 310633997
+#mas "Slack for Desktop", id: 803453959
+
+# ─── VS Code extensions (brew bundle installs these via `code --install-extension`) ──
+vscode "editorconfig.editorconfig"
+vscode "esbenp.prettier-vscode"
+vscode "biomejs.biome"
+vscode "dbaeumer.vscode-eslint"
+vscode "charliermarsh.ruff"
+vscode "ms-python.python"
+vscode "ms-python.vscode-pylance"
+vscode "ms-toolsai.jupyter"
+vscode "golang.go"
+vscode "rust-lang.rust-analyzer"
+vscode "vadimcn.vscode-lldb"
+vscode "llvm-vs-code-extensions.vscode-clangd"
+vscode "redhat.java"
+vscode "vscjava.vscode-java-pack"
+vscode "ms-azuretools.vscode-containers"
+vscode "ms-vscode-remote.remote-ssh"
+vscode "ms-vscode-remote.remote-containers"
+vscode "github.copilot"
+vscode "github.copilot-chat"
+vscode "github.vscode-pull-request-github"
+vscode "github.vscode-github-actions"
+vscode "eamodio.gitlens"
+vscode "mhutchie.git-graph"
+vscode "usernamehw.errorlens"
+vscode "streetsidesoftware.code-spell-checker"
+vscode "yzhang.markdown-all-in-one"
+vscode "bierner.markdown-mermaid"
+vscode "james-yu.latex-workshop"
+vscode "myriad-dreamin.tinymist"
+vscode "tamasfe.even-better-toml"
+vscode "redhat.vscode-yaml"
+vscode "timonwong.shellcheck"
+vscode "foxundermoon.shell-format"
+vscode "mkhl.direnv"
+vscode "hashicorp.terraform"
+vscode "ms-kubernetes-tools.vscode-kubernetes-tools"
+vscode "pkief.material-icon-theme"
+vscode "github.github-vscode-theme"
+#vscode "vscodevim.vim"
+#vscode "asvetliakov.vscode-neovim"
+#vscode "anthropic.claude-code"
+#vscode "continue.continue"</code></pre></div>
+<h2 id="per-machine-brewfiles">Per-machine Brewfiles<a class="anchor" href="#per-machine-brewfiles" aria-label="Permalink">#</a></h2>
+<p>One file rarely fits a laptop, a desktop, and a work machine. Two patterns:</p>
+<p><strong>Includes</strong> — a base file plus a per-host file, concatenated at install time:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># ~/.dotfiles/install.sh
+cat Brewfile.base "Brewfile.$(scutil --get ComputerName | tr ' ' '-')" 2&gt;/dev/null &gt; /tmp/Brewfile
+brew bundle --file=/tmp/Brewfile</code></pre></div>
+<p><strong>Ruby conditionals</strong> — the Brewfile is Ruby, so this works:</p>
+<div class="codeblock"><span class="code-lang">ruby</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-ruby">host = `scutil --get ComputerName`.strip
+cask "docker-desktop"  if host == "work-mbp"       # company mandates Docker Desktop
+cask "orbstack"        unless host == "work-mbp"
+cask "steam"           if host == "studio"
+brew "postgresql@18", restart_service: (host == "studio")</code></pre></div>
+<h2 id="keeping-it-honest">Keeping it honest<a class="anchor" href="#keeping-it-honest" aria-label="Permalink">#</a></h2>
+<p>Every month (the routine in <a href="18-performance-and-maintenance.html">chapter 18</a>):</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew bundle cleanup --file=~/.dotfiles/Brewfile    # lists things you installed ad hoc
+# → either add them to the Brewfile (you use them) or `brew uninstall --zap` them (you don't)
+brew bundle dump --force --describe --file=/tmp/Brewfile.now &amp;&amp; diff ~/.dotfiles/Brewfile /tmp/Brewfile.now</code></pre></div>
+<p><code>brew bundle dump</code> sorts alphabetically and loses your comments, so don't overwrite a hand-curated file with it — diff and copy the new lines across. <code>--describe</code> adds each formula's description as a comment, which makes a dumped file readable enough to start from.</p>
+<h2 id="formula-and-cask-name-changes">Formula and cask name changes<a class="anchor" href="#formula-and-cask-name-changes" aria-label="Permalink">#</a></h2>
+<p>Homebrew renames casks when upstream renames apps (<code>docker</code> → <code>docker-desktop</code>, <code>tailscale</code> → <code>tailscale-app</code>, <code>handbrake</code> → <code>handbrake-app</code>, <code>wireshark</code> → <code>wireshark-app</code> all happened in 2025–26). <code>brew bundle</code> prints a deprecation warning with the new name; update the file. <code>brew search --cask name</code> finds the current one.</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="appendix-a-bootstrap-script.html"><span>Previous</span><strong>Appendix A — Bootstrap script</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/appendix-b-brewfile.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/appendix-b-brewfile.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#conventions-in-this-file">Conventions in this file</a></li>
+<li class="lvl2"><a href="#scriptsbrewfile"><code>scripts/Brewfile</code></a></li>
+<li class="lvl2"><a href="#per-machine-brewfiles">Per-machine Brewfiles</a></li>
+<li class="lvl2"><a href="#keeping-it-honest">Keeping it honest</a></li>
+<li class="lvl2"><a href="#formula-and-cask-name-changes">Formula and cask name changes</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
