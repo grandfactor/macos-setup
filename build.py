@@ -44,7 +44,8 @@ def escape_text(s: str) -> str:
         out.append(m.group(0))
         pos = m.end()
     out.append(html.escape(s[pos:], quote=False))
-    return "".join(out)
+    # keep author-written character references intact (&lt; &#96; &amp; ...)
+    return re.sub(r"&amp;(#\d+|#x[0-9a-fA-F]+|[A-Za-z][A-Za-z0-9]{1,31});", r"&\1;", "".join(out))
 
 
 def inline(md: str) -> str:
