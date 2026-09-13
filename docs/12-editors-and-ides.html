@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Editors, IDEs &amp; AI coding tools — The macOS Setup Guide</title>
+<meta name="description" content="VS Code, Cursor, Zed, JetBrains, Neovim, Xcode and the AI coding agents — what each is for in 2026, recommended settings, and how to keep the configs in sync across machines.">
+<meta property="og:title" content="Editors, IDEs &amp; AI coding tools — The macOS Setup Guide">
+<meta property="og:description" content="VS Code, Cursor, Zed, JetBrains, Neovim, Xcode and the AI coding agents — what each is for in 2026, recommended settings, and how to keep the configs in sync across machines.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li class="active"><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="editors-ides-ai-coding-tools">Editors, IDEs &amp; AI coding tools</h1>
+<p>The editor market split three ways in 2025–2026: <strong>VS Code</strong> remains the free universal default (~76% share in the Stack Overflow survey), <strong>Cursor</strong> is the AI-native fork that a fifth of developers now use, and <strong>Zed</strong> is the fast native newcomer. JetBrains stays the choice for Java/Kotlin and heavy refactoring; Neovim for the terminal-native; Xcode for Apple platforms. You don't have to pick one — most engineers run two.</p>
+<h2 id="the-recommendation">The recommendation<a class="anchor" href="#the-recommendation" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>You are…</th><th>Install</th><th>Why</th></tr></thead><tbody><tr><td>A <strong>CS student</strong></td><td><strong>VS Code</strong> (free) + Copilot Student (free) — and <strong>JetBrains</strong> IDEs for Java/Kotlin courses (free with a student licence)</td><td>Every course's instructions assume VS Code; JetBrains for the JVM is what industry uses</td></tr><tr><td>A <strong>working engineer</strong>, general</td><td><strong>VS Code</strong> or <strong>Cursor</strong> as primary, <strong>Zed</strong> for speed on big repos, terminal agent (Claude Code / Codex) alongside</td><td>The AI layer is now the differentiator; VS Code+Copilot vs Cursor is a taste/budget call</td></tr><tr><td>Deep in one ecosystem</td><td><strong>JetBrains</strong> (IntelliJ/PyCharm/GoLand/RustRover/CLion/WebStorm)</td><td>Nothing beats their refactoring, debugger and framework awareness</td></tr><tr><td>Apple platforms</td><td><strong>Xcode 27</strong> (+ VS Code/Zed for Swift packages)</td><td>Required for signing, simulators, Instruments</td></tr><tr><td>Terminal-native</td><td><strong>Neovim</strong> (LazyVim or kickstart.nvim) or <strong>Helix</strong></td><td>Everything over SSH, zero latency, infinitely configurable</td></tr></tbody></table></div>
+<h2 id="visual-studio-code">Visual Studio Code<a class="anchor" href="#visual-studio-code" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew install --cask visual-studio-code</code></pre></div>
+<p>Launch once, then in the Command Palette (<kbd>⌘</kbd><kbd>⇧</kbd><kbd>P</kbd>) run <em>Shell Command: Install 'code' command in PATH</em> so <code>code .</code> works (Homebrew's cask usually does this for you). Turn on <strong>Settings Sync</strong> (sign in with GitHub) so extensions, settings, keybindings and snippets follow you to the next machine — or keep <code>settings.json</code>/<code>keybindings.json</code> in your dotfiles.</p>
+<h3 id="settings-that-matter">Settings that matter<a class="anchor" href="#settings-that-matter" aria-label="Permalink">#</a></h3>
+<p><code>⌘,</code> → open <em>settings.json</em> (the <code>{}</code> icon top right). A developer baseline:</p>
+<div class="codeblock"><span class="code-lang">jsonc</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-jsonc">{
+  // --- editor ---
+  "editor.fontFamily": "JetBrainsMono Nerd Font, Menlo, monospace",
+  "editor.fontSize": 13,
+  "editor.fontLigatures": true,
+  "editor.lineHeight": 1.6,
+  "editor.tabSize": 2,
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": true,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.codeActionsOnSave": { "source.fixAll": "explicit", "source.organizeImports": "explicit" },
+  "editor.rulers": [88, 120],
+  "editor.minimap.enabled": false,
+  "editor.bracketPairColorization.enabled": true,
+  "editor.guides.bracketPairs": "active",
+  "editor.cursorSmoothCaretAnimation": "on",
+  "editor.smoothScrolling": true,
+  "editor.linkedEditing": true,
+  "editor.stickyScroll.enabled": true,
+  "editor.inlineSuggest.enabled": true,
+  "editor.accessibilitySupport": "off",
+  // --- files ---
+  "files.autoSave": "onFocusChange",
+  "files.trimTrailingWhitespace": true,
+  "files.insertFinalNewline": true,
+  "files.exclude": { "**/.git": true, "**/node_modules": true, "**/.venv": true, "**/__pycache__": true },
+  "files.watcherExclude": { "**/node_modules/**": true, "**/.venv/**": true, "**/target/**": true },
+  "search.exclude": { "**/node_modules": true, "**/dist": true, "**/.venv": true },
+  // --- workbench ---
+  "workbench.startupEditor": "none",
+  "workbench.colorTheme": "GitHub Dark Default",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.editor.enablePreview": false,
+  "workbench.tree.indent": 16,
+  "window.autoDetectColorScheme": true,
+  "window.newWindowDimensions": "inherit",
+  "window.titleBarStyle": "custom",
+  // --- terminal (runs your zsh, inherits mise) ---
+  "terminal.integrated.fontFamily": "JetBrainsMono Nerd Font",
+  "terminal.integrated.fontSize": 13,
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.integrated.scrollback": 20000,
+  "terminal.integrated.macOptionIsMeta": true,
+  "terminal.integrated.enableMultiLinePasteWarning": "never",
+  // --- git ---
+  "git.autofetch": true,
+  "git.confirmSync": false,
+  "git.enableSmartCommit": true,
+  "git.openRepositoryInParentFolders": "always",
+  "diffEditor.ignoreTrimWhitespace": false,
+  // --- languages ---
+  "[python]": { "editor.defaultFormatter": "charliermarsh.ruff", "editor.tabSize": 4 },
+  "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+  "python.terminal.activateEnvironment": true,
+  "[go]": { "editor.defaultFormatter": "golang.go", "editor.tabSize": 4, "editor.insertSpaces": false },
+  "[rust]": { "editor.defaultFormatter": "rust-lang.rust-analyzer" },
+  "[markdown]": { "editor.wordWrap": "on", "editor.formatOnSave": false },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "typescript.preferences.importModuleSpecifier": "relative",
+  // --- telemetry / noise ---
+  "telemetry.telemetryLevel": "off",
+  "update.showReleaseNotes": false,
+  "extensions.ignoreRecommendations": false,
+  "security.workspace.trust.untrustedFiles": "open"
+}</code></pre></div>
+<h3 id="extensions-a-curated-not-exhaustive-list">Extensions (a curated, not exhaustive, list)<a class="anchor" href="#extensions-a-curated-not-exhaustive-list" aria-label="Permalink">#</a></h3>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># generic
+code --install-extension eamodio.gitlens              # or the lighter mhutchie.git-graph
+code --install-extension usernamehw.errorlens          # inline diagnostics
+code --install-extension editorconfig.editorconfig
+code --install-extension esbenp.prettier-vscode
+code --install-extension biomejs.biome
+code --install-extension streetsidesoftware.code-spell-checker
+code --install-extension pkief.material-icon-theme
+code --install-extension github.github-vscode-theme
+code --install-extension ms-vscode-remote.remote-ssh     # edit on servers
+code --install-extension ms-vscode-remote.remote-containers
+code --install-extension ms-azuretools.vscode-containers
+code --install-extension redhat.vscode-yaml
+code --install-extension tamasfe.even-better-toml
+code --install-extension mikestead.dotenv
+code --install-extension yzhang.markdown-all-in-one
+# languages
+code --install-extension ms-python.python charliermarsh.ruff ms-python.debugpy ms-toolsai.jupyter
+code --install-extension golang.go
+code --install-extension rust-lang.rust-analyzer vadimcn.vscode-lldb
+code --install-extension llvm-vs-code-extensions.vscode-clangd
+code --install-extension sswg.swift-lang
+code --install-extension vscjava.vscode-java-pack
+code --install-extension dbaeumer.vscode-eslint
+code --install-extension bradlc.vscode-tailwindcss
+# AI (pick one)
+code --install-extension github.copilot github.copilot-chat</code></pre></div>
+<p>Record them in your dotfiles with <code>code --list-extensions &gt; vscode/extensions.txt</code> — or as <code>vscode "…"</code> lines in the Brewfile (Chapter 8), which <code>brew bundle</code> installs.</p>
+<h3 id="keyboard-essentials-macos">Keyboard essentials (macOS)<a class="anchor" href="#keyboard-essentials-macos" aria-label="Permalink">#</a></h3>
+<p><kbd>⌘</kbd><kbd>P</kbd> file, <kbd>⌘</kbd><kbd>⇧</kbd><kbd>P</kbd> command, <kbd>⌘</kbd><kbd>⇧</kbd><kbd>O</kbd> symbol, <kbd>⌘</kbd><kbd>T</kbd> workspace symbol, <kbd>⌘</kbd><kbd>B</kbd> sidebar, <kbd>⌘</kbd><kbd>J</kbd> panel/terminal, <kbd>⌃</kbd><kbd>`</kbd> terminal, <kbd>⌘</kbd><kbd>\</kbd> split, <kbd>⌘</kbd><kbd>1/2/3</kbd> editor group, <kbd>⌥</kbd><kbd>↑/↓</kbd> move line, <kbd>⌥</kbd><kbd>⇧</kbd><kbd>↑/↓</kbd> copy line, <kbd>⌘</kbd><kbd>D</kbd> add selection to next match, <kbd>⌘</kbd><kbd>⇧</kbd><kbd>L</kbd> select all matches, <kbd>F2</kbd> rename, <kbd>F12</kbd> definition, <kbd>⌥</kbd><kbd>F12</kbd> peek, <kbd>⇧</kbd><kbd>F12</kbd> references, <kbd>⌘</kbd><kbd>.</kbd> quick fix, <kbd>⌘</kbd><kbd>K</kbd> <kbd>⌘</kbd><kbd>S</kbd> keybindings editor. Install the <strong>Vim</strong> or <strong>VSCode Neovim</strong> extension if you're modal.</p>
+<h3 id="vs-code-vs-vscodium">VS Code vs VSCodium<a class="anchor" href="#vs-code-vs-vscodium" aria-label="Permalink">#</a></h3>
+<p>VS Code's binary is MIT-licensed source plus Microsoft telemetry, branding and the proprietary Marketplace. <strong>VSCodium</strong> (<code>brew install --cask vscodium</code>) is the telemetry-free build using the Open VSX registry; a few extensions (Copilot, Remote SSH, Pylance, C# Dev Kit) are Microsoft-only and don't work there. For students who need Copilot, plain VS Code with <code>telemetry.telemetryLevel: off</code> is the pragmatic answer.</p>
+<h2 id="cursor">Cursor<a class="anchor" href="#cursor" aria-label="Permalink">#</a></h2>
+<p><strong>Cursor</strong> (<code>brew install --cask cursor</code>) is a fork of VS Code with the AI layer rebuilt as first-class: <strong>Tab</strong> (multi-line predictive edits), <strong>Agent/Composer</strong> (plan and execute multi-file changes, run commands, fix from terminal errors), inline <kbd>⌘</kbd><kbd>K</kbd> edits, codebase indexing, and bundled frontier models (Anthropic, OpenAI, Google, its own). It imports your VS Code settings, keybindings and extensions on first launch; nearly all extensions work.</p>
+<p>Pricing (Sept 2026): <strong>Hobby</strong> free (limited), <strong>Pro $20/mo</strong> (~$20 of model credits), <strong>Pro+ $60</strong>, <strong>Ultra $200</strong>, Teams $40/user + base fee. Students have periodically been offered a free year of Pro — check cursor.com/students. The credits model means heavy agent use runs out mid-month; set a spend alert.</p>
+<p>Use Cursor if AI assistance is the reason you'd switch editors; stay on VS Code + Copilot if you want a flat price and Microsoft's ecosystem (Remote SSH, Dev Containers, Pylance) without fork lag — Cursor tracks VS Code releases with a delay of weeks. Windsurf (Codeium, now under Cognition) and Google's <strong>Antigravity</strong> (agent-manager IDE) are the other AI-first forks worth a look; Antigravity's multi-agent orchestration is the most different idea in the space.</p>
+<h2 id="zed">Zed<a class="anchor" href="#zed" aria-label="Permalink">#</a></h2>
+<p><strong>Zed</strong> (<code>brew install --cask zed</code>) is a native Rust editor with a GPU renderer from the creators of Atom: ~180 ms cold start vs 2+ s for Electron editors, ~140 MB idle memory, 8 ms keystroke latency, built-in real-time collaboration (multiplayer editing and voice), Vim mode that's actually good, and an <strong>Agent Panel</strong> that speaks the open <strong>Agent Client Protocol</strong> so you can plug in Claude Code, Gemini CLI, OpenCode or Zed's own hosted models. Language servers install automatically per file type. The editor is free and open source; <strong>Zed Pro</strong> (~$10/mo) is only for hosted AI usage.</p>
+<p>Zed is the right choice for large monorepos and for people who find VS Code sluggish, and for pair programming. Its gaps in 2026: a smaller extension ecosystem (no VS Code extension compatibility), a debugger that's newer and less complete than VS Code's, Windows support still maturing. Many people run Zed for editing and VS Code for debugging. Config: <code>~/.config/zed/settings.json</code> and <code>keymap.json</code> (<code>⌘,</code>) — it imports VS Code keybindings and themes.</p>
+<h2 id="jetbrains">JetBrains<a class="anchor" href="#jetbrains" aria-label="Permalink">#</a></h2>
+<p>IntelliJ IDEA, PyCharm, WebStorm, GoLand, RustRover, CLion, Rider, DataGrip, PhpStorm, RubyMine, Android Studio (Google's fork). Install via <strong>JetBrains Toolbox</strong> (<code>brew install --cask jetbrains-toolbox</code>), which manages versions, updates and the <code>idea</code>/<code>pycharm</code> shell launchers. <strong>Free for students and teachers</strong> (jetbrains.com/academy/student-pack, or via the GitHub Student Developer Pack) — the full Ultimate/Professional editions, renewable yearly while enrolled. WebStorm, RustRover, Rider, CLion and Aqua also have <strong>free non-commercial licences</strong> for everyone since 2024–2025. IntelliJ Community and PyCharm Community are free for any use.</p>
+<p>Why JetBrains despite VS Code: language-aware refactoring that's actually safe across a whole project, the best debugger UX, deep framework understanding (Spring, Django, Rails, Next.js), database tools built in (Ultimate), and <em>everything</em> working out of the box without assembling extensions. Cost: memory (2–4 GB per IDE), indexing time on first open, and a heavier UI. The <strong>AI Assistant</strong> and <strong>Junie</strong> agent are JetBrains' AI layer (subscription; a free tier exists); Copilot and Claude Code also plug in.</p>
+<p>macOS notes: the <em>IdeaVim</em> plugin is excellent; enable <em>Settings → Keymap → macOS</em> (default) and bind <kbd>⌘</kbd><kbd>⇧</kbd><kbd>A</kbd> (Find Action) into your fingers; increase the heap for big projects (<em>Help → Change Memory Settings</em>, 4096 MB); exclude <code>~/Library/Caches/JetBrains</code> from Time Machine.</p>
+<h2 id="neovim">Neovim<a class="anchor" href="#neovim" aria-label="Permalink">#</a></h2>
+<p><code>brew install neovim</code>. Start from a distribution rather than an empty config:</p>
+<ul>
+<li><strong>LazyVim</strong> — batteries-included, lazy.nvim plugin manager, LSP/Treesitter/Telescope/Snacks preconfigured, Mason installs language servers. <code>git clone https://github.com/LazyVim/starter ~/.config/nvim &amp;&amp; nvim</code>.</li>
+<li><strong>kickstart.nvim</strong> — a single, heavily commented <code>init.lua</code> meant to be <em>read</em> and owned. Best for learning what each piece does (recommended for students).</li>
+<li><strong>AstroNvim</strong>, <strong>NvChad</strong>, <strong>LunarVim</strong> — other full distros.</li>
+</ul>
+<p>Pair with Ghostty (true colour, Kitty keyboard protocol for extra keybindings, Nerd Font for icons), <code>ripgrep</code> and <code>fd</code> (Telescope uses them), <code>lazygit</code> (Neovim plugin exists), and a clipboard bridge — Neovim on macOS uses <code>pbcopy</code>/<code>pbpaste</code> automatically for <code>"+</code>. AI in Neovim: <strong>codecompanion.nvim</strong>, <strong>avante.nvim</strong>, <strong>copilot.lua</strong>, or just run Claude Code in a split. <strong>Helix</strong> (<code>brew install helix</code>) is the modern alternative: Kakoune-style selection-first editing, LSP and Treesitter built in, zero-plugin philosophy — a great choice if you want modal editing without the configuration hobby.</p>
+<h2 id="xcode-for-apple-platforms">Xcode (for Apple platforms)<a class="anchor" href="#xcode-for-apple-platforms" aria-label="Permalink">#</a></h2>
+<p>Chapter 7 covers installing it. Settings worth changing: <em>Text Editing → Display</em>: line numbers, code folding ribbon, page guide at 120; <em>Text Editing → Editing</em>: while editing, automatically trim trailing whitespace including whitespace-only lines; <em>Themes</em>: pick a dark one or install one; <em>Navigation → Command-click</em>: Jumps to Definition; <em>Key Bindings</em>: bind <em>Refactor → Rename</em> and <em>Jump to Definition</em> if you come from VS Code. Xcode 27's coding agents live in the <em>Conversation</em> panel — connect your Claude/ChatGPT account or use Apple's models. Simulators, SwiftUI previews and Instruments are why you tolerate the 15 GB.</p>
+<h2 id="ai-coding-agents-in-the-terminal">AI coding agents in the terminal<a class="anchor" href="#ai-coding-agents-in-the-terminal" aria-label="Permalink">#</a></h2>
+<p>The biggest workflow change of 2025–2026: agents that read your repo, plan, edit files, run tests and iterate, driven from a terminal or an editor panel. They're complementary to whatever editor you use.</p>
+<div class="table-wrap"><table><thead><tr><th>Tool</th><th>Vendor / model</th><th>Install</th><th>Notes</th></tr></thead><tbody><tr><td><strong>Claude Code</strong></td><td>Anthropic</td><td><code>brew install --cask claude-code</code> or <code>npm i -g @anthropic-ai/claude-code</code></td><td>Usage via Claude Pro/Max subscription or API. Skills, hooks, MCP servers, <code>CLAUDE.md</code> project memory. Integrates with VS Code/Zed/JetBrains panels.</td></tr><tr><td><strong>Codex CLI</strong></td><td>OpenAI</td><td><code>brew install codex</code> / <code>npm i -g @openai/codex</code></td><td>Included in ChatGPT Plus/Pro; sandboxed execution.</td></tr><tr><td><strong>Gemini CLI</strong></td><td>Google</td><td><code>brew install gemini-cli</code></td><td>Generous free tier with a Google account.</td></tr><tr><td><strong>OpenCode</strong></td><td>open source</td><td><code>brew install opencode</code></td><td>Bring any model (local via Ollama, or any API key).</td></tr><tr><td><strong>Aider</strong></td><td>open source</td><td><code>uv tool install aider-chat</code></td><td>The original; git-native, any model.</td></tr><tr><td><strong>Amp</strong></td><td>Sourcegraph</td><td><code>npm i -g @sourcegraph/amp</code></td><td>Team-oriented.</td></tr><tr><td><strong>GitHub Copilot CLI / coding agent</strong></td><td>GitHub</td><td><code>gh extension install github/gh-copilot</code></td><td>Free for students via Copilot Student; the coding agent works on issues → PRs in the cloud.</td></tr></tbody></table></div>
+<p>Practical habits: give agents a <code>CLAUDE.md</code>/<code>AGENTS.md</code> at the repo root describing the stack, commands and conventions; run them in a <strong>git worktree</strong> or branch so you can review diffs; keep tests fast so the agent's loop is fast; never paste secrets into a prompt; and for university coursework, <strong>read your integrity policy</strong> — many courses now distinguish "AI for understanding" from "AI for writing the submitted code".</p>
+<p><strong>Model Context Protocol (MCP)</strong> servers give agents tools (GitHub, Postgres, browser, filesystem). Configure them once in <code>~/.claude.json</code> / Cursor / Zed settings and every agent can use them.</p>
+<h2 id="keeping-editor-configs-in-sync">Keeping editor configs in sync<a class="anchor" href="#keeping-editor-configs-in-sync" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>VS Code / Cursor</strong>: Settings Sync (built in), or commit <code>settings.json</code>, <code>keybindings.json</code>, <code>snippets/</code>, and an <code>extensions.txt</code> to dotfiles. Cursor stores its own copies under <code>~/Library/Application Support/Cursor/User/</code>.</li>
+<li><strong>Zed</strong>: <code>~/.config/zed/</code> is already a dotfiles-friendly directory; it also has settings sync via a Zed account.</li>
+<li><strong>JetBrains</strong>: <em>Settings Sync</em> (account-based) or export settings to a zip; Toolbox remembers your installed IDEs.</li>
+<li><strong>Neovim/Helix</strong>: <code>~/.config/nvim</code> and <code>~/.config/helix</code> — pure text, commit them.</li>
+<li><strong>Xcode</strong>: themes in <code>~/Library/Developer/Xcode/UserData/FontAndColorThemes</code>, key bindings in <code>…/KeyBindings</code>, snippets in <code>…/CodeSnippets</code> — symlink these into your dotfiles.</li>
+</ul>
+<h2 id="fonts-for-code">Fonts for code<a class="anchor" href="#fonts-for-code" aria-label="Permalink">#</a></h2>
+<p>Same as the terminal (Chapter 9) so glyphs match: <strong>JetBrains Mono</strong>, <strong>Fira Code</strong>, <strong>Monaspace</strong> (GitHub; five variable families that mix), <strong>Cascadia Code</strong>, <strong>Iosevka</strong>, <strong>Geist Mono</strong>, <strong>Commit Mono</strong>, <strong>Berkeley Mono</strong> ($75, the enthusiast favourite), Apple's <strong>SF Mono</strong> (in <code>/System/Applications/Utilities/Terminal.app/Contents/Resources/Fonts</code> — copy them to Font Book to use elsewhere). 13 px at 1.6 line height on a Retina display is a comfortable default; 12 px on a 5K 27".</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="11-languages-and-runtimes.html"><span>Previous</span><strong>Languages &amp; runtimes</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/12-editors-and-ides.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/12-editors-and-ides.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#the-recommendation">The recommendation</a></li>
+<li class="lvl2"><a href="#visual-studio-code">Visual Studio Code</a></li>
+<li class="lvl3"><a href="#settings-that-matter">Settings that matter</a></li>
+<li class="lvl3"><a href="#extensions-a-curated-not-exhaustive-list">Extensions (a curated, not exhaustive, list)</a></li>
+<li class="lvl3"><a href="#keyboard-essentials-macos">Keyboard essentials (macOS)</a></li>
+<li class="lvl3"><a href="#vs-code-vs-vscodium">VS Code vs VSCodium</a></li>
+<li class="lvl2"><a href="#cursor">Cursor</a></li>
+<li class="lvl2"><a href="#zed">Zed</a></li>
+<li class="lvl2"><a href="#jetbrains">JetBrains</a></li>
+<li class="lvl2"><a href="#neovim">Neovim</a></li>
+<li class="lvl2"><a href="#xcode-for-apple-platforms">Xcode (for Apple platforms)</a></li>
+<li class="lvl2"><a href="#ai-coding-agents-in-the-terminal">AI coding agents in the terminal</a></li>
+<li class="lvl2"><a href="#keeping-editor-configs-in-sync">Keeping editor configs in sync</a></li>
+<li class="lvl2"><a href="#fonts-for-code">Fonts for code</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
