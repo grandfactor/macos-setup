@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Homebrew — The macOS Setup Guide</title>
+<meta name="description" content="Homebrew 6 from scratch — installing correctly on Apple silicon, formulae vs casks, Brewfiles, tap trust, ask mode, services, maintenance, and the Intel deprecation.">
+<meta property="og:title" content="Homebrew — The macOS Setup Guide">
+<meta property="og:description" content="Homebrew 6 from scratch — installing correctly on Apple silicon, formulae vs casks, Brewfiles, tap trust, ask mode, services, maintenance, and the Intel deprecation.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li class="active"><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="homebrew">Homebrew</h1>
+<p>Homebrew is the package manager for macOS. Nearly every command-line tool in this guide and most GUI apps install through it, and a <code>Brewfile</code> is how you make a new Mac look like your old one in twenty minutes. This chapter covers Homebrew <strong>6.x</strong> (6.0.0 shipped June 2026), which changed several defaults from what older tutorials show.</p>
+<h2 id="install">Install<a class="anchor" href="#install" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"</code></pre></div>
+<p>The installer asks for your password once (<code>sudo</code> to create <code>/opt/homebrew</code> and set ownership to your user), installs the Command Line Tools if missing, and finishes with two lines to add to your shell config. On Apple silicon the prefix is <strong><code>/opt/homebrew</code></strong>; the installer's suggested snippet is:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">echo &gt;&gt; ~/.zprofile
+echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' &gt;&gt; ~/.zprofile
+eval "$(/opt/homebrew/bin/brew shellenv)"</code></pre></div>
+<p><code>brew shellenv</code> sets <code>HOMEBREW_PREFIX</code>, <code>PATH</code>, <code>MANPATH</code>, <code>INFOPATH</code>. Put it in <code>~/.zprofile</code> (login shells) or <code>~/.zshrc</code> — Chapter 9 organises this properly. Then:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew doctor      # "Your system is ready to brew." — fix anything it flags
+brew --prefix    # /opt/homebrew
+brew config      # look for "Rosetta 2: false" and "macOS: 27.x-arm64"</code></pre></div>
+<div class="admonition warning"><p class="admonition-title">Warning</p><p>If <code>brew --prefix</code> prints <code>/usr/local</code>, you have an <strong>Intel</strong> Homebrew running under Rosetta (usually inherited via Migration Assistant or by running the installer from an x86 terminal). It will stop receiving binary packages this month and stop working in macOS 28. Record it (<code>brew bundle dump --file=~/old-brewfile</code>), uninstall it with the official script under <code>arch -x86_64</code>, delete <code>/usr/local/Homebrew</code> and <code>/usr/local/Cellar</code>, and reinstall natively.</p></div>
+<p>Standard-account users (Chapter 3): run the installer while authenticating as the admin user, then <code>sudo chown -R $(whoami):admin /opt/homebrew</code> so your daily account owns it. Homebrew refuses to run as root; multi-user Homebrew is unsupported — one user owns it.</p>
+<h2 id="concepts">Concepts<a class="anchor" href="#concepts" aria-label="Permalink">#</a></h2>
+<div class="table-wrap"><table><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody><tr><td><strong>Formula</strong></td><td>A command-line package built from source or, almost always, installed from a prebuilt <strong>bottle</strong>. <code>brew install ripgrep</code>. Lives in <code>/opt/homebrew/Cellar/&lt;name&gt;/&lt;version&gt;</code> and is symlinked into <code>/opt/homebrew/bin</code>, <code>lib</code>, etc.</td></tr><tr><td><strong>Cask</strong></td><td>A GUI app or large binary (fonts, drivers) installed from the vendor's own download. <code>brew install --cask ghostty</code>. The <code>.app</code> goes to <code>/Applications</code>; metadata to <code>/opt/homebrew/Caskroom</code>.</td></tr><tr><td><strong>Tap</strong></td><td>A third-party repository of formulae/casks (<code>brew tap owner/repo</code>). <code>homebrew/core</code> and <code>homebrew/cask</code> are built in and served from a JSON API rather than a git clone.</td></tr><tr><td><strong>Keg-only</strong></td><td>A formula not symlinked into <code>bin</code> because it would shadow a system tool (e.g. <code>openssl@3</code>, <code>libpq</code>, <code>curl</code>). Use <code>$(brew --prefix libpq)/bin/psql</code> or add to <code>PATH</code> explicitly.</td></tr><tr><td><strong>Bottle</strong></td><td>Prebuilt binary for your macOS version/arch. If none exists, <code>brew</code> compiles — slow and a sign the formula is unusual or you're on an unsupported macOS.</td></tr><tr><td><strong>Brewfile</strong></td><td>A manifest of taps, formulae, casks, Mac App Store apps and extension packages, consumed by <code>brew bundle</code>.</td></tr><tr><td><strong>Service</strong></td><td>A formula with a launchd definition (Postgres, Redis, nginx): <code>brew services start postgresql@17</code>.</td></tr></tbody></table></div>
+<h2 id="everyday-commands">Everyday commands<a class="anchor" href="#everyday-commands" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew search &lt;text&gt;            # formulae and casks; use "brew search --desc" to search descriptions
+brew info &lt;pkg&gt;               # what it is, deps, caveats (read caveats!), install status; "brew info --cask"
+brew install &lt;pkg&gt;            # formula
+brew install --cask &lt;app&gt;     # GUI app
+brew exec &lt;formula&gt; -- &lt;cmd&gt;  # run a tool from a formula's environment without installing globally (6.0, like npx)
+brew list                     # installed formulae (+ --cask for apps); "brew leaves" = explicitly installed, not deps
+brew deps --tree &lt;pkg&gt;        # why is this here?
+brew uses --installed &lt;pkg&gt;   # what depends on it
+brew update                   # refresh the package index (fast; internal JSON API)
+brew outdated                 # what would upgrade
+brew upgrade                  # upgrade everything (formulae + casks); "brew upgrade &lt;pkg&gt;" for one
+brew pin &lt;pkg&gt; / brew unpin   # freeze a version (formulae and, since 6.0, casks)
+brew uninstall &lt;pkg&gt;          # remove; "--zap" for casks deletes prefs/caches too
+brew autoremove               # remove orphaned dependencies
+brew cleanup [--prune=all]    # delete old versions and downloads (auto-runs periodically; run manually to reclaim GB)
+brew doctor                   # health check
+brew tap-info --installed     # your taps and their trust status
+brew vulns                    # (tap) check installed packages against known CVEs</code></pre></div>
+<p>Homebrew 6 turned on <strong>"ask" mode by default for developers</strong> (and it's a one-line opt-in for everyone): <code>brew install</code>/<code>upgrade</code> print a plan — packages, dependencies, download size — and wait for <code>y</code>. Set <code>HOMEBREW_ASK=1</code> in your shell config to have it everywhere, or <code>--yes</code>/<code>-y</code> to skip a prompt in scripts. <code>brew upgrade</code> now prints a summary at the end, and cask upgrades can reopen apps that were running.</p>
+<p>Casks with <code>auto_updates true</code> (apps that update themselves, like Chrome, VS Code, Slack) are skipped by <code>brew upgrade</code> unless you pass <code>--greedy</code>, so <code>brew upgrade --greedy</code> occasionally forces them to the version Homebrew knows.</p>
+<h2 id="tap-trust-new-in-60">Tap trust (new in 6.0)<a class="anchor" href="#tap-trust-new-in-60" aria-label="Permalink">#</a></h2>
+<p>Third-party taps contain arbitrary Ruby that runs on your machine. Homebrew 6 requires you to <strong>trust a tap explicitly</strong> before its formulae or casks are evaluated:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew tap --trust owner/repo          # add and trust in one step
+brew tap owner/repo                  # add untrusted → install of its packages is refused until trusted
+brew trust owner/repo                # trust later
+brew untrust owner/repo
+brew tap-info owner/repo             # shows "trusted: true/false"</code></pre></div>
+<p>Official taps are trusted by default. Homebrew also stopped auto-tapping (<code>brew install owner/repo/tool</code> no longer silently adds the tap). In a Brewfile, write <code>tap "owner/repo", trusted: true</code>. Before trusting a tap, look at its GitHub repo — how many stars, who maintains it, does it just wrap binaries from a vendor's releases page. Popular taps you'll likely trust: <code>hashicorp/tap</code>, <code>oven-sh/bun</code>, <code>xcodesorg/made</code>, <code>FelixKratz/formulae</code> (sketchybar/borders), <code>koekeishiya/formulae</code> (yabai/skhd), <code>nikitabobko/tap</code> (AeroSpace), <code>charmbracelet/tap</code>, <code>stripe/stripe-cli</code>, <code>supabase/tap</code>.</p>
+<h2 id="the-brewfile-your-machine-as-code">The Brewfile: your machine as code<a class="anchor" href="#the-brewfile-your-machine-as-code" aria-label="Permalink">#</a></h2>
+<p>Create one from your current state:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew bundle dump --describe --file=~/.config/homebrew/Brewfile   # --force to overwrite</code></pre></div>
+<p>Edit it by hand from then on. A realistic developer Brewfile (yours will differ — this is the shape):</p>
+<div class="codeblock"><span class="code-lang">ruby</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-ruby"># ~/.config/homebrew/Brewfile
+tap "oven-sh/bun", trusted: true
+tap "nikitabobko/tap", trusted: true
+
+# --- shell &amp; core CLI ---
+brew "git"                 # newer than Apple's
+brew "gh"                  # GitHub CLI
+brew "zsh"                 # optional: newer than /bin/zsh
+brew "starship"            # prompt
+brew "zoxide"              # smarter cd
+brew "fzf"                 # fuzzy finder
+brew "ripgrep"             # rg
+brew "fd"                  # find
+brew "bat"                 # cat with wings
+brew "eza"                 # ls
+brew "jq", "yq"            # JSON / YAML
+brew "tmux"
+brew "neovim"
+brew "mise"                # runtime versions (node, python, go, java…)
+brew "uv"                  # python packaging
+brew "direnv"
+brew "tldr"                # or tlrc
+brew "htop", "btop"
+brew "wget", "curl"        # curl is keg-only; Apple's is fine for most uses
+brew "coreutils", "gnu-sed", "gawk"   # GNU tools (g-prefixed)
+brew "tree", "ncdu", "dust", "duf"
+brew "watch", "entr"
+brew "hyperfine"           # benchmarking
+brew "difftastic", "git-delta"
+brew "shellcheck", "shfmt"
+brew "pre-commit"
+brew "gnupg", "pinentry-mac"
+brew "mas"                 # Mac App Store CLI
+brew "trash"               # move to Trash from the shell instead of rm
+brew "colima", "docker", "docker-compose", "docker-buildx"   # or the OrbStack cask instead of these four
+brew "postgresql@17", restart_service: :changed
+brew "redis", restart_service: :changed
+brew "sqlite"
+brew "awscli"
+brew "terraform"           # or tofu
+brew "kubectl", "k9s", "helm"
+brew "oven-sh/bun/bun"
+
+# --- GUI apps ---
+cask "ghostty"
+cask "visual-studio-code"
+cask "zed"
+cask "raycast"
+cask "rectangle"           # or: cask "nikitabobko/tap/aerospace"
+cask "karabiner-elements"
+cask "maccy"
+cask "1password", "1password-cli"
+cask "orbstack"
+cask "tableplus"
+cask "postman"             # or "bruno"
+cask "obsidian"
+cask "notion"
+cask "slack", "discord", "zoom"
+cask "google-chrome", "firefox", "zen"
+cask "iina"                # video player
+cask "the-unarchiver"
+cask "appcleaner"
+cask "stats"               # menu bar system monitor
+cask "ice"                 # menu bar organiser
+cask "font-jetbrains-mono-nerd-font"
+cask "font-fira-code-nerd-font"
+cask "qlmarkdown", "syntax-highlight", "quicklook-json", "qlstephen"
+
+# --- Mac App Store (needs mas + signed in) ---
+mas "Xcode", id: 497799835
+mas "Amphetamine", id: 937984704
+mas "Kagi for Safari", id: 1622835804
+
+# --- VS Code extensions ---
+vscode "ms-python.python"
+vscode "esbenp.prettier-vscode"
+vscode "eamodio.gitlens"</code></pre></div>
+<p>Apply it on a new machine (or after editing):</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew bundle install --file=~/.config/homebrew/Brewfile   # installs anything missing; parallel since 6.0
+brew bundle check                                        # what's missing
+brew bundle cleanup                                      # uninstall things NOT in the Brewfile (asks first)
+brew bundle add ripgrep --describe                       # append to the Brewfile
+brew bundle remove ripgrep</code></pre></div>
+<p>Set <code>HOMEBREW_BUNDLE_FILE=~/.config/homebrew/Brewfile</code> in your shell config so you can drop <code>--file</code>. Homebrew 6 also lets a Brewfile carry <code>npm</code>, <code>cargo</code>, <code>go</code>, <code>uv</code> (Python tools), <code>krew</code> and even <code>winget</code> (on Windows) entries, so global CLI tools from language ecosystems live in the same manifest:</p>
+<div class="codeblock"><span class="code-lang">ruby</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-ruby">uv "ruff"
+uv "pre-commit"
+npm "typescript"
+cargo "cargo-watch"</code></pre></div>
+<p>Commit the Brewfile to your dotfiles repo (Chapter 10). Appendix B is a complete annotated Brewfile you can start from.</p>
+<h2 id="services">Services<a class="anchor" href="#services" aria-label="Permalink">#</a></h2>
+<p>Formulae with background daemons integrate with launchd:</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew services list
+brew services start postgresql@17      # start now + at login
+brew services run redis                # start now only
+brew services stop postgresql@17
+brew services restart --all
+brew services info postgresql@17       # status, log paths, user</code></pre></div>
+<p>Logs go to <code>/opt/homebrew/var/log/</code>; data to <code>/opt/homebrew/var/&lt;service&gt;/</code>. For databases that should only run when you're actually developing, prefer starting them per project (Chapter 15) or in containers — a Postgres that autostarts at login is a battery cost you'll forget about.</p>
+<h2 id="fonts-drivers-and-other-casks">Fonts, drivers, and other casks<a class="anchor" href="#fonts-drivers-and-other-casks" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Fonts</strong> are casks: <code>brew install --cask font-jetbrains-mono-nerd-font</code> (the <em>Nerd Font</em> variants include the icons that Starship, eza and Neovim status lines expect). Since Homebrew 4.x the fonts live in the main cask repo — no <code>homebrew/cask-fonts</code> tap needed.</li>
+<li><strong>Drivers/kernel extensions</strong> (Logitech, Wacom, Elgato, VirtualBox) are casks too; on Apple silicon many need approval in <code>Privacy &amp; Security</code> after install, and a kext requires <em>Reduced Security</em> in Recovery — avoid apps that still ship kexts in 2026.</li>
+<li><strong>Quarantine</strong>: casks are downloaded with Gatekeeper's quarantine bit set, so the first launch shows the "downloaded from the internet" check. <code>brew install --cask --no-quarantine &lt;app&gt;</code> skips that for apps you trust (or <code>export HOMEBREW_CASK_OPTS="--no-quarantine"</code> for all). Casks whose signatures fail Gatekeeper are disabled in Homebrew as of September 2026, so anything installable is at least signed.</li>
+<li><code>brew install --cask --appdir=~/Applications &lt;app&gt;</code> installs for your user only.</li>
+<li><strong><code>brew uninstall --zap --cask &lt;app&gt;</code></strong> removes preferences, caches, and launch agents listed in the cask definition — the closest thing to a clean uninstall. AppCleaner does the same for non-Homebrew apps.</li>
+</ul>
+<h2 id="environment-variables-worth-setting">Environment variables worth setting<a class="anchor" href="#environment-variables-worth-setting" aria-label="Permalink">#</a></h2>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># ~/.zshenv or ~/.zshrc
+export HOMEBREW_NO_ENV_HINTS=1          # quieter
+export HOMEBREW_BUNDLE_FILE="$HOME/.config/homebrew/Brewfile"
+export HOMEBREW_CASK_OPTS="--no-quarantine"   # optional; see above
+export HOMEBREW_NO_ANALYTICS=1          # opt out of anonymous analytics (or `brew analytics off`)
+export HOMEBREW_ASK=1                   # always show the plan and confirm
+# export HOMEBREW_AUTO_UPDATE_SECS=86400  # update the index at most daily instead of every 5 min
+# export HOMEBREW_NO_AUTO_UPDATE=1        # never auto-update on install (then run `brew update` yourself)</code></pre></div>
+<p>Defaults that changed in 5.x/6.x and no longer need setting: concurrent downloads (on), the internal JSON API (on), <code>brew bundle</code> parallel installs (on), SBOM generation (now <strong>opt-in</strong> via <code>HOMEBREW_SBOM=1</code>).</p>
+<h2 id="maintenance-routine">Maintenance routine<a class="anchor" href="#maintenance-routine" aria-label="Permalink">#</a></h2>
+<p>Weekly (or bind it to a Raycast/Shortcuts command):</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh">brew update &amp;&amp; brew upgrade &amp;&amp; brew autoremove &amp;&amp; brew cleanup --prune=all &amp;&amp; brew doctor</code></pre></div>
+<p>Occasionally:</p>
+<ul>
+<li><code>brew leaves</code> — anything you don't recognise, <code>brew uninstall</code> it.</li>
+<li><code>brew bundle cleanup</code> — prunes to the Brewfile.</li>
+<li><code>du -sh $(brew --cache)</code> — the download cache; <code>brew cleanup --prune=all</code> clears it.</li>
+<li>After a <strong>major macOS upgrade</strong>: <code>brew update</code>, <code>brew upgrade</code>, then <code>brew doctor</code>. If many bottles are missing for a brand-new macOS version (the first week or two of Golden Gate), Homebrew builds from source; be patient or wait a week. Reinstall the CLT if <code>brew doctor</code> says they're outdated.</li>
+<li><strong>Every September</strong>: read the Homebrew blog post for the new major version. 6.0's changes (tap trust, ask mode) broke a few people's scripts.</li>
+</ul>
+<h2 id="homebrew-and-the-intel-deprecation">Homebrew and the Intel deprecation<a class="anchor" href="#homebrew-and-the-intel-deprecation" aria-label="Permalink">#</a></h2>
+<p>Per Homebrew's support tiers: with macOS 27 dropping Intel Macs, <strong>macOS x86_64 moved to Tier 3 in September 2026</strong> — no CI, no new bottles, install-from-source only, <code>brew doctor</code> warns — and <strong>in September 2027 all Intel macOS code is deleted</strong>. If you still have an Intel Mac on Tahoe, expect increasingly frequent from-source builds; if you have an Intel Homebrew on an Apple silicon Mac, remove it now (above).</p>
+<h2 id="alternatives-and-complements">Alternatives and complements<a class="anchor" href="#alternatives-and-complements" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>MacPorts</strong> — older, uses <code>/opt/local</code>, builds more from source, runs as root. Excellent for scientific/legacy Unix software; fine to run <em>alongside</em> Homebrew if you keep PATHs straight. Most people don't need it.</li>
+<li><strong>Nix / nix-darwin / Home Manager</strong> — declarative, reproducible, cross-platform. Powerful and a real rabbit hole; if you already use Nix on Linux, <code>nix-darwin</code> can manage Homebrew casks <em>and</em> system settings. Homebrew 6 warns when it detects a Nix-managed installation but works.</li>
+<li><strong><code>mise</code></strong> (Chapter 11) for language runtimes and dev tools with per-project versions; <strong><code>uv tool</code></strong>, <strong><code>pipx</code></strong>, <strong><code>npm -g</code></strong>, <strong><code>cargo install</code></strong> for language-specific CLIs — increasingly all recorded in the Brewfile via the 6.0 extensions.</li>
+<li><strong>Mac App Store + <code>mas</code></strong> for sandboxed apps that update themselves and are tied to your Apple Account.</li>
+<li><strong>Setapp</strong> ($10/month subscription to ~250 Mac apps) — worth it if you'd otherwise buy 3+ of its apps (CleanShot X, Bartender, TablePlus, Paste, iStat Menus…). Free 7-day trial; students get 50% off.</li>
+<li><strong>Workbrew</strong> — Homebrew for managed fleets (the Homebrew lead's company). Relevant if your employer manages Macs.</li>
+<li><strong>BrewUI</strong> — Homebrew's own upcoming official GUI; not ready for general use yet. <strong>Cakebrew</strong> is dead; <strong>Applite</strong> is a decent third-party cask GUI for beginners.</li>
+</ul>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="07-command-line-tools-and-xcode.html"><span>Previous</span><strong>Command Line Tools, Xcode &amp; the toolchain</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/08-homebrew.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/08-homebrew.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#install">Install</a></li>
+<li class="lvl2"><a href="#concepts">Concepts</a></li>
+<li class="lvl2"><a href="#everyday-commands">Everyday commands</a></li>
+<li class="lvl2"><a href="#tap-trust-new-in-60">Tap trust (new in 6.0)</a></li>
+<li class="lvl2"><a href="#the-brewfile-your-machine-as-code">The Brewfile: your machine as code</a></li>
+<li class="lvl2"><a href="#services">Services</a></li>
+<li class="lvl2"><a href="#fonts-drivers-and-other-casks">Fonts, drivers, and other casks</a></li>
+<li class="lvl2"><a href="#environment-variables-worth-setting">Environment variables worth setting</a></li>
+<li class="lvl2"><a href="#maintenance-routine">Maintenance routine</a></li>
+<li class="lvl2"><a href="#homebrew-and-the-intel-deprecation">Homebrew and the Intel deprecation</a></li>
+<li class="lvl2"><a href="#alternatives-and-complements">Alternatives and complements</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
