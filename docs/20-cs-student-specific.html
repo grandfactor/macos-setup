@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CS-student specific — The macOS Setup Guide</title>
+<meta name="description" content="What&#x27;s different when the Mac is for a CS degree — free software through student programs, the course-by-course toolchain (C/C++, Java, Python, systems, ML, mobile, databases, theory), running x86 Linux and Windows when a class requires it, remote lab machines, LaTeX/Typst, note-taking, and surviving four years on one battery.">
+<meta property="og:title" content="CS-student specific — The macOS Setup Guide">
+<meta property="og:description" content="What&#x27;s different when the Mac is for a CS degree — free software through student programs, the course-by-course toolchain (C/C++, Java, Python, systems, ML, mobile, databases, theory), running x86 Linux and Windows when a class requires it, remote lab machines, LaTeX/Typst, note-taking, and surviving four years on one battery.">
+<meta property="og:type" content="article">
+<meta name="color-scheme" content="light dark">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/style.css">
+<script>(function(){try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+</head>
+<body>
+<a class="skip" href="#content">Skip to content</a>
+<header class="topbar">
+  <button class="menu-btn" id="menuBtn" aria-label="Toggle navigation" aria-expanded="false" aria-controls="sidebar"><span></span><span></span><span></span></button>
+  <a class="brand" href="index.html"><img src="assets/favicon.svg" alt="" width="26" height="26"><span>The macOS Setup Guide</span></a>
+  <div class="topbar-right">
+    <button class="search-btn" id="searchBtn" aria-label="Search the guide (press slash)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><span>Search</span><kbd>/</kbd></button>
+    <button class="theme-btn" id="themeBtn" aria-label="Toggle dark mode" title="Toggle light / dark / auto">◐</button>
+    <a class="gh" href="https://github.com/grandfactor/macos-setup" target="_blank" rel="noopener" aria-label="GitHub repository"><svg width="20" height="20" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg></a>
+  </div>
+</header>
+<div class="layout">
+  <aside class="sidebar" id="sidebar">
+    <nav aria-label="Chapters">
+      <a class="nav-home" href="index.html">Start here: overview &amp; how to use this guide</a>
+      <p class="nav-part">Part I — Before you start</p><ul>
+<li><a href="01-hardware-and-buying.html"><span class="nav-num">01</span>Hardware &amp; buying guide</a></li>
+<li><a href="02-first-boot-and-migration.html"><span class="nav-num">02</span>First boot, Setup Assistant &amp; migration</a></li>
+</ul>
+<p class="nav-part">Part II — System &amp; interface</p><ul>
+<li><a href="03-system-settings.html"><span class="nav-num">03</span>System Settings, pane by pane</a></li>
+<li><a href="04-finder-dock-spotlight.html"><span class="nav-num">04</span>Finder, Dock &amp; Spotlight</a></li>
+<li><a href="05-keyboard-and-input.html"><span class="nav-num">05</span>Keyboard, shortcuts &amp; input</a></li>
+<li><a href="06-window-management.html"><span class="nav-num">06</span>Window management, Spaces &amp; displays</a></li>
+</ul>
+<p class="nav-part">Part III — Developer environment</p><ul>
+<li><a href="07-command-line-tools-and-xcode.html"><span class="nav-num">07</span>Command Line Tools, Xcode &amp; the toolchain</a></li>
+<li><a href="08-homebrew.html"><span class="nav-num">08</span>Homebrew</a></li>
+<li><a href="09-terminal-and-shell.html"><span class="nav-num">09</span>Terminal &amp; shell</a></li>
+<li><a href="10-dotfiles-and-git.html"><span class="nav-num">10</span>Dotfiles &amp; Git</a></li>
+<li><a href="11-languages-and-runtimes.html"><span class="nav-num">11</span>Languages &amp; runtimes</a></li>
+<li><a href="12-editors-and-ides.html"><span class="nav-num">12</span>Editors, IDEs &amp; AI coding tools</a></li>
+<li><a href="13-containers-and-vms.html"><span class="nav-num">13</span>Containers &amp; virtual machines</a></li>
+<li><a href="14-cloud-and-devops-tooling.html"><span class="nav-num">14</span>Cloud, network &amp; DevOps tooling</a></li>
+<li><a href="15-databases-and-local-dev.html"><span class="nav-num">15</span>Databases &amp; local development services</a></li>
+</ul>
+<p class="nav-part">Part IV — Security, backup &amp; maintenance</p><ul>
+<li><a href="16-security-and-privacy.html"><span class="nav-num">16</span>Security &amp; privacy</a></li>
+<li><a href="17-backup-and-recovery.html"><span class="nav-num">17</span>Backup &amp; recovery</a></li>
+<li><a href="18-performance-and-maintenance.html"><span class="nav-num">18</span>Performance &amp; maintenance</a></li>
+</ul>
+<p class="nav-part">Part V — Daily driving &amp; workflows</p><ul>
+<li><a href="19-daily-driver-apps.html"><span class="nav-num">19</span>Daily-driver apps</a></li>
+<li class="active"><a href="20-cs-student-specific.html"><span class="nav-num">20</span>CS-student specific</a></li>
+</ul>
+    </nav>
+  </aside>
+  <main id="content" class="content">
+    <article class="prose">
+<h1 id="cs-student-specific">CS-student specific</h1>
+<p>Most of this guide applies to anyone who writes software. This chapter is about the parts that are specifically <em>university</em>: the free software you're entitled to, the toolchains individual courses expect, the x86 Linux machine your systems class assumes you have, the lab servers you'll SSH into at 2 AM, and the writing you'll do. It also has an honest section on the Mac's weak spots for a CS degree — there are a few — and the workarounds.</p>
+<div class="admonition important"><p class="admonition-title">Important</p><p>Read your course's setup instructions <em>first</em>, then this chapter. Many CS departments publish Mac-specific notes and provide a VM image or a container. If a course says "use the lab machines" or "use our Docker image," do that; it eliminates a whole category of "works on my machine" problems at submission time.</p></div>
+<h2 id="free-stuff-claim-it-in-week-one">Free stuff: claim it in week one<a class="anchor" href="#free-stuff-claim-it-in-week-one" aria-label="Permalink">#</a></h2>
+<p>Student status unlocks a surprising amount of software and services. Most need a <code>.edu</code> (or equivalent) email or a student ID upload. Do this before buying anything.</p>
+<div class="table-wrap"><table><thead><tr><th>Program</th><th>What you get</th><th>Notes</th></tr></thead><tbody><tr><td><strong>GitHub Student Developer Pack</strong></td><td>GitHub Pro (private repos w/ full features), <strong>GitHub Copilot Pro free</strong>, JetBrains all-products pack, Namecheap domain, DigitalOcean/Azure credits, 1Password (1 yr), Termius, Notion, and ~100 more</td><td>Apply at education.github.com. Re-verify each year. The single best perk list.</td></tr><tr><td><strong>JetBrains Educational</strong></td><td>All IDEs (IntelliJ Ultimate, PyCharm Pro, CLion, WebStorm, DataGrip, GoLand, RustRover…) free</td><td>Direct or via GitHub pack. Renew annually.</td></tr><tr><td><strong>Apple Education pricing</strong></td><td>~10% off Macs, discounted AppleCare+; back-to-school promos usually add a gift card or accessories</td><td>Verified via UNiDAYS in most countries. See <a href="01-hardware-and-buying.html">chapter 1</a>.</td></tr><tr><td><strong>Apple Developer Program</strong></td><td>Free to build and run on your own devices; $99 yr to publish. Some universities are in the <strong>iOS Developer University Program</strong> — ask</td><td>Sideloading your own app to your iPhone is free with a free Apple ID.</td></tr><tr><td><strong>Microsoft 365</strong></td><td>Word/Excel/PowerPoint + 1 TB OneDrive, free at most universities</td><td>Through your school's portal. Also <strong>Azure for Students</strong>: $100 credit, no card.</td></tr><tr><td><strong>Google Workspace for Education</strong></td><td>Usually unlimited-ish Drive, Colab (free GPU time), Gemini</td><td>Depends on your institution. Colab is the cheapest way to get a GPU for an ML course.</td></tr><tr><td><strong>AWS Educate / Academy</strong></td><td>Credits and labs</td><td>Varies by school.</td></tr><tr><td><strong>Notion, Figma, Canva, Miro, Linear</strong></td><td>Free education plans</td><td>Figma Education is the full professional tier.</td></tr><tr><td><strong>Tableau, MATLAB, Mathematica, Autodesk</strong></td><td>Free via campus licenses</td><td>Check your IT software portal. MATLAB is usually a campus site license.</td></tr><tr><td><strong>Apple Music / Spotify / YouTube Premium</strong></td><td>Student plans ~50% off</td><td>Apple Music student includes TV+.</td></tr><tr><td><strong>Amazon Prime Student, Adobe (60% off), Cursor Pro (free 1 yr), Perplexity Pro, Warp</strong></td><td>Discounts / free tiers</td><td>Cursor's student offer requires .edu; check current terms.</td></tr><tr><td><strong>Overleaf</strong></td><td>Often institutional Premium</td><td>Check your library site.</td></tr><tr><td><strong>Zotero storage</strong></td><td>Some libraries fund unlimited</td><td>Ask the library.</td></tr><tr><td><strong>O'Reilly, ACM Digital Library, IEEE Xplore, Safari Books</strong></td><td>Through the library proxy</td><td>Set up the library's browser extension/EZproxy bookmarklet; you'll need papers behind paywalls from year two.</td></tr><tr><td><strong>ACM student membership</strong></td><td>$19 yr; includes O'Reilly access at many chapters</td><td>Worth it just for O'Reilly.</td></tr></tbody></table></div>
+<p>Set a calendar reminder to re-verify GitHub Education and JetBrains each September.</p>
+<h2 id="the-course-by-course-toolchain">The course-by-course toolchain<a class="anchor" href="#the-course-by-course-toolchain" aria-label="Permalink">#</a></h2>
+<p>A CS degree touches a lot of languages. The approach from <a href="11-languages-and-runtimes.html">chapter 11</a> — <code>mise</code> for runtimes, <code>uv</code> for Python, Homebrew for compilers — handles all of them. Here's what each typical course expects and the Mac-specific gotchas.</p>
+<h3 id="intro-programming-python-java">Intro programming (Python / Java)<a class="anchor" href="#intro-programming-python-java" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>Python</strong>: <code>uv python install 3.13</code> (or whatever the course pins — check; intro courses often lag a version). Use <code>uv init</code> per assignment folder, <code>uv add</code> for packages. Never <code>sudo pip</code>. Run scripts with <code>uv run script.py</code>. If the course insists on Anaconda, install <code>miniforge</code> via brew instead (same conda, no bloat, Apple-silicon native) and <code>conda init zsh</code>.</li>
+<li><strong>Java</strong>: <code>mise use -g java@21</code> (or 25 — current LTS is 25, most courses want 17 or 21). IntelliJ IDEA Ultimate is free (above) and is what most Java courses assume. <code>brew install --cask intellij-idea</code>. If the course uses BlueJ or Greenfoot, both have Apple-silicon builds.</li>
+<li><strong>Scratch/Snap/Racket/Scheme</strong> (some intro courses): <code>brew install --cask racket</code>; DrRacket is fine on Apple silicon.</li>
+</ul>
+<h3 id="c-c-and-systems-programming">C, C++, and systems programming<a class="anchor" href="#c-c-and-systems-programming" aria-label="Permalink">#</a></h3>
+<p>This is where the Mac diverges most from what courses assume. Apple's <code>cc</code> is <strong>Clang</strong>, not GCC, and macOS is not Linux.</p>
+<ul>
+<li><code>xcode-select --install</code> gives you <code>clang</code>, <code>clang++</code>, <code>make</code>, <code>lldb</code>, <code>git</code> (<a href="07-command-line-tools-and-xcode.html">chapter 7</a>). For most C/C++ coursework this is all you need. <code>gcc</code> on a Mac is a symlink to clang.</li>
+<li><strong>If the course requires real GCC</strong> (specific flags, <code>-fanalyzer</code>, GCC-only extensions, or an autograder that uses GCC): <code>brew install gcc</code> and invoke as <code>gcc-15</code> / <code>g++-15</code>. Or, better, do the work in a Linux container/VM (below) so your environment matches the grader.</li>
+<li><strong>Valgrind does not run on Apple silicon macOS.</strong> This is the #1 systems-course pain point. Options: (a) use Clang's sanitizers — <code>clang -fsanitize=address,undefined -g</code> catches most of what Valgrind would; (b) <code>leaks --atExit -- ./prog</code> (Apple's built-in leak checker); (c) run Valgrind inside an x86-64 or arm64 Linux container (Valgrind has arm64 Linux support). Most courses accept sanitizer output.</li>
+<li><strong>GDB</strong> is a pain on macOS (code signing required, and it's flaky on Apple silicon). Use <strong>LLDB</strong> — same concepts, slightly different commands (<code>b</code>, <code>r</code>, <code>n</code>, <code>s</code>, <code>p</code>, <code>bt</code> all work). Or debug in a Linux container with GDB. VS Code's C/C++ extension uses LLDB on Mac transparently; <strong>CodeLLDB</strong> is the better extension.</li>
+<li><strong>Headers differ</strong>: <code>#include &lt;malloc.h&gt;</code> doesn't exist (use <code>&lt;stdlib.h&gt;</code>); <code>&lt;sys/epoll.h&gt;</code> doesn't exist (macOS uses kqueue); <code>&lt;endian.h&gt;</code> is <code>&lt;machine/endian.h&gt;</code>; no <code>&lt;sys/sendfile.h&gt;</code>. Assignments that dip into Linux syscalls need Linux. Assignments that use POSIX generally compile fine.</li>
+<li><strong>Assembly</strong>: courses teach x86-64 or RISC-V or ARM. On Apple silicon your native assembly is ARM64 — great if the course is ARM, irrelevant otherwise. For x86-64 assembly homework, use a Linux VM/container with <code>gcc</code>/<code>nasm</code>/<code>gdb</code> (Rosetta-accelerated x86 containers via OrbStack are fast enough). For RISC-V, <code>brew install riscv-gnu-toolchain</code> (from <code>riscv-software-src/riscv</code>) plus <code>qemu</code>, or the <strong>Venus</strong>/<strong>RARS</strong> simulators in the browser/Java.</li>
+<li><strong>Make/CMake</strong>: <code>brew install cmake ninja</code>. CLion (free) handles CMake projects well.</li>
+<li><strong>Threads/OS courses</strong>: xv6 (<code>riscv64</code> toolchain + qemu, above), Pintos (needs x86 — Linux VM), and anything with <code>fork()</code>-heavy code works natively.</li>
+</ul>
+<p><strong>Recommended setup for a systems course:</strong> native Clang + sanitizers for daily work, plus an Ubuntu container (<code>orb create ubuntu:24.04 cs</code> or the course's Docker image) for the autograder-matching build and Valgrind/GDB. See <a href="13-containers-and-vms.html">chapter 13</a>. With OrbStack, <code>cd</code> into your project and run <code>orb -m cs make test</code> — the same files, Linux toolchain.</p>
+<h3 id="data-structures-algorithms">Data structures &amp; algorithms<a class="anchor" href="#data-structures-algorithms" aria-label="Permalink">#</a></h3>
+<p>Usually Java, C++, or Python; covered above. For competitive programming: <code>brew install gcc</code> for <code>bits/stdc++.h</code> (Clang lacks it; or create your own precompiled header), and use a fast judge client (<strong>cph</strong> extension in VS Code, or <strong>Competitive Companion</strong>).</p>
+<h3 id="web-development">Web development<a class="anchor" href="#web-development" aria-label="Permalink">#</a></h3>
+<p>Node via <code>mise use -g node@24</code> (26 is LTS from October 2026); <code>pnpm</code> or <code>npm</code>. Everything in <a href="11-languages-and-runtimes.html">chapter 11</a> applies. Browser DevTools in Chrome or Firefox. If the course uses PHP/Laravel: <code>brew install php composer</code> or Laravel Herd.</p>
+<h3 id="databases">Databases<a class="anchor" href="#databases" aria-label="Permalink">#</a></h3>
+<p><code>brew install postgresql@18</code> and <code>brew services run postgresql@18</code>, or a container. <code>sqlite3</code> is preinstalled. <strong>TablePlus</strong> (free tier) or <strong>DBeaver</strong> (free) for a GUI. MySQL courses: <code>brew install mysql</code> or a <code>mysql:9</code> container. Oracle: only via container (<code>gvenzl/oracle-free</code>, arm64 available). SQL Server: <code>mcr.microsoft.com/azure-sql-edge</code> or the 2025 arm64 preview in a container. See <a href="15-databases-and-local-dev.html">chapter 15</a>.</p>
+<h3 id="machine-learning-data-science">Machine learning &amp; data science<a class="anchor" href="#machine-learning-data-science" aria-label="Permalink">#</a></h3>
+<p>The Mac is genuinely good here up to a point.</p>
+<ul>
+<li><strong>Python stack</strong>: <code>uv add numpy pandas scikit-learn matplotlib jupyter</code>. Everything is Apple-silicon native now.</li>
+<li><strong>PyTorch</strong>: <code>uv add torch torchvision</code> — the <strong>MPS</strong> backend uses the GPU (<code>device = "mps"</code>). Fast enough for coursework and small models; not CUDA. Some ops still fall back to CPU (<code>PYTORCH_ENABLE_MPS_FALLBACK=1</code>).</li>
+<li><strong>JAX</strong>: <code>jax-metal</code> plugin, experimental. <strong>TensorFlow</strong>: <code>tensorflow-metal</code>, maintenance mode. Prefer PyTorch on a Mac.</li>
+<li><strong>MLX</strong> (Apple's framework): <code>uv add mlx mlx-lm</code> — the fastest way to run and fine-tune LLMs locally on Apple silicon. <code>mlx_lm.generate --model mlx-community/Llama-3.2-3B-Instruct-4bit --prompt "..."</code>.</li>
+<li><strong>Local LLMs for studying</strong>: <strong>Ollama</strong> (<code>brew install ollama</code>) or <strong>LM Studio</strong> (cask). A 16 GB Mac runs 7–8B models comfortably; 32 GB runs 20–30B; a 70B model wants 48 GB+. See <a href="01-hardware-and-buying.html">chapter 1</a> for RAM planning.</li>
+<li><strong>When you need CUDA</strong> (a course that requires it, or a model that won't fit): Google Colab (free tier, or Pro $10 mo), Kaggle notebooks (free 30 hrs/week GPU), your department's GPU cluster (SSH + Slurm — see below), Lambda/RunPod/Vast.ai for cheap hourly rentals. The Mac becomes a thin client; <strong>VS Code Remote-SSH</strong> or <strong>JupyterLab over an SSH tunnel</strong> (<code>ssh -L 8888:localhost:8888 user@gpu-box</code>) makes it feel local.</li>
+<li><strong>Jupyter</strong>: <code>uv tool install jupyterlab</code>, or use VS Code's notebook UI (better diffing, git integration). <strong>Positron</strong> (Posit's VS Code fork for data science) or <strong>RStudio</strong> if the course is R-heavy (<code>brew install --cask r rstudio</code>; or <code>mise use r</code>).</li>
+<li><strong>conda/Anaconda</strong>: if a course insists, <code>brew install --cask miniforge</code>. Don't install full Anaconda — 5 GB, slow shell startup, and it hijacks <code>python</code> globally.</li>
+</ul>
+<h3 id="mobile-development">Mobile development<a class="anchor" href="#mobile-development" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>iOS/Swift</strong>: install <strong>Xcode</strong> from the App Store (or <code>xcodes</code> — see <a href="07-command-line-tools-and-xcode.html">chapter 7</a>); it's 12+ GB, budget storage and an hour. Simulators are another 5–8 GB per iOS version. This is the one course where the Mac is <em>required</em>, not merely nice.</li>
+<li><strong>Android</strong>: <code>brew install --cask android-studio</code>; the emulator runs arm64 Android images natively and fast on Apple silicon. Set <code>ANDROID_HOME</code> and add <code>platform-tools</code> to PATH for <code>adb</code>. Flutter: <code>mise use -g flutter</code>; React Native: Node + Watchman (<code>brew install watchman</code>) + Xcode/Android Studio.</li>
+</ul>
+<h3 id="theory-math-and-writing-heavy-courses">Theory, math, and writing-heavy courses<a class="anchor" href="#theory-math-and-writing-heavy-courses" aria-label="Permalink">#</a></h3>
+<ul>
+<li><strong>LaTeX</strong>: <code>brew install --cask mactex-no-gui</code> (2.5 GB — the full <code>mactex</code> adds GUI apps you won't use) or <strong>BasicTeX</strong> (100 MB, then <code>tlmgr install</code> packages as needed). Editor: VS Code + <strong>LaTeX Workshop</strong>, or <strong>TeXShop</strong>/<strong>TeXstudio</strong>. <strong>Skim</strong> as the PDF viewer for SyncTeX. Or <strong>Overleaf</strong> for group projects (institutional Premium is common).</li>
+<li><strong>Typst</strong> (<code>brew install typst</code>): compiles in milliseconds, saner syntax, <code>typst watch paper.typ</code>. Most professors accept a PDF and don't care what made it. <strong>Tinymist</strong> VS Code extension for live preview. Templates exist for most conference formats. Recommended for solo problem sets.</li>
+<li><strong>Markdown → PDF</strong>: <code>brew install pandoc</code> and <code>pandoc notes.md -o notes.pdf</code> (needs a TeX engine; Typst can be the engine: <code>pandoc -t typst</code>). <strong>Quarto</strong> for notebooks-as-documents.</li>
+<li><strong>Diagrams</strong>: <strong>Excalidraw</strong> (web / VS Code extension / Obsidian plugin) for hand-drawn style; <strong>draw.io</strong> (<code>drawio</code>) for formal; <strong>Mermaid</strong> inline in Markdown; <strong>Graphviz</strong> (<code>brew install graphviz</code>) for automata and graphs; <strong>TikZ</strong> if you're deep in LaTeX.</li>
+<li><strong>Math tools</strong>: <code>brew install --cask mathpix-snipping-tool</code> (screenshot → LaTeX, student pricing), <strong>SageMath</strong> (cask), <strong>Wolfram Engine</strong> free for developers, <strong>GeoGebra</strong>, Python with <code>sympy</code>. <strong>Lean 4</strong> (<code>brew install elan-init</code>, then VS Code extension) if you take a formal methods course.</li>
+<li><strong>Automata/logic</strong>: <strong>JFLAP</strong> (Java, works), <strong>Logisim Evolution</strong> (<code>brew install --cask logisim-evolution</code>), <strong>Digital</strong>.</li>
+</ul>
+<h3 id="other-languages-you-may-meet">Other languages you may meet<a class="anchor" href="#other-languages-you-may-meet" aria-label="Permalink">#</a></h3>
+<p><code>mise</code> handles Go, Rust, Ruby, Elixir, Erlang, Zig, Deno, Bun, Haskell (via <code>ghcup</code> — <code>mise use ghc</code> or <code>brew install ghcup</code>), OCaml (<code>brew install opam</code>), Prolog (<code>brew install swi-prolog</code>), Lisp (<code>brew install sbcl</code> + Emacs/SLIME or VS Code), Standard ML (<code>brew install smlnj</code>), Lua, Kotlin (<code>brew install kotlin</code> or via IntelliJ), Scala (<code>brew install coursier</code> → <code>cs setup</code>), Fortran (<code>brew install gcc</code> gives <code>gfortran</code>), Ada, COBOL — yes, <code>brew install gnucobol</code>. Nothing in a CS curriculum lacks an Apple-silicon build in 2026.</p>
+<h2 id="when-you-need-linux">When you need Linux<a class="anchor" href="#when-you-need-linux" aria-label="Permalink">#</a></h2>
+<p>You will. The four routes, cheapest-friction first:</p>
+<ol>
+<li><strong>OrbStack Linux machine</strong> (<code>orb create ubuntu:24.04</code>) — a full Ubuntu userland sharing your Mac filesystem, starts in a second, near-native speed. <code>orb -m ubuntu bash</code> drops you in; your <code>~/code</code> is at the same path. Handles 90% of "this only works on Linux." Free for personal/student use. See <a href="13-containers-and-vms.html">chapter 13</a>.</li>
+<li><strong>The course's Docker image</strong> — <code>docker run -it -v "$PWD":/work course/image</code> and your files are inside. Exactly matches the autograder.</li>
+<li><strong>x86-64 Linux</strong> — for x86 assembly, Pintos, old binaries, or a course VM shipped as an <code>.ova</code>. Options: <code>orb create --arch amd64 ubuntu</code> (Rosetta-translated, surprisingly fast for compiles and gdb; you lose Rosetta on macOS 28, so prefer arm64 where possible); <strong>UTM</strong> (free; QEMU-based, full emulation — slow but runs anything, including that <code>.ova</code> after conversion); <strong>VMware Fusion</strong> (free since 2024) or <strong>Parallels</strong> (paid, $100 yr; student discount) both run <strong>arm64</strong> Linux/Windows fast but <strong>not x86</strong>. Full x86 emulation is 5–20× slower than native; fine for a shell and gdb, painful for builds. If a course truly needs x86 performance, use the department's Linux servers.</li>
+<li><strong>Remote Linux</strong> — see the next section. A <code>$5/mo</code> VPS or the lab servers is often the least-friction x86 machine you'll ever have.</li>
+</ol>
+<div class="admonition note"><p class="admonition-title">Note</p><p>A "Linux VM" for a CS course does not need to be Ubuntu Desktop with a GUI. Terminal-only Ubuntu Server or the OrbStack machine, with VS Code Remote-SSH or <code>orb</code> integration for editing, is faster and uses a quarter of the RAM. If you need a GUI for a specific tool, run it with X forwarding (<code>brew install --cask xquartz</code>) or in a full UTM VM.</p></div>
+<h2 id="windows-for-the-one-course-that-needs-it">Windows (for the one course that needs it)<a class="anchor" href="#windows-for-the-one-course-that-needs-it" aria-label="Permalink">#</a></h2>
+<p>Visual Studio (not Code), .NET Framework (not modern .NET — that runs natively), MS Access, some CAD or EDA tools, and games. Options: <strong>Windows 11 ARM</strong> in <strong>Parallels</strong> (easiest; it's a licensed, supported path — Parallels downloads the ISO; student pricing available), <strong>VMware Fusion</strong> (free; bring your own ISO from Microsoft's site), or <strong>UTM</strong> (free, slower). Windows on ARM runs x86/x64 apps through its own emulation, and it's decent. A cheap alternative for occasional use: your university's <strong>Windows virtual lab</strong> (Citrix/AVD), or <strong>Windows 365</strong>. Don't dual-boot — Boot Camp doesn't exist on Apple silicon.</p>
+<h2 id="remote-machines-lab-servers-clusters-and-cloud">Remote machines: lab servers, clusters, and cloud<a class="anchor" href="#remote-machines-lab-servers-clusters-and-cloud" aria-label="Permalink">#</a></h2>
+<p>By second year you'll live in <code>ssh</code>. Make it good.</p>
+<div class="codeblock"><span class="code-lang">sh</span><button class="copy" type="button" aria-label="Copy code">Copy</button><pre><code class="language-sh"># ~/.ssh/config
+Host lab
+  HostName lab.cs.university.edu
+  User yourid
+  ForwardAgent no
+  ControlMaster auto
+  ControlPath ~/.ssh/cm-%r@%h:%p
+  ControlPersist 10m
+  ServerAliveInterval 60
+
+Host gpu1
+  HostName gpu1.cs.university.edu
+  User yourid
+  ProxyJump lab            # bastion hop; lab is reachable, gpu1 isn't
+  LocalForward 8888 localhost:8888   # Jupyter</code></pre></div>
+<ul>
+<li><strong>Keys, not passwords</strong>: <code>ssh-keygen -t ed25519</code> and <code>ssh-copy-id lab</code>. Use <code>UseKeychain yes</code> + <code>AddKeysToAgent yes</code> so Touch ID (via the Keychain) unlocks the key. Full SSH setup in <a href="09-terminal-and-shell.html">chapter 9</a>.</li>
+<li><strong>Don't lose work to a dropped connection</strong>: run long jobs in <code>tmux</code> on the server (<code>tmux new -s work</code>, later <code>tmux attach -t work</code>). Or <strong>mosh</strong> (<code>brew install mosh</code>; needs the server side installed) for a connection that survives Wi-Fi changes and sleep.</li>
+<li><strong>Edit remotely as if local</strong>: VS Code <strong>Remote-SSH</strong> (installs a server component in your home directory — works on most lab machines without root), or <strong>Zed</strong> remote, or JetBrains <strong>Gateway</strong>. Or edit locally and <code>rsync -avz --exclude .git ./ lab:~/proj/</code> before running. Or mount with <code>sshfs</code> (via <code>macfuse</code> — needs a system extension; the Finder integration is nice but flaky).</li>
+<li><strong>Slurm clusters</strong> (GPU/HPC): <code>sbatch job.sh</code>, <code>squeue -u $USER</code>, <code>srun --pty bash</code> for interactive; load modules with <code>module load cuda/12.6</code>. Keep a <code>~/.bashrc</code>/<code>.zshrc</code> on the cluster in your dotfiles repo with a hostname branch (<a href="10-dotfiles-and-git.html">chapter 10</a>).</li>
+<li><strong>VPN</strong>: universities require it off-campus; usually <strong>Cisco Secure Client</strong>, <strong>GlobalProtect</strong>, or <strong>WireGuard</strong>/<strong>OpenVPN</strong> profiles. Install from your IT portal, not Homebrew (licensing). Use split tunneling if offered so your Spotify doesn't go through campus.</li>
+<li><strong>Cheap always-on Linux</strong>: a $4–6/mo VPS (Hetzner, DigitalOcean w/ GitHub Education credits, Oracle Cloud's free arm64 tier) as a personal x86 or arm box, tunnel endpoint, and place to leave <code>tmux</code> running. <strong>Tailscale</strong> (free for personal, <code>brew install --cask tailscale</code>) puts your Mac, the VPS, and your phone on one private network — SSH to any of them from anywhere, no port forwarding.</li>
+</ul>
+<h2 id="version-control-for-coursework">Version control for coursework<a class="anchor" href="#version-control-for-coursework" aria-label="Permalink">#</a></h2>
+<p>Everything in <a href="10-dotfiles-and-git.html">chapter 10</a>, plus:</p>
+<ul>
+<li><strong>One repo per course</strong> (<code>~/code/uni/cs240/</code>) with a folder per assignment, or one repo per assignment if the course uses GitHub Classroom (it will create them). <em>Private.</em> Public solutions violate most academic integrity policies, and a future employer searching your GitHub won't be impressed by <code>hw3_final_FINAL2.py</code>.</li>
+<li><strong>Commit at every working state</strong> — the autograder eating your submission, a bad <code>rm</code>, a laptop theft: all recoverable with a pushed commit.</li>
+<li><strong><code>.gitignore</code> for the course's language</strong> — <code>gh repo create --gitignore Python</code> or <code>gitignore.io</code>. Never commit <code>venv/</code>, <code>node_modules/</code>, <code>.o</code> files, or <code>.DS_Store</code> (the global ignore from chapter 10 handles the last one).</li>
+<li><strong>Group projects</strong>: agree on a branch/PR flow in the first meeting, protect <code>main</code>, use Issues, use <code>git blame</code> for blame only at the retro. Use the GitHub Classroom template if provided.</li>
+<li><strong>Academic integrity and AI tools</strong>: know your course's policy on Copilot/Cursor/ChatGPT <em>before</em> the assignment. Many intro courses ban them; many upper-level courses allow them with disclosure. Some autograders detect Copilot-style output. Disable Copilot per-workspace (<code>"github.copilot.enable": {"*": false}</code> in the course's <code>.vscode/settings.json</code>) so you don't accidentally cross a line.</li>
+</ul>
+<h2 id="studying-on-the-mac">Studying on the Mac<a class="anchor" href="#studying-on-the-mac" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>Notes</strong>: Obsidian or Apple Notes (<a href="19-daily-driver-apps.html">chapter 19</a>). For lecture notes with math, Obsidian's MathJax (<code>$…$</code>) is the fastest path; <strong>Notability</strong>/<strong>GoodNotes</strong> on iPad with Sidecar/Universal Control if you handwrite.</li>
+<li><strong>Spaced repetition</strong>: <strong>Anki</strong> (<code>brew install --cask anki</code>) for anything with definitions — theory courses, networking layers, complexity classes, syscalls. Free on Mac; the iOS app is $25 once.</li>
+<li><strong>Focus</strong>: macOS <strong>Focus modes</strong> (Control Center) with per-Focus Home Screen/notification filtering; <strong>Screen Time</strong> app limits; <strong>Cold Turkey</strong>/<strong>Focus</strong> for hard blocking; <strong>Raycast Focus</strong> for lighter sessions. Keep Slack/Discord closed during study blocks (not just muted).</li>
+<li><strong>Reading papers</strong>: <strong>Zotero</strong> + Better BibTeX plugin exports <code>.bib</code> for LaTeX/Typst; <strong>Skim</strong> or <strong>Preview</strong> for annotation; <strong>Sioyek</strong> (<code>brew install --cask sioyek</code>) is a keyboard-driven PDF reader designed for papers and textbooks.</li>
+<li><strong>Lecture recordings</strong>: <strong>IINA</strong> at 1.5–2× with pitch correction; <strong>Whisper</strong> locally (<code>brew install whisper-cpp</code> or MacWhisper) for transcripts of recorded lectures — Apple silicon runs the <code>large-v3-turbo</code> model faster than real time.</li>
+<li><strong>Problem sets</strong>: a <code>template/</code> folder with a <code>main.typ</code> or <code>hw.tex</code>, a <code>Makefile</code>, and a <code>README</code> you copy per assignment. Small thing, saves an hour a week over a semester.</li>
+</ul>
+<h2 id="battery-and-hardware-student-edition">Battery and hardware, student edition<a class="anchor" href="#battery-and-hardware-student-edition" aria-label="Permalink">#</a></h2>
+<ul>
+<li>A MacBook Air M5 or Neo makes it through a full day of lectures on battery. A 14" Pro does too; a 16" Pro is heavy in a backpack — buy it only if you're genuinely doing local ML or video.</li>
+<li>Enable the <strong>80% charge limit</strong> (<a href="18-performance-and-maintenance.html">chapter 18</a>) if you mostly work at a desk; turn it off for exam weeks when you're never near an outlet.</li>
+<li><strong>Low Power Mode</strong> on battery for note-taking days.</li>
+<li>Use the <strong>USB-C charger from your phone</strong> in lecture halls — any 20 W+ USB-C PD brick slow-charges a MacBook. Carry a compact 65–70 W GaN charger (Anker, UGREEN) rather than Apple's; it's smaller and charges the phone too.</li>
+<li><strong>AppleCare+</strong> is worth it for a laptop that lives in a backpack for four years; accidental damage claims are $99–299 vs. a $700+ screen. Education pricing discounts it.</li>
+<li><strong>Find My</strong> on, <strong>Activation Lock</strong> on (automatic with Find My), and <strong>Stolen Device Protection</strong> (macOS 26.4+) on. Laptop theft from libraries is common; a stolen Mac with Activation Lock is a brick for the thief. See <a href="16-security-and-privacy.html">chapter 16</a>.</li>
+<li>Back up. Your thesis is not safe on one SSD. Time Machine to a $60 external drive plus GitHub for code plus iCloud/Backblaze for documents (<a href="17-backup-and-recovery.html">chapter 17</a>).</li>
+</ul>
+<h2 id="the-honest-list-of-mac-disadvantages-for-cs">The honest list of Mac disadvantages for CS<a class="anchor" href="#the-honest-list-of-mac-disadvantages-for-cs" aria-label="Permalink">#</a></h2>
+<ul>
+<li><strong>No Valgrind, flaky GDB</strong>, x86 assembly needs emulation, no <code>epoll</code> — systems courses are where you'll notice you're not on Linux. The container/VM route fixes all of it.</li>
+<li><strong>8 GB isn't enough</strong> for Docker + IDE + browser. If you already own an 8 GB machine, run containers on a VPS or the lab servers and keep local work light.</li>
+<li><strong>x86 Windows software</strong> (some CAD/EDA, old lab software, anticheat games) — emulation only. A Windows PC in the lab or a cloud desktop is the workaround.</li>
+<li><strong>Rosetta ends with macOS 28</strong> — Intel-only Mac apps and x86 containers will need alternatives by 2027–2028. For a student starting in 2026 on a 4-year degree, plan for arm64-native everything.</li>
+<li><strong>Cost</strong> — offset by education pricing and the fact that a $600–1,100 Mac outlasts the degree.</li>
+</ul>
+<p>Everything else — Unix shell, native Git, Docker performance, battery life, the display, the trackpad, the fact that your TA's demo will probably be on a Mac — favors it.</p>
+    </article>
+    <nav class="pager" aria-label="Chapter navigation"><a class="pager-link prev" href="19-daily-driver-apps.html"><span>Previous</span><strong>Daily-driver apps</strong></a><span></span></nav>
+    <footer class="page-footer">
+      <p><a href="https://github.com/grandfactor/macos-setup/blob/main/guide/20-cs-student-specific.md" target="_blank" rel="noopener">View this chapter as Markdown</a> · <a href="https://github.com/grandfactor/macos-setup/edit/main/guide/20-cs-student-specific.md" target="_blank" rel="noopener">Edit on GitHub</a></p>
+      <p>Last reviewed September 2026. Written for macOS 26 Tahoe and macOS 27 Golden Gate on Apple silicon Macs. Prices are US list prices. Text is CC BY 4.0; code and configs are MIT.</p>
+    </footer>
+  </main>
+  <aside class="rightbar"><nav class="toc" aria-label="On this page"><p class="toc-title">On this page</p><ul>
+<li class="lvl2"><a href="#free-stuff-claim-it-in-week-one">Free stuff: claim it in week one</a></li>
+<li class="lvl2"><a href="#the-course-by-course-toolchain">The course-by-course toolchain</a></li>
+<li class="lvl3"><a href="#intro-programming-python-java">Intro programming (Python / Java)</a></li>
+<li class="lvl3"><a href="#c-c-and-systems-programming">C, C++, and systems programming</a></li>
+<li class="lvl3"><a href="#data-structures-algorithms">Data structures &amp; algorithms</a></li>
+<li class="lvl3"><a href="#web-development">Web development</a></li>
+<li class="lvl3"><a href="#databases">Databases</a></li>
+<li class="lvl3"><a href="#machine-learning-data-science">Machine learning &amp; data science</a></li>
+<li class="lvl3"><a href="#mobile-development">Mobile development</a></li>
+<li class="lvl3"><a href="#theory-math-and-writing-heavy-courses">Theory, math, and writing-heavy courses</a></li>
+<li class="lvl3"><a href="#other-languages-you-may-meet">Other languages you may meet</a></li>
+<li class="lvl2"><a href="#when-you-need-linux">When you need Linux</a></li>
+<li class="lvl2"><a href="#windows-for-the-one-course-that-needs-it">Windows (for the one course that needs it)</a></li>
+<li class="lvl2"><a href="#remote-machines-lab-servers-clusters-and-cloud">Remote machines: lab servers, clusters, and cloud</a></li>
+<li class="lvl2"><a href="#version-control-for-coursework">Version control for coursework</a></li>
+<li class="lvl2"><a href="#studying-on-the-mac">Studying on the Mac</a></li>
+<li class="lvl2"><a href="#battery-and-hardware-student-edition">Battery and hardware, student edition</a></li>
+<li class="lvl2"><a href="#the-honest-list-of-mac-disadvantages-for-cs">The honest list of Mac disadvantages for CS</a></li>
+</ul></nav></aside>
+</div>
+<div class="search-modal" id="searchModal" hidden>
+  <div class="search-panel" role="dialog" aria-modal="true" aria-label="Search the guide">
+    <input type="search" id="searchInput" placeholder="Search the guide…" autocomplete="off" spellcheck="false" aria-label="Search">
+    <ul id="searchResults" class="search-results" role="listbox"></ul>
+    <p class="search-hint"><kbd>↑</kbd><kbd>↓</kbd> navigate · <kbd>Enter</kbd> open · <kbd>Esc</kbd> close</p>
+  </div>
+</div>
+<script src="assets/app.js" defer></script>
+</body>
+</html>
